@@ -177,7 +177,7 @@ footer nav {
 
 h3.nlposts-ulist-title {
 	@include base-font;
-	font-weight: normal;
+	font-weight: normal !important;
 }
 
 h4.widgettitle label {

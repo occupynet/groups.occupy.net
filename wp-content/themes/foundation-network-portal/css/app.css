@@ -120,7 +120,7 @@ h3.nlposts-ulist-title {
   font-weight: normal;
   color: #222222;
   text-transform: none;
-  font-weight: normal; }
+  font-weight: normal !important; }
 
 h4.widgettitle label {
   font-size: 23px;
