@@ -64,12 +64,6 @@ function optionsframework_options() {
 	$options[] = array( "name" => "General Options",
 						"type" => "heading");
 
-	$options[] = array( "name" => "Site Title Display",
-						"desc" => "Name displayed in the logo area of header (to be used if the site name and display name should be different.",
-						"id" => "site_name_display",
-						"std" => "",
-						"type" => "textarea");
-
 	$options[] = array( "name" => "Footer Text",
 						"desc" => "Text to be displayed in the footer.",
 						"id" => "footer_text",
