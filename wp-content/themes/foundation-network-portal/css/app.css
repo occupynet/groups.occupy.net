@@ -120,6 +120,8 @@ h3.nlposts-ulist-title {
   font-weight: normal;
   color: #222222;
   text-transform: none; }
+  h3.nlposts-ulist-title li.nlposts-ulist-litem {
+    margin-bottom: 2px; }
 
 li.nlposts-ulist-litem {
   margin-bottom: 2px; }
