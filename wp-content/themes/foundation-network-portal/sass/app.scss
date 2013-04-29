@@ -176,7 +176,11 @@ footer nav {
 }
 
 h3.nlposts-ulist-title {
-	@include base-font;
+	font-family: $base-font-family;
+	font-size: 14px;
+	font-weight: $base-font-weight;
+	color: $base-font-color;
+	text-transform: none;
 }
 
 h4.widgettitle label {
