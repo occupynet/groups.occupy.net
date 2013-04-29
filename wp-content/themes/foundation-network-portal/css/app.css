@@ -1,0 +1,120 @@
+/* app.scss */
+/************* Global ********************/
+/************* Typography ********************/
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-weight: normal; }
+
+h1 {
+  color: #c91c22; }
+
+.intro-text,
+.intro-text p {
+  font-size: 1.5em;
+  font-style: italic;
+  line-height: 1.4em;
+  margin-top: 5px; }
+
+/************* Elements ********************/
+a {
+  color: #c91c22; }
+  a:hover {
+    color: #cccccc; }
+  a:active {
+    color: #333333; }
+
+.button {
+  background: #c91c22;
+  border-color: #990000; }
+  .button:hover {
+    background: #e6e6e6;
+    border-color: #333333; }
+  .button:active {
+    background: #333333;
+    border-color: #333333; }
+
+/************* Header ********************/
+.siteinfo a {
+  color: black;
+  font-weight: normal;
+  font-size: 55px;
+  font-style: italic; }
+.siteinfo .exclamation {
+  color: #c91c22;
+  font-size: 65px; }
+.siteinfo .subhead {
+  color: #666; }
+
+/************* Navigation ********************/
+.top-nav {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase; }
+
+.nav-bar > li.active {
+  background: #c91c22 !important;
+  border-color: #990000 !important; }
+  .nav-bar > li.active:hover {
+    background: #990000 !important; }
+
+/************* Slider ********************/
+.featured-slider {
+  background: #f2f2f2; }
+
+#featured h3 {
+  margin-top: 1em; }
+#featured img {
+  width: 100%;
+  height: auto; }
+
+#featured.orbit div.featured-slider {
+  padding: 0; }
+
+footer nav {
+  background: #333333; }
+  footer nav a {
+    color: #fff; }
+    footer nav a:hover {
+      color: #f2f2f2; }
+
+/************* Images ********************/
+.post-thumbnail img {
+  background: #f2f2f2;
+  border: 1px solid #e6e6e6;
+  padding: 10px;
+  float: left;
+  margin-right: 10px;
+  width: 45%;
+  height: auto; }
+  .post-thumbnail img .right {
+    float: right;
+    margin-left: 10px; }
+
+/************* Widgets ********************/
+.sidebar ul {
+  list-style: none; }
+  .sidebar ul li {
+    border-bottom: #cccccc solid 1px; }
+    .sidebar ul li:first-child a {
+      font-weight: bold; }
+    .sidebar ul li:last-child {
+      border-bottom: none; }
+
+h4.widgettitle label {
+  font-size: 23px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  margin-top: 14px;
+  text-rendering: optimizelegibility;
+  font-family: 'Oswald',sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: black; }
+
+/************* Directory Page ********************/
+ul.organization-listing {
+  list-style: none; }

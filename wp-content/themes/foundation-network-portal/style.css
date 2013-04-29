@@ -1,0 +1,23 @@
+/*
+Theme Name: Foundation - Groups Theme
+Version: 1.0
+Description: Custom child theme of Wordpress Foundation
+Theme URI: http://groups.occupy.net
+Author: Occupy.net
+Author URI: http://occupy.net
+Template: wp-foundation
+*/
+
+@import url("../wp-foundation/style.css");
+@import url("css/app.css");
+
+/************* Navigation ********************/
+.top-nav {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase; }
+
+.nav-bar > li .active {
+  background: #c91c22 !important;
+  border-color: #990000 !important; }
+  .nav-bar > li .active:hover {
+    background: #990000 !important; }
