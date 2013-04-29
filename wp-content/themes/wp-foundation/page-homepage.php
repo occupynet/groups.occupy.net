@@ -59,11 +59,8 @@ Template Name: Homepage
 						<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 						<section class="row post_content">
-
-							<?php get_sidebar(); // sidebar 1 ?>
-
 						
-							<div class="home-main six columns">
+							<div class="home-main eight columns">
 						
 								<?php the_content(); ?>
 								
