@@ -117,8 +117,9 @@ footer nav {
 h3.nlposts-ulist-title {
   font-family: Open Sans, sans-serif;
   font-size: 12px;
-  font-weight: #222222;
-  color: normal; }
+  font-weight: normal;
+  color: #222222;
+  text-transform: none; }
 
 h4.widgettitle label {
   font-size: 23px;

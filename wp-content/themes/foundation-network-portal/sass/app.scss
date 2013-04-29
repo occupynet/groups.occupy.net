@@ -28,8 +28,9 @@ $base-font-weight: normal;
 @mixin base-font {
 	font-family: $base-font-family;
 	font-size: $base-font-size;
-	font-weight: $base-font-color;
-	color: $base-font-weight;
+	font-weight: $base-font-weight;
+	color: $base-font-color;
+	text-transform: none;
 }
 
 /************* Typography ********************/
