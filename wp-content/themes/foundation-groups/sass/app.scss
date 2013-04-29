@@ -1,0 +1,181 @@
+/* app.scss */
+
+/************* Global ********************/
+
+//Variables
+$black: #000;
+$red: #c91c22;
+$red-dark: #900;
+$red-light: #600;
+$secondary-color: #4D4D4D;
+$third-color: #F2F2F2;
+$gray-dark: #333;
+$gray-medium: #ccc;
+$gray-light: #E6E6E6;
+$gray-superlight: #F2F2F2;
+
+//Mixins
+@mixin rounded($vert, $horz, $radius: 10px) {
+  border-#{$vert}-#{$horz}-radius: $radius;
+  -moz-border-radius-#{$vert}#{$horz}: $radius;
+  -webkit-border-#{$vert}-#{$horz}-radius: $radius;
+}
+
+/************* Typography ********************/
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: 'Oswald', sans-serif;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+h1 {
+	color: $red;
+}
+
+.intro-text,
+.intro-text p {
+	font-size: 1.5em;
+	font-style: italic;
+	line-height: 1.4em;
+	margin-top: 5px;
+}
+
+/************* Elements ********************/
+
+a {
+  color: $red;
+  &:hover { color: $gray-medium; }
+  &:active { color: $gray-dark; }
+}
+
+.button {
+	background: $red;
+	border-color: $red-dark;
+	&:hover {
+		background: $gray-light;
+		border-color: $gray-dark;
+	}
+	&:active {
+		background: $gray-dark;
+		border-color: $gray-dark;
+	}
+}
+
+/************* Header ********************/
+
+.siteinfo {
+	a {
+	color: $black;
+	font-weight: normal;
+	font-size: 55px;
+	font-style: italic;
+	}
+	.exclamation {
+	color: $red;
+	font-size: 65px;
+	}
+	.subhead {
+	color: #666;
+	}
+
+}
+
+/************* Navigation ********************/
+
+.top-nav {
+	font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+.nav-bar > li.active {
+	background: $red !important;
+	border-color: $red-dark !important;
+		&:hover {
+		background: $red-dark !important;
+		}
+	}
+
+/************* Slider ********************/
+
+.featured-slider {
+    background: $gray-superlight;
+}
+
+#featured {
+	h3 {
+	margin-top: 1em;
+	}
+	img {
+	width: 100%;
+	height: auto;
+	}
+}
+
+#featured.orbit div.featured-slider {
+	padding: 0;
+}
+
+footer nav {
+	background: $gray-dark;
+	a {
+		color: #fff;
+		&:hover {
+			color: $gray-superlight;
+		}
+	}
+}
+
+/************* Images ********************/
+
+.post-thumbnail img {
+	background: $gray-superlight;
+    border: 1px solid $gray-light;
+    padding: 10px;
+	float: left;
+	margin-right: 10px;
+	width: 45%;
+	height: auto;
+		.right {
+		float: right;
+		margin-left: 10px;
+		}
+}
+
+/************* Widgets ********************/
+
+.sidebar ul {
+	list-style: none;
+	li {
+		border-bottom: $gray-medium solid 1px;
+		&:first-child a {
+			font-weight: bold;
+		}
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}
+
+h4.widgettitle label {
+	font-size: 23px;
+	line-height: 1.1;
+    margin-bottom: 14px;
+    margin-top: 14px;
+    text-rendering: optimizelegibility;
+    font-family: 'Oswald',sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: $black;
+}
+
+/************* Directory Page ********************/
+
+ul.organization-listing {
+	list-style: none;
+}
+
