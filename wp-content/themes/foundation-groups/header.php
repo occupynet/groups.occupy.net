@@ -10,7 +10,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		
-		<title><?php bloginfo('name'); ?> &raquo; <?php is_front_page() ? bloginfo('description') : wp_title(''); ?></title>
+		<title><?php wp_title('', true, 'right'); ?></title>
 				
 		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 		
@@ -24,7 +24,7 @@
 		<!-- For Nokia -->
 		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/icons/l/apple-touch-icon.png">
 		<!-- For everything else -->
-		<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/favicon.png">
+		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico">
 				
 		<!-- media-queries.js (fallback) -->
 		<!--[if lt IE 9]>
@@ -41,26 +41,19 @@
 		<!-- wordpress head functions -->
 		<?php wp_head(); ?>
 		<!-- end of wordpress head -->
+
+		<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
+
 		
 		<!-- bring in theme options styles -->
 		<?php 
-
-		$site_name_display = of_get_option('site_name_display');
-		if ($site_name_display) {
-			$site_name = $site_name_display;
-		} else {
-			$site_name = bloginfo('name');
-		}
-
-		$footer_text = of_get_option('footer_text');
-
 		$heading_typography = of_get_option('heading_typography');
 		if ($heading_typography) {
 			$theme_options_styles = '
 			h1, h2, h3, h4, h5, h6{ 
-				<!--font-family: ' . $heading_typography['face'] . '; 
+				font-family: ' . $heading_typography['face'] . '; 
 				font-weight: ' . $heading_typography['style'] . '; 
-				color: ' . $heading_typography['color'] . ';--> 
+				color: ' . $heading_typography['color'] . '; 
 			}';
 		}
 		
@@ -137,9 +130,6 @@
 		}
 		
 		?>
-
-		<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-
 				
 	</head>
 	
@@ -150,7 +140,7 @@
 				<header role="banner" id="top-header">
 					
 					<div class="siteinfo">
-						<h1><a class="brand" id="logo" href="<?php echo get_bloginfo('url'); ?>"><?php echo $site_name; ?></a></h1>
+						<h1><a class="brand" id="logo" href="<?php echo get_bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>
 						<h4 class="subhead"><?php echo get_bloginfo ( 'description' ); ?></h4>
 					</div>
 			
