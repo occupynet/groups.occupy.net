@@ -139,7 +139,6 @@
 		?>
 
 		<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'stylesheet_url' ); ?>" />
-
 				
 	</head>
 	
@@ -150,7 +149,7 @@
 				<header role="banner" id="top-header">
 					
 					<div class="siteinfo">
-						<h1><a class="brand" id="logo" href="<?php echo get_bloginfo('url'); ?>"><?php echo $site_name; ?></a></h1>
+						<h1><a class="brand" id="logo" href="<?php echo get_bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>
 						<h4 class="subhead"><?php echo get_bloginfo ( 'description' ); ?></h4>
 					</div>
 			
