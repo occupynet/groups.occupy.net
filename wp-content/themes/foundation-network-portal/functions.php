@@ -22,25 +22,6 @@ if( !function_exists( 'custom_fonts_styles' ) ) {
 
 // Sidebars & Widgetizes Areas
 
-    register_sidebar(array(
-        'id' => 'sidebarleft',
-        'name' => 'Left Sidebar',
-        'description' => 'Displays left sidebar.',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget' => '</div>',
-        'before_title' => '<h4 class="widgettitle">',
-        'after_title' => '</h4>',
-    ));
-
-    register_sidebar(array(
-        'id' => 'sidebarright',
-        'name' => 'Right Sidebar',
-        'description' => 'Displays right sidebar.',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget' => '</div>',
-        'before_title' => '<h4 class="widgettitle">',
-        'after_title' => '</h4>',
-    ));
 
     register_sidebar(array(
         'id' => 'actionpanel',
