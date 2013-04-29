@@ -148,9 +148,11 @@ footer nav {
 
 /************* Widgets ********************/
 
-.sidebar ul {
+.sidebar ul,
+.sidebar ul.nlposts-wrapper {
 	list-style: none;
-	li {
+	li,
+	h3.nlposts-ulist-title {
 		border-bottom: $gray-medium solid 1px;
 		&:first-child a {
 			font-weight: bold;

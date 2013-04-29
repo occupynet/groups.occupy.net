@@ -95,13 +95,23 @@ footer nav {
     margin-left: 10px; }
 
 /************* Widgets ********************/
-.sidebar ul {
+.sidebar ul,
+.sidebar ul.nlposts-wrapper {
   list-style: none; }
-  .sidebar ul li {
+  .sidebar ul li,
+  .sidebar ul h3.nlposts-ulist-title,
+  .sidebar ul.nlposts-wrapper li,
+  .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title {
     border-bottom: #cccccc solid 1px; }
-    .sidebar ul li:first-child a {
+    .sidebar ul li:first-child a,
+    .sidebar ul h3.nlposts-ulist-title:first-child a,
+    .sidebar ul.nlposts-wrapper li:first-child a,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a {
       font-weight: bold; }
-    .sidebar ul li:last-child {
+    .sidebar ul li:last-child,
+    .sidebar ul h3.nlposts-ulist-title:last-child,
+    .sidebar ul.nlposts-wrapper li:last-child,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:last-child {
       border-bottom: none; }
 
 h4.widgettitle label {

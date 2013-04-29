@@ -12,15 +12,15 @@
 
 					<div class="row panel">
 						<div class="footer four columns">
-							<?php dynamic_sidebar( 'footerleft' ); ?>
+							<?php// dynamic_sidebar( 'footerleft' ); ?>
 						</div>
 
 						<div class="footer four columns">
-							<?php dynamic_sidebar( 'footercenter' ); ?>
+							<?php// dynamic_sidebar( 'footercenter' ); ?>
 						</div>
 
 						<div class="footer four columns">
-							<?php dynamic_sidebar( 'footerright' ); ?>
+							<?php// dynamic_sidebar( 'footerright' ); ?>
 						</div>
 					</div>
 
