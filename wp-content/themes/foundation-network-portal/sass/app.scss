@@ -166,9 +166,9 @@ footer nav {
 	li,
 	h3.nlposts-ulist-title {
 		border-bottom: $gray-medium solid 1px;
-		&:first-child a {
+		/* &:first-child a {
 			font-weight: bold;
-		}
+		} */
 		&:last-child {
 			border-bottom: none;
 		}
@@ -177,7 +177,6 @@ footer nav {
 
 h3.nlposts-ulist-title {
 	@include base-font;
-	font-weight: normal !important;
 }
 
 h4.widgettitle label {

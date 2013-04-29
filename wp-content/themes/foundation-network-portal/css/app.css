@@ -102,12 +102,10 @@ footer nav {
   .sidebar ul h3.nlposts-ulist-title,
   .sidebar ul.nlposts-wrapper li,
   .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title {
-    border-bottom: #cccccc solid 1px; }
-    .sidebar ul li:first-child a,
-    .sidebar ul h3.nlposts-ulist-title:first-child a,
-    .sidebar ul.nlposts-wrapper li:first-child a,
-    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a {
-      font-weight: bold; }
+    border-bottom: #cccccc solid 1px;
+    /* &:first-child a {
+    	font-weight: bold;
+    } */ }
     .sidebar ul li:last-child,
     .sidebar ul h3.nlposts-ulist-title:last-child,
     .sidebar ul.nlposts-wrapper li:last-child,
@@ -119,8 +117,7 @@ h3.nlposts-ulist-title {
   font-size: 12px;
   font-weight: normal;
   color: #222222;
-  text-transform: none;
-  font-weight: normal !important; }
+  text-transform: none; }
 
 h4.widgettitle label {
   font-size: 23px;
