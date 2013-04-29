@@ -175,15 +175,18 @@ footer nav {
 	}
 }
 
+ul.nlposts-wrapper {
+	li.nlposts-ulist-litem {
+		margin-bottom: 2px;
+	}
+}
+
 h3.nlposts-ulist-title {
 	font-family: $base-font-family;
 	font-size: 14px;
 	font-weight: $base-font-weight;
 	color: $base-font-color;
 	text-transform: none;
-	li.nlposts-ulist-litem {
-		margin-bottom: 2px;
-	}
 }
 
 h4.widgettitle label {

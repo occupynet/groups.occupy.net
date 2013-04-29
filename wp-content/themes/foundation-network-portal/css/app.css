@@ -114,14 +114,15 @@ footer nav {
     .sidebar ul.nlposts-wrapper li.nlposts-ulist-litem:last-child {
       border-bottom: none; }
 
+ul.nlposts-wrapper li.nlposts-ulist-litem {
+  margin-bottom: 2px; }
+
 h3.nlposts-ulist-title {
   font-family: Open Sans, sans-serif;
   font-size: 14px;
   font-weight: normal;
   color: #222222;
   text-transform: none; }
-  h3.nlposts-ulist-title li.nlposts-ulist-litem {
-    margin-bottom: 2px; }
 
 h4.widgettitle label {
   font-size: 23px;
