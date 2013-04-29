@@ -127,6 +127,7 @@ class EM_Category extends EM_Object {
 		}
 		$category_string = $format;		 
 	 	preg_match_all("/(#@?_?[A-Za-z0-9]+)({([a-zA-Z0-9,]+)})?/", $format, $placeholders);
+	 	$replaces = array();
 		foreach($placeholders[1] as $key => $result) {
 			$replace = '';
 			$full_result = $placeholders[0][$key];
@@ -158,7 +159,9 @@ class EM_Category extends EM_Object {
 								    	$replace = wp_get_attachment_image($this->get_image_id(), $image_size);
 								    	$this->ms_global_switch_back();
 								    }else{
-										$replace = "<img src='".em_get_thumbnail_url($this->get_image_url(), $image_size[0], $image_size[1])."' alt='".esc_attr($this->name)."' width='{$image_size[0]}' height='{$image_size[1]}'/>";
+										$width = ($image_size[0]) ? 'width="'.esc_attr($image_size[0]).'"':'';
+										$height = ($image_size[1]) ? 'height="'.esc_attr($image_size[1]).'"':'';
+										$replace = "<img src='".esc_url(em_get_thumbnail_url($this->get_image_url(), $image_size[0], $image_size[1]))."' alt='".esc_attr($this->name)."' $width $height />";
 								    }
 								}else{
 									$replace = "<img src='".esc_url($this->get_image_url())."' alt='".esc_attr($this->name)."'/>";
@@ -205,15 +208,23 @@ class EM_Category extends EM_Object {
 						$replace = get_option('dbem_category_no_events_message','</ul>');
 					}
 					break;
+				case '#_CATEGORYNEXTEVENT':
+					$events = EM_Events::get( array('category'=>$this->term_id, 'scope'=>'future', 'limit'=>1, 'orderby'=>'event_start_date,event_start_time') );
+					$replace = get_option('dbem_category_no_event_message');
+					foreach($events as $EM_Event){
+						$replace = $EM_Event->output(get_option('dbem_category_event_single_format'));
+					}
+					break;
 				default:
 					$replace = $full_result;
 					break;
 			}
-			$replace = apply_filters('em_category_output_placeholder', $replace, $this, $full_result, $target); //USE WITH CAUTION! THIS MIGHT GET RENAMED
-			$category_string = str_replace($full_result, $replace , $category_string );
+			$replaces[$full_result] = apply_filters('em_category_output_placeholder', $replace, $this, $full_result, $target);
 		}
-		$name_filter = ($target == "html") ? 'dbem_general':'dbem_general_rss'; //TODO remove dbem_ filters
-		$category_string = str_replace('#_CATEGORY', apply_filters($name_filter, $this->name) , $category_string ); //Depreciated
+		krsort($replaces);
+		foreach($replaces as $full_result => $replacement){
+			$category_string = str_replace($full_result, $replacement , $category_string );
+		}
 		return apply_filters('em_category_output', $category_string, $this, $format, $target);	
 	}
 	

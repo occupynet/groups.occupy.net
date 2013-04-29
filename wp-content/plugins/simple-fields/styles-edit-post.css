@@ -47,7 +47,7 @@ ul.simple-fields-metabox-field-group-fields {
 	margin: 0 -10px;
 }
 
-ul.simple-fields-metabox-field-group-fields-repeatable li {
+ul.simple-fields-metabox-field-group-fields-repeatable .simple-fields-metabox-field-group {
 	margin-top: 1em;
 	padding-top: .5em;
 	padding-bottom: .5em;
@@ -61,11 +61,11 @@ ul.simple-fields-metabox-field-group-fields-repeatable li {
 	border-top: 2px solid #eee;
 	padding: .5em 1.5em;
 	margin: 0 0 0 0;
-	opacity: .9;
+	/*opacity: .9;*/
 }
-ul.simple-fields-metabox-field-group-fields-repeatable li:hover {
+ul.simple-fields-metabox-field-group-fields-repeatable .simple-fields-metabox-field-group:hover {
 	background-color: #fffcf1;
-	opacity: 1;
+	/*opacity: 1;*/
 }
 
 
@@ -161,6 +161,15 @@ ul.simple-fields-metabox-field-group-fields-repeatable li:hover {
 }
 
 
+/* hidden view for custom field keys/slugs */
+.simple-fields-metabox-field-custom-field-key {
+}
+.simple-fields-metabox-field-custom-field-key-visible {
+	display: block;
+	clear: both;
+	margin-bottom: 1em;
+}
+
 
 .simple_fields_editor_switch {
 	display: inline;
@@ -197,7 +206,7 @@ ul.simple-fields-metabox-field-group-fields-repeatable li:hover {
 		opacity: 1;
 	}
 
-/* file field */
+/* file field type */
 ul.simple-fields-file-browser-list {
 	margin: 1em;
 }
@@ -237,7 +246,10 @@ ul.simple-fields-file-browser-list {
 		left: 0;
 		top: 50px;
 	}
-
+	
+	.simple-fields-metabox-field-file-selected-image-name {
+		font-weight: bold;
+	}
 	.simple-fields-metabox-field-file-col1 {
 		width: 46px;
 		height: 46px;
@@ -248,13 +260,14 @@ ul.simple-fields-file-browser-list {
 	.simple-fields-metabox-field-file-col1 img {
 		width: 46px;
 		display: block;
+		max-height: 100%;
 	}
 	.simple-fields-metabox-field-file-col2 {
 		margin-left: 56px;
 		margin-top: -46px;
 	}
 
-/*	.xxxsimple-fields-metabox-field-file-select,*/
+	/*
 	.simple-fields-metabox-field-file-edit,
 	.simple-fields-metabox-field-file-clear {
 		visibility: hidden;
@@ -264,37 +277,70 @@ ul.simple-fields-file-browser-list {
 	.simple-fields-metabox-field-group:hover .simple-fields-metabox-field-file-clear {
 		visibility: visible;
 	}
+	*/
+
+	.simple-fields-metabox-field-description,
+	.simple-fields-meta-box-field-group-description
+	 {
+		font-style: italic;
+		color: #666;
+	}
+
+	.simple-fields-metabox-field-file-col2 a {
+		border-left: 1px solid #ccc;
+		padding-left: 4px;
+		margin-left: 4px;
+	}
+
+	.simple-fields-metabox-field-file-selected-image-name + a {
+		border-left: none;
+		padding-left: 0;
+		margin-left: 0;
+	}
 
 
+	/* hide things by default */
+	.simple-fields-metabox-field-file-selected-image-name,
+	.simple-fields-metabox-field-file-view,
+	.simple-fields-metabox-field-file-edit,
+	.simple-fields-metabox-field-file-clear
+	{
+		display: none;
+	}
+	
+	/* show things when file is selected */
+	.simple-fields-metabox-field-file-is-selected .simple-fields-metabox-field-file-clear
+	{
+		display: inline;
+	}
+	.simple-fields-metabox-field-file-is-selected .simple-fields-metabox-field-file-selected-image-name {
+		display: block;
+	}
+	
+	/* show some things on hover */
+	.simple-fields-metabox-field-file-is-selected:hover .simple-fields-metabox-field-file-view,
+	.simple-fields-metabox-field-file-is-selected:hover .simple-fields-metabox-field-file-edit {
+		display: inline;
+	}
 
-.simple-fields-metabox-field-description,
-.simple-fields-meta-box-field-group-description
- {
-	font-style: italic;
-	color: #666;
-}
-
-.simple-fields-metabox-field-file-select, .simple-fields-metabox-field-file-edit, .simple-fields-metabox-field-file-clear,
-.simple-fields-metabox-field-post-clear {
-	border-left: 1px solid #ccc;
-	padding-left: 4px;
-	margin-left: 4px;
-}
 
 /*.simple-fields-bonny-plugins-inner-sidebar {
 	display: none;
 }*/
 
 /**
- * field dropdown
+ * dropdown field type
  */
 .simple-fields-fieldgroups-field-type-dropdown select {
 	/*width: 50%;*/
 }
 
 /** 
- * field post
+ * post field type
  */
+.simple-fields-field-type-post-postName {
+	font-weight: bold;
+}
 .simple-fields-meta-box-field-group-field-type-post-dialog {
 	margin: 10px;
 }
@@ -358,14 +404,16 @@ ul.simple-fields-file-browser-list {
 
 
 
-/* test style for thumbnail repeatable view */
+/* styles for thumbnail repeatable view */
 .simple-fields-metabox-field-group-fields-view-table {
 
 }
 
-.simple-fields-metabox-field-group-fields-view-table li {
-	border: 0 !important;
-	background-image: none !important;
+.simple-fields-metabox-field-group-fields-view-table .simple-fields-metabox-field-group {
+	border-top: 1px solid #eee !important;
+	/*background-image: none !important;*/
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
 }
 
 .simple-fields-metabox-field-group-fields-view-table .simple-fields-metabox-field {
@@ -398,7 +446,7 @@ ul.simple-fields-file-browser-list {
 	margin-top: 0;
 }
 
-
+/*
 .simple-fields-metabox-field-group-fields-view-table li:first-of-type {
 	border-top: 0;
 }
@@ -419,36 +467,75 @@ ul.simple-fields-file-browser-list {
 .simple-fields-metabox-field-group-fields-view-table li:first-of-type .simple-fields-metabox-field-second {
 	margin-bottom: 25px;
 }
+*/
+
+.simple-fields-metabox-field-group-view-table-headline-wrap {
+	border-bottom: 1px solid #ccc;
+	padding-top: 0.5em;
+	margin-bottom: .75em;
+	padding-bottom: .75em;
+}
+
+.simple-fields-metabox-field-group-view-table-headline {
+	float: left;
+}
+
+	.simple-fields-field-group-view-table-headline-name {
+		font-weight: bold;
+		display: block;
+		min-height: 1em;
+		margin: 0 0 .5em 0;
+	}
+
+	.simple-fields-field-group-view-table-headline-description {
+		font-style: italic;
+		color: #666;
+	}
+
+	.simple-fields-meta-box-field-group-wrapper-view-table .simple-fields-metabox-field-add-top {
+		margin-top: 0;
+	}
 
 /* different widths depending on num of added fields. and yes, this feel a bit stupud */
-/* we support up to 10 fields, even that is proably to many too look good*/
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-1 .simple-fields-metabox-field {
+/* we support up to 10 fields, even that is proably to many too look good */
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-1 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-1
+ {
 	width: 100%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-2 .simple-fields-metabox-field {
-	width: 30%;
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-2 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-2 {
+	width: 50%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-3 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-3 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-3 {
 	width: 33.33%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-4 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-4 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-4 {
 	width: 25%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-5 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-5 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-5 {
 	width: 20%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-6 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-6 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-6 {
 	width: 16.66%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-7 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-7 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-7 {
 	width: 14.28%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-8 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-8 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-8 {
 	width: 12.5%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-9 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-9 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-9 {
 	width: 11.11%;
 }
-.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-10 .simple-fields-metabox-field {
+.simple-fields-metabox-field-group-fields-view-table.simple-fields-metabox-field-group-fields-count-10 .simple-fields-metabox-field,
+.simple-fields-metabox-field-group-view-table-headline-count-10 {
 	width: 10%;
 }

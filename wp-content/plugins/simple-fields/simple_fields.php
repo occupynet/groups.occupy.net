@@ -3,7 +3,7 @@
 Plugin Name: Simple Fields
 Plugin URI: http://simple-fields.com
 Description: Add groups of textareas, input-fields, dropdowns, radiobuttons, checkboxes and files to your edit post screen.
-Version: 1.1.6
+Version: 1.2.4
 Author: Pär Thernström
 Author URI: http://eskapism.se/
 License: GPL2
@@ -11,18 +11,18 @@ License: GPL2
 
 /*  Copyright 2010  Pär Thernström (email: par.thernstrom@gmail.com)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License, version 2, as 
+	published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 /**
@@ -54,7 +54,7 @@ class simple_fields {
 
 		define( "SIMPLE_FIELDS_URL", plugins_url(basename(dirname(__FILE__))). "/");
 		define( "SIMPLE_FIELDS_NAME", "Simple Fields");
-		define( "SIMPLE_FIELDS_VERSION", "1.1.6");
+		define( "SIMPLE_FIELDS_VERSION", "1.2.4");
 
 		load_plugin_textdomain( 'simple-fields', null, basename(dirname(__FILE__)).'/languages/');
 		
@@ -83,8 +83,10 @@ class simple_fields {
 		$this->registered_field_types = array();
 
 		// Actions and filters
+
 		add_action( 'admin_init', array($this, 'admin_init') );
 		add_action( 'admin_init', array($this, 'check_upgrade_stuff') );
+		add_action( 'admin_init', array($this, "options_page_save" ));
 		add_action( 'admin_enqueue_scripts', array($this, 'admin_enqueue_scripts') );
 		add_action( 'admin_menu', array($this, "admin_menu") );
 		add_action( 'admin_head', array($this, 'admin_head') );
@@ -94,8 +96,12 @@ class simple_fields {
 		add_action( 'admin_init', array($this,'post_admin_init') );
 		add_action( 'dbx_post_sidebar', array($this, 'post_dbx_post_sidebar') );
 		add_action( 'save_post', array($this, 'save_postdata') );
+		add_action( 'save_post', array($this, 'clear_caches') );
+		add_action( 'edit_attachment', array($this, 'save_postdata') );
+
 		add_action( 'plugins_loaded', array($this, 'plugins_loaded') );
 		add_action( 'init', array($this, "maybe_add_debug_info") ); 
+
 
 		// Hacks for media select dialog
 		add_filter( 'media_send_to_editor', array($this, 'media_send_to_editor'), 15, 2 );
@@ -107,10 +113,36 @@ class simple_fields {
 		add_action( 'wp_ajax_simple_fields_field_type_post_dialog_load', array($this, 'field_type_post_dialog_load') );
 		add_action( 'wp_ajax_simple_fields_field_group_add_field', array($this, 'field_group_add_field') );
 
+		// Add to debug bar if debug is enabled
+		add_filter( 'debug_bar_panels', array($this, "debug_panel_insert") );
+
 		// Boot up
 		do_action("simple_fields_init", $this);
 
 	}
+
+	/**
+	 * Inserts debug panel to debug bar
+	 * Called form debug bar filter "debug_bar_panels", so will only be run'ed when debug bar is activated
+	 */
+	function debug_panel_insert( $panels ) {
+		
+		$options = $this->get_options();
+		// if (isset($options["debug_type"]) && $options["debug_type"] !== 0) {
+
+			// 1 = debug for admins only, 2 = debug for all
+			//if ( ($options["debug_type"] === 1 && current_user_can("edit_themes")) || $options["debug_type"] === 2) {
+
+				include_once( dirname(__FILE__) . "/class_simple_fields_debug_panel.php" );
+				$panels[] = new class_simple_fields_debug_panel;
+
+			//}
+
+		//}
+
+		return $panels;
+
+}
 
 	// check some things regarding update
 	function check_upgrade_stuff() {
@@ -145,7 +177,9 @@ class simple_fields {
 	 * @return string
 	 */
 	function get_slug_pattern() {
-		return "[A-Za-z0-9_]+";
+		$pattern = "[A-Za-z0-9_]+";
+		$pattern = apply_filters( "simple_fields_get_slug_pattern", $pattern);
+		return $pattern;
 	}
 	
 	/**
@@ -214,7 +248,7 @@ class simple_fields {
 			$page_type = "settings";
 		}
 		
-		if (!$is_on_simple_fields_page) return;
+		if ( ! $is_on_simple_fields_page ) return;
 
 		if ("settings" === $page_type) {
 
@@ -239,18 +273,18 @@ class simple_fields {
 			// wp_enqueue_style("chosen", SIMPLE_FIELDS_URL.'js/chosen/chosen.css', false, SIMPLE_FIELDS_VERSION);
 
 			wp_enqueue_style('simple-fields-styles-post', SIMPLE_FIELDS_URL.'styles-edit-post.css', false, SIMPLE_FIELDS_VERSION);
+
+			// Media must be enqueued if we are editing a post with no editor (probably custom post type)
+			wp_enqueue_media(); // edit-form-advanced passes this also: array( 'post' => $post_ID
 	
 		}
 
 		// Common scripts
-
 		wp_enqueue_script("jquery-ui-core");
 		wp_enqueue_script("jquery-ui-sortable");
 		wp_enqueue_script("jquery-ui-dialog");
-		wp_enqueue_style('wp-jquery-ui-dialog');
 		wp_enqueue_script("jquery-effects-highlight");
-
-		wp_register_script('simple-fields-scripts', SIMPLE_FIELDS_URL.'scripts.js', false, SIMPLE_FIELDS_VERSION);
+		wp_register_script('simple-fields-scripts', SIMPLE_FIELDS_URL.'scripts.js', false, SIMPLE_FIELDS_VERSION);		
 		wp_localize_script('simple-fields-scripts', 'sfstrings', array(
 			'page_type' => $page_type,
 			'txtDelete' => __('Delete', 'simple-fields'),
@@ -271,6 +305,9 @@ class simple_fields {
 			'high' => __('high'),
 		));
 		wp_enqueue_script('simple-fields-scripts');
+
+		// Common styles
+		wp_enqueue_style('wp-jquery-ui-dialog');
 
 		// Hook for plugins
 		do_action("simple_fields_enqueue_scripts", $this);
@@ -337,9 +374,13 @@ class simple_fields {
 	 * @return mixed int connector id or string __none__ or __inherit__
 	 */
 	function get_default_connector_for_post_type($post_type) {
+
 		$post_type_defaults = $this->get_post_type_defaults();
 		$selected_post_type_default = (isset($post_type_defaults[$post_type]) ? $post_type_defaults[$post_type] : "__none__");
+		$selected_post_type_default = apply_filters( "simple_fields_get_default_connector_for_post_type", $selected_post_type_default, $post_type );
+
 		return $selected_post_type_default;
+
 	}
 
 	/**
@@ -378,8 +419,11 @@ class simple_fields {
 		if (wp_is_post_revision($post_id) !== FALSE) return $post_id;
 		
 		// attach post connector
-		$simple_fields_selected_connector = (isset($_POST["simple_fields_selected_connector"])) ? $_POST["simple_fields_selected_connector"] : null;
-		update_post_meta($post_id, "_simple_fields_selected_connector", $simple_fields_selected_connector);
+		// only save if being found in post variable, beacuse it may not exist if meta box is hidden/not outputted on page
+		if ( isset($_POST["simple_fields_selected_connector"]) ) {
+			$simple_fields_selected_connector = (isset($_POST["simple_fields_selected_connector"])) ? $_POST["simple_fields_selected_connector"] : null;
+			update_post_meta($post_id, "_simple_fields_selected_connector", $simple_fields_selected_connector);
+		}
 	
 		$post_id = (int) $post_id;
 		$fieldgroups = (isset($_POST["simple_fields_fieldgroups"])) ? $_POST["simple_fields_fieldgroups"] : null;
@@ -448,6 +492,7 @@ class simple_fields {
 						// it's a tiny edit area, so use wpautop to fix p and br
 						$do_wpautop = true;
 					}
+					$do_wpautop = apply_filters("simple_fields_save_postdata_do_wpautop", $do_wpautop, $post_id);
 					
 					// save entered value for each added group
 					$num_in_set = 0;
@@ -466,17 +511,17 @@ class simple_fields {
 							Date field:
 							Array
 							(
-							    [date_unixtime] => 1351983600000
+								[date_unixtime] => 1351983600000
 							)
 							
 							Map field:
 							Array
 							(
-							    [lat] => 59.312089
-							    [lng] => 18.074117
-							    [name] => Monki Skrapan
-							    [formatted_address] => GÃ¶tgatan 78, Stockholm, Sverige
-							    [address_components] => [{\"long_name\":\"78\",\"short_name\":\"78\",\"types\":[\"street_number\"]},{\"long_name\":\"GÃ¶tgatan\",\"short_name\":\"GÃ¶tgatan\",\"types\":[\"route\"]},{\"long_name\":\"SÃ¶dermalm\",\"short_name\":\"SÃ¶dermalm\",\"types\":[\"sublocality\",\"political\"]},{\"long_name\":\"Stockholm\",\"short_name\":\"Stockholm\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Stockholms lÃ¤n\",\"short_name\":\"Stockholms lÃ¤n\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"SE\",\"short_name\":\"SE\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"11830\",\"short_name\":\"11830\",\"types\":[\"postal_code\"]}]
+								[lat] => 59.312089
+								[lng] => 18.074117
+								[name] => Monki Skrapan
+								[formatted_address] => GÃ¶tgatan 78, Stockholm, Sverige
+								[address_components] => [{\"long_name\":\"78\",\"short_name\":\"78\",\"types\":[\"street_number\"]},{\"long_name\":\"GÃ¶tgatan\",\"short_name\":\"GÃ¶tgatan\",\"types\":[\"route\"]},{\"long_name\":\"SÃ¶dermalm\",\"short_name\":\"SÃ¶dermalm\",\"types\":[\"sublocality\",\"political\"]},{\"long_name\":\"Stockholm\",\"short_name\":\"Stockholm\",\"types\":[\"locality\",\"political\"]},{\"long_name\":\"Stockholms lÃ¤n\",\"short_name\":\"Stockholms lÃ¤n\",\"types\":[\"administrative_area_level_2\",\"political\"]},{\"long_name\":\"SE\",\"short_name\":\"SE\",\"types\":[\"country\",\"political\"]},{\"long_name\":\"11830\",\"short_name\":\"11830\",\"types\":[\"postal_code\"]}]
 							)
 							*/
 							//echo "xxx save value for custom field type"; sf_d($custom_field_value);
@@ -544,8 +589,7 @@ class simple_fields {
 			$field_group_css .= " simple-fields-fieldgroup-" . $current_field_group["slug"];
 		}*/
 
-		?>
-		<li class="sf-cf simple-fields-metabox-field-group <?php echo $field_group_css ?>">
+		?><li class="sf-cf simple-fields-metabox-field-group <?php echo $field_group_css ?>">
 			<?php // must use this "added"-thingie do be able to track added field group that has no added values (like unchecked checkboxes, that we can't detect ?>
 			<input type="hidden" name="simple_fields_fieldgroups[<?php echo $field_group_id ?>][added][<?php echo $num_in_set ?>]" value="1" />
 			<div class="simple-fields-metabox-field-group-handle"></div>
@@ -577,11 +621,16 @@ class simple_fields {
 				//  - array if field type extension, unless the field extension overrides this
 				$custom_field_key = "_simple_fields_fieldGroupID_{$field_group_id}_fieldID_{$field_id}_numInSet_{$num_in_set}";
 				$saved_value = get_post_meta($post_id, $custom_field_key, true);
-				
+
+				// Options, common for all fields
 				$description = "";
-				if (!empty($field["description"])) {
+				if ( ! empty( $field["description"] ) ) {
 					$description = sprintf("<div class='simple-fields-metabox-field-description'>%s</div>", esc_html($field["description"]));
 				}
+
+				// Options, common for most core field
+				$field_type_options = ! isset( $field["options"] ) || ! isset( $field["options"][$field["type"]] ) ? array() : (array) $field["options"][ $field["type"] ];
+				$placeholder = empty( $field_type_options["placeholder"] ) ? "" : esc_attr( $field_type_options["placeholder"] );
 				
 				// div that wraps around each outputed field
 				// Output will be similar to this
@@ -692,8 +741,8 @@ class simple_fields {
 								/*
 								Array
 								(
-								    [0] => dropdown_num_2
-								    [1] => dropdown_num_3
+									[0] => dropdown_num_2
+									[1] => dropdown_num_3
 								)
 								*/
 								if (in_array($one_option_internal_name, $arr_saved_value_dropdown)) {
@@ -721,7 +770,9 @@ class simple_fields {
 						$image_html = "";
 						$image_name = "";
 						$view_file_url = "";
+						$class = "";
 						if ($attachment_id) {
+							$class .= " simple-fields-metabox-field-file-is-selected ";
 							$image_post = get_post($attachment_id);
 							if ($image_post === NULL) {
 								// hm.. image that no longer exists? trashed?
@@ -733,7 +784,6 @@ class simple_fields {
 							}
 							$view_file_url = wp_get_attachment_url($attachment_id);
 						}
-						$class = "";
 						if ($description) {
 							//$class = "simple-fields-metabox-field-file-with-description";
 						}
@@ -749,36 +799,35 @@ class simple_fields {
 							echo "<div class='simple-fields-metabox-field-file-col1'>";
 								echo "<div class='simple-fields-metabox-field-file-selected-image'>$image_html</div>";
 							echo "</div>";
+
 							echo "<div class='simple-fields-metabox-field-file-col2'>";
+								
 								echo "<input type='hidden' class='text simple-fields-metabox-field-file-fileID' name='$field_name' id='$field_unique_id' value='$attachment_id' />";							
 	
+								// File name
+								echo "<div class='simple-fields-metabox-field-file-selected-image-name'>$image_name</div>";
+
+								// File action links (view, select, edit, etc.)
 								$field_unique_id_esc = rawurlencode($field_unique_id);
 								$file_url = get_bloginfo('wpurl') . "/wp-admin/media-upload.php?simple_fields_dummy=1&simple_fields_action=select_file&simple_fields_file_field_unique_id=$field_unique_id_esc&post_id=$current_post_id&TB_iframe=true";
 								
-								echo "<a class='simple-fields-metabox-field-file-view' href='$view_file_url'>".__('View', 'simple-fields')."</a>";
-								echo "<a class='thickbox simple-fields-metabox-field-file-select' href='$file_url'>".__('Select', 'simple-fields')."</a>";
+								echo "<a class='simple-fields-metabox-field-file-select' href='$file_url'>".__('Select', 'simple-fields')."</a> ";
+								echo "<a href='#' class='simple-fields-metabox-field-file-clear'>".__('Clear', 'simple-fields')."</a> ";
+								echo "<a class='simple-fields-metabox-field-file-view' target='_blank' href='$view_file_url'>".__('View', 'simple-fields')."</a> ";
 								
-								$class = ($attachment_id) ? " " : " hidden ";
-								$href_edit = ($attachment_id) ? admin_url("media.php?attachment_id={$attachment_id}&action=edit") : "#";
-								echo " <a href='{$href_edit}' class='simple-fields-metabox-field-file-edit $class'>".__('Edit', 'simple-fields') . "</a>";
-								echo " <a href='#' class='simple-fields-metabox-field-file-clear $class'>".__('Clear', 'simple-fields')."</a>";							
-								echo "<div class='simple-fields-metabox-field-file-selected-image-name'>$image_name</div>";
-								
+								//$class = ($attachment_id) ? " " : " hidden ";
+								// old format: http://viacom.ep/wp-admin/media.php?attachment_id=20314&action=edit
+								// new format: http://viacom.ep/wp-admin/post.php?post=20314&action=edit
+								$href_edit = ($attachment_id) ? admin_url("post.php?post={$attachment_id}&action=edit") : "#";
+								echo "<a href='{$href_edit}' target='_blank' class='simple-fields-metabox-field-file-edit'>".__('Edit', 'simple-fields') . "</a>";
+
 							echo "</div>";
 
 
 							echo "</div>"; // second
 
 						echo "</div>";
-	
-					} elseif ("image" == $field["type"]) {
-						
-						// @todo: does this field type exist??
-						$text_value_esc = esc_html($saved_value);
-						echo "<label>".__('image', 'simple-fields')."</label>";
-						//echo $description;
-						echo "<input class='text' name='$field_name' id='$field_unique_id' value='$text_value_esc' />";
-						
+							
 					} elseif ("textarea" == $field["type"]) {
 		
 						$textarea_value_esc = esc_html($saved_value);
@@ -816,12 +865,13 @@ class simple_fields {
 
 						echo "<div class='simple-fields-metabox-field-second'>";
 	
-						if (isset($textarea_options["use_html_editor"])) {
+						if ( isset( $textarea_options["use_html_editor"] ) && $textarea_options["use_html_editor"] ) {
+							
 							// This helps get_upload_iframe_src() determine the correct post id for the media upload button
 							global $post_ID;
 							if (intval($post_ID) == 0) {
 								if (intval($_REQUEST['post_id']) > 0) {
-									$post_ID = intval($_REQUEST['post']);
+									$post_ID = intval($_REQUEST['post_id']);
 								} elseif (intval($_REQUEST['post']) > 0) {
 									$post_ID = intval($_REQUEST['post']);
 								}
@@ -833,35 +883,139 @@ class simple_fields {
 								"textarea_rows"	=> $textarea_rows,
 								"media_buttons"	=> TRUE
 							);
+
 							echo "<div class='simple-fields-metabox-field-textarea-tinymce-wrapper'>";
+							#sf_d($saved_value, "saved_value");
+							#$field_unique_id = "GORILLA" . rand();
+							#sf_d($args, "args");
+							#sf_d($use_defaults, "use_defaults");
+							/*
+							$editor_id
+							(string) (required) HTML ID attribute value for the textarea and TinyMCE. (may only contain lower-case letters)
+							Note that the ID that is passed to the wp_editor() function can only be composed of lower-case letters. No underscores, no hyphens. Anything else will cause the WYSIWYG editor to malfunction.
+							Default: None
+							
+							Ny, funkar ej:
+								field_unique_id:
+								simple_fields_fieldgroups_6_1_new0
+								args:
+								Array
+								(
+								    [textarea_name] => simple_fields_fieldgroups[6][1][new0]
+								    [editor_class] => simple-fields-metabox-field-textarea-tinymce  simple-fields-metabox-field-textarea-tinymce-size-small 
+								    [textarea_rows] => 3
+								    [media_buttons] => 1
+								)
+							Befintlig, funkar:
+								saved_value:
+								field_unique_id:
+								simple_fields_fieldgroups_6_1_0
+								args:
+								Array
+								(
+								    [textarea_name] => simple_fields_fieldgroups[6][1][0]
+								    [editor_class] => simple-fields-metabox-field-textarea-tinymce  simple-fields-metabox-field-textarea-tinymce-size-small 
+								    [textarea_rows] => 3
+								    [media_buttons] => 1
+								)							
+							*/
+							// sf_d($field_unique_id, "adding wp_editor with field_unique_id");
 							wp_editor( $saved_value, $field_unique_id, $args );
+
+							// use_defauls = first time fields are outputed = new post or new fielgroup from ajax call ("+ Add"-link)
+							if ($use_defaults) {
+
+								// Do stuff with wp editor, but only when called from ajax
+								if ( defined("DOING_AJAX") && DOING_AJAX ) {
+			
+									// Must call footer scripts so wp_editor outputs it's stuff
+									// It works with TinyMCE but the quicktags are not outputted due to quicktags being activated on domready
+
+									// remove scripts that we don't need								
+									remove_action( "admin_print_footer_scripts", "wp_auth_check_js");
+
+									// don't load tinymce plugins
+									add_filter('mce_external_plugins', "__return_empty_array");
+
+									ob_start();
+									do_action("admin_print_footer_scripts");
+									$footer_scripts = ob_get_clean();
+									
+									// only keep scripts. works pretty ok, but we get some stray text too, so use preg match to get only script tags
+									$footer_scripts = wp_kses($footer_scripts, array("script" => array()));
+									
+									preg_match_all('/<script>(.*)<\/script>/msU', $footer_scripts, $matches);
+									$footer_scripts = "";
+									foreach ($matches[1] as $one_script_tag_contents) {
+										if ( ! empty( $one_script_tag_contents ) )
+											$footer_scripts .= sprintf('<script>%1$s</script>', $one_script_tag_contents);
+									}
+
+									// the scripts only output correct id for the first editor
+									// (for unknown reasons, something to do with the fact that we do this everal times while it's meant do only be done once)
+									// so replace strings like simple_fields_fieldgroups_6_1_new0 to the current editor
+									// mceInit : {'simple_fields_fieldgroups_6_1_new0'
+									/*
+									$pattern = "#simple_fields_fieldgroups_(\d+)_(\d+)_new(\d+)#";
+									$replacement = "$field_unique_id";
+									$footer_scripts = preg_replace($pattern, $replacement, $footer_scripts);
+
+									$footer_scripts = str_replace("tinyMCEPreInit", "tinyMCEPreInit_$field_unique_id", $footer_scripts);
+									$footer_scripts = str_replace("wpActiveEditor", "wpActiveEditor_$field_unique_id", $footer_scripts);
+									*/
+
+									// the line that begins with 
+									// (function(){var t=tinyMCEPreInit,sl=tinymce.ScriptLoader
+									// breaks my install... so let's remove it
+									// it's only outputed sometimes, something to do with compressed scripts or not. or simpething.
+									$footer_scripts = preg_replace('/\(function\(\){var t=tinyMCEPreInit,sl=tinymce.ScriptLoader.*/', '', $footer_scripts);
+
+									echo "$footer_scripts";
+
+									?>
+									<script>
+										// We need to call _buttonsInit to make quicktags buttons appear/work, but it's private. however calling addButtons calls _buttonsInit
+										// so we fake-add a button, just to fire _buttonsInit again.
+										QTags.addButton( 'simple_fields_dummy_button', '...', '<br />', null, null, null, null, "apa" );
+									</script>
+									<?php
+
+								} // if ajax
+
+							}  // if use defaults 
+
 							echo "</div>";
+
 						} else {
+
 							echo "<div class='simple-fields-metabox-field-textarea-wrapper'>";
-							echo "<textarea class='simple-fields-metabox-field-textarea' name='$field_name' id='$field_unique_id' cols='50' rows='$textarea_rows'>$textarea_value_esc</textarea>";
+							echo "<textarea class='simple-fields-metabox-field-textarea' name='$field_name' id='$field_unique_id' cols='50' rows='$textarea_rows' placeholder='$placeholder'>$textarea_value_esc</textarea>";
 							echo "</div>";
+
 						}
-						
 
 						echo "</div>";
 		
 					} elseif ("text" == $field["type"]) {
 		
 						$text_value_esc = esc_html($saved_value);
-						
+
+						$type_attr = isset( $field_type_options["subtype"] ) ? $field_type_options["subtype"] : "text";
+						$extra_attributes = isset( $field_type_options["attributes"] ) ? $field_type_options["attributes"] : "";
+
 						echo "<div class='simple-fields-metabox-field-first'>";
 						echo "<label for='$field_unique_id'> " . $field["name"] . "</label>";
 						echo $description;
 						echo "</div>";
 
 						echo "<div class='simple-fields-metabox-field-second'>";
-						echo "<input class='text' name='$field_name' id='$field_unique_id' value='$text_value_esc' />";
+						echo "<input type='$type_attr' class='text' name='$field_name' id='$field_unique_id' value='$text_value_esc' placeholder='$placeholder' $extra_attributes />";
 						echo "</div>";
 		
 					} elseif ("color" == $field["type"]) {
 						
 						$text_value_esc = esc_html($saved_value);
-						
+
 						echo "<div class='simple-fields-metabox-field-first'>";
 						echo "<label for='$field_unique_id'> " . $field["name"] . "</label>";
 						echo $description;
@@ -889,7 +1043,7 @@ class simple_fields {
 	
 					} elseif ("taxonomy" == $field["type"]) {
 						
-						$arr_taxonomies = get_taxonomies(array(), "objects");					
+						$arr_taxonomies = get_taxonomies(array(), "objects");
 						$enabled_taxonomies = (array) @$field["type_taxonomy_options"]["enabled_taxonomies"];
 						
 						//echo "<pre>";print_r($enabled_taxonomies );echo "</pre>";
@@ -923,6 +1077,10 @@ class simple_fields {
 						$enabled_taxonomy = @$field["type_taxonomyterm_options"]["enabled_taxonomy"];
 						$additional_arguments = @$field["type_taxonomyterm_options"]["additional_arguments"];
 	
+						// Check that selected taxonomy exists
+						$enabled_taxonomy_obj = get_taxonomy ( $enabled_taxonomy );
+
+
 						// hämta alla terms som finns för taxonomy $enabled_taxonomy
 						// @todo: kunna skicka in args här, t.ex. för orderby
 						echo "<div class='simple-fields-metabox-field-first'>";
@@ -931,23 +1089,33 @@ class simple_fields {
 						echo "</div>";
 
 						echo "<div class='simple-fields-metabox-field-second'>";
-	
 
-						$arr_selected_cats = (array) $saved_value;
+						if ( $enabled_taxonomy_obj === false ) {
+
+							echo __("The selected Taxonomy Term for this field type does not exist", "simple-fields");
+
+						} else {
+
+							$arr_selected_cats = (array) $saved_value;
+							
+							$walker = new Simple_Fields_Walker_Category_Checklist();
+							$args = array(
+								"taxonomy" => $enabled_taxonomy,
+								"selected_cats" => $arr_selected_cats,
+								"walker" => $walker,
+								"sf_field_name" => $field_name // walker is ot able to get this one, therefor global
+							);
+
+							// Add additional argument to args array
+							$args = wp_parse_args( $additional_arguments, $args );
+							
+							global $simple_fields_taxonomyterm_walker_field_name; // sorry for global...
+							$simple_fields_taxonomyterm_walker_field_name = $field_name;
+							echo "<ul class='simple-fields-metabox-field-taxonomymeta-terms'>";
+							wp_terms_checklist(NULL, $args);
+							echo "</ul>";
 						
-						$walker = new Simple_Fields_Walker_Category_Checklist();
-						$args = array(
-							"taxonomy" => $enabled_taxonomy,
-							"selected_cats" => $arr_selected_cats,
-							"walker" => $walker,
-							"sf_field_name" => $field_name // walker is ot able to get this one, therefor global
-						);
-						global $simple_fields_taxonomyterm_walker_field_name; // sorry for global…!
-						$simple_fields_taxonomyterm_walker_field_name = $field_name;
-						echo "<ul class='simple-fields-metabox-field-taxonomymeta-terms'>";
-						wp_terms_checklist(NULL, $args);
-						echo "</ul>";
-						
+						}
 
 						echo "</div>";
 						
@@ -962,8 +1130,8 @@ class simple_fields {
 							$showHideClass = "hidden";
 						}
 						
-						$type_post_options = (array) @$field["type_post_options"];
-						$enabled_post_types = $type_post_options["enabled_post_types"];
+						$type_post_options = isset($field["type_post_options"]) ? (array) $field["type_post_options"] : array();
+						$enabled_post_types = isset($type_post_options["enabled_post_types"]) ? (array) $type_post_options["enabled_post_types"] : array();
 						
 						echo "<div class='simple-fields-metabox-field-post'>";
 
@@ -974,6 +1142,10 @@ class simple_fields {
 
 						echo "<div class='simple-fields-metabox-field-second'>";
 	
+						// name of the selected post
+						echo "<div class='simple-fields-field-type-post-postName $showHideClass'>$saved_post_name</div>";
+
+						// Output action buttons (select, clear, etc.)
 						echo "<div>";
 						printf("<a class='%s' href='#'>%s</a>", "simple-fields-metabox-field-post-select", __("Select post", "simple-fields"));
 						printf("<a class='%s' href='#'>%s</a>", "simple-fields-metabox-field-post-clear $showHideClass", __("Clear", "simple-fields"));
@@ -981,17 +1153,14 @@ class simple_fields {
 						
 						// output the post types that are selected for this post field
 						printf("<input type='hidden' name='%s' value='%s' />", "simple-fields-metabox-field-post-enabled-post-types", join(",", $enabled_post_types));
-											
-						// name of the selected post
-						echo "<div class='simple-fields-field-type-post-postName $showHideClass'>$saved_post_name</div>";
-						
+																	
 						// print the id of the current post
 						echo "<input type='hidden' class='simple-fields-field-type-post-postID' name='$field_name' id='$field_unique_id' value='$saved_value_int' />";
 						
 						// output additional arguments for this post field
-						echo "<input type='hidden' name='additional_arguments' id='additional_arguments' value='".$type_post_options['additional_arguments']."' />";
+                                                $type_post_options_additional_arguments = isset( $type_post_options['additional_arguments'] ) ? $type_post_options['additional_arguments'] : "";
+                                                echo "<input type='hidden' name='additional_arguments' id='additional_arguments' value='" . $type_post_options_additional_arguments . "' />";
 						
-
 						echo "</div>";
 
 						echo "</div>";
@@ -1069,7 +1238,6 @@ class simple_fields {
 
 							// Get and output the edit-output from the field type
 							// Return as array if field type has not specified other
-							// xxx
 							$custom_field_type_saved_value = $saved_value;
 							#echo "saved value"; sf_d($custom_field_type_saved_value);
 							// always return array, or just sometimes?
@@ -1085,11 +1253,11 @@ class simple_fields {
 					
 					// Output hidden field that can be shown with JS to see the name and slug of a field
 					?>
-					<div class="simple-fields-metabox-field-custom-field-key hidden highlight">
+					<div class="simple-fields-metabox-field-custom-field-key hidden">
 						<strong><?php _e('Meta key:', 'simple-fields') ?></strong>
 						<?php echo $custom_field_key ?>
 						<?php if (isset($field["slug"])) { ?>
-							<br><strong><?php _e('Field slug:', 'simple-fields') ?></strong>
+							<br><strong><?php _e('Slug:', 'simple-fields') ?></strong>
 							<?php echo $field["slug"] ?>
 						<?php } ?>
 					</div>
@@ -1135,7 +1303,8 @@ class simple_fields {
 			if (in_array($post_type, $arr_post_types)) {
 				
 				// general meta box to select fields for the post
-				add_meta_box('simple-fields-post-edit-side-field-settings', 'Simple Fields', array($this, 'edit_post_side_field_settings'), $post_type, 'side', 'low');
+				$add_post_edit_side_field_settings_box = apply_filters("simple_fields_add_post_edit_side_field_settings", true, $post);
+				if ($add_post_edit_side_field_settings_box) add_meta_box('simple-fields-post-edit-side-field-settings', 'Simple Fields', array($this, 'edit_post_side_field_settings'), $post_type, 'side', 'low');
 				
 				$connector_to_use = $this->get_selected_connector_for_post($post);
 				
@@ -1193,14 +1362,14 @@ class simple_fields {
 	 */
 	function meta_box_output($post_connector_field_id, $post_id) {
 	 
-	    // if not repeatable, just print it out
-	    // if repeatable: only print out the ones that have a value
-	    // and + add-button
-	    
-	    global $sf;
+		// if not repeatable, just print it out
+		// if repeatable: only print out the ones that have a value
+		// and + add-button
+		
+		global $sf;
 	 
-	    $field_groups = $this->get_field_groups();
-	    $current_field_group = $field_groups[$post_connector_field_id];
+		$field_groups = $this->get_field_groups( false );
+		$current_field_group = $field_groups[$post_connector_field_id];
 
 		// check for prev. saved fieldgroups
 		// _simple_fields_fieldGroupID_1_fieldID_added_numInSet_0
@@ -1219,81 +1388,104 @@ class simple_fields {
 			$field_group_slug_css = "simple-fields-meta-box-field-group-wrapper-slug-" . $current_field_group["slug"];
 		}
 	 
-	    echo "<div class='simple-fields-meta-box-field-group-wrapper $num_added_field_groups_css $field_group_slug_css'>";
-	    echo "<input type='hidden' name='simple-fields-meta-box-field-group-id' value='$post_connector_field_id' />";
+	 	$field_group_wrapper_css = "";
+
+		$default_gui_view = isset( $current_field_group["gui_view"] ) ? $current_field_group["gui_view"] : "list";
+		if ("table" === $default_gui_view) {
+			$field_group_wrapper_css .= " simple-fields-meta-box-field-group-wrapper-view-table ";
+		}
+
+		echo "<div class='simple-fields-meta-box-field-group-wrapper $num_added_field_groups_css $field_group_slug_css $field_group_wrapper_css'>";
+		echo "<input type='hidden' name='simple-fields-meta-box-field-group-id' value='$post_connector_field_id' />";
 	 
-	    // show description
-	    if (!empty($current_field_group["description"])) {
-	        printf("<p class='%s'>%s</p>", "simple-fields-meta-box-field-group-description", esc_html($current_field_group["description"]));
-	    }
-	    //echo "<pre>";print_r($current_field_group);echo "</pre>";
-	 
-	    if ($current_field_group["repeatable"]) {
+		// show description
+		if (!empty($current_field_group["description"])) {
+			printf("<p class='%s'>%s</p>", "simple-fields-meta-box-field-group-description", esc_html($current_field_group["description"]));
+		}
+		//echo "<pre>";print_r($current_field_group);echo "</pre>";
+		
+		if ($current_field_group["repeatable"]) {
+
+			// Generate headline for the table view
+			#sf_d($current_field_group);
+			if ("table" === $default_gui_view) {
+				echo "<div class='sf-cf simple-fields-metabox-field-group-view-table-headline-wrap'>";
+				foreach ( $current_field_group["fields"] as $field_id => $field_arr ) {
+					// sf_d($field_arr);
+					printf('<div class="simple-fields-metabox-field-group-view-table-headline simple-fields-metabox-field-group-view-table-headline-count-%1$d">', $current_field_group["fields_count"]);
+					printf('<div class="simple-fields-field-group-view-table-headline-name">%1$s</div>', $field_arr["name"]);
+					printf('<div class="simple-fields-field-group-view-table-headline-description">%1$s</div>', $field_arr["description"]);
+					printf('</div>');
+				}
+				echo "</div>";
+			}
 
 			// Start of list with added field groups
-	        $ul_add_css = "";
+			$ul_add_css = "";
 
 			// add link at top	 
-	        echo "
-				<div class='simple-fields-metabox-field-add'>
+			echo "
+				<div class='simple-fields-metabox-field-add simple-fields-metabox-field-add-top'>
 					<a href='#'>+ ".__('Add', 'simple-fields')."</a>
 					<!-- 
 					|
 					<a href='#' id='sfToggleView{$current_field_group["id"]}'>Toggle view</a>
 					-->
 				</div>
-	        ";
+			";
 
 			/*
-	        ?>
-	        <script>
-	        	jQuery(function($) {
-	        		$("#sfToggleView<?php echo $current_field_group["id"] ?>").click(function(e) {
-	        			e.preventDefault();
-	        			$(this).closest(".simple-fields-meta-box-field-group-wrapper").find("ul:first").toggleClass("simple-fields-metabox-field-group-fields-view-table");
-	        		});
-	        	});
-	        </script>
-	        <?php
-	        */
+			?>
+			<script>
+				jQuery(function($) {
+					$("#sfToggleView<?php echo $current_field_group["id"] ?>").click(function(e) {
+						e.preventDefault();
+						$(this).closest(".simple-fields-meta-box-field-group-wrapper").find("ul:first").toggleClass("simple-fields-metabox-field-group-fields-view-table");
+					});
+				});
+			</script>
+			<?php
+			*/
 
-	        // add test class to test table layout
-	        // $ul_add_css .= " simple-fields-metabox-field-group-fields-view-table";
+			// add test class to test table layout
+			if ("table" === $default_gui_view) {
+				$ul_add_css .= " simple-fields-metabox-field-group-fields-view-table";
+			}
 
-	        // add class with number of fields in field group
-	        $ul_add_css .= " simple-fields-metabox-field-group-fields-count-" . $current_field_group["fields_count"];
-	        echo "<ul class='sf-cf simple-fields-metabox-field-group-fields simple-fields-metabox-field-group-fields-repeatable $ul_add_css'>";
+			// add class with number of fields in field group
+			$ul_add_css .= " simple-fields-metabox-field-group-fields-count-" . $current_field_group["fields_count"];
+			echo "<ul class='sf-cf simple-fields-metabox-field-group-fields simple-fields-metabox-field-group-fields-repeatable $ul_add_css'>";
 	 
-	        // now add them. ooooh my, this is fancy stuff.
-	        $use_defaults = null;
-	        for ($num_in_set=0; $num_in_set<$num_added_field_groups; $num_in_set++) {
-	            $this->meta_box_output_one_field_group($post_connector_field_id, $num_in_set, $post_id, $use_defaults);  
-	        }
+			// now add them. ooooh my, this is fancy stuff.
+			$use_defaults = null;
+			for ($num_in_set=0; $num_in_set<$num_added_field_groups; $num_in_set++) {
+				$this->meta_box_output_one_field_group($post_connector_field_id, $num_in_set, $post_id, $use_defaults);  
+			}
 	 
-	 		// end list with added field groups
-	        echo "</ul>";
+			// end list with added field groups
+			echo "</ul>";
 
 			// add link at bottom
 			echo "
-	            <div class='simple-fields-metabox-field-add simple-fields-metabox-field-add-bottom'>
-	                <a href='#'>+ ".__('Add', 'simple-fields')."</a>
-	            </div>
-	        ";
+				<div class='simple-fields-metabox-field-add simple-fields-metabox-field-add-bottom'>
+					<a href='#'>+ ".__('Add', 'simple-fields')."</a>
+				</div>
+			";
 
 	 
-	    } else {
-	         
-	        // is this a new post, ie. should default values be used
-	        $been_saved = (bool) get_post_meta($post_id, "_simple_fields_been_saved", true);
-	        if ($been_saved) { $use_defaults = false; } else { $use_defaults = true; }
-	         
-	        echo "<ul>";
-	        $this->meta_box_output_one_field_group($post_connector_field_id, 0, $post_id, $use_defaults);
-	        echo "</ul>";
+		} else {
+			 
+			// is this a new post, ie. should default values be used
+			$been_saved = (bool) get_post_meta($post_id, "_simple_fields_been_saved", true);
+			if ($been_saved) { $use_defaults = false; } else { $use_defaults = true; }
+			 
+			echo "<ul>";
+			$this->meta_box_output_one_field_group($post_connector_field_id, 0, $post_id, $use_defaults);
+			echo "</ul>";
 	 
-	    }
-	     
-	    echo "</div>";
+		}
+		 
+		echo "</div>";
 	 
 	} // end
 
@@ -1314,38 +1506,38 @@ class simple_fields {
 			// calculate number of active field groups
 			// @todo: check this a bit more, does not seem to be any deleted groups. i thought i saved the deletes ones to, but with deleted flag set
 			foreach (array_keys($connectors) as $i) {
-	                    
-	                    // Sanity check the connector id
-	                    if (empty($connectors[$i]["id"]) && empty($connectors[$i]["deleted"])) {
-	                        
-	                        // Found field group without id, let's try to repair it
-	                        $highest_id = 0;
-	                        foreach($connectors as $one_connector) {
-	                            if ($one_connector["id"] > $highest_id)
-	                                $highest_id = $one_connector["id"];
-	                            if ($one_connector["id"] === $i)
-	                                $id_already_exists = true;
-	                        }
-	                        
-	                        if ($i > 0 && !$id_already_exists) {
-	                            // If the array key is larger than 0 and
-	                            // not used as id by any other connector,
-	                            // then it's the perfect id
-	                            $connectors[$i]["id"] = $i;
-	                        } else {
-	                            // The array key is either less than or equal to 0,
-	                            // or another connector is using it as id. In any case,
-	                            // let's treat it as a new connector and give it a new id.
-	                            $new_id = $highest_id + 1;
-	                            $connectors[$i]["id"] = $new_id;
-	                            
-	                            // Now make sure the array key matches the new id
-	                            $connectors[$new_id] = $connectors[$i];
-	                            unset($connectors[$i]);
-	                            $i = $new_id;
-	                        }
-	                        
-	                    }
+				
+				// Sanity check the connector id
+				if (empty($connectors[$i]["id"]) && empty($connectors[$i]["deleted"])) {
+					
+					// Found field group without id, let's try to repair it
+					$highest_id = 0;
+					foreach($connectors as $one_connector) {
+						if ($one_connector["id"] > $highest_id)
+							$highest_id = $one_connector["id"];
+						if ($one_connector["id"] === $i)
+							$id_already_exists = true;
+					}
+					
+					if ($i > 0 && !$id_already_exists) {
+						// If the array key is larger than 0 and
+						// not used as id by any other connector,
+						// then it's the perfect id
+						$connectors[$i]["id"] = $i;
+					} else {
+						// The array key is either less than or equal to 0,
+						// or another connector is using it as id. In any case,
+						// let's treat it as a new connector and give it a new id.
+						$new_id = $highest_id + 1;
+						$connectors[$i]["id"] = $new_id;
+						
+						// Now make sure the array key matches the new id
+						$connectors[$new_id] = $connectors[$i];
+						unset($connectors[$i]);
+						$i = $new_id;
+					}
+					
+				}
 			
 				// compatibility fix key vs slug
 				if (isset($connectors[$i]["slug"]) && $connectors[$i]["slug"]) {
@@ -1370,6 +1562,9 @@ class simple_fields {
 		return $connectors;
 	}
 
+	/**
+	 * Returns 
+	 */
 	function get_post_type_defaults() {
 
 		$post_type_defaults = wp_cache_get( 'simple_fields_'.$this->ns_key.'_post_type_defaults', 'simple_fields' );
@@ -1378,6 +1573,8 @@ class simple_fields {
 			wp_cache_set( 'simple_fields_'.$this->ns_key.'_post_type_defaults', $post_type_defaults, 'simple_fields' );
 		}
 
+		$post_type_defaults = apply_filters( "simple_fields_get_post_type_defaults", $post_type_defaults );
+
 		return $post_type_defaults;
 
 	}
@@ -1385,91 +1582,125 @@ class simple_fields {
 	/**
 	 * Returns all defined field groups
 	 *
+	 * @param $include_deleted should deletd fieldgroups and fields also be included? defaults to true for backwards compat
 	 * @return array
 	 */
-	function get_field_groups() {
+	function get_field_groups($include_deleted = true) {
 		
 		$field_groups = wp_cache_get( 'simple_fields_'.$this->ns_key.'_groups', 'simple_fields' );
+
 		if (FALSE === $field_groups) {
 			
 			$field_groups = get_option("simple_fields_groups");
-			if ($field_groups === FALSE) $field_groups = array();
 			
+			if ( $field_groups === FALSE || ! is_array( $field_groups ) ) $field_groups = array();
+
 			// Calculate the number of active fields
 			// And some other things
+
+			// With each field group among all field groups
 			foreach (array_keys($field_groups) as $i) {
-	                    
-                // Sanity check the field group id
-                if (empty($field_groups[$i]["id"]) && empty($field_groups[$i]["deleted"])) {
-                    
-                    // Found field group without id, let's try to repair it
-                    $highest_id = 0;
-                    foreach($field_groups as $one_field_group) {
-                        if ($one_field_group["id"] > $highest_id)
-                            $highest_id = $one_field_group["id"];
-                        if ($one_field_group["id"] === $i)
-                            $id_already_exists = true;
-                    }
-                    
-                    if ($i > 0 && !$id_already_exists) {
-                        // If the array key is larger than 0 and
-                        // not used as id by any other field group,
-                        // then it's the perfect id
-                        $field_groups[$i]["id"] = $i;
-                    } else {
-                        // The array key is either less than or equal to 0,
-                        // or another field group is using it as id. In any case,
-                        // let's treat it as a new field group and give it a new id.
-                        $new_id = $highest_id + 1;
-                        $field_groups[$i]["id"] = $new_id;
-                        
-                        // Now make sure the array key matches the new id
-                        $field_groups[$new_id] = $field_groups[$i];
-                        unset($field_groups[$i]);
-                        $i = $new_id;
-                    }
-                    
-                }
+
+				// Sanity check the field group id
+				if (empty($field_groups[$i]["id"]) && empty($field_groups[$i]["deleted"])) {
+					
+					// Found field group without id, let's try to repair it
+					$highest_id = 0;
+					foreach($field_groups as $one_field_group) {
+						if ($one_field_group["id"] > $highest_id)
+							$highest_id = $one_field_group["id"];
+						if ($one_field_group["id"] === $i)
+							$id_already_exists = true;
+					}
+					
+					if ($i > 0 && !$id_already_exists) {
+						// If the array key is larger than 0 and
+						// not used as id by any other field group,
+						// then it's the perfect id
+						$field_groups[$i]["id"] = $i;
+					} else {
+						// The array key is either less than or equal to 0,
+						// or another field group is using it as id. In any case,
+						// let's treat it as a new field group and give it a new id.
+						$new_id = $highest_id + 1;
+						$field_groups[$i]["id"] = $new_id;
+						
+						// Now make sure the array key matches the new id
+						$field_groups[$new_id] = $field_groups[$i];
+						unset($field_groups[$i]);
+						$i = $new_id;
+					}
+					
+				}
 	
 				// Make sure we have both key and slug set to same. key = old name for slug
 				if (isset($field_groups[$i]["slug"]) && $field_groups[$i]["slug"]) {
 					$field_groups[$i]["key"] = $field_groups[$i]["slug"];
 				} else if (isset($field_groups[$i]["key"]) && $field_groups[$i]["key"]) {
 					$field_groups[$i]["slug"] = $field_groups[$i]["key"];
+				} else {
+					// no slug set at all (for the pre-slug installs that are upgraded)
+					$field_groups[$i]["slug"] = "";
+					$field_groups[$i]["key"] = "";
 				}
 	
+				// Calculate number of active fields in this field group
+				// and add some extra info that is nice to have
 				$num_active_fields = 0;
-				foreach ($field_groups[$i]["fields"] as $one_field) {
-					if (!$one_field["deleted"]) $num_active_fields++;
+				foreach ( $field_groups[$i]["fields"] as $one_field ) {
+					if ( ! $one_field["deleted"] ) $num_active_fields++;
+					$one_field["meta_key"] = $this->get_meta_key( $field_groups[$i]["id"], $one_field["id"] );
 				}
 				$field_groups[$i]["fields_count"] = $num_active_fields;
-				
+
 				// Also add some info about the field group is belongs to
 				// This can be useful to have if you're only fetching a single field
 				// but need to do something with that fields field group 
 				// (like getting the id to calcualte that custom field meta key to use)
 				foreach ($field_groups[$i]["fields"] as $one_field_id => $one_field) {
 
-					if (!isset($field_groups[$i]["fields"][$one_field_id]["field_group"])) {
+					// Info about the field group that this field belongs to did not exist, so add it
+					$field_groups[$i]["fields"][$one_field_id]["field_group"] = array(
+						"id"           => $field_groups[$i]["id"],
+						"name"         => $field_groups[$i]["name"],
+						"slug"         => $field_groups[$i]["slug"],
+						"description"  => $field_groups[$i]["description"],
+						"repeatable"   => $field_groups[$i]["repeatable"],
+						"fields_count" => $field_groups[$i]["fields_count"]
+					);
 
-						$field_groups[$i]["fields"][$one_field_id]["field_group"] = array(
-							"id"           => $field_groups[$i]["id"],
-							"name"         => $field_groups[$i]["name"],
-							"slug"         => $field_groups[$i]["slug"],
-							"description"  => $field_groups[$i]["description"],
-							"repeatable"   => $field_groups[$i]["repeatable"],
-							"fields_count" => $field_groups[$i]["fields_count"]
-						);
-						
-					}
-					
 				}
 			}
 
 			wp_cache_set( 'simple_fields_'.$this->ns_key.'_groups', $field_groups, 'simple_fields' );
 			
-		}
+		} // cache false
 
+		// Maybe remove deleted groups and fields
+		if ( false === $include_deleted) {
+
+			foreach ( $field_groups as $one_field_group_key => $one_field_group ) {
+
+				if ( $one_field_group["deleted"] ) {
+					unset( $field_groups[ $one_field_group_key ] );
+					continue;
+				}
+				
+				// Check fields now
+				// Note: field keys are not in numerical order, they are in "visually order"
+				foreach ( $field_groups[ $one_field_group_key ]["fields"] as $one_field_key => $one_field_value ) {
+					if ( $one_field_value["deleted"] ) {
+						// Remove both field by id and field by slug
+						unset( $field_groups[ $one_field_group_key ]["fields"][ $one_field_key ] );
+						unset( $field_groups[ $one_field_group_key ]["fields_by_slug"][ $one_field_value["slug"] ] );
+					}
+				}
+
+			} // foreach
+
+		} // if don't include deleted
+
+		$field_groups = apply_filters( "simple_fields_get_field_groups", $field_groups );
 		return $field_groups;
 		
 	}
@@ -1480,6 +1711,7 @@ class simple_fields {
 	 * @return array with field group or false if field group is not found
 	 */
 	function get_field_group($group_id) {
+
 		$field_groups = $this->get_field_groups();
 		$return = false;
 		if (is_array($field_groups)) {
@@ -1497,17 +1729,22 @@ class simple_fields {
 				}
 			}
 		}
+
+		$return = apply_filters( "simple_fields_get_field_group", $return );
 		return $return;
+
 	}
 
 
 	/**
 	 * Returns a field from a field group
+	 *
 	 * @param int $field_group
-	 * @param int $field_id
+	 * @param mixed $field_id id or name of field
 	 * @return false on error
 	 */
 	function get_field_in_group($field_group, $field_id) {
+
 		$return = false;
 		if (is_array($field_group) && is_array($field_group['fields'])) {
 			foreach($field_group['fields'] as $field) {
@@ -1524,7 +1761,10 @@ class simple_fields {
 				}
 			}
 		}
+	
+		$return = apply_filters( "simple_fields_get_field_in_group", $return, $field_group, $field_id);
 		return $return;
+	
 	}
 
 
@@ -1592,6 +1832,13 @@ class simple_fields {
 					<?php endforeach; ?>
 				</select>
 			</div>
+			<?php
+			// If connector has been changed with filter then show was connector is being used
+			if ( is_numeric($connector_selected) && $connector_selected != $saved_connector_to_use ) {
+				$connector_selected_info = $this->get_connector_by_id($connector_selected);
+				?><div><p><?php _e("Actual used connector:", "simple-fields") ?> <?php echo $connector_selected_info["name"]; ?></p></div><?php
+			}
+			?>
 			<div id="simple-fields-post-edit-side-field-settings-select-connector-please-save" class="hidden">
 				<p><?php _e('Save post to switch to selected fields.', 'simple-fields') ?></p>
 			</div>
@@ -1660,9 +1907,33 @@ class simple_fields {
 			$connector_to_use = "__none__";
 		}
 	
+		// Let user change to connector being used for post
+		// Filter here can return a string that is the slug, 
+		// and then we will get the id for that post before continuing
+		$connector_to_use = apply_filters( "simple_fields_get_selected_connector_for_post", $connector_to_use, $post);
+		if ( ! is_numeric($connector_to_use) && ! is_null( $connector_to_use ) && (preg_match('/^__/', $connector_to_use) !== 1) ) {
+			$connector_to_use_info = $this->get_post_connector_by_slug( $connector_to_use );
+			$connector_to_use = $connector_to_use_info["id"];
+		}
+
 		return $connector_to_use;
 	
 	} // function get_selected_connector_for_post
+
+
+	/**
+	 * Get post connector by its slug
+	 *
+	 * @param string $post_slug
+	 * @return connector if found, false if not
+	 */
+	function get_post_connector_by_slug($post_slug) {
+		$connectors = $this->get_post_connectors();
+		foreach ($connectors as $one_connector) {
+			if ( $one_connector["slug"] === $post_slug) return $one_connector;
+		}
+		return false;
+	}
 
 
 	/**
@@ -1673,7 +1944,7 @@ class simple_fields {
 		global $sf;
 	
 		$defaults = array(
-	    	"post_type" => "page",
+			"post_type" => "page",
 			"xparent" => "0",
 			"xpost_parent" => "0",
 			"numberposts" => "-1",
@@ -1682,6 +1953,7 @@ class simple_fields {
 			"post_status" => "any"
 		);
 		$args = wp_parse_args( $args, $defaults );
+		$args = apply_filters( "simple_fields_get_pages_args", $args);
 		$pages = get_posts($args);
 	
 		$output = "";
@@ -1719,6 +1991,7 @@ class simple_fields {
 			$output = "<ul class='simple-fields-tree-page-tree_childs'>$output</ul>";
 		}
 		
+		$output = apply_filters( "simple_fields_get_pages_output", $output, $args);
 		return $output;
 	}
 
@@ -1728,6 +2001,7 @@ class simple_fields {
 	 * hide some things there to make it more clean and user friendly
 	 */
 	function admin_head_select_file() {
+
 		// Only output this css when we are showing a file dialog for simple fields
 		if (isset($_GET["simple_fields_action"]) && $_GET["simple_fields_action"] == "select_file") {
 			?>
@@ -1738,6 +2012,7 @@ class simple_fields {
 			</style>
 			<?php
 		}
+
 	}
 
 	
@@ -1747,7 +2022,7 @@ class simple_fields {
 	 */
 	function media_send_to_editor($html, $id) {
 	
-		parse_str($_POST["_wp_http_referer"], $arr_postinfo);
+		parse_str( isset( $_POST["_wp_http_referer"] ) ? $_POST["_wp_http_referer"] : "" , $arr_postinfo);
 	
 		// only act if file browser is initiated by simple fields
 		if (isset($arr_postinfo["simple_fields_action"]) && $arr_postinfo["simple_fields_action"] == "select_file") {
@@ -1776,8 +2051,7 @@ class simple_fields {
 				sfmff.closest(".simple-fields-metabox-field").find(".simple-fields-metabox-field-file-selected-image-name").html(unescape("<?php echo $file_name?>")).show();
 				
 				// show clear and edit-links
-				//var url = ajaxurl.replace(/admin-ajax.php$/, "") + "media.php?attachment_id="+file_id+"&action=edit";
-				var url = "<?php echo admin_url("media.php?attachment_id={$file_id}&action=edit") ?>";
+				var url = "<?php echo admin_url("post.php?post={$file_id}&action=edit") ?>";
 	
 				sfmff.find(".simple-fields-metabox-field-file-edit").attr("href", url).show();
 				sfmff.find(".simple-fields-metabox-field-file-clear").show();
@@ -1857,10 +2131,25 @@ class simple_fields {
 	
 		global $sf;
 	
-		$arr_enabled_post_types = (array) $_POST["arr_enabled_post_types"];
+		$arr_enabled_post_types = isset($_POST["arr_enabled_post_types"]) ? $_POST["arr_enabled_post_types"] : array();
+		$str_enabled_post_types = isset($_POST["str_enabled_post_types"]) ? $_POST["str_enabled_post_types"] : "";
 		$additional_arguments = isset($_POST["additional_arguments"]) ? $_POST["additional_arguments"] : "";
 		$existing_post_types = get_post_types(NULL, "objects");
-		$selected_post_type = (string) @$_POST["selected_post_type"];
+		$selected_post_type = isset($_POST["selected_post_type"]) ? (string) $_POST["selected_post_type"] : "";
+
+		if (empty($arr_enabled_post_types)) {
+			$arr_enabled_post_types = explode(",", $str_enabled_post_types);
+		}
+
+		/*echo "<br>selected_post_type: $selected_post_type";
+		echo "<br>str_enabled_post_types: $str_enabled_post_types";
+		echo "<br>enabled post types:"; print_r($arr_enabled_post_types);*/
+
+		// If no post type is selected then don't show any posts
+		if (empty($arr_enabled_post_types)) {
+			_e("<p>No post type is selected. Please at at least one post type in Simple Fields.</p>", "simple-fields");
+			exit;
+		}
 		?>
 	
 		<?php if (count($arr_enabled_post_types) > 1) { ?>
@@ -2001,9 +2290,9 @@ class simple_fields {
 			$field_type_options looks like this:
 			Array
 			(
-			    [myTextOption] => No value entered yet
-			    [mapsTextarea] => Enter some cool text here please!
-			    [funkyDropdown] => 
+				[myTextOption] => No value entered yet
+				[mapsTextarea] => Enter some cool text here please!
+				[funkyDropdown] => 
 			)
 			*/
 			
@@ -2041,23 +2330,17 @@ class simple_fields {
 				$field_options_output
 			);
 
-		}
+		} // end output registered field types
 		
 		$out = "";
-		$out .= "
-		<li class='simple-fields-field-group-one-field simple-fields-field-group-one-field-id-{$fieldID}'>
+		$out .= "<li class='simple-fields-field-group-one-field simple-fields-field-group-one-field-id-{$fieldID}'>
 			<div class='simple-fields-field-group-one-field-handle'></div>
 	
 			<div class='simple-fields-field-group-one-field-row'>
 				<label class='simple-fields-field-group-one-field-name-label'>".__('Name', 'simple-fields')."</label>
 				<input type='text' class='regular-text simple-fields-field-group-one-field-name' name='field[{$fieldID}][name]' value='{$field_name}' />
 			</div>
-			
-			<div class='simple-fields-field-group-one-field-row simple-fields-field-group-one-field-row-description'>
-				<label>".__('Description', 'simple-fields')."</label>
-				<input type='text' class='regular-text' name='field[{$fieldID}][description]' value='{$field_description}' />
-			</div>
-			
+					
 			<div class='simple-fields-field-group-one-field-row simple-fields-field-group-one-field-row-slug'>
 				<label>".__('Slug', 'simple-fields')."</label>
 				<input 
@@ -2070,7 +2353,12 @@ class simple_fields {
 					 /> 
 				<br><span class='description'>" . __('A unique identifier used in your theme to get the saved values of this field.', 'simple-fields') . "</span>
 			</div>
-			
+
+			<div class='simple-fields-field-group-one-field-row simple-fields-field-group-one-field-row-description'>
+				<label>".__('Description', 'simple-fields')."</label>
+				<input type='text' class='regular-text' name='field[{$fieldID}][description]' value='{$field_description}' />
+			</div>
+
 			<div class='simple-fields-field-group-one-field-row'>
 				<label>".__('Type', 'simple-fields')."</label>
 				<!-- <br> -->
@@ -2096,12 +2384,96 @@ class simple_fields {
 			</div>
 	
 			$registred_field_types_output_options
+			";
+			
+			// options for text
+			$field_text_options = isset($field_options["text"]) ? (array) $field_options["text"] : array();
+			$out .= "<div class='simple-fields-field-group-one-field-row " . (($field_type=="text") ? "" : " hidden ") . " simple-fields-field-type-options simple-fields-field-type-options-text'>";
 
-			<!-- options for field type  textarea -->
-			<div class='simple-fields-field-group-one-field-row " . (($field_type=="textarea") ? "" : " hidden ") . " simple-fields-field-type-options simple-fields-field-type-options-textarea'>
+			$arr_text_input_types = $this->get_html_text_types();
+			$str_input_types_select = "";
+			$prev_input_version = "";
+
+			// default sub type is text, since that's the only was that existed before 1.2
+			$selected_sub_type = isset( $field_text_options["subtype"] ) ? $field_text_options["subtype"] : "text";
+
+			foreach ( $arr_text_input_types as $one_input_type_key => $one_input_type ) {
+				if ($prev_input_version != $one_input_type["version"]) {
+					if ("html" == $one_input_type["version"]) {
+						$str_input_types_select .= "<optgroup label='" . _x("Plain Old HTML", "Text field options", "simple-fields") . "'>";
+					} else if ("html5" == $one_input_type["version"]) {
+						$str_input_types_select .= "<optgroup label='" . _x("New Fancy HTML5 Input Types", "Text field options", "simple-fields") . "'>";
+					}
+					$prev_input_version = $one_input_type["version"];
+				}
+				$str_input_types_select .= sprintf('<option %3$s value="%2$s">%1$s</option>', $one_input_type["description"], $one_input_type_key, ($one_input_type_key === $selected_sub_type) ? "selected" : "" );
+			}
+
+			$out .= sprintf('
+				<div class="simple-fields-field-group-one-field-row">
+					<div class="simple-fields-field-group-one-field-row-col-first">
+						<label>%1$s</label>
+					</div>
+					<div class="simple-fields-field-group-one-field-row-col-second">
+						<select name="%4$s">
+							%2$s
+						</select>
+						<br>
+						<span class="description">%3$s</span>
+					</div>
+				</div>
+				', 
+			 	_x("Sub type", "Text field options", "simple-fields"),
+			 	$str_input_types_select,
+			 	sprintf( _x( 'HTML5 introduces new input types, that fall back to text input in browsers that don\'t support them. <a target="_blank" href="%1$s">Read more at HTML5 Rocks</a>.', "simple-fields"), "http://www.html5rocks.com/en/tutorials/forms/html5forms/" ),
+			 	"field[{$fieldID}][options][text][subtype]"
+			);
+
+			// text, placeholder
+			$out .= "
 				<div class='simple-fields-field-group-one-field-row'>
 					<div class='simple-fields-field-group-one-field-row-col-first'>
-						<label>Height</label>
+						<label>" . _x('Placeholder text', 'Text field options', 'simple-fields') . "</label>
+					</div>
+					<div class='simple-fields-field-group-one-field-row-col-second'>
+						<input class='regular-text' type='text' name='field[{$fieldID}][options][text][placeholder]' value='" . esc_attr( isset( $field_text_options["placeholder"] ) ? $field_text_options["placeholder"] : "" ) . "'>
+						<br>
+						<span class='description'>" . __("A hint to the user of what can be entered in the field.", "simple-fields") . "</span>
+					</div>
+				</div>
+			";
+
+			// text, custom attributes
+			$out .= "
+				<div class='simple-fields-field-group-one-field-row'>
+					<div class='simple-fields-field-group-one-field-row-col-first'>
+						<label>" . _x('Attributes', 'Text field options', 'simple-fields') . "</label>
+					</div>
+					<div class='simple-fields-field-group-one-field-row-col-second'>
+						<input 
+							class='regular-text' 
+							type='text' 
+							name='field[{$fieldID}][options][text][attributes]' 
+							placeholder='" . _x('attribute_1="value_1" attribute_2="value_2"', 'Text field options', 'simple-fields') . "'
+							value='" . esc_attr( isset( $field_text_options["attributes"] ) ? esc_attr( $field_text_options["attributes"] ) : "" ) . "'>
+						<br>
+						<span class='description'>" . __("Add your own attributes to the input tag.", "simple-fields") . "</span>
+					</div>
+				</div>
+			";
+
+			// end text options
+			$out .= "
+			</div>
+			";
+
+			// options for textarea
+			$field_textarea_options = isset($field_options["textarea"]) ? (array) $field_options["textarea"] : array();
+			$out .= "<div class='simple-fields-field-group-one-field-row " . (($field_type=="textarea") ? "" : " hidden ") . " simple-fields-field-type-options simple-fields-field-type-options-textarea'>
+				
+				<div class='simple-fields-field-group-one-field-row'>
+					<div class='simple-fields-field-group-one-field-row-col-first'>
+						<label>" . _x('Height', 'Textarea default height', 'simple-fields') . "</label>
 					</div>
 					<div class='simple-fields-field-group-one-field-row-col-second'>
 						<input " . ((empty($field_type_textarea_option_size_height) || $field_type_textarea_option_size_height == "default") ? " checked=checked " : "")  . " type='radio' name='field[{$fieldID}][type_textarea_options][size_height]' value='default'> " . _x('Default', 'Textarea default height', 'simple-fields') . " &nbsp;
@@ -2115,7 +2487,16 @@ class simple_fields {
 					<div class='simple-fields-field-group-one-field-row-col-first'>
 					</div>
 					<div class='simple-fields-field-group-one-field-row-col-second'>
-						<input type='checkbox' name='field[{$fieldID}][type_textarea_options][use_html_editor]' " . (($field_type_textarea_option_use_html_editor) ? " checked='checked'" : "") . " value='1' /> ".__('Use HTML-editor', 'simple-fields')."
+						<input type='checkbox' name='field[{$fieldID}][type_textarea_options][use_html_editor]' " . (($field_type_textarea_option_use_html_editor) ? " checked='checked'" : "") . " value='1' /> " . __('Use HTML-editor', 'simple-fields') . "
+					</div>
+				</div>
+
+				<div class='simple-fields-field-group-one-field-row'>
+					<div class='simple-fields-field-group-one-field-row-col-first'>
+						<label>" . _x('Placeholder text (does not work with HTML editor enabled', 'Textarea field options', 'simple-fields') . "</label>
+					</div>
+					<div class='simple-fields-field-group-one-field-row-col-second'>
+						<input class='regular-text' type='text' name='field[{$fieldID}][options][textarea][placeholder]' value='" . esc_attr( isset( $field_textarea_options["placeholder"] ) ? $field_textarea_options["placeholder"] : "" ) . "'>
 					</div>
 				</div>
 
@@ -2230,7 +2611,7 @@ class simple_fields {
 			foreach ($taxonomies as $one_tax) {
 				// skip some built in types
 				if (in_array($one_tax->name, array("attachment", "revision", "nav_menu_item"))) {
-				    continue;
+					continue;
 				}
 				$input_name = "field[{$fieldID}][type_taxonomy_options][enabled_taxonomies][]";
 				$out .= sprintf("%s<input name='%s' type='checkbox' %s value='%s'> %s", 
@@ -2270,7 +2651,7 @@ class simple_fields {
 			foreach ($taxonomies as $one_tax) {
 				// skip some built in types
 				if (in_array($one_tax->name, array("attachment", "revision", "nav_menu_item"))) {
-				    continue;
+					continue;
 				}
 				$input_name = "field[{$fieldID}][type_taxonomyterm_options][enabled_taxonomy]";
 				$out .= sprintf("%s<input name='%s' type='radio' %s value='%s'> %s", 
@@ -2311,7 +2692,10 @@ class simple_fields {
 			$radio_buttons_highest_id = 0;
 			if ($field_type_radiobuttons_options) {
 				foreach ($field_type_radiobuttons_options as $key => $val) {
-					if (strpos($key, "radiobutton_num_") !== false && $val["deleted"] != true) {
+
+					$is_deleted = isset( $val["deleted"] ) && $val["deleted"] == true;
+
+					if ( strpos( $key, "radiobutton_num_" ) !== false && ! $is_deleted ) {
 						// found one button in format radiobutton_num_0
 						$radiobutton_num = str_replace("radiobutton_num_", "", $key);
 						if ($radiobutton_num > $radio_buttons_highest_id) {
@@ -2329,6 +2713,7 @@ class simple_fields {
 							</li>";
 					}
 				}
+
 			}
 			$radio_buttons_highest_id++;
 			$out .= "<div class='" . (($field_type=="radiobuttons") ? "" : " hidden ") . " simple-fields-field-type-options simple-fields-field-type-options-radiobuttons'>";
@@ -2375,7 +2760,9 @@ class simple_fields {
 			$dropdown_values_highest_id = 0;
 			if ($field_type_dropdown_options) {
 				foreach ($field_type_dropdown_options as $key => $val) {
-					if (strpos($key, "dropdown_num_") !== false && $val["deleted"] != true) {
+					
+					$is_deleted = isset( $val["deleted"] ) && $val["deleted"] == true;
+					if (strpos($key, "dropdown_num_") !== false && ! $is_deleted ) {
 						// found one button in format radiobutton_num_0
 						$dropdown_num = str_replace("dropdown_num_", "", $key);
 						if ($dropdown_num > $dropdown_values_highest_id) {
@@ -2390,6 +2777,7 @@ class simple_fields {
 								<a href='#' class='simple-fields-field-type-options-dropdown-delete'>".__('Delete', 'simple-fields')."</a>
 							</li>";
 					}
+
 				}
 			}
 			$dropdown_values_highest_id++;
@@ -2445,6 +2833,7 @@ class simple_fields {
 			<input type='hidden' name='field[{$fieldID}][deleted]' value='{$field_deleted}' class='hidden_deleted' />
 	
 		</li>";
+
 		return $out;
 	
 	} // /simple_fields_field_group_add_field_template
@@ -2453,785 +2842,23 @@ class simple_fields {
 	 * Called from AJAX call to add a field group to the post in edit
 	 */
 	function field_group_add_field() {
+
 		global $sf;
 		$simple_fields_highest_field_id = (int) $_POST["simple_fields_highest_field_id"];
 		echo $this->field_group_add_field_template($simple_fields_highest_field_id);
 		exit;
+
 	}
 
 
 	/**
 	 * Output all stuff for the options page
-	 * Should be modularized a bit, it's way to long/big right now
 	 */
 	function options_page() {
-	
-		global $sf;
-	
-		$field_groups = $this->get_field_groups();
-		$post_connectors = $this->get_post_connectors();
 
-		// for debug purposes, here we can reset the option
-		#$field_groups = array(); update_option("simple_fields_groups", $field_groups);
-		#$post_connectors = array(); update_option("simple_fields_post_connectors", $post_connectors);
-	
-		// sort them by name
-		function simple_fields_uasort($a, $b) {
-			if ($a["name"] == $b["name"]) { return 0; }
-			return strcasecmp($a["name"], $b["name"]);
-		}
-		
-		uasort($field_groups, "simple_fields_uasort");
-		uasort($post_connectors, "simple_fields_uasort");
-			
-		?>
-		<div class="wrap">
-	
-			<h2><?php echo SIMPLE_FIELDS_NAME ?></h2>
-	
-			<div class="clear"></div>
-			
-			<!-- 
-			<div class="simple-fields-bonny-plugins-inner-sidebar">
-				<h3>Keep this plugin alive</h3>
-				<p>
-					I develop this plugin mostly on my spare time. Please consider <a href="http://eskapism.se/sida/donate/">donating</a>
-					or <a href="https://flattr.com/thing/116510/Simple-Fields">Flattr</a>
-					to keep the development going.
-				</p>
-	
-				<h3>Support</h3>
-				<p>If you have any problems with this plugins please check out the <a href="http://wordpress.org/tags/simple-fields?forum_id=10">support forum</a>.</p>
-				<p>You can <a href="https://github.com/bonny/WordPress-Simple-Fields">follow the development of this plugin at GitHub</a>.</p>
-										
-			</div>
-			-->
-	
-		<div class="simple-fields-settings-wrap">
-	
-			<?php
-			
-			$action = (isset($_GET["action"])) ? $_GET["action"] : null;
+		require( dirname(__FILE__) . "/inc-admin-options.php" );
 
-			/**
-			 * save post type defaults
-			 */
-			if ("edit-post-type-defaults-save" == $action) {
-	
-				$post_type = $_POST["simple_fields_save-post_type"];
-				$post_type_connector = $_POST["simple_fields_save-post_type_connector"];
-							
-				simple_fields_register_post_type_default($post_type_connector, $post_type);
-				
-				$simple_fields_did_save_post_type_defaults = true;
-				$action = "";
-	
-			}
-	
-			/**
-			 * edit post type defaults
-			 */
-			if ("edit-post-type-defaults" == $action) {
-				$post_type = $_GET["post-type"];
-				global $wp_post_types;
-				if (isset($wp_post_types[$post_type])) {
-					$selected_post_type = $wp_post_types[$post_type];
-					?>
-					<h3><?php echo __( sprintf('Edit default post connector for post type %1$s', $selected_post_type->label), "simple-fields" ) ?></h3>
-					
-					<form action="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-post-type-defaults-save" method="post">
-						<table class="form-table">
-							<tr>
-								<th><?php _e('Default post connector', 'simple-fields') ?></th>
-								<td>
-									<?php
-									$arr_post_connectors = $this->get_post_connectors_for_post_type($post_type);
-									if ($arr_post_connectors) {
-										$selected_post_type_default = $this->get_default_connector_for_post_type($post_type);
-										?>
-										<select name="simple_fields_save-post_type_connector">
-											<option <?php echo ($selected_post_type_default==="__none__") ? " selected='selected' " : "" ?> value="__none__"><?php _e('No post connector', 'simple-fields') ?></option>
-											<option <?php echo ($selected_post_type_default==="__inherit__") ? " selected='selected' " : "" ?> value="__inherit__"><?php _e('Inherit from parent post', 'simple-fields') ?></option>
-											<?php
-											foreach ($arr_post_connectors as $one_post_connector) {
-												echo "<option " . ((intval($selected_post_type_default)==intval($one_post_connector["id"])) ? " selected='selected' " : "") . "value='{$one_post_connector["id"]}'>" . $one_post_connector["name"] . "</option>";
-											}
-											?>
-										</select>
-										<?php
-									} else {
-										?><p><?php _e('There are no post connectors for this post type.', 'simple-fields') ?></p><?php
-									}
-									?>
-								</td>
-							</tr>
-						</table>
-						<p class="submit">
-							<input class="button-primary" type="submit" value="<?php _e("Save changes", "simple-fields") ?>" />
-							<input type="hidden" name="simple_fields_save-post_type" value="<?php echo $post_type ?>" />
-							<?php _e('or', 'simple_fields');  ?>
-							<a href="<?php echo SIMPLE_FIELDS_FILE ?>"><?php _e('cancel', 'simple-fields') ?></a>
-						</p>
-					</form>
-					<?php
-					
-				}
-			}
-	
-			/**
-			 * Delete a field group
-			 */
-			if ("delete-field-group" == $action) {
-				$field_group_id = (int) $_GET["group-id"];
-				$field_groups[$field_group_id]["deleted"] = true;
-				update_option("simple_fields_groups", $field_groups);
-				$this->clear_caches();
-				$simple_fields_did_delete = true;
-				$action = "";
-			}
-	
-	
-			/**
-			 * Delete a post connector
-			 */
-			if ("delete-post-connector" == $action) {
-				$post_connector_id = (int) $_GET["connector-id"];
-				$post_connectors[$post_connector_id]["deleted"] = 1;
-				update_option("simple_fields_post_connectors", $post_connectors);
-				$this->clear_caches();
-				$simple_fields_did_delete_post_connector = true;
-				$action = "";
-			}
-			
-			
-			/**
-			 * save a field group
-			 * including fields
-			 */
-			if ("edit-field-group-save" == $action) {
-			
-				if ($_POST) {
-					#sf_d($_POST);
-					$field_group_id                               = (int) $_POST["field_group_id"];
-					$field_groups[$field_group_id]["name"]        = stripslashes($_POST["field_group_name"]);
-					$field_groups[$field_group_id]["description"] = stripslashes($_POST["field_group_description"]);
-					$field_groups[$field_group_id]["slug"]        = stripslashes($_POST["field_group_slug"]);
-					$field_groups[$field_group_id]["repeatable"]  = (bool) (isset($_POST["field_group_repeatable"]));					
-					$field_groups[$field_group_id]["fields"]      = (array) stripslashes_deep($_POST["field"]);
-
-					// Since 0.6 we really want all things to have slugs, so add one if it's not set
-					if (empty($field_groups[$field_group_id]["slug"])) {
-						$field_groups[$field_group_id]["slug"] = "field_group_" . $field_group_id;
-					}
-					
-					/*
-					if just one empty array like this, unset first elm
-					happens if no fields have been added (now why would you do such an evil thing?!)
-					*/
-					if (sizeof($field_groups[$field_group_id]["fields"]) == 1 && empty($field_groups[$field_group_id]["fields"][0])) {
-						unset($field_groups[$field_group_id]["fields"][0]);
-					}
-					
-					update_option("simple_fields_groups", $field_groups);
-					$this->clear_caches();
-
-					// we can have changed the options of a field group, so update connectors using this field group
-					$post_connectors = (array) $this->get_post_connectors();
-					foreach ($post_connectors as $connector_id => $connector_options) {
-						if (isset($connector_options["field_groups"][$field_group_id])) {
-							// field group existed, update name
-							$post_connectors[$connector_id]["field_groups"][$field_group_id]["name"] = stripslashes($_POST["field_group_name"]);
-						}
-					}
-					update_option("simple_fields_post_connectors", $post_connectors);
-					$this->clear_caches();
-					
-					$simple_fields_did_save = true;
-				}
-				$action = "";
-						
-			}
-	
-			/**
-			 * save a post connector
-			 */
-			if ("edit-post-connector-save" == $action) {
-				if ($_POST) {
-										
-					$connector_id = (int) $_POST["post_connector_id"];
-					$post_connectors[$connector_id]["name"] = (string) stripslashes($_POST["post_connector_name"]);
-					$post_connectors[$connector_id]["slug"] = (string) ($_POST["post_connector_slug"]);
-					$post_connectors[$connector_id]["field_groups"] = (array) @$_POST["added_fields"];
-					$post_connectors[$connector_id]["post_types"] = (array) @$_POST["post_types"];
-					$post_connectors[$connector_id]["hide_editor"] = (bool) @$_POST["hide_editor"];
-	
-					// a post type can only have one default connector, so make sure only the connector
-					// that we are saving now has it; remove it from all others;
-					/*
-					$post_types_type_default = (array) $_POST["post_types_type_default"];
-					foreach ($post_types_type_default as $one_default_post_type) {
-						foreach ($post_connectors as $one_post_connector) {
-							if (in_array($one_default_post_type, $one_post_connector["post_types_type_default"])) {
-								$array_key = array_search($one_default_post_type, $one_post_connector["post_types_type_default"]);
-								if ($array_key !== false) {
-									unset($post_connectors[$one_post_connector["id"]]["post_types_type_default"][$array_key]);
-								}
-							}
-						}
-					}
-					$post_connectors[$connector_id]["post_types_type_default"] = $post_types_type_default;
-					*/
-					
-					// for some reason I got an empty connector (array key was empty) so check for these and remove
-					$post_connectors_tmp = array();
-					foreach ($post_connectors as $key => $one_connector) {
-						if (!empty($one_connector)) {
-							$post_connectors_tmp[$key] = $one_connector;
-						}
-					}
-					$post_connectors = $post_connectors_tmp;
-	
-					update_option("simple_fields_post_connectors", $post_connectors);
-					$this->clear_caches();
-	
-					$simple_fields_did_save_connector = true;
-				}
-				$action = "";
-			}
-	
-			
-			/**
-			 * edit new or existing post connector
-			 * If new then connector-id = 0
-			 */
-			if ("edit-post-connector" == $action) {
-	
-				$connector_id = (isset($_GET["connector-id"])) ? intval($_GET["connector-id"]) : false;
-				$highest_connector_id = 0;
-	
-				// if new, save it as unnamed, and then set to edit that
-				if ($connector_id === 0) {
-	
-					// is new connector
-					$post_connector_in_edit = simple_fields_register_post_connector();
-	
-				} else {
-	
-					// existing post connector
-					
-					// set a default value for hide_editor if it does not exist. did not exist until 0.5
-					$post_connectors[$connector_id]["hide_editor"] = (bool) @$post_connectors[$connector_id]["hide_editor"];
-					
-					$post_connector_in_edit = $post_connectors[$connector_id];
-				}
-	
-				?>
-				<h3><?php _e('Post Connector details', 'simple-fields') ?></h3>
-	
-				<form method="post" action="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-post-connector-save">
-	
-					<table class="form-table">
-
-						<tr>
-							<th><label><?php _e('Name', 'simple-fields') ?></label></th>
-							<td><input type="text" id="post_connector_name" name="post_connector_name" class="regular-text" value="<?php echo esc_html($post_connector_in_edit["name"]) ?>" /></td>
-						</tr>
-
-						<tr>
-							<th>
-								<label for="post_connector_slug"><?php _e('Slug', 'simple-fields') ?></label>
-							</th>
-							<td>
-								<input 	type="text" name="post_connector_slug" id="post_connector_slug" class="regular-text" 
-										value="<?php echo esc_html(@$post_connector_in_edit["slug"]) ?>"
-										pattern='<?php echo $this->get_slug_pattern() ?>'
-										title='<?php echo $this->get_slug_title() ?>'
-										required
-										 />
-								 <br>
-								 <span class="description"><?php echo __("A unique identifier for this connector", 'simple-fields') ?></span>
-								 <?php
-								 // sf_d($post_connector_in_edit);
-								 ?>
-							</td>
-						</tr>
-
-						<tr>
-							<th><?php _e('Field Groups', 'simple-fields') ?></th>
-							<td>
-								<p>
-									<select id="simple-fields-post-connector-add-fields">
-										<option value=""><?php _e('Add field group...', 'simple-fields') ?></option>
-										<?php
-										foreach ($field_groups as $one_field_group) {
-											if ($one_field_group["deleted"]) { continue; }
-											?><option value='<?php echo $one_field_group["id"] ?>'><?php echo esc_html($one_field_group["name"]) ?></option><?php
-										}
-										?>
-									</select>
-								</p>
-								<ul id="simple-fields-post-connector-added-fields">
-									<?php
-									foreach ($post_connector_in_edit["field_groups"] as $one_post_connector_added_field) {
-										if ($one_post_connector_added_field["deleted"]) { continue; }
-										
-										#d($one_post_connector_added_field);
-										
-										?>
-										<li>
-											<div class='simple-fields-post-connector-addded-fields-handle'></div>
-											<div class='simple-fields-post-connector-addded-fields-field-name'><?php echo $one_post_connector_added_field["name"] ?></div>
-											<input type='hidden' name='added_fields[<?php echo $one_post_connector_added_field["id"] ?>][id]' value='<?php echo $one_post_connector_added_field["id"] ?>' />
-											<input type='hidden' name='added_fields[<?php echo $one_post_connector_added_field["id"] ?>][name]' value='<?php echo $one_post_connector_added_field["name"] ?>' />
-											<input type='hidden' name='added_fields[<?php echo $one_post_connector_added_field["id"] ?>][deleted]' value='0' class="simple-fields-post-connector-added-field-deleted" />
-											<div class="simple-fields-post-connector-addded-fields-options">
-												<?php _e('Context', 'simple-fields') ?>
-												<select name='added_fields[<?php echo $one_post_connector_added_field["id"] ?>][context]' class="simple-fields-post-connector-addded-fields-option-context">
-													<option <?php echo ("normal" == $one_post_connector_added_field["context"]) ? " selected='selected' " : "" ?> value="normal"><?php _e('normal') ?></option>
-													<option <?php echo ("advanced" == $one_post_connector_added_field["context"]) ? " selected='selected' " : "" ?> value="advanced"><?php _e('advanced') ?></option>
-													<option <?php echo ("side" == $one_post_connector_added_field["context"]) ? " selected='selected' " : "" ?> value="side"><?php _e('side') ?></option>
-												</select>
-												
-												<?php _e('Priority', 'simple-fields') ?>
-												<select name='added_fields[<?php echo $one_post_connector_added_field["id"] ?>][priority]' class="simple-fields-post-connector-addded-fields-option-priority">
-													<option <?php echo ("low" == $one_post_connector_added_field["priority"]) ? " selected='selected' " : "" ?> value="low"><?php _e('low') ?></option>
-													<option <?php echo ("high" == $one_post_connector_added_field["priority"]) ? " selected='selected' " : "" ?> value="high"><?php _e('high') ?></option>
-												</select>
-											</div>
-											<a href='#' class='simple-fields-post-connector-addded-fields-delete'><?php _e('Delete', 'simple-fields') ?></a>
-										</li>
-										<?php
-									}
-									?>
-								</ul>
-							</td>
-						</tr>
-						
-						<tr>
-							<th><?php _e('Options', 'simple-fields') ?></th>
-							<td><input
-								 type="checkbox" 
-								 <?php echo $post_connector_in_edit["hide_editor"] == TRUE ? " checked='checked' " : "" ?>
-								 name="hide_editor" 
-								 class="" 
-								 value="1" />
-								 <?php _e('Hide the built in editor', 'simple-fields') ?>
-							</td>
-						</tr>
-						
-						<tr>
-							<th>
-								<?php _e('Available for post types', 'simple-fields') ?>
-							</th>
-							<td>
-								<table>
-									<?php
-									global $wp_post_types;
-									$arr_post_types_to_ignore = array("attachment", "revision", "nav_menu_item");
-									foreach ($wp_post_types as $one_post_type) {
-										if (!in_array($one_post_type->name, $arr_post_types_to_ignore)) {
-											?>
-											<tr>
-												<td>
-													<input <?php echo (in_array($one_post_type->name, $post_connector_in_edit["post_types"]) ? " checked='checked' " : ""); ?> type="checkbox" name="post_types[]" value="<?php echo $one_post_type->name ?>" />
-													<?php echo $one_post_type->name ?>
-												</td>
-												<?php
-												/*
-												<!-- <td>
-													<input <?php echo (in_array($one_post_type->name, $post_connector_in_edit["post_types_type_default"]) ? " checked='checked' " : "") ?> type="checkbox" name="post_types_type_default[]" value="<?php echo $one_post_type->name ?>" />
-													Default connector for post type <?php echo $one_post_type->name ?>
-												</td> -->
-												*/
-											?>
-											</tr>
-											<?php
-										}
-									}
-									?>
-								</table>
-							</td>
-						</tr>
-	
-					</table>
-					<p class="submit">
-						<input class="button-primary" type="submit" value="<?php _e('Save Changes', 'simple-fields') ?>" />
-						<input type="hidden" name="action" value="update" />
-						<!-- <input type="hidden" name="page_options" value="field_group_name" /> -->
-						<input type="hidden" name="post_connector_id" value="<?php echo $post_connector_in_edit["id"] ?>" />
-						or 
-						<a href="<?php echo SIMPLE_FIELDS_FILE ?>"><?php _e('cancel', 'simple-fields') ?></a>
-					</p>
-					<p class="simple-fields-post-connector-delete">
-						<a href="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=delete-post-connector&amp;connector-id=<?php echo $post_connector_in_edit["id"] ?>"><?php _e('Delete') ?></a>
-					</p>
-	
-				</form>
-				<?php
-			}
-	
-		
-			/**
-			 * Edit new or existing Field Group
-			 */
-			if ("edit-field-group" == $action) {
-				
-				$field_group_id = (isset($_GET["group-id"])) ? intval($_GET["group-id"]) : false;
-				
-				$highest_field_id = 0;
-
-				// check if field group is new or existing
-				if ($field_group_id === 0) {
-
-					// new: save it as unnamed, and then set to edit that
-					$field_group_in_edit = simple_fields_register_field_group();
-
-					simple_fields::debug("Added new field group", $field_group_in_edit);
-	
-				} else {
-
-					// existing: get highest field id
-					foreach ($field_groups[$field_group_id]["fields"] as $one_field) {
-						if ($one_field["id"] > $highest_field_id) {
-							$highest_field_id = $one_field["id"];
-						}
-					}
-	
-					$field_group_in_edit = $field_groups[$field_group_id];
-
-				}
-
-				?>
-				<form method="post" action="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-field-group-save">
-		            <h3><?php _e('Field group details', 'simple-fields') ?></h3>
-		            <table class="form-table">
-		            	<tr>
-		            		<th>
-		            			<label for="field_group_name"><?php _e('Name', 'simple-fields') ?></label>
-		            		</th>
-		            		<td>
-		            			<input type="text" name="field_group_name" id="field_group_name" class="regular-text" value="<?php echo esc_html($field_group_in_edit["name"]) ?>" required />
-							</td>
-						</tr>
-						<tr>
-							<th>
-								<label for="field_group_description"><?php _e('Description', 'simple-fields') ?></label>
-							</th>
-							<td>
-								<input 	type="text" name="field_group_description" id="field_group_description" class="regular-text" 
-										value="<?php echo esc_html(@$field_group_in_edit["description"]) ?>"
-										 />
-							</td>
-						</th>
-
-						<tr>
-							<th>
-								<label for="field_group_slug"><?php _e('Slug', 'simple-fields') ?></label>
-							</th>
-							<td>
-								<input 	type="text" name="field_group_slug" id="field_group_slug" class="regular-text" 
-										value="<?php echo esc_html(@$field_group_in_edit["slug"]) ?>"
-										pattern='<?php echo $this->get_slug_pattern() ?>'
-										title='<?php echo $this->get_slug_title() ?>'
-										required
-										title="<?php _e("Allowed chars: a-z and underscore.", 'simple-fields') ?>"
-										 />
-								 <br>
-								 <span class="description"><?php echo __("A unique identifier for this field group.", 'simple-fields') ?></span>
-							</td>
-						</tr>
-
-						<tr>
-							<th>
-								<?php echo __("Options", 'simple-fields') ?>
-							</th>
-							<td>
-		            			<label for="field_group_repeatable">
-									<input type="checkbox" <?php echo ($field_group_in_edit["repeatable"] == true) ? "checked='checked'" : ""; ?> value="1" id="field_group_repeatable" name="field_group_repeatable" />
-									<?php _e('Repeatable', 'simple-fields') ?>
-								</label>								
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<th><?php _e('Fields', 'simple-fields') ?></th>
-		            		<td>
-		            			<div id="simple-fields-field-group-existing-fields">
-		            				<ul class='simple-fields-edit-field-groups-added-fields'>
-										<?php
-										foreach ($field_group_in_edit["fields"] as $oneField) {
-											if (!$oneField["deleted"]) {
-												echo $this->field_group_add_field_template($oneField["id"], $field_group_in_edit);
-											}
-										}
-										?>
-		            				</ul>
-		            			</div>
-		            			<p><a href="#" id="simple-fields-field-group-add-field">+ <?php _e('Add field', 'simple-fields') ?></a></p>
-		            		</td>
-		            	</tr>			
-					</table>
-	
-					<p class="submit">
-						<input class="button-primary" type="submit" value="<?php _e('Save Changes', 'simple-fields') ?>" />
-						<input type="hidden" name="action" value="update" />
-						<input type="hidden" name="page_options" value="field_group_name" />
-						<input type="hidden" name="field_group_id" value="<?php echo $field_group_in_edit["id"] ?>" />
-						<?php _e('or', 'simple-fields') ?> 
-						<a href="<?php echo SIMPLE_FIELDS_FILE ?>"><?php _e('cancel', 'simple-fields') ?></a>
-					</p>
-					<p class="simple-fields-field-group-delete">
-						<a href="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=delete-field-group&amp;group-id=<?php echo $field_group_in_edit["id"] ?>"><?php _e('Delete', 'simple-fields') ?></a>
-					</p>
-					
-				</form>
-		
-				<script type="text/javascript">
-					var simple_fields_highest_field_id = <?php echo (int) $highest_field_id ?>;
-				</script>
-		
-				<?php
-			
-			}
-	
-			// view debug information
-			if ("simple-fields-view-debug-info" == $action) {
-	
-				echo "<h3>Post Connectors</h3>\n";
-				echo "<p>Called with function <code>get_post_connectors()</code>";
-				sf_d( $this->get_post_connectors() );
-	
-				echo "<hr>";
-				
-				echo "<h3>Field Groups</h3>\n";
-				echo "<p>Called with function <code>get_field_groups()</code>";
-				sf_d( $this->get_field_groups() );
-				
-				echo "<hr>";
-				echo "<h3>simple_fields_post_type_defaults</h3>";
-				echo '<p>Called with: get_option("simple_fields_post_type_defaults")';
-				sf_d( $this->get_post_type_defaults() );
-				
-			}
-	
-			// Save options
-			if ("edit-options-save" == $action) {
-				
-				$this->save_options(array(
-					"debug_type" => (int) $_POST["debug_type"]
-				));
-				
-				$action = "";
-				$simple_fields_did_save_options = TRUE;
-				
-			}
-	
-			// overview, if no action
-			if (!$action) {
-	
-	
-				/**
-				 * view post connectors
-				 */
-				$post_connector_count = 0;
-				foreach ($post_connectors as $onePostConnector) {
-					if (!$onePostConnector["deleted"]) {
-						$post_connector_count++;
-					}
-				}
-	
-	
-				/**
-				 * view existing field groups
-				 */	
-				?>
-				<div class="simple-fields-edit-field-groups">
-	
-					<h3><?php _e('Field groups', 'simple-fields') ?></h3>
-	
-					<?php
-					
-					// Show messages, like "saved" and so on
-					if (isset($simple_fields_did_save) && $simple_fields_did_save) {
-						?><div id="message" class="updated"><p><?php _e('Field group saved', 'simple-fields') ?></p></div><?php
-					} elseif (isset($simple_fields_did_delete) && $simple_fields_did_delete) {
-						?><div id="message" class="updated"><p><?php _e('Field group deleted', 'simple-fields') ?></p></div><?php
-					} elseif (isset($simple_fields_did_delete_post_connector) && $simple_fields_did_delete_post_connector) {
-						?><div id="message" class="updated"><p><?php _e('Post connector deleted', 'simple-fields') ?></p></div><?php
-					} elseif (isset($simple_fields_did_save_post_type_defaults) && $simple_fields_did_save_post_type_defaults) {
-						?><div id="message" class="updated"><p><?php _e('Post type defaults saved', 'simple-fields') ?></p></div><?php
-					} elseif (isset($simple_fields_did_save_options) && $simple_fields_did_save_options) {
-						?><div id="message" class="updated"><p><?php _e('Simple Fields options saved', 'simple-fields') ?></p></div><?php
-					}
-					
-					$field_group_count = 0;
-					foreach ($field_groups as $oneFieldGroup) {
-						if (!$oneFieldGroup["deleted"]) {
-							$field_group_count++;
-						}
-					}
-	
-					if ($field_groups == $field_group_count) {
-						echo "<p>".__('No field groups yet.', 'simple-fields')."</p>";
-					} else {
-						echo "<ul class=''>";
-						foreach ($field_groups as $oneFieldGroup) {
-							if ($oneFieldGroup["id"] && !$oneFieldGroup["deleted"]) {
-								
-								echo "<li>";
-								echo "<a href='" . SIMPLE_FIELDS_FILE . "&amp;action=edit-field-group&amp;group-id=$oneFieldGroup[id]'>$oneFieldGroup[name]</a>";
-								if ($oneFieldGroup["fields_count"]) {
-									$format = $oneFieldGroup["repeatable"] ? _n('1 added field, repeatable', '%d added fields, repeatable', $oneFieldGroup["fields_count"]) : _n('1 added field', '%d added fields', $oneFieldGroup["fields_count"]);
-									echo "<br>" . __( sprintf($format, $oneFieldGroup["fields_count"]) );
-								}
-								echo "</li>";
-							}
-						}
-						echo "</ul>";
-					}
-					echo "<p><a class='button' href='" . SIMPLE_FIELDS_FILE . "&amp;action=edit-field-group&amp;group-id=0'>+ ".__('New field group', 'simple-fields')."</a></p>";
-					?>
-				</div>
-			
-			
-				<div class="simple-fields-edit-post-connectors">
-	
-					<h3><?php _e('Post Connectors', 'simple-fields') ?></h3>
-	
-					<?php
-					if (isset($simple_fields_did_save_connector) && $simple_fields_did_save_connector === true) {
-						?><div id="message" class="updated"><p><?php _e('Post connector saved', 'simple-fields') ?></p></div><?php
-					}
-	
-					if ($post_connector_count) {
-						?><ul><?php
-							foreach ($post_connectors as $one_post_connector) {
-								if ($one_post_connector["deleted"] || !$one_post_connector["id"]) {
-									continue;
-								}
-	
-								?>
-								<li>
-									<a href="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-post-connector&amp;connector-id=<?php echo $one_post_connector["id"] ?>"><?php echo $one_post_connector["name"] ?></a>
-									<?php
-									if ($one_post_connector["field_groups_count"]) {
-										echo "<br>" . sprintf( _n('1 added field group', '%d added field groups', $one_post_connector["field_groups_count"]), $one_post_connector["field_groups_count"] );
-									}
-									?>
-								</li>
-								<?php
-								
-							}
-						?></ul><?php
-					} else {
-						?>
-						<!-- <p>No post connectors</p> -->
-						<?php
-					}
-					?>
-					<p>
-						<a href="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-post-connector&amp;connector-id=0" class="button">+ <?php _e('New post connector', 'simple-fields') ?></a>
-					</p>
-					
-				</div>
-	
-				<div class="simple-fields-post-type-defaults">
-					<h3><?php _e('Post type defaults', 'simple-fields') ?></h3>
-					<ul>
-						<?php
-						$post_types = get_post_types();
-						$arr_post_types_to_ignore = array("attachment", "revision", "nav_menu_item");
-						foreach ($post_types as $one_post_type) {
-							$one_post_type_info = get_post_type_object($one_post_type);
-							if (!in_array($one_post_type, $arr_post_types_to_ignore)) {
-	
-								$default_connector = $this->get_default_connector_for_post_type($one_post_type);
-								switch ($default_connector) {
-									case "__none__":
-										$default_connector_str = __('Default is to use <em>no connector</em>', 'simple-fields');
-										break;
-									case "__inherit__":
-										$default_connector_str = __('Default is to inherit from <em>parent connector</em>', 'simple-fields');
-										break;
-									default:
-										if (is_numeric($default_connector)) {
-											
-											$connector = $this->get_connector_by_id($default_connector);
-											if ($connector !== FALSE) {
-												$default_connector_str = sprintf(__('Default is to use connector <em>%s</em>', 'simple-fields'), $connector["name"]);
-											}
-										}
-	
-								}
-	
-								?><li>
-									<a href="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-post-type-defaults&amp;post-type=<?php echo $one_post_type ?>">
-										<?php echo $one_post_type_info->label ?>
-									</a>
-									<br>
-									<span><?php echo $default_connector_str ?></span>
-								</li><?php
-							}
-						}
-						?>
-					</ul>
-				</div>	
-
-
-				<div class="simple-fields-debug">
-					<h3><?php echo __('Debug', 'simple-fields') ?></h3>
-					<?php
-					// Dropdown with debug options
-
-					// Debug type. 0 = no debug, 1 = debug for admins only, 2 = debug for all
-					$options = $this->get_options();
-					$debug_type = isset($options["debug_type"]) ? (int) $options["debug_type"] : "0";
-					// capability edit_themes
-					?>
-					<form action="<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=edit-options-save" method="post">
-						<?php
-						printf('
-							<p>
-								<select name=debug_type>
-									<option value=0 %1$s>%4$s</option>
-									<option value=1 %2$s>%5$s</option>
-									<option value=2 %3$s>%6$s</option>
-								</select>
-							</p>
-							', 
-							$debug_type === 0 ? "selected" : "",
-							$debug_type === 1 ? "selected" : "",
-							$debug_type === 2 ? "selected" : "",
-							__("Don't enable debug output", "simple-fields"),
-							__("Enable debug output for administrators", "simple-fields"),
-							__("Enable debug output for all users", "simple-fields")
-						);
-						?>
-						<p class=description>
-							<?php _e("Automatically append information about attached fields on posts (using filter 'the_content').", "simple-fields"); ?>
-						</p>
-
-						<p>
-							<input class="button-primary" type=submit value="<?php _e("Save changes", "simple-fields") ?>">
-						</p>
-					</form> <!-- // enable debug -->
-				
-					<ul>
-						<li><a href='<?php echo SIMPLE_FIELDS_FILE ?>&amp;action=simple-fields-view-debug-info'><?php echo __('View debug information', 'simple-fields') ?></a></li>
-					</ul>
-
-				</div>
-				
-				<?php
-	
-			} // end simple_fields_options
-	
-			?>
-			</div>
-		</div>	
-	
-		<?php
-	} // end func simple_fields_options
-
+	}
 
 	/**
 	 * Add the admin menu page for simple fields
@@ -3271,7 +2898,10 @@ class simple_fields {
 				$arr_found_connectors[] = $one_connector;
 			}
 		}
+
+		$arr_found_connectors = apply_filters( "simple_fields_get_post_connectors_for_post_type", $arr_found_connectors, $post_type);
 		return $arr_found_connectors;
+
 	}
 	
 	/**
@@ -3293,8 +2923,11 @@ class simple_fields {
 	 * @return array
 	 */
 	function get_options() {
+
 		$options = (array) get_option("simple_fields_options");
+		$options = apply_filters( "simple_fields_get_options", $options);
 		return $options;
+
 	}
 	
 	/**
@@ -3302,10 +2935,13 @@ class simple_fields {
 	 * @param array $new_options. will be merged with old options, so you only need to add your modified stuff to the array, and then all old stuff will be untouched.
 	 */
 	function save_options($new_options) {
+
 		$old_options = $this->get_options();
 		$new_options = wp_parse_args($new_options, $old_options);
+		$new_options = apply_filters( "simple_fields_save_options", $new_options);
 		update_option("simple_fields_options", $new_options);
 		$this->clear_caches();
+
 	}
 	
 	/**
@@ -3318,12 +2954,8 @@ class simple_fields {
 		if (isset($options["debug_type"]) && $options["debug_type"] !== 0) {
 		
 			// 1 = debug for admins only, 2 = debug for all
-			if ( ($options["debug_type"] === 1 && current_user_can("edit_themes")) ||  $options["debug_type"] === 2) {
-
-				// enqueu jquery because that is used to show/hide the debug box
-				wp_enqueue_script("jquery");
-				
-				// add filter
+			if ( ($options["debug_type"] === 1 && current_user_can("edit_themes")) || $options["debug_type"] === 2) {
+			
 				add_filter("the_content", array($this, "simple_fields_content_debug_output"));
 			}	
 	
@@ -3333,36 +2965,52 @@ class simple_fields {
 	
 	/** 
 	 * Outputs the names of the post connectors attached to the post you view + outputs the values
+	 * @param string $the_content
+	 * @param bool $allow_always Set to true to bypass checks that we are inside the correct the_content-filter
 	 */
-	function simple_fields_content_debug_output($the_content) {
+	function simple_fields_content_debug_output($the_content, $args = "") {
+
+		$defaults = array(
+			"always_show" => FALSE,
+			"show_expanded" => FALSE
+		);
+
+		$args = wp_parse_args( $args, $defaults);
 
 		// we only want to appen the debug code when being used from get_the_content or the_content
 		// but for example get_the_excerpt is also using filter the_content which leads to problems
 		// so check that we are somewhere inside the right functions
-		$is_inside_righ_function = FALSE;
-	    $arr_trace = debug_backtrace();
-	    $arr_trace_count = count($arr_trace);
+		if ($args["always_show"] === FALSE) {
 
-	    for ($i = 0; $i < $arr_trace_count; $i++) {
-		    if ( isset($arr_trace[$i]["function"]) && in_array($arr_trace[$i]["function"], array("the_content", "get_the_content"))) {
-		    	$is_inside_righ_function = TRUE;
-		    	break;
-		    }
-	    }
+			$is_inside_righ_function = FALSE;
+			$arr_trace = debug_backtrace();
+			$arr_trace_count = count($arr_trace);
 
-	    if (!$is_inside_righ_function) {
+			for ($i = 0; $i < $arr_trace_count; $i++) {
+				if ( isset($arr_trace[$i]["function"]) && in_array($arr_trace[$i]["function"], array("the_content", "get_the_content"))) {
+					$is_inside_righ_function = TRUE;
+					break;
+				}
+			}
 
-		    // Don't do the debug, since we're not in the_content
-		    return $the_content;
+			if ( ! $is_inside_righ_function ) {
 
-	    }
+				// Don't do the debug, since we're not in the_content
+				return $the_content;
 
+			}
+		}
 		
 		$output = "";
 		$output_all = "";
 		$field_count = 0;
 		
-		$post_connector_with_values = simple_fields_get_all_fields_and_values_for_post(get_the_ID(), "include_deleted=0");
+		if ( ! isset( $GLOBALS['post'] ) ) {
+			return $the_content;
+		}
+		
+		$post_id = get_the_ID();
+		$post_connector_with_values = simple_fields_get_all_fields_and_values_for_post($post_id, "include_deleted=0");
 		if ($post_connector_with_values) {
 
 			foreach ($post_connector_with_values["field_groups"] as $one_field_group) {
@@ -3386,8 +3034,8 @@ class simple_fields {
 					$field_count++;
 					$content = "";
 					$content .= "<ul style='background:#eee;padding:.5em;margin:0;display:block;'>";
-					$content .= "<li>Field <b>" . $one_field["name"] . "</b>";
-					$content .= ", type <b>" . $one_field["type"] . "</b>";
+					$content .= "<li>" . __("Field", "simple-fields") . " <b>" . $one_field["name"] . "</b>";
+					$content .= ", " . __("type", "simple-fields") . " <b>" . $one_field["type"] . "</b>";
 
 					if (isset($one_field["slug"])) {
 						
@@ -3395,19 +3043,19 @@ class simple_fields {
 						$str_all_group_fields .= $one_field["slug"] . ",";
 						
 						if ($one_field_group["repeatable"]) {
-							$content .= "<br>Use <code><b>simple_fields_values('".$one_field["slug"]."')</b></code> to get:";
-							ob_start();
+							$content .= "<br>Use <code><b>simple_fields_values('".$one_field["slug"]."')</b></code>.";
+							/*ob_start();
 							sf_d( simple_fields_values($one_field["slug"]) );
-							$content .= ob_get_clean();
+							$content .= ob_get_clean();*/
 						} else {		
-							$content .= "<br>Use <code><b>simple_fields_value('".$one_field["slug"]."')</b></code> to get:";
-							ob_start();
+							$content .= "<br>Use <code><b>simple_fields_value('".$one_field["slug"]."')</b></code>.";
+							/*ob_start();
 							sf_d( simple_fields_value($one_field["slug"]) );
-							$content .= ob_get_clean();
+							$content .= ob_get_clean();*/
 						}
 						
 					} else {
-						$content .= "<br>No slug for this field found (probably old field that has not been edited and saved).";
+						$content .= "<br>" . __("No slug for this field found (probably old field that has not been edited and saved).", "simple-fields");
 					}
 					$content .= "</ul>";
 					$output_all .= $content;
@@ -3419,15 +3067,15 @@ class simple_fields {
 					$str_all_group_fields = preg_replace('!,$!', '', $str_all_group_fields);
 					$output_all .= "<ul style='background:#eee;padding:.5em;margin:0;display:block;'>";
 					if ($one_field_group["repeatable"]) {
-						$content = "<li>Get all fields at once: use <code><b>simple_fields_values('".$str_all_group_fields."')</b></code> to get:";
-						ob_start();
+						$content = "<li>Get all fields at once: use <code><b>simple_fields_values('".$str_all_group_fields."')</b></code>.";
+						/*ob_start();
 						sf_d( simple_fields_values($str_all_group_fields) );
-						$content .= ob_get_clean();
+						$content .= ob_get_clean();*/
 					} else {
-						$content = "<li>Get all fields at once: use <code><b>simple_fields_value('".$str_all_group_fields."')</b></code> to get:";
-						ob_start();
+						$content = "<li>Get all fields at once: use <code><b>simple_fields_value('".$str_all_group_fields."')</b></code>.";
+						/*ob_start();
 						sf_d( simple_fields_value($str_all_group_fields) );
-						$content .= ob_get_clean();
+						$content .= ob_get_clean();*/
 					}
 					$output_all .= $content;
 					$output_all .= "</ul>";
@@ -3442,39 +3090,63 @@ class simple_fields {
 			?>
 			<script>
 			window.simple_fields_post_debug_show_hide = window.simple_fields_post_debug_show_hide || function(t) {
-				var $t = jQuery(t);
-				var $div_wrap = $t.closest("div.simple-fields-post-debug-wrap");
-				var debug_content = $div_wrap.find("div.simple-fields-post-debug-content");
-				debug_content.toggle();
-				if (debug_content.is(":visible")) {
-					$t.text("<?php echo $str_hide_fields ?>");
-				} else {
-					$t.text("<?php echo $str_show_fields ?>");
+
+				var div_debug_contents = t.parentNode.parentNode.getElementsByClassName("simple-fields-post-debug-content"),
+					new_style,
+					link_text;
+
+				if (div_debug_contents.length) {
+					
+					if (div_debug_contents[0].style.display === "block") {
+						new_style = "none";
+						link_text = "<?php echo $str_show_fields ?>";
+					} else {
+						new_style = "block";
+						link_text = "<?php echo $str_hide_fields ?>";
+					}
+
+					div_debug_contents[0].style.display = new_style;
+					t.innerHTML = link_text;
+
 				}
+
 				return false;
+				
 			}
 			</script>
 			<?php
-			$output_all = '
+
+			$str_show_hide = "";
+			$display = "block";
+			if ($args["show_expanded"] === FALSE) {
+				$str_show_hide = '<a href="#" onclick="return simple_fields_post_debug_show_hide(this);">'.$str_show_fields.'</a></p>';
+				$display = "none";
+			}
+
+			$output_all = sprintf('
 				<div class="simple-fields-post-debug-wrap" style="display:block;margin:0;padding:0;">
-					<p style="margin:0;padding:0;display:block;">This post has ' . $field_count . ' Simple Fields-fields attached. <a href="#" onclick="return simple_fields_post_debug_show_hide(this);">'.$str_show_fields.'</a></p>
-					<div class="simple-fields-post-debug-content" style="display:none;">'.$output_all.'</div>
+					<p style="margin:0;padding:0;display:block;">This post has %1$s Simple Fields-fields attached. 
+					%2$s
+					<div class="simple-fields-post-debug-content" style="display:%3$s;">%4$s</div>
 				</div>
-				';
+				', $field_count, $str_show_hide, $display, $output_all);
 		}
 		// if a field has the slug caption the output will be [caption] and then it will crash with some shortcodes, so we try to fix that here
 		$output_all = str_replace("[", "&#91;", $output_all);
 		$output_all = str_replace("]", "&#93;", $output_all);
+
 		return $the_content . $output_all;
+	
 	}
 
 	/**
 	 * Retrieve and return extended return values for a field type
+	 * Only used for internal/built in file types.
+	 *
 	 * @param mixed $field array or string or int or whatever with field info
 	 * @param mixed $field_value the saved value
 	 */
 	function get_extended_return_values_for_field($field, $field_value) {
-	
 
 		$return_field_value = array();
 
@@ -3484,6 +3156,7 @@ class simple_fields {
 			// lets get more info about that file then, so we have most useful stuff in an array – hooray!
 			
 			if (isset($field_value) && is_numeric($field_value)) {
+
 				$file_id                             = (int) $field_value;
 				$return_field_value["id"]            = $file_id;
 				$return_field_value["is_image"]      = wp_attachment_is_image( $file_id );
@@ -3619,15 +3292,17 @@ class simple_fields {
 			
 		} else if ("post" === $field["type"]) {
 
-			if (isset($field_value) && is_numeric($field_value)) {
+			// For post field
+			// Get shortcut for id, title, and permalink
+			// and then the whole post
+			if ( isset( $field_value ) && is_numeric( $field_value ) && (int) $field_value !== 0) {
 				$post_id = (int) $field_value;
 				$return_field_value["id"] 			= $post_id;
 				$return_field_value["title"] 		= get_the_title( $post_id );
 				$return_field_value["permalink"] 	= get_permalink( $post_id );
 				$return_field_value["post"] 		= get_post( $post_id );
 			}
-			
-		
+				
 		} else if ("user" === $field["type"]) {
 
 			if (isset($field_value) && is_numeric($field_value)) {
@@ -3638,7 +3313,7 @@ class simple_fields {
 				// user is a WP_User object,
 				// see this url for more info on what data you can get:
 				// http://codex.wordpress.org/Function_Reference/get_userdata
-				$user                                = get_user_by( "id", $user_id );				
+				$user                                = get_user_by( "id", $user_id );
 				$return_field_value["first_name"]    = $user->first_name;
 				$return_field_value["last_name"]     = $user->last_name;
 				$return_field_value["user_login"]    = $user->user_login;
@@ -3703,59 +3378,110 @@ class simple_fields {
 			}
 			
 		}
-			
+		
+		$return_field_value = apply_filters( "simple_fields_get_extended_return_values_for_field", $return_field_value, $field, $field_value);
+
 		return $return_field_value;
+
 	}
 
 	/**
 	 * Gets a field group using it's id. Deleted field groups are not included
+	 *
 	 * @since 1.0.5
 	 * @param string slug of field group (or id, actually)
 	 * @return mixed array with field group info if field groups exists, false if does not exist
 	 */
-	function get_field_group_by_slug($field_group_slug) {
-#echo 111;		
-#var_dump($this->ns_key);
-		$cache_key = 'simple_fields_'.$this->ns_key.'_get_field_group_by_slug_' . $field_group_slug;
-#echo $cache_key;
+	function get_field_group_by_slug($field_group_slug, $include_deleted = false) {
+
+		$cache_key = 'simple_fields_'.$this->ns_key.'_get_field_group_by_slug_deleted_' . (int) $include_deleted . "_" . $field_group_slug;
 		$return_val = wp_cache_get( $cache_key, 'simple_fields' );
-		if (FALSE === $return_val) {
 		
-		 	$field_groups = $this->get_field_groups();
-		 	
-			if (!is_numeric($field_group_slug)) {
+		if (FALSE === $return_val) {
+
+			$field_groups = $this->get_field_groups();
+
+			if ( ! is_numeric($field_group_slug) ) {
 	
 				// not number so look for field group with this variable as slug
 				foreach ($field_groups as $one_field_group) {
-					if ($one_field_group["deleted"]) continue;
+					
+					if ( $one_field_group["deleted"] && ! $include_deleted ) continue;
+					
 					if ($one_field_group["slug"] == $field_group_slug) {
+
 						wp_cache_set( $cache_key, $one_field_group, 'simple_fields' );
+						$one_field_group = apply_filters( "simple_fields_get_field_group_by_slug", $one_field_group, $field_group_slug);
 						return $one_field_group;
 					}
 				}
 				
 				wp_cache_set( $cache_key, FALSE, 'simple_fields' );
-				return FALSE;
+				
+				$return_val = FALSE;
+				$return_val = apply_filters( "simple_fields_get_field_group_by_slug", $return_val, $field_group_slug);
+				return $return_val;
 	
 			} else {
 	
 				// look for group using id
-			 	if (isset($field_groups[$field_group_slug]) && is_array($field_groups[$field_group_slug]) && !$field_groups[$field_group_slug]["deleted"]) {
+				if ( isset($field_groups[$field_group_slug]) && is_array($field_groups[$field_group_slug]) ) {
+
+					if ( $field_groups[$field_group_slug]["deleted"] && ! $include_deleted) {
+	
+						// deleted and we don't want deleted ones
+						wp_cache_set( $cache_key, FALSE, 'simple_fields' );					
+						$return_val = apply_filters( "simple_fields_get_field_group_by_slug", $return_val, $field_group_slug);
+						return $return_val;
+
+					}
+
 					wp_cache_set( $cache_key, $field_groups[$field_group_slug], 'simple_fields' );
-				 	return $field_groups[$field_group_slug];
-			 	} else {
-				 	wp_cache_set( $cache_key, FALSE, 'simple_fields' );
-				 	return FALSE;
-			 	}
-			 	
+					$return_val = $field_groups[$field_group_slug];
+					$return_val = apply_filters( "simple_fields_get_field_group_by_slug", $return_val, $field_group_slug);
+					return $return_val;
+
+				} else {
+
+					wp_cache_set( $cache_key, FALSE, 'simple_fields' );					
+					$return_val = apply_filters( "simple_fields_get_field_group_by_slug", $return_val, $field_group_slug);
+					return $return_val;
+
+				}
+				
 			}
 				
-		}
+		} // if not in cache
 
+		$return_val = apply_filters( "simple_fields_get_field_group_by_slug", $return_val, $field_group_slug);
 		return $return_val;
 
 	}
 
+
+	/**
+	 * Get meta key name for a field id + field group id combination
+	 *
+	 * @param int $field_group_id
+	 * @param int field_id
+	 * @param int num_in_set
+	 * @return string
+	 */
+	function get_meta_key($field_group_id = NULL, $field_id = NULL, $num_in_set = 0) {
+
+		if ( ! isset($field_group_id) || ! isset($field_group_id) || ! is_numeric($field_group_id) || ! is_numeric($field_id) || ! is_numeric($num_in_set) ) return FALSE;
+
+		$custom_field_key_template = '_simple_fields_fieldGroupID_%1$d_fieldID_%2$d_numInSet_%3$d';
+		$custom_field_key_template = apply_filters("simple_fields_get_meta_key_template", $custom_field_key_template);
+
+		// TODO: fetch slugs so they are available for the printf too?
+
+		$custom_field_key = sprintf($custom_field_key_template, $field_group_id, $field_id, $num_in_set);
+		$custom_field_key = apply_filters("simple_fields_get_meta_key", $custom_field_key);
+		
+		return $custom_field_key;
+
+	}
 
 	/**
 	 * Returns a field from a fieldgroup using their slugs
@@ -3772,12 +3498,15 @@ class simple_fields {
 		
 		foreach ($field_group["fields"] as $one_field) {
 			if ($field_slug === $one_field["slug"]) {
+				$one_field = apply_filters( "simple_fields_get_field_by_slug", $one_field, $field_slug, $fieldgroup_slug);
 				return $one_field;
 			}
 		}
 		
 		// No field with that slug found
-		return FALSE;
+		$return_val = FALSE;
+		$return_val = apply_filters( "simple_fields_get_field_by_slug", $return_val, $field_slug, $fieldgroup_slug);
+		return $return_val;
 	}
 
 	/**
@@ -3786,8 +3515,22 @@ class simple_fields {
 	 */
 	function clear_caches() {
 
+		do_action("simple_fields_clear_caches");
+
 		$prev_key = $this->ns_key;
 		$this->ns_key = wp_cache_incr( 'simple_fields_namespace_key', 1, 'simple_fields' );
+
+		// this can consume lots of memory if we for example use set_value a lot because
+		// it gets all field values and such and then increase the namespace key, bloating up the memory
+		// kinda correct, but kinda too much memory
+		// this is perhaps naughty, but will work: get all keys belonging to simple fields and just remove them
+		global $wp_object_cache;
+		if (isset($wp_object_cache->cache["simple_fields"])) {
+			// cache exists for simple fields
+			// remove all keys
+			$wp_object_cache->cache["simple_fields"] = array();
+		}
+
 		if ($this->ns_key === FALSE) {
 			// I really don't know why, but wp_cache_incr returns false...always or sometimes?
 			// Manually update namespace key by one
@@ -3795,8 +3538,360 @@ class simple_fields {
 			wp_cache_set( 'simple_fields_namespace_key', $this->ns_key, 'simple_fields' );
 		}
 		// echo "clear_key";var_dump($this->ns_key);
+
+	} // clear caches
+
+
+	/**
+	 * @param string $str_field_key Key of field type to get
+	 * @return mixed. Returns false if field is not found. Returns array with field info if field is found.
+	 */
+	function get_core_field_type_by_key($str_field_key = "") {
+		
+		if ( empty( $str_field_key ) ) return FALSE;
+
+		$arr_field_types = $this->get_core_field_types();
+		if ( isset( $arr_field_types[ $str_field_key ] ) ) {
+			return $arr_field_types[ $str_field_key ];
+		} else {
+			return FALSE;
+		}
+
+	} // end func get_core_field_type_by_key
+
+	/**
+	 * Check if field type with key $str_field_type is one of the core ones
+	 *
+	 * @param string $field_key
+	 * @return Bool
+	 */
+	function field_type_is_core($str_field_key = "")  {
+
+		if ( empty( $str_field_key ) ) return FALSE;
+
+		$arr_field_types = $this->get_core_field_types();
+
+		if ( isset( $arr_field_types[ $str_field_key ] ) ) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
 	}
+
+	/**
+	 * Get a list of all core field types
+	 * Core = all field types that are not extensions
+	 * Core field types use old and less smart way of storing options
+	 * 
+	 * @return array with all field types
+	 */
+	function get_core_field_types() {
+
+		$arr_core_field_types = array(
+			"text" => array(
+				"key" => 'text',
+				"name" => __('Text', 'simple-fields'),
+			),
+			"textarea" => array(
+				"key" => 'textarea',
+				"name" => __('Textarea', 'simple-fields'),
+			),
+			"checkbox" => array(
+				"key" => 'checkbox',
+				"name" => __('Checkbox', 'simple-fields'),
+			),
+			"radiobuttons" => array(
+				"key" => 'radiobuttons',
+				"name" => __('Radio buttons', 'simple-fields'),
+			),
+			"dropdown" => array(
+				"key" => 'dropdown',
+				"name" => __('Dropdown', 'simple-fields'),
+			),
+			"file" => array(
+				"key" => 'file',
+				"name" => __('File', 'simple-fields'),
+			),
+			"post" => array(
+				"key" => 'post',
+				"name" => __('Post', 'simple-fields'),
+			),
+			"taxonomy" => array(
+				"key" => 'taxonomy',
+				"name" => __('Taxonomy', 'simple-fields'),
+			),
+			"taxonomyterm" => array(
+				"key" => 'taxonomyterm',
+				"name" => __('Taxonomy Term', 'simple-fields'),
+			),
+			"color" => array(
+				"key" => 'color',
+				"name" => __('Color', 'simple-fields'),
+			),
+			"date" => array(
+				"key" => 'date',
+				"name" => __('Date', 'simple-fields'),
+			),
+			"user" => array(
+				"key" => 'user',
+				"name" => __('User', 'simple-fields'),
+			),
+		);
+
+		return $arr_core_field_types;
+
+	} // end func get_core_field_types
+
+
+	function options_page_save() {
+
+		// only perform action on fields pages
+		if ( isset( $_GET["page"] ) && ("simple-fields-options" == $_GET["page"]) ) {
+		
+			if ( ! isset($_GET["action"]) || empty( $_GET["action"] ) ) return;
+			$action = $_GET["action"];
+
+			global $sf;
+		
+			$field_groups = $this->get_field_groups();
+			$post_connectors = $this->get_post_connectors();
+			$menu_page_url  = menu_page_url("simple-fields-options", false);
+
+			/**
+			 * save a post connector
+			 */
+			if ("edit-post-connector-save" == $action) {
+				
+				if ( ! wp_verify_nonce( $_POST["simple-fields"], "save-post-connector" ) ) wp_die( __("Cheatin&#8217; uh?") );		
+
+				$connector_id = (int) $_POST["post_connector_id"];
+				$post_connectors[$connector_id]["name"] = (string) stripslashes($_POST["post_connector_name"]);
+				$post_connectors[$connector_id]["slug"] = (string) ($_POST["post_connector_slug"]);
+				$post_connectors[$connector_id]["field_groups"] = (array) @$_POST["added_fields"];
+				$post_connectors[$connector_id]["post_types"] = (array) @$_POST["post_types"];
+				$post_connectors[$connector_id]["hide_editor"] = (bool) @$_POST["hide_editor"];
+					
+				// for some reason I got an empty connector (array key was empty) so check for these and remove
+				$post_connectors_tmp = array();
+				foreach ($post_connectors as $key => $one_connector) {
+					if (!empty($one_connector)) {
+						$post_connectors_tmp[$key] = $one_connector;
+					}
+				}
+				$post_connectors = $post_connectors_tmp;
+
+				update_option("simple_fields_post_connectors", $post_connectors);
+				$this->clear_caches();
+
+				$simple_fields_did_save_connector = true;
+
+				wp_redirect( add_query_arg( "message", "post-connector-saved", $menu_page_url ) );
+				exit;
+			
+			}
+
+
+			/**
+			 * save a field group
+			 * including fields
+			 */
+			if ("edit-field-group-save" == $action) {
+
+				if ( ! wp_verify_nonce( $_POST["simple-fields"], "save-field-group" ) ) wp_die( __("Cheatin&#8217; uh?") );
+
+				$field_group_id                               = (int) $_POST["field_group_id"];
+				$field_groups[$field_group_id]["name"]        = stripslashes($_POST["field_group_name"]);
+				$field_groups[$field_group_id]["description"] = stripslashes($_POST["field_group_description"]);
+				$field_groups[$field_group_id]["slug"]        = stripslashes($_POST["field_group_slug"]);
+				$field_groups[$field_group_id]["repeatable"]  = (bool) (isset($_POST["field_group_repeatable"]));
+				$field_groups[$field_group_id]["gui_view"]    = isset( $_POST["field_group_gui_view"] )  ? "table" : "list";
+				$field_groups[$field_group_id]["fields"]      = isset($_POST["field"]) ? (array) stripslashes_deep($_POST["field"]) : array();
+
+				// When field group is created it's set to deleted in case we don't save, so undo that
+				$field_groups[$field_group_id]["deleted"] = false;
+
+				// Since 0.6 we really want all things to have slugs, so add one if it's not set
+				if (empty($field_groups[$field_group_id]["slug"])) {
+					$field_groups[$field_group_id]["slug"] = "field_group_" . $field_group_id;
+				}
+				
+				/*
+				if just one empty array like this, unset first elm
+				happens if no fields have been added (now why would you do such an evil thing?!)
+				*/
+				if (sizeof($field_groups[$field_group_id]["fields"]) == 1 && empty($field_groups[$field_group_id]["fields"][0])) {
+					unset($field_groups[$field_group_id]["fields"][0]);
+				}
+				
+				update_option("simple_fields_groups", $field_groups);
+				$this->clear_caches();
+
+				// we can have changed the options of a field group, so update connectors using this field group
+				$post_connectors = (array) $this->get_post_connectors();
+				foreach ($post_connectors as $connector_id => $connector_options) {
+					if (isset($connector_options["field_groups"][$field_group_id])) {
+						// field group existed, update name
+						$post_connectors[$connector_id]["field_groups"][$field_group_id]["name"] = stripslashes($_POST["field_group_name"]);
+					}
+				}
+				update_option("simple_fields_post_connectors", $post_connectors);
+				$this->clear_caches();
+				
+				$simple_fields_did_save = true;
+			
+				wp_redirect( add_query_arg( "message", "field-group-saved", $menu_page_url ) );
+				exit;
+
+			} // edit field group
+
+
+			/**
+			 * Delete a field group
+			 */
+			if ("delete-field-group" == $action) {
+
+				if ( ! wp_verify_nonce( $_REQUEST["_wpnonce"], "delete-field-group" ) ) {
+					wp_die( __("Cheatin&#8217; uh?") );
+				}
+
+				$field_group_id = (int) $_GET["group-id"];
+				$field_groups[$field_group_id]["deleted"] = true;
+				update_option("simple_fields_groups", $field_groups);
+				$this->clear_caches();
+
+				wp_redirect( add_query_arg( "message", "field-group-deleted", $menu_page_url ) );
+				exit;
+
+			} // delete field group
+
+			/**
+			 * Delete a post connector
+			 */
+			if ("delete-post-connector" == $action) {
+
+				if ( ! wp_verify_nonce( $_REQUEST["_wpnonce"], "delete-post-connector" ) ) {
+					wp_die( __("Cheatin&#8217; uh?") );
+				}
+
+				$post_connector_id = (int) $_GET["connector-id"];
+				$post_connectors[$post_connector_id]["deleted"] = 1;
+				update_option("simple_fields_post_connectors", $post_connectors);
+				$this->clear_caches();
+
+				wp_redirect( add_query_arg( "message", "post-connector-deleted", $menu_page_url ) );
+				exit;
+
+			} // delete post connector
+
+			/**
+			 * save post type defaults
+			 */
+			if ("edit-post-type-defaults-save" == $action) {
 	
+				if ( ! wp_verify_nonce( $_POST["simple-fields"], "save-default-post-connector" ) ) wp_die( __("Cheatin&#8217; uh?") );
+
+				if ( isset($_POST["simple_fields_save-post_type"]) && isset($_POST["simple_fields_save-post_type_connector"]) ) {
+
+					$post_type = $_POST["simple_fields_save-post_type"];
+					$post_type_connector = $_POST["simple_fields_save-post_type_connector"];
+								
+					simple_fields_register_post_type_default($post_type_connector, $post_type);
+				}					
+
+				wp_redirect( add_query_arg( "message", "post-type-defaults-saved", $menu_page_url ) );
+				exit;				
+	
+			}
+
+			// Save options
+			if ("edit-options-save" == $action) {
+				
+				if ( ! wp_verify_nonce( $_POST["_wpnonce"], "save-debug-options" ) ) wp_die( __("Cheatin&#8217; uh?") );
+				
+				$this->save_options(array(
+					"debug_type" => (int) $_POST["debug_type"]
+				));
+				
+				wp_redirect( add_query_arg( "message", "debug-options-saved", $menu_page_url ) );
+				exit;				
+				
+			}
+
+
+		} // perform action on simple fields pages
+
+	} // save options
+
+	/**
+	 * Get the html input types that we show in text field type
+	 * @since 1.2
+	 * @return array
+	 */
+	function get_html_text_types() {
+
+		$arr_text_input_types = array(
+			"text" => array(
+				"description" => "text",
+				"version" => "html"
+			),
+			"password" => array(
+				"description" => "password",
+				"version" => "html"
+			),
+			"tel" => array(
+				"description" => "tel",
+				"version" => "html5"
+			),
+			"url" => array(
+				"description" => "url",
+				"version" => "html5"
+			),
+			"email" => array(
+				"description" => "email",
+				"version" => "html5"
+			),
+			"datetime" => array(
+				"description" => "datetime",
+				"version" => "html5"
+			),
+			"date" => array(
+				"description" => "date",
+				"version" => "html5"
+			),
+			"month" => array(
+				"description" => "month",
+				"version" => "html5"
+			),
+			"week" => array(
+				"description" => "week",
+				"version" => "html5"
+			),
+			"time" => array(
+				"description" => "time",
+				"version" => "html5"
+			),
+			"datetime-local	" => array(
+				"description" => "datetime",
+				"version" => "html5"
+			),
+			"number" => array(
+				"description" => "number",
+				"version" => "html5"
+			),
+			"range" => array(
+				"description" => "range",
+				"version" => "html5"
+			),
+			"color" => array(
+				"description" => "color",
+				"version" => "html5"
+			),
+		);
+		$arr_text_input_types = apply_filters("simple_fields_get_html_text_types", $arr_text_input_types);
+		return $arr_text_input_types;
+	}
+
+
 } // end class
 
 

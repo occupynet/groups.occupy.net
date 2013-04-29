@@ -22,7 +22,7 @@
 */
 define ('VERSION', '2.8.11');																		// Version of this script 
 //Load a config file if it exists. Otherwise, use the values below
-if( file_exists(dirname(__FILE__) . '/timthumb-config.php'))	require_once('timthumb-config.php');
+if( file_exists(dirname(__FILE__) . '/timthumb-config.php'))	require_once(dirname(__FILE__) . '/timthumb-config.php');
 if(! defined('DEBUG_ON') )					define ('DEBUG_ON', false);								// Enable debug logging to web server error log (STDERR)
 if(! defined('DEBUG_LEVEL') )				define ('DEBUG_LEVEL', 1);								// Debug level 1 is less noisy and 3 is the most noisy
 if(! defined('MEMORY_LIMIT') )				define ('MEMORY_LIMIT', '30M');							// Set PHP memory limit
@@ -33,6 +33,7 @@ if(! defined('ALLOW_EXTERNAL') )			define ('ALLOW_EXTERNAL', TRUE);						// Allo
 if(! defined('ALLOW_ALL_EXTERNAL_SITES') ) 	define ('ALLOW_ALL_EXTERNAL_SITES', false);				// Less secure. 
 if(! defined('FILE_CACHE_ENABLED') ) 		define ('FILE_CACHE_ENABLED', TRUE);					// Should we store resized/modified images on disk to speed things up?
 if(! defined('FILE_CACHE_TIME_BETWEEN_CLEANS'))	define ('FILE_CACHE_TIME_BETWEEN_CLEANS', 86400);	// How often the cache is cleaned 
+if(! defined('FETCH_LOCAL_URL')) 			define('FETCH_LOCAL_URL',false); 						// Force to fetch URL even if stored in the same host. Remember to include $_SERVER['HTTP_HOST'] in ALLOWED_SITES if you're overriding it and using this constant.
 
 if(! defined('FILE_CACHE_MAX_FILE_AGE') ) 	define ('FILE_CACHE_MAX_FILE_AGE', 86400);				// How old does a file have to be to be deleted from the cache
 if(! defined('FILE_CACHE_SUFFIX') ) 		define ('FILE_CACHE_SUFFIX', '.timthumb.txt');			// What to put at the end of all files in the cache directory so we can identify them
@@ -133,6 +134,7 @@ if(! isset($ALLOWED_SITES)){
 		'imgur.com',
 		'imageshack.us',
 		'tinypic.com',
+		$_SERVER['HTTP_HOST']
 	);
 }
 // -------------------------------------------------------------
@@ -209,7 +211,9 @@ class timthumb {
 		$this->myHost = preg_replace('/^www\./i', '', $_SERVER['HTTP_HOST']);
 		$this->src = $this->param('src');
 		$this->url = parse_url($this->src);
-		$this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);
+		if( FETCH_LOCAL_URL ) {
+			$this->src = preg_replace('/https?:\/\/(?:www\.)?' . $this->myHost . '/i', '', $this->src);
+		}
 		
 		if(strlen($this->src) <= 3){
 			$this->error("No image specified");

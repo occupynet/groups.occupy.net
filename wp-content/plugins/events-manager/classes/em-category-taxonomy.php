@@ -13,13 +13,19 @@ class EM_Category_Taxonomy{
 	 * @return string
 	 */
 	function template($template){
-		global $wp_query, $EM_Category, $em_category_id;
+		global $wp_query, $EM_Category, $em_category_id, $post;
 		if( is_tax(EM_TAXONOMY_CATEGORY) && get_option('dbem_cp_categories_formats', true) ){
 			$EM_Category = em_get_category($wp_query->queried_object->term_id);
 			if( get_option('dbem_categories_page') ){
 			    //less chance for things to go wrong with themes etc. so just reset the WP_Query to think it's a page rather than taxonomy
 				$wp_query = new WP_Query(array('page_id'=> get_option('dbem_categories_page')));
-				$wp_query->posts[0]->post_title = $wp_query->queried_object->post_title = $EM_Category->output(get_option('dbem_category_page_title_format'));
+				$wp_query->post->post_title = $wp_query->posts[0]->post_title = $wp_query->queried_object->post_title = $EM_Category->output(get_option('dbem_category_page_title_format'));
+				if( !function_exists('yoast_breadcrumb') ){ //not needed by WP SEO Breadcrumbs
+					$wp_query->post->post_parent = $wp_query->posts[0]->post_parent = $wp_query->queried_object->post_parent = $EM_Category->output(get_option('dbem_categories_page'));
+				}
+				$wp_query->queried_object = $wp_query->post;
+				$wp_query->queried_object_id = $wp_query->post->ID;
+				$post = $wp_query->post;
 			}else{
 			    //we don't have a categories page, so we create a fake page
 			    $wp_query->posts = array();
@@ -40,7 +46,9 @@ class EM_Category_Taxonomy{
 			    $wp_query->is_singular = 1;
 			    $wp_query->is_archive = 0;
 			}
+			remove_filter('the_content', 'em_content'); //one less filter
 			add_filter('the_content', array('EM_Category_Taxonomy','the_content')); //come in slightly early and consider other plugins
+			add_filter('wpseo_breadcrumb_links',array('EM_Category_Taxonomy','wpseo_breadcrumb_links')); //for Yoast WP SEO
 			$wp_query->em_category_id = $em_category_id = $EM_Category->term_id; //we assign $em_category_id just in case other themes/plugins do something out of the ordinary to WP_Query
 			$template = locate_template(array('page.php','index.php'),false); //category becomes a page
 		}
@@ -59,7 +67,7 @@ class EM_Category_Taxonomy{
 	}
 	
 	function parse_query( ){
-	    global $wp_query;
+	    global $wp_query, $post;
 		if( is_tax(EM_TAXONOMY_CATEGORY) ){
 			//Scope is future
 			$today = strtotime(date('Y-m-d', current_time('timestamp')));
@@ -75,7 +83,19 @@ class EM_Category_Taxonomy{
 			  	$wp_query->query_vars['meta_key'] = get_option('dbem_categories_default_archive_orderby','_start_ts');
 		  	}
 			$wp_query->query_vars['order'] = get_option('dbem_categories_default_archive_order','ASC');
+		}elseif( !empty($wp_query->em_category_id) ){
+		    $post = $wp_query->post;
 		}
+	}
+	
+	function wpseo_breadcrumb_links( $links ){
+	    global $wp_query;
+	    array_pop($links);
+	    if( get_option('dbem_categories_page') ){
+		    $links[] = array('id'=> get_option('dbem_categories_page'));
+	    }
+	    $links[] = array('text'=> $wp_query->posts[0]->post_title);
+	    return $links;
 	}
 }
 EM_Category_Taxonomy::init();
@@ -124,9 +144,9 @@ class EM_Walker_CategoryMultiselect extends Walker {
 			$output .= ' selected="selected"';
 		$output .= '>';
 		$output .= $pad.$cat_name;
-		if ( $args['show_count'] )
+		if ( !empty($args['show_count']) )
 			$output .= '&nbsp;&nbsp;('. $category->count .')';
-		if ( $args['show_last_update'] ) {
+		if ( !empty($args['show_last_update']) ) {
 			$format = 'Y-m-d';
 			$output .= '&nbsp;&nbsp;' . gmdate($format, $category->last_update_timestamp);
 		}

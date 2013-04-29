@@ -16,6 +16,10 @@ This is by far the easiest, fastest, and most user-friendly way you will ever cr
 
 The NS Cloner will take any existing site on your WordPress multisite network and clone it into a new site that is completely identical in theme & theme settings, plugins & plugin configurations, content, pictures, videos, and site settings. **Everything** is preserved and intelligent replacements are made so that the new site settings reflect your choices for the name and title of the new site as well as other automated background housekeeping to make sure the new site works exactly the same way as if you had taken the time to set it all up manually.
 
+If you want even more functionality, check out our Pro version!
+http://neversettle.it/ns-cloner-pro/
+SPRING SALE - SAVE 25% at checkout until May 7th by using the coupon code: springfling
+
 = Standard Precautions and Notes =
 * This plugin ONLY works on WordPress Multisite and is not for use on single site installations. 
 * It now supports both subdomain and subdirectory mode! It will auto-detect and auto-render appropriate UI.
@@ -66,26 +70,29 @@ Check with your host. They probably have an agreesive mod_security configuration
 
 = When will the Pro version be available? =
 
-Wait no longer! It's here: http://neversettle.it/shop/ns-cloner-pro/
+Wait no longer! It's here: http://neversettle.it/ns-cloner-pro/
 
-= Why can't I clone the root site (ID:1)? =
+= Why can't I clone the root site (ID:1) - why doesn't the main site show up in the drop-down? =
 
-The tables for the root site are prefixed differently than all the other tables in sub sites and this structure doesn't lend itself to the same automation that is possible with ID > 1. We are looking into away to support this as well.
-
-= Why aren't my images or files being copied to the new cloned site? =
-
-The Cloner looks for your media files and uploads in the standard, default directories depending on WP version number. If you have set a custom upload location and/or if another plugin or theme has altered that upload location dynamically, it might not be able to automatically copy the files and/or update the URLs. Please check to make sure that your uploads are in the standard locations:
-* ../wp-content/blogs.dir/ID for < 3.5
-* ../wp-content/uploads/sites/ID for >= 3.5
+Unfortunately the Multisite database structure does not lend itself to automating cloning on the main site. All subsites create new tables that are numbered with the site ID. However, the main site's tables are not numbered and are mixed in with other global network tables. It gets even more complicated when other plugins install there own tables. There's no simple way to know what tables in the database should be cloned or not for the main site whereas it is very straight forward for subsites because they are numbered with the site ID.
 
 == Screenshots ==
 
 1. The NS Cloner in all its simple, user-friendly glory
 
 == Changelog ==
+= 2.1.4.4 =
+* Enhanced media file copy handling from 2.1.4.3
+
+= 2.1.4.3 =
+* Added better media file copy handling in cases where themes or plugins alter wp_upload_dir() and it is returning bad paths
+
+= 2.1.4.2 =
+* Fixed bug reported by Christian (Thank you!) where some upload file paths containing the same numbers as site IDs were getting mangled
+
 = 2.1.4.1 =
-* Fixed 2.1.4 to make file copies compatible with the new uploads structure in native WP 3.5 installs.
-* ANNOUNCING NS Cloner Pro is now Available
+* Fixed 2.1.4 to make file copies compatible with the new uploads structure in native WP 3.5 installs
+* ANNOUNCING NS Cloner Pro is now Available at http://neversettle.it/ns-cloner-pro/
 
 = 2.1.4 =
 * Fixed bug in 2.1.3 that caused file copies to fail in some cases where the target folders already existed

@@ -100,7 +100,7 @@ function em_docs_init($force_init = false){
 						'desc' => 'Events Manager allows extremely flexible date formatting by using <a href="http://www.php.net/manual/en/function.date.php">PHP date syntax format characters</a> along with placeholders.',
 						'placeholders' => array(
 							'# or #@' => array( 'desc' => 'Prepend <code>#</code> or <code>#@</code> before a valid PHP date syntax format character to show start and end date/time information respectively (e.g. <code>#F</code> will show the starting month name like "January", #@h shows the end hour).' ),
-							'#{x} or #@{x}' => array( 'desc' => 'You can also create a date format without prepending # to each character by wrapping a valid php date() format in <code>#{}</code> or <code>#@{}</code> (e.g. <code>#_{d/m/Y}</code>). If there is no end date (or is same as start date), the value is not shown. This is useful if you want to show event end dates only on events that are longer than on day, e.g. <code>#j #M #Y #@_{ \u\n\t\i\l j M Y}</code>.' ),
+							'#{x} or #@{x}' => array( 'desc' => 'You can also create a date format without prepending # to each character by wrapping a valid php date() format in <code>#{}</code> or <code>#@{}</code> (e.g. <code>#_{d/m/Y}</code>). If there is no end date (or is same as start date), the value is not shown. This is useful if you want to show event end dates only on events that are longer than one day, e.g. <code>#j #M #Y #@_{ \u\n\t\i\l j M Y}</code>.' ),
 						)
 					),
 					'Links/URLs' => array(
@@ -113,7 +113,7 @@ function em_docs_init($force_init = false){
 						)
 					),
 					'Custom Attributes' => array(
-						'desc' => 'Events Manager allows you to create dynamic attributes to your events, which act as extra information fields for your events (e.g. "Dress Code"). For more information see <a href="http://wp-events-plugin.com/documentation/categories-and-attributes/">our online documentation</a> for more info on attributes.',
+						'desc' => 'Events Manager allows you to create dynamic attributes to your events, which act as extra information fields for your events (e.g. "Dress Code"). For more information see <a href="http://wp-events-plugin.com/documentation/event-attributes/">our online documentation</a> for more info on attributes.',
 						'placeholders' => array( 
 							'#_ATT{key}' => array('desc'=> 'This key will appear as an option when adding attributes to your event.'),
 							'#_ATT{key}{alternative text}' => array('desc'=> 'This key will appear as an option when adding attributes to your event. The text in the second braces will appear if the attribute is not defined or left blank for that event.'),
@@ -146,6 +146,7 @@ function em_docs_init($force_init = false){
 							'#_CONTACTNAME' => array( 'desc' => 'Name of the contact person for this event (as shown in the dropdown when adding an event).' ),
 							'#_CONTACTUSERNAME' => array( 'desc' => 'Contact person\'s username.' ),
 							'#_CONTACTEMAIL' => array( 'desc' => 'E-mail of the contact person for this event.' ),
+							'#_CONTACTURL' => array( 'desc' => 'Website of the contact person for this event.' ),
 							'#_CONTACTPHONE' => array( 'desc' => 'Phone number of the contact person for this event. Can be set in the user profile page.' ),
 							'#_CONTACTAVATAR' => array( 'desc' => 'Contact person\'s avatar.' ),
 							'#_CONTACTPROFILELINK' => array( 'desc' => 'Contact person\'s "Profile" link. Only works with BuddyPress enabled.' ),
@@ -173,7 +174,7 @@ function em_docs_init($force_init = false){
 							'#_CATEGORYIMAGE' => array( 'desc' => 'Shows the category image, if available.' ),
 							'#_CATEGORYIMAGE{x,y}' => array( 'desc' => 'Shows the category image thumbnail if available, x and y are width and height respectively, both being numbers e.g. <code>#_CATEGORYIMAGE{100,100}</code>' ),
 							'#_CATEGORYIMAGEURL' => array( 'desc' => 'Shows the category image url, if available.' ),
-							'#_CATEGORYNOTES' => array( 'desc' => 'Shows the location description.' )
+							'#_CATEGORYNOTES' => array( 'desc' => 'Shows the category description.' )
 						)
 					),			
 					'Related Events' => array(
@@ -211,7 +212,7 @@ function em_docs_init($force_init = false){
 						)
 					),
 					'Custom Attributes' => array(
-						'desc' => 'Events Manager allows you to create dynamic attributes to your locations, which act as extra information fields for your locations (e.g. "Dress Code"). For more information see <a href="http://wp-events-plugin.com/documentation/categories-and-attributes/">our online documentation</a> for more info on attributes.',
+						'desc' => 'Events Manager allows you to create dynamic attributes to your locations, which act as extra information fields for your locations (e.g. "Dress Code"). For more information see <a href="http://wp-events-plugin.com/documentation/event-attributes/">our online documentation</a> for more info on attributes.',
 						'placeholders' => array( 
 							'#_LATT{key}' => array('desc'=> 'This key will appear as an option when adding attributes to your location.'),
 							'#_LATT{key}{alternative text}' => array('desc'=> 'This key will appear as an option when adding attributes to your location. The text in the second braces will appear if the attribute is not defined or left blank for that location.'),

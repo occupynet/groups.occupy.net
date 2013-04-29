@@ -259,35 +259,50 @@ function em_events_admin($args = array()){
 			}
 			em_event_form();
 		}else{
+			//template $args for different views
+		    $args_views['pending'] = array('status'=>0, 'owner' =>get_current_user_id(), 'scope' => 'all');
+		    $args_views['draft'] = array('status'=>null, 'owner' =>get_current_user_id(), 'scope' => 'all');
+		    $args_views['past'] = array('status'=>'all', 'owner' =>get_current_user_id(), 'scope' => 'past');
+		    $args_views['future'] = array('status'=>'1', 'owner' =>get_current_user_id(), 'scope' => 'future');
+		    //get listing options for $args
 			$limit = ( !empty($_REQUEST['limit']) ) ? $_REQUEST['limit'] : 20;//Default limit
 			$page = ( !empty($_REQUEST['pno']) ) ? $_REQUEST['pno']:1;
 			$offset = ( $page > 1 ) ? ($page-1)*$limit : 0;
 			$order = ( !empty($_REQUEST ['order']) ) ? $_REQUEST ['order']:'ASC';
-			$scope_names = em_get_scopes();
-			$scope = ( !empty($_REQUEST ['scope']) && array_key_exists($_REQUEST ['scope'], $scope_names) ) ? $_REQUEST ['scope']:'future';
-			if( array_key_exists('status', $_REQUEST) ){
-				$status = ($_REQUEST['status']) ? 1:0;
-			}else{
-				$status = false;
-			}
 			$search = ( !empty($_REQUEST['em_search']) ) ? $_REQUEST['em_search']:'';
-			$args = array( 'scope' => $scope, 'order' => $order, 'search' => $search, 'owner' => get_current_user_id(),'status' => $status);
+			//deal with view or scope/status combinations
+			$args = array('order' => $order, 'search' => $search, 'owner' => get_current_user_id());
+			if( !empty($_REQUEST['view']) && in_array($_REQUEST['view'], array('future','draft','past','pending')) ){
+	    	    $args['status'] = $args_views[$_REQUEST['view']]['status'];
+	    	    $args['scope'] = $args_views[$_REQUEST['view']]['scope'];
+			}else{
+				$scope_names = em_get_scopes();
+				$args['scope'] = ( !empty($_REQUEST ['scope']) && array_key_exists($_REQUEST ['scope'], $scope_names) ) ? $_REQUEST ['scope']:'future';
+				if( array_key_exists('status', $_REQUEST) ){
+					$status = ($_REQUEST['status']) ? 1:0;
+					if($_REQUEST['status'] == 'all') $status = 'all';
+					if($_REQUEST['status'] == 'draft') $status = null;
+				}else{
+					$status = false;
+				}
+				$args['status'] = $status;
+			}
 			$events_count = EM_Events::count( $args ); //count events without limits for pagination
 			$args['limit'] = $limit;
 			$args['offset'] = $offset;
-			$EM_Events = EM_Events::get( $args );
-			if($scope != 'future'){
-				$future_count = EM_Events::count( array('status'=>1, 'owner' =>get_current_user_id(), 'scope' => 'future'));
-			}else{
-				$future_count = $events_count;
-			}
-			$pending_count = EM_Events::count( array('status'=>0, 'owner' =>get_current_user_id(), 'scope' => 'all') );
+			$EM_Events = EM_Events::get( $args ); //now get the limited events to display
+			$future_count = EM_Events::count( $args_views['future'] );
+			$pending_count = EM_Events::count( $args_views['pending'] );
+			$draft_count = EM_Events::count( $args_views['draft'] );
+			$past_count = EM_Events::count( $args_views['past'] );
 			em_locate_template('tables/events.php',true, array(
 				'args'=>$args, 
 				'EM_Events'=>$EM_Events, 
 				'events_count'=>$events_count, 
 				'future_count'=>$future_count,
 				'pending_count'=>$pending_count,
+				'draft_count'=>$draft_count,
+				'past_count'=>$past_count,
 				'page' => $page,
 				'limit' => $limit,
 				'offset' => $offset,
@@ -370,12 +385,9 @@ function em_locations_admin($args = array()){
 				$status = false;
 			}
 			$blog = false;
-			if( EM_MS_GLOBAL ){
-			    if( get_site_option('dbem_ms_mainblog_locations') ){
-			    	$blog = get_current_site()->blog_id;
-			    }elseif( !is_main_site() ){
-			    	$blog = get_current_blog_id();
-			    }
+			if( EM_MS_GLOBAL && !get_site_option('dbem_ms_mainblog_locations') && !is_main_site() ){
+			    //set current blog id if not on main site and using global mode whilst not forcing all locations to be on main blog
+			    $blog = get_current_blog_id();
 			}
 			$args = array('limit'=>$limit, 'offset'=>$offset, 'status'=>$status, 'blog'=>$blog);
 			//count locations

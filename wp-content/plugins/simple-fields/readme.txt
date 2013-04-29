@@ -2,11 +2,11 @@
 Contributors: eskapism, MarsApril, samface, angrycreative, Earth People
 Donate link: http://simple-fields.com/about/donate/
 Tags: admin, fields, custom fields, advanced custom fields, extended custom fields, more fields, repeatable fields, field manager, attachments, text areas, input fields, tinymce, radio button, drop down, files, meta box, edit, post, post_meta, post meta, custom, simple fields, cms, date picker, time picker, repeatable fields, multiple fields
-Requires at least: 3.3.1
-Tested up to: 3.5
-Stable tag: 1.1.6
+Requires at least: 3.5.1
+Tested up to: 3.5.1
+Stable tag: 1.2.4
 
-With Simple Fields you can add any kind of custom fields to your pages and posts.
+With Simple Fields you can add any kind of custom fields to your pages, posts and attachments.
 
 == Description ==
 The built in custom fields in WordPress are great, but they do come with a big limitation: they only support plain text. To overcome this limitation I created the Simple Fields WordPress plugin.
@@ -19,47 +19,56 @@ Use "repeatable" field groups to add many any amount of field groups to a single
 
 Simple Fields can be used on any post type, including custom post types.
 
+The saved values are easy get in your theme or functions.php-file. Like this:
+
+`
+<?php
+// Get the saved value for a field called "video"
+$video_url = simple_fields_value('video');
+?>
+`
+
 = Field Types =
 
 Simple Fields comes bundled with a useful variation of fields. Note that any field can be added any number of times to a post using repeatable fields.
 
 The fields that are included in Simple Fields are:
 
-Text
-: A simple text input to enter any kind of information.
+* **Text**<br>
+A simple text input to enter any kind of information.
 
-Textarea
-: A bigger area for inputing text. Even support WYSIWYG/TinyMCE-mode that makes it work like the regular content editor, so you can insert images, headlines, list, paragraphs and so on.
+* **Textarea**<br>
+A bigger area for inputing text. Even support WYSIWYG/TinyMCE-mode that makes it work like the regular content editor, so you can insert images, headlines, list, paragraphs and so on.
 
-Checkbox
-: A simple checkbox to be able to select something on/off.
+* **Checkbox**<br>
+A simple checkbox to be able to select something on/off.
 
- Radio Buttons
-: Add multiple radiobuttons where a user can select one of the buttons. Useful for letting a user choose between multiple options.
+* **Radio Buttons**<br>
+Add multiple radiobuttons where a user can select one of the buttons. Useful for letting a user choose between multiple options.
  
-Dropdown
-: Add multiple values to a dropdown box. User can select one or several items in the list. Useful for letting your users select one or severall things.
+* **Dropdown**<br>
+Add multiple values to a dropdown box. User can select one or several items in the list. Useful for letting your users select one or severall things.
 
-File
-: Select any file using the built in file/media browser in WordPress. Since it's using the built in media browser you can also upload new images/attachments to your posts. Using this field together with repeatable field groups = very powerful! :)
+* **File**<br>
+Select any file using the built in file/media browser in WordPress. Since it's using the built in media * browser you can also upload new images/attachments to your posts. Using this field together with repeatable field groups = very powerful! :)
 
-Post
-: Select any post that exists in WordPress. Can be pages or any custom post type.
+* **Post**<br>
+Select any post that exists in WordPress. Can be pages or any custom post type.
 
-Taxonomy
-: Select a taxonomy from a list of taxonomies.
+* **Taxonomy**<br>
+Select a taxonomy from a list of taxonomies.
 
-Taxonomy Term
-: Select a term from a taxonomy.
+* **Taxonomy Term**<br>
+Select a term from a taxonomy.
 
-Color
-: Show a color picker where the user can choose any color. The color can also be entered manually, if the user knows the hex value of the color.
+* **Color**<br>
+Show a color picker where the user can choose any color. The color can also be entered manually, if the user knows the hex value of the color.
 
- Date and Time
-: Chose a date and optionally time from a JQuery UI date and time picker.
+* **Date and Time**<br>
+Chose a date and optionally time from a JQuery UI date and time picker.
  
- User
-: Choose a user from the system.
+* **User**<br>
+Choose a user from the system.
  
 See the [field documentation](http://simple-fields.com/documentation/field-types/) for more details about the different fields.
  
@@ -80,8 +89,10 @@ Also, the fields in a a repeatable field group are easily sorted using drag and 
 = Simple PHP functions to speed up your development =
 
 `
-simple_fields_value();
-simple_fields_values();
+<?php
+simple_fields_value("field_slug");
+simple_fields_values("field_slug_1, field_slug_2, field_slug_n");
+?>
 `
 
 = Works with all post types =
@@ -116,101 +127,6 @@ As always, make a backup of your database first!
 1. That's it; you know have a super cool and powerful CMS based on WordPress!
 
 
-== Example usage: Define your simple fields in your theme ==
-
-Simple fields now supports registering field groups and fields with php code. For example, try this in your functions.php:
-
---- 8< ---
-
-simple_fields_register_field_group('test',
-                array (
-                    'name' => 'Test field group',
-                    'description' => "Test field description",
-                    'repeatable' => 1,
-                    'fields' => array(
-                                    array('name' => 'Test text',
-                                          'description' => 'Text description',
-                                          'type' => 'text'
-                                    ),
-                                    array('name' => 'Test textarea',
-                                          'description' => 'Textarea description',
-                                          'type' => 'textarea',
-                                          'type_textarea_options' => array('use_html_editor' => 1)
-                                    ),
-                                    array('name' => 'Test checkbox',
-                                          'description' => 'Checkbox description',
-                                          'type' => 'checkbox',
-                                          'type_checkbox_options' => array('checked_by_default' => 1)
-                                    ),
-                                    array('name' => 'Test radiobutton',
-                                          'description' => 'Radiobutton description',
-                                          'type' => 'radiobutton',
-                                          'type_radiobutton_options' => array(array("value" => "Yes"),
-                                                                              array("value" => "No")
-                                                                        )
-                                    ),
-                                    array('name' => 'Test dropdown',
-                                          'description' => 'Dropdown description',
-                                          'type' => 'dropdown',
-                                          'type_dropdown_options' => array(array("value" => "Yes"),
-                                                                           array("value" => "No")
-                                                                     )
-                                    ),
-                                    array('name' => 'Test file',
-                                          'description' => 'File description',
-                                          'type' => 'file'
-                                    ),
-                                    array('name' => 'Test post',
-                                          'description' => 'Post description',
-                                          'type' => 'post',
-                                          'type_post_options' => array("enabled_post_types" => array("post"))
-                                    ),
-                                    array('name' => 'Test taxonomy',
-                                          'description' => 'Taxonomy description',
-                                          'type' => 'taxonomy',
-                                          'type_taxonomy_options' => array("enabled_taxonomies" => array("category"))
-                                    ),
-                                    array('name' => 'Test taxonomy term',
-                                          'description' => 'Taxonomy term description',
-                                          'type' => 'taxonomyterm',
-                                          'type_taxonomyterm_options' => array("enabled_taxonomy" => "category")
-                                    ),
-                                    array('name' => 'Test color selector',
-                                          'description' => 'Color selector description',
-                                          'type' => 'color'
-                                    ),
-                                    array('name' => 'Test date selector',
-                                          'description' => 'Date selector description',
-                                          'type' => 'date',
-                                          'type_date_options' => array('use_time' => 1)
-                                    ),
-                                    array('name' => 'Test user selector',
-                                          'description' => 'User selector description',
-                                          'type' => 'user'
-                                    )
-                                )
-                )
-);
-
-simple_fields_register_post_connector('test_connector',
-                array (
-                    'name' => "A test connector",
-                    'field_groups' => array(
-                                            array('name' => 'Test fields',
-                                                  'key' => 'test',
-                                                  'context' => 'normal',
-                                                  'priority' => 'high')
-                                      ),
-                    'post_types' => array('post'),
-                    'hide_editor' => 0
-                )
-);
-
-simple_fields_register_post_type_default('test_connector', 'post');
-
---- >8 ---
-
-
 == Screenshots ==
 
 1. A post in edit, showing two field groups: "Article options" and "Article images".
@@ -221,8 +137,85 @@ See that "Add"-link above "Article images"? That means that it is repeatable, so
 
 3. Group field groups together and make them available for different post types.
 
+4. A field group with some HTML5 input types date, url, color, email and range added.
+
+5. The settings screen, as it looks on http://simple-fields.com. And yes, that's the real fields I use on the domain for this plugin :)
+
 
 == Changelog ==
+
+#### Version 1.2.4
+- Fixed: was unable to enable use html editor when using gui
+
+#### Version 1.2.3
+- Fixed: could not unset option use_html_editor for textarea field type. props Hayden.
+- Fixed: javascript in editor would break in some situations.
+
+#### Version 1.2.2
+- Fixed: file field did not work on custom post types that did not have an editor
+
+#### Version 1.2.1
+- Added: you can now add custom attributes to text and HTML5 fields. Like "required" or "pattern".
+- Fixed: a console.log was of course left in the code... :/ could make the file field not work.
+
+#### Version 1.2
+- (Lotsa things modified, so please make a backup of your database before upgrade. I haven't had any problems at all, but... please be safe out there!)
+- Added support for the new media manager that was introduced in WordPress 3.5 (yes, finally!)
+- Added support for HTML5 input types like color, date, range, email, url. Bevare, support depends on the browser. These are subtypes of the text field, since browsers do fall back to text field if they don't support the new fancy input type.
+- Added support for adding fields to attachments, attachments now works the way as regular posts: just any amount of fields to an attachment.
+- Fixed bug with repeatable fields containing tiny mce-editors (textarea with wysiwyg/html-capabilities). Fixes https://github.com/bonny/WordPress-Simple-Fields/issues/73.
+- Added a new view for repeatable field groups on the edit post screen: table. It's a much more compact view with a greater overview of the added field. Mostly suitable for field groups with between 1 and 10 fields.
+- Added support for placeholder text on text and textarea fields
+- Added debug panel to debug bar (if installed). Makes it possible to preview stored values when inside WordPress admin and editing posts. Will automatically be enabled when debug bar is installed and activated.
+- Changed debug box to stop using jQuery, so it should work with more themes and in more situations where jQuery may not be available
+- Fixed bug with post field type dialog
+- Fixed passing additional arguments for field type post
+- Fixed memory leak when using cache. When using functions that cleared the cache, for example simple_fields_set_value(), then memory usage could increase pretty much, and when the function is used in a loop then eventionally the script would eat up all memory. Nom nom nom. But in a bad way.
+- Changed the way some cache keys where stored, beacuse a key in an array that contains quotes is just silly looking (but valid, apparently)
+- Little better looking output of "Show custom field keys"
+- Fixed ordering of fields when using simple_fields_register_field_group
+- Fixed bug with post field and extended return values, 
+  where a field with no post/page selected would return the post of the current post in the loop. 
+  Now returns empty array instead. Thanks to [hjalle](https://twitter.com/hjalle) for finding.
+- simple_fields_register_post_connector now uses name from each field group, so no need to enter that manually any more (if entered manually, it will be removed)
+- Added filters and actions that you can use in your functions.php-file or in your plugin or field extension or whatever. Added filters are:
+  simple_fields_add_post_edit_side_field_settings<br>
+  simple_fields_get_selected_connector_for_post<br>
+  simple_fields_debug_output<br>
+  simple_fields_get_post_value<br>
+  simple_fields_get_post_group_values<br>
+  simple_fields_get_all_fields_and_values_for_post<br>
+  simple_fields_get_meta_query<br>
+  simple_fields_query_posts<br>
+  simple_fields_values<br>
+  simple_fields_value<br>
+  simple_fields_connector<br>
+  simple_fields_fieldgroup<br>
+  simple_fields_get_slug_pattern<br>
+  simple_fields_get_default_connector_for_post_type<br>
+  simple_fields_get_post_type_defaults<br>
+  simple_fields_get_field_groups<br>
+  simple_fields_get_field_group<br>
+  simple_fields_get_field_in_group<br>
+  simple_fields_get_pages_args<br>
+  simple_fields_get_pages_output<br>
+  simple_fields_get_post_connectors_for_post_type<br>
+  simple_fields_get_options<br>
+  simple_fields_save_options<br>
+  simple_fields_get_extended_return_values_for_field<br>
+  simple_fields_get_field_group_by_slug<br>
+  simple_fields_clear_caches<br>
+  simple_fields_get_meta_key_template<br>
+  simple_fields_get_meta_key<br>
+- Added method get_meta_key(). Use it to retrieve the key that simple fields uses for meta/custom fields storage.
+- Added "meta_key" as key to all fields when using get_field_by_slug() somewhere. 
+  Makes it easy to know/get the meta key if you need it. returns the meta key for the first field in that field group. 
+  If group is repeatable you must add number to numInSet yourself. Will contain a value like "_simple_fields_fieldGroupID_1_fieldID_2_numInSet_0"
+- Fixed so plugin works with jQuery 1.9, because now jQuery(htmlString) requires first char to be < for string to be considered HTML. Was not working due to spaces before first HMTL tag.
+- Added Slovak translation by Branco. Thanks a lot!
+- Added nonces to admin to prevent CSRF
+- Added table view to admin instead of ul-li-lists. Makes the admin looks nicer and more WordPress-ish.
+- Lotsa code cleanups and stuff and unit tests added and a bit of this and also a bit of that
 
 #### Version 1.1.6
 - Fixed bug that could lead to memoryleak. Thanks to plux/angry creative for patch.

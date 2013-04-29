@@ -180,7 +180,7 @@ class EM_Events extends EM_Object implements Iterator {
 			$events_count = count($events);
 		}else{
 			//Firstly, let's check for a limit/offset here, because if there is we need to remove it and manually do this
-			$args = apply_filters('em_events_output_args', self::get_default_search($args) );
+			$args = apply_filters('em_events_output_args', $args );
 			$limit = ( !empty($args['limit']) && is_numeric($args['limit']) ) ? $args['limit']:false;
 			$offset = ( !empty($args['offset']) && is_numeric($args['offset']) ) ? $args['offset']:0;
 			$page = ( !empty($args['page']) && is_numeric($args['page']) ) ? $args['page']:$page;
@@ -252,7 +252,7 @@ class EM_Events extends EM_Object implements Iterator {
 				if($post_value != ',' ){
 					$args[$post_key] = $post_value;
 				}elseif( $post_value == ',' && $post_key == 'scope' ){
-					$args['scope'] = get_option('dbem_events_page_scope');
+					unset($args['scope']);
 				}
 			}
 		}
@@ -272,12 +272,14 @@ class EM_Events extends EM_Object implements Iterator {
 	function build_sql_conditions( $args = array() ){
 		$conditions = parent::build_sql_conditions($args);
 		if( !empty($args['search']) ){
-			$like_search = array('event_name',EM_EVENTS_TABLE.'.post_content','location_name','location_address','location_town','location_postcode','location_state','location_country');
+			$like_search = array('event_name',EM_EVENTS_TABLE.'.post_content','location_name','location_address','location_town','location_postcode','location_state','location_country','location_region');
 			$conditions['search'] = "(".implode(" LIKE '%{$args['search']}%' OR ", $like_search). "  LIKE '%{$args['search']}%')";
 		}
 		if( array_key_exists('status',$args) && is_numeric($args['status']) ){
 			$null = ($args['status'] == 0) ? ' OR `event_status` = 0':'';
 			$conditions['status'] = "(`event_status`={$args['status']}{$null} )";
+		}elseif( array_key_exists('status',$args) && $args['status'] === null ){
+		    $conditions['status'] = "(`event_status` IS NULL )"; //by default, we don't ever show deleted items
 		}elseif( empty($args['status']) || $args['status'] != 'all'){
 			$conditions['status'] = "(`event_status` IS NOT NULL )"; //by default, we don't ever show deleted items
 		}
