@@ -13,12 +13,23 @@ $gray-dark: #333;
 $gray-medium: #ccc;
 $gray-light: #E6E6E6;
 $gray-superlight: #F2F2F2;
+$base-font-family: Open Sans, sans-serif;
+$base-font-size: 12px;
+$base-font-color: #222;
+$base-font-weight: normal;
 
 //Mixins
 @mixin rounded($vert, $horz, $radius: 10px) {
   border-#{$vert}-#{$horz}-radius: $radius;
   -moz-border-radius-#{$vert}#{$horz}: $radius;
   -webkit-border-#{$vert}-#{$horz}-radius: $radius;
+}
+
+@mixin base-font {
+	font-family: $base-font-family;
+	font-size: $base-font-size;
+	font-weight: $base-font-color;
+	color: $base-font-weight;
 }
 
 /************* Typography ********************/
@@ -164,8 +175,7 @@ footer nav {
 }
 
 h3.nlposts-ulist-title {
-	@extend body;
-	@extend a;
+	@include base-font;
 }
 
 h4.widgettitle label {

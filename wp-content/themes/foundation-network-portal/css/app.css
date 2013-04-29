@@ -21,11 +21,11 @@ h1 {
   margin-top: 5px; }
 
 /************* Elements ********************/
-a, h3.nlposts-ulist-title {
+a {
   color: #c91c22; }
-  a:hover, h3.nlposts-ulist-title:hover {
+  a:hover {
     color: #cccccc; }
-  a:active, h3.nlposts-ulist-title:active {
+  a:active {
     color: #333333; }
 
 .button {
@@ -39,7 +39,7 @@ a, h3.nlposts-ulist-title {
     border-color: #333333; }
 
 /************* Header ********************/
-.siteinfo a, .siteinfo h3.nlposts-ulist-title {
+.siteinfo a {
   color: black;
   font-weight: normal;
   font-size: 55px;
@@ -76,9 +76,9 @@ a, h3.nlposts-ulist-title {
 
 footer nav {
   background: #333333; }
-  footer nav a, footer nav h3.nlposts-ulist-title {
+  footer nav a {
     color: #fff; }
-    footer nav a:hover, footer nav h3.nlposts-ulist-title:hover {
+    footer nav a:hover {
       color: #f2f2f2; }
 
 /************* Images ********************/
@@ -103,19 +103,22 @@ footer nav {
   .sidebar ul.nlposts-wrapper li,
   .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title {
     border-bottom: #cccccc solid 1px; }
-    .sidebar ul li:first-child a, .sidebar ul li:first-child h3.nlposts-ulist-title,
+    .sidebar ul li:first-child a,
     .sidebar ul h3.nlposts-ulist-title:first-child a,
-    .sidebar ul h3.nlposts-ulist-title:first-child h3.nlposts-ulist-title,
     .sidebar ul.nlposts-wrapper li:first-child a,
-    .sidebar ul.nlposts-wrapper li:first-child h3.nlposts-ulist-title,
-    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a,
-    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child h3.nlposts-ulist-title {
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a {
       font-weight: bold; }
     .sidebar ul li:last-child,
     .sidebar ul h3.nlposts-ulist-title:last-child,
     .sidebar ul.nlposts-wrapper li:last-child,
     .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:last-child {
       border-bottom: none; }
+
+h3.nlposts-ulist-title {
+  font-family: Open Sans, sans-serif;
+  font-size: 12px;
+  font-weight: #222222;
+  color: normal; }
 
 h4.widgettitle label {
   font-size: 23px;
