@@ -21,11 +21,11 @@ h1 {
   margin-top: 5px; }
 
 /************* Elements ********************/
-a {
+a, h3.nlposts-ulist-title {
   color: #c91c22; }
-  a:hover {
+  a:hover, h3.nlposts-ulist-title:hover {
     color: #cccccc; }
-  a:active {
+  a:active, h3.nlposts-ulist-title:active {
     color: #333333; }
 
 .button {
@@ -39,7 +39,7 @@ a {
     border-color: #333333; }
 
 /************* Header ********************/
-.siteinfo a {
+.siteinfo a, .siteinfo h3.nlposts-ulist-title {
   color: black;
   font-weight: normal;
   font-size: 55px;
@@ -76,9 +76,9 @@ a {
 
 footer nav {
   background: #333333; }
-  footer nav a {
+  footer nav a, footer nav h3.nlposts-ulist-title {
     color: #fff; }
-    footer nav a:hover {
+    footer nav a:hover, footer nav h3.nlposts-ulist-title:hover {
       color: #f2f2f2; }
 
 /************* Images ********************/
@@ -103,10 +103,13 @@ footer nav {
   .sidebar ul.nlposts-wrapper li,
   .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title {
     border-bottom: #cccccc solid 1px; }
-    .sidebar ul li:first-child a,
+    .sidebar ul li:first-child a, .sidebar ul li:first-child h3.nlposts-ulist-title,
     .sidebar ul h3.nlposts-ulist-title:first-child a,
+    .sidebar ul h3.nlposts-ulist-title:first-child h3.nlposts-ulist-title,
     .sidebar ul.nlposts-wrapper li:first-child a,
-    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a {
+    .sidebar ul.nlposts-wrapper li:first-child h3.nlposts-ulist-title,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child h3.nlposts-ulist-title {
       font-weight: bold; }
     .sidebar ul li:last-child,
     .sidebar ul h3.nlposts-ulist-title:last-child,
