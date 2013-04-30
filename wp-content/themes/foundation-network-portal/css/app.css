@@ -23,8 +23,6 @@ h1 {
 /************* Elements ********************/
 a {
   color: #c91c22; }
-  a:link {
-    color: #c91c22; }
   a:hover {
     color: #333333; }
   a:active {
