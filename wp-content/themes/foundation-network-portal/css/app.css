@@ -132,8 +132,9 @@ h4.widgettitle label {
   color: black; }
 
 /************* Directory Page ********************/
-.page section.post_content div {
-  float: none; }
+.page section.post_content div,
+table.blogs_directory_nav_table {
+  float: none !important; }
 
 ul.organization-listing {
   list-style: none; }
