@@ -23,9 +23,13 @@ h1 {
 /************* Elements ********************/
 a, h3.nlposts-ulist-title {
   color: #c91c22; }
+  a:link, h3.nlposts-ulist-title:link {
+    color: #333333; }
   a:hover, h3.nlposts-ulist-title:hover {
-    color: #cccccc; }
+    color: #333333; }
   a:active, h3.nlposts-ulist-title:active {
+    color: #333333; }
+  a:visited, h3.nlposts-ulist-title:visited {
     color: #333333; }
 
 .button {
