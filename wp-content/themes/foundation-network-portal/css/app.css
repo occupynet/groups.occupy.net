@@ -52,7 +52,9 @@ a {
 /************* Navigation ********************/
 .top-nav {
   font-family: "Oswald", sans-serif;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  font-weight: normal;
+  color: #222; }
 
 .nav-bar > li.active {
   background: #c91c22 !important;

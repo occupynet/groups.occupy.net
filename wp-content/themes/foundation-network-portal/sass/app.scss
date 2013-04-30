@@ -101,8 +101,7 @@ a {
 /************* Navigation ********************/
 
 .top-nav {
-	font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
+	@include headings;
 }
 
 .nav-bar > li.active {
