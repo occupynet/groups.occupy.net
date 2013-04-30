@@ -8,7 +8,8 @@ h4,
 h5 {
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
-  font-weight: normal; }
+  font-weight: normal;
+  color: #222; }
 
 h1 {
   color: #c91c22; }
@@ -122,16 +123,16 @@ h3.nlposts-ulist-title {
   color: #222222;
   text-transform: none; }
 
+h2.nlposts-ulist-wtitle,
 h4.widgettitle label {
   font-size: 23px;
   line-height: 1.1;
   margin-bottom: 14px;
   margin-top: 14px;
-  text-rendering: optimizelegibility;
-  font-family: 'Oswald',sans-serif;
-  font-weight: normal;
+  font-family: "Oswald", sans-serif;
   text-transform: uppercase;
-  color: black; }
+  font-weight: normal;
+  color: #222; }
 
 /************* Directory Page ********************/
 section.post_content div h1 {

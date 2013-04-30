@@ -33,6 +33,13 @@ $base-font-weight: normal;
 	text-transform: none;
 }
 
+@mixin headings {
+	font-family: 'Oswald', sans-serif;
+	text-transform: uppercase;
+	font-weight: normal;
+	color: #222;
+}
+
 /************* Typography ********************/
 
 h1,
@@ -40,9 +47,7 @@ h2,
 h3,
 h4,
 h5 {
-	font-family: 'Oswald', sans-serif;
-	text-transform: uppercase;
-	font-weight: normal;
+	@include headings
 }
 
 h1 {
@@ -185,16 +190,13 @@ h3.nlposts-ulist-title {
 	text-transform: none;
 }
 
+h2.nlposts-ulist-wtitle,
 h4.widgettitle label {
 	font-size: 23px;
 	line-height: 1.1;
     margin-bottom: 14px;
     margin-top: 14px;
-    text-rendering: optimizelegibility;
-    font-family: 'Oswald',sans-serif;
-    font-weight: normal;
-    text-transform: uppercase;
-    color: $black;
+    @include headings;
 }
 
 /************* Directory Page ********************/
