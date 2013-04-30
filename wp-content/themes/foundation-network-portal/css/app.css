@@ -132,6 +132,9 @@ h4.widgettitle label {
   color: black; }
 
 /************* Directory Page ********************/
+section.post_content div h1 {
+  display: none; }
+
 .page section.post_content div,
 table.blogs_directory_nav_table {
   float: none !important; }
