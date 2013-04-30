@@ -61,7 +61,7 @@ h1 {
 
 a {
   color: $red;
-  &:link { color: $gray-dark; }
+  &:link { color: $red; }
   &:hover { color: $gray-dark; }
   &:active { color: $gray-dark; }
   &:visited { color: $red-dark; }
