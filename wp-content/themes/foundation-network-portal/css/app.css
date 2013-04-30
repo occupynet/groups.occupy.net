@@ -42,11 +42,7 @@ a {
 .siteinfo a {
   color: black;
   font-weight: normal;
-  font-size: 55px;
-  font-style: italic; }
-.siteinfo .exclamation {
-  color: #c91c22;
-  font-size: 65px; }
+  font-size: 55px; }
 .siteinfo .subhead {
   color: #666; }
 
