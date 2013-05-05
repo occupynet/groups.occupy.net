@@ -151,3 +151,7 @@ ul.organization-listing {
 .nlposts-block-container .nlposts-block-item,
 div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
   width: 100%; }
+
+.nlposts-block-container .nlposts-block-thumbnail-litem a > img {
+  float: left;
+  margin: 14px 15px auto auto; }
