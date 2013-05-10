@@ -36,9 +36,9 @@ Template Name: Homepage
 						?>
 						
 						<div class="featured-slider">
-							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-							<?php the_post_thumbnail(); ?> 
-							<?php the_excerpt('20'); ?>
+							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<div class="post-image"><?php the_post_thumbnail(); ?></div>
+							<div class="post-excerpt"><?php the_excerpt('20'); ?></div>
 							<!-- <p><a href="<?php the_permalink(); ?>" class="button nice radius">Read more »</a></p> -->
 						</div>
 						
@@ -53,9 +53,9 @@ Template Name: Homepage
 				   $(window).load(function() {
 				       $('#featured').orbit({ 
 				       	fluid: '16x7',
-						'bullets' : true,		
-						'bulletThumbs': true,
-						'bulletThumbLocation': 'orbit/'
+						bullets: true,		
+						bulletThumbs: true,
+						bulletThumbLocation: 'orbit/'
 				       });
 				   });
 				</script>
