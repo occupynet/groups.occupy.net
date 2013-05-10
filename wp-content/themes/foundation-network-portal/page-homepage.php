@@ -37,6 +37,7 @@ Template Name: Homepage
 						
 						<div class="featured-slider">
 							<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+							<?php the_post_thumbnail(); ?> 
 							<?php the_excerpt('20'); ?>
 							<!-- <p><a href="<?php the_permalink(); ?>" class="button nice radius">Read more »</a></p> -->
 						</div>
