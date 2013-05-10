@@ -51,7 +51,10 @@ Template Name: Homepage
 				<script type="text/javascript">
 				   $(window).load(function() {
 				       $('#featured').orbit({ 
-				       	fluid: '16x7'
+				       	fluid: '16x7',
+						'bullets' : true,		
+						'bulletThumbs': true,
+						'bulletThumbLocation': 'orbit/'
 				       });
 				   });
 				</script>
