@@ -35,7 +35,7 @@ Template Name: Homepage
 					$placeholder_image = of_get_option('placeholder_image');
 					echo EM_Events::output( array('format_header'=>'<ul class="bxslider">','format_footer'=>'</ul>','limit'=>5,'orderby'=>'date','format'=>'
 						<li class="slider-item">
-							<div class="event-image">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{350,250}{/has_image}</div>
+							<div class="event-image"><a href="#_EVENTURL">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{350,250}{/has_image}</a></div>
 							<h3 class="event-title"><span class="event-date">#M #j:</span> #_EVENTLINK</h3>
 						</li>
 						'
