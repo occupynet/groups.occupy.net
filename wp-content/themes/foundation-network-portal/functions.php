@@ -10,12 +10,24 @@ sidebars, comments, ect.
 
 /************* REGISTER STYLES ********************/
 
-if( !function_exists( 'custom_fonts_styles' ) ) {
-    function custom_fonts_styles() { 
+if( !function_exists( 'include_custom_styles' ) ) {
+    function include_custom_styles() { 
         wp_register_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald', array(), '', 'all' );
         wp_enqueue_style( 'oswald' );
+        /* wp_register_style( 'boxslider', get_stylesheet_directory() . 'css/jquery.bxslider.css', array(), '', 'all' ); */
+        wp_register_style( 'boxslider', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/css/jquery.bxslider.css', array(), '', 'all' );
+        wp_enqueue_style( 'boxslider' );    
     }
-    add_action('wp_enqueue_scripts', 'custom_fonts_styles', 25);
+    add_action('wp_enqueue_scripts', 'include_custom_styles', 25);
+}
+
+if( !function_exists( 'include_custom_scripts' ) ) {
+    function include_custom_scripts() { 
+        wp_register_script('boxsliderscript', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/js/jquery.bxslider/jquery.bxslider.js', true);  
+        /* wp_register_script('boxsliderscript', get_stylesheet_directory() . 'js/jquery.bxslider/jquery.bxslider.js', true); */
+        wp_enqueue_script('boxsliderscript');
+    }
+    add_action('wp_enqueue_scripts', 'include_custom_scripts', 25);
 }
 
 /************* ACTIVE SIDEBARS ********************/
@@ -312,5 +324,102 @@ function show_template() {
         print_r($template);
     }
 }
+
+/************* SHOW ALL SITES********************/
+
+if(!function_exists('get_all_sites')){
+  /**
+   * Retrieves all multisite blogs
+   *
+   * @return array Blog IDs as keys and blog names as values.
+   */
+  function get_all_sites() {
+
+    global $wpdb;
+    $multisite = array();
+    // Query all blogs from multi-site install
+    $blogs = $wpdb->get_results("SELECT blog_id,domain,path FROM wp_blogs ORDER BY path");
+
+    // Get primary blog
+    $blogname = $wpdb->get_row("SELECT option_value FROM wp_options WHERE option_name='blogname' ");
+    $multisite[1] = $blogname->option_value;
+
+    // For each blog search for blog name in respective options table
+    foreach( $blogs as $blog ) {
+      // Get rest of the sites
+      $blogname = $wpdb->get_results("SELECT option_value FROM wp_".$blog->blog_id ."_options WHERE option_name='blogname' ");
+      foreach( $blogname as $name ) {
+        $multisite[$blog->blog_id] = $name->option_value;
+      }
+    }
+    return $multisite;
+  }
+}
+
+
+ 
+ /************* SHOW ALL SITES********************/
+// Output a single menu item
+function bloglist_entry($id, $title, $link_self) {
+    global $blog_id;
+        if ($link_self || $id != $blog_id) {
+            echo '<li>';
+            if ($id == $blog_id) {
+            echo '<strong>';
+            }
+            $url = get_home_url($id);
+                if (substr($url, -1) != '/') {
+                // Note: I added a "/" to the end of the URL because WordPress
+                // wasn't doing that automatically in v3.0.4. YMMV.
+                $url .= '/';
+                }
+                echo '<a href="' . $url . '">' . $title . '</a>';
+                    if ($id == $blog_id) {
+                    echo '</strong>';
+            }
+        echo '</li>';
+    }
+}
+ 
+// Output the whole menu
+// If $link_self is false, skip the current site - used to display the menu on the homepage
+function bloglist($link_self = true) {
+    global $wpdb;
+     
+    echo '<ul class="blog-list">';
+     
+    bloglist_entry(1, 'Home', $link_self);
+     
+    $blogs = $wpdb->get_results("
+    SELECT blog_id
+        FROM {$wpdb->blogs}
+        WHERE site_id = '{$wpdb->siteid}'
+        AND spam = '0'
+        AND deleted = '0'
+        AND archived = '0'
+        AND blog_id != 1
+    ");
+     
+    $sites = array();
+    foreach ($blogs as $blog) {
+        $sites[$blog->blog_id] = get_blog_option($blog->blog_id, 'blogname');
+    }
+     
+    natsort($sites);
+    foreach ($sites as $blog_id => $blog_title) {
+        bloglist_entry($blog_id, $blog_title, $link_self);
+    }
+    echo '</ul>';
+}
+ 
+// Adds a [bloglist] shortcode, so I can embed the menu into the static homepage.
+// Note: I originally put it directly into the template, but that didn't work
+// with WPtouch.
+function bloglist_shortcode($atts)
+{
+    bloglist(false);
+}
+ 
+add_shortcode('bloglist', 'bloglist_shortcode');
 
 ?>

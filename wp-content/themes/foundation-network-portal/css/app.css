@@ -63,24 +63,30 @@ a {
     background: #990000 !important; }
 
 /************* Slider ********************/
-.featured-slider {
-  background: #f2f2f2; }
+ul.bxslider li.slider-item {
+  border: 1px solid #e6e6e6; }
+  ul.bxslider li.slider-item .event-image img {
+    margin-bottom: 0 !important;
+    /*width: 350px;
+    height: 250px;*/ }
+  ul.bxslider li.slider-item h3.event-title {
+    padding: 4px 5px;
+    margin: 0;
+    font-size: 24px;
+    background-color: #333333;
+    color: #f2f2f2; }
 
-#featured h3 {
-  margin-top: 1em; }
-#featured img {
-  width: 100%;
-  height: auto; }
-
-#featured.orbit div.featured-slider {
-  padding: 0; }
-
+/************* Footer ********************/
 footer nav {
-  background: #333333; }
+  background: #333333;
+  color: #fff; }
+  footer nav .link-list {
+    margin-top: 10px;
+    margin-bottom: 10px; }
   footer nav a {
     color: #fff; }
     footer nav a:hover {
-      color: #f2f2f2; }
+      color: #e6e6e6 !important; }
 
 /************* Images ********************/
 .post-thumbnail img {
@@ -94,6 +100,9 @@ footer nav {
   .post-thumbnail img .right {
     float: right;
     margin-left: 10px; }
+
+.home .post-thumbnail img {
+  width: 150px; }
 
 /************* Widgets ********************/
 .sidebar ul,

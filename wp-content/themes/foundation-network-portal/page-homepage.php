@@ -8,64 +8,7 @@ Template Name: Homepage
 
 	<div id="content">
 
-		<div id="main" class="eight columns clearfix" role="main">
-
-			<article role="article">
-
-				<?php
-
-				$orbit_slider = of_get_option('orbit_slider'); //Set in Theme Options
-				$number_featured_posts = of_get_option('posts_in_orbit_slider'); //Value set in Theme Options
-				if ($orbit_slider){
-
-				?>
-				
-				<header>
-				
-					<div id="featured">
-
-						<?php
-							global $post;
-							$tmp_post = $post;
-							$args = array( 'numberposts' => $number_featured_posts );
-							$myposts = get_posts( $args );
-							foreach( $myposts as $post ) :	setup_postdata($post);
-								$alt_text = get_post_meta($img_id , '_wp_attachment_image_alt', true);
-								$post_thumbnail_id = get_post_thumbnail_id();
-								$featured_src = wp_get_attachment_image_src( $post_thumbnail_id, 'wpf-home-feature' );
-						?>
-						
-						<div class="featured-slider">
-							<h3 class="post-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-							<div class="post-image"><?php the_post_thumbnail(); ?></div>
-							<div class="post-excerpt"><?php the_excerpt('20'); ?></div>
-							<!-- <p><a href="<?php the_permalink(); ?>" class="button nice radius">Read more »</a></p> -->
-						</div>
-						
-						<?php endforeach; ?>
-						<?php $post = $tmp_post; ?>
-
-					</div>
-					
-				</header>
-
-				<script type="text/javascript">
-				   $(window).load(function() {
-				       $('#featured').orbit({ 
-				       	fluid: '16x7',
-						bullets: true,		
-						bulletThumbs: true,
-						bulletThumbLocation: 'orbit/'
-				       });
-				   });
-				</script>
-
-			<?php } 
-
-			// Reset Query
-			wp_reset_query(); ?>
-
-			</article>
+		<div id="main" class="twelve columns clearfix" role="main">
 
 			<!-- Home page intro text -->
 
@@ -74,6 +17,28 @@ Template Name: Homepage
 				<div class="intro-text">
 					<?php echo get_post_meta($post->ID, 'custom_tagline', true); ?>
 				</div>
+
+				<script>
+				jQuery(document).ready(function(){
+				  $('.bxslider').bxSlider({
+					  minSlides: 3,
+					  maxSlides: 3,
+					  slideWidth: 360,
+					  slideMargin: 20
+					});
+				});
+				</script>
+
+				<h2>Upcoming Events</h2>
+				<?php if (class_exists('EM_Events')) {
+					echo EM_Events::output( array('format_header'=>'<ul class="bxslider">','format_footer'=>'</ul>','limit'=>5,'orderby'=>'date','format'=>'
+						<li class="slider-item">
+							<div class="event-image">#_EVENTIMAGE{350,250}</div>
+							<h3 class="event-title"><span class="event-date">#M #j:</span> #_EVENTLINK</h3>
+						</li>
+						'
+						) );
+					} ?> 
 
 			</article>
 
@@ -101,6 +66,7 @@ Template Name: Homepage
 			?>
 				
 			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
+
 				
 				<header>
 					
@@ -152,7 +118,7 @@ Template Name: Homepage
 
 		</div> <!-- end #main -->
 
-		<?php get_sidebar('sidebar2'); // sidebar 2 ?>
+		<?php// get_sidebar('sidebar2'); // sidebar 2 ?>
 
 	</div> <!-- end #content -->
 
