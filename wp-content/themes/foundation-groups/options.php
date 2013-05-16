@@ -64,6 +64,18 @@ function optionsframework_options() {
 	$options[] = array( "name" => "General Options",
 						"type" => "heading");
 
+	$options[] = array( "name" => "Site Icon",
+						"desc" => "Icon that will be shown in the Directory.",
+						"id" => "site_icon",
+						"std" => "",
+						"type" => "upload");
+
+	$options[] = array( "name" => "Site Description",
+						"desc" => "Alternate description that will appear in the Directory.",
+						"id" => "directory_description",
+						"std" => "",
+						"type" => "textarea");
+
 	$options[] = array( "name" => "Footer Text",
 						"desc" => "Text to be displayed in the footer.",
 						"id" => "footer_text",

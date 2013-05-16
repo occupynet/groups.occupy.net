@@ -14,8 +14,10 @@ if( !function_exists( 'include_custom_styles' ) ) {
     function include_custom_styles() { 
         wp_register_style( 'oswald', 'http://fonts.googleapis.com/css?family=Oswald', array(), '', 'all' );
         wp_enqueue_style( 'oswald' );
-        /* wp_register_style( 'boxslider', get_stylesheet_directory() . 'css/jquery.bxslider.css', array(), '', 'all' ); */
-        wp_register_style( 'boxslider', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/css/jquery.bxslider.css', array(), '', 'all' );
+        p_register_style( 'league-gothic', gget_template_directory() . 'fonts/league-gothic.css' , array(), '', 'all' );
+        wp_enqueue_style( 'league-gothic' );
+         wp_register_style( 'boxslider', get_stylesheet_directory() . 'css/jquery.bxslider.css', array(), '', 'all' ); 
+        // wp_register_style( 'boxslider', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/css/jquery.bxslider.css', array(), '', 'all' );
         wp_enqueue_style( 'boxslider' );    
     }
     add_action('wp_enqueue_scripts', 'include_custom_styles', 25);
@@ -23,8 +25,8 @@ if( !function_exists( 'include_custom_styles' ) ) {
 
 if( !function_exists( 'include_custom_scripts' ) ) {
     function include_custom_scripts() { 
-        wp_register_script('boxsliderscript', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/js/jquery.bxslider/jquery.bxslider.js', true);  
-        /* wp_register_script('boxsliderscript', get_stylesheet_directory() . 'js/jquery.bxslider/jquery.bxslider.js', true); */
+        // wp_register_script('boxsliderscript', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/js/jquery.bxslider/jquery.bxslider.js', true);  
+         wp_register_script('boxsliderscript', get_stylesheet_directory() . 'js/jquery.bxslider/jquery.bxslider.js', true); 
         wp_enqueue_script('boxsliderscript');
     }
     add_action('wp_enqueue_scripts', 'include_custom_scripts', 25);
