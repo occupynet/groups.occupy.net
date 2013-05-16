@@ -70,6 +70,12 @@ function optionsframework_options() {
 						"std" => "",
 						"type" => "textarea");
 
+	$options[] = array( "name" => "Placeholder Image",
+						"desc" => "Image that will be used as a placeholder when no Featured Image is provided (e.g. Upcoming Events slider).",
+						"id" => "placeholder_image",
+						"std" => "",
+						"type" => "upload");
+
 	$options[] = array( "name" => "Typography",
 						"type" => "heading");
 						
@@ -136,7 +142,7 @@ function optionsframework_options() {
 	$options[] = array( "name" => "Recent posts homepage slider",
 						"desc" => "Show Orbit slider of recent posts on homepage template?",
 						"id" => "orbit_slider",
-						"std" => "1",
+						"std" => "0",
 						"type" => "checkbox");
 
 	$options[] = array( "name" => "Number of ecent posts in slider",
