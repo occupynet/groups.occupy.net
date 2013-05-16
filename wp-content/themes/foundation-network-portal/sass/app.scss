@@ -127,6 +127,9 @@ ul.bxslider li.slider-item {
 		font-size: 24px;
 		background-color: $gray-dark;
 		color: $gray-superlight;
+		a:hover {
+			color: $gray-light !important;
+		}
 	}
 }
 

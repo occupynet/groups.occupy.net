@@ -75,6 +75,8 @@ ul.bxslider li.slider-item {
     font-size: 24px;
     background-color: #333333;
     color: #f2f2f2; }
+    ul.bxslider li.slider-item h3.event-title a:hover {
+      color: #e6e6e6 !important; }
 
 /************* Footer ********************/
 footer nav {
