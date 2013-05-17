@@ -3,16 +3,23 @@
 /************* Global ********************/
 
 //Variables
-$black: #000;
-$red: #c91c22;
-$red-dark: #900;
-$red-light: #600;
-$secondary-color: #4D4D4D;
-$third-color: #F2F2F2;
-$gray-dark: #333;
-$gray-medium: #ccc;
-$gray-light: #E6E6E6;
-$gray-superlight: #F2F2F2;
+$brand: #fbb03b;
+$complement: #4D4D4D;
+$action: #c91c22;
+$action-dark: #900;
+$action-light: #600;
+$bg: #F2F2F2;
+$gray1: #000;
+$gray2: #222;
+$gray3: #444;
+$gray4: #666;
+$gray5: #888;
+$gray6: #AAA;
+$gray7: #CCC;
+$gray8: #EEE;
+$gray9: #F2F2F2;
+$gray10: #FFF;
+
 
 //Mixins
 @mixin rounded($vert, $horz, $radius: 10px) {
@@ -31,10 +38,15 @@ h5 {
 	font-family: 'Oswald', sans-serif;
 	text-transform: uppercase;
 	font-weight: normal;
+	color: $gray2;
+}
+
+p, li, dt, dd {
+	color: $gray4;
 }
 
 h1 {
-	color: $red;
+	color: $action;
 }
 
 .intro-text,
@@ -48,22 +60,22 @@ h1 {
 /************* Elements ********************/
 
 a {
-  color: $red;
-  &:hover { color: $gray-dark; }
-  &:active { color: $gray-dark; }
-  &:visited { color: $red-dark; }
+  color: $action;
+  &:hover { color: $shade1; }
+  &:active { color: $shade1; }
+  &:visited { color: $action-dark; }
 }
 
 .button {
-	background: $red;
-	border-color: $red-dark;
+	background: $action;
+	border-color: $action-dark;
 	&:hover {
-		background: $gray-light;
-		border-color: $gray-dark;
+		background: $shade7;
+		border-color: $shade1;
 	}
 	&:active {
-		background: $gray-dark;
-		border-color: $gray-dark;
+		background: $shade1;
+		border-color: $shade1;
 	}
 }
 
@@ -71,7 +83,7 @@ a {
 
 .siteinfo {
 	a {
-	color: $black;
+	color: $shade0;
 	font-weight: normal;
 	font-size: 55px;
 	}
@@ -89,17 +101,17 @@ a {
 }
 
 .nav-bar > li.active {
-	background: $red !important;
-	border-color: $red-dark !important;
+	background: $action !important;
+	border-color: $action-dark !important;
 		&:hover {
-		background: $red-dark !important;
+		background: $action-dark !important;
 		}
 	}
 
 /************* Slider ********************/
 
 .featured-slider {
-    background: $gray-superlight;
+    background: $shade8;
 }
 
 #featured {
@@ -117,11 +129,11 @@ a {
 }
 
 footer nav {
-	background: $gray-dark;
+	background: $shade1;
 	a {
 		color: #fff;
 		&:hover {
-			color: $gray-superlight;
+			color: $shade8;
 		}
 	}
 }
@@ -129,8 +141,8 @@ footer nav {
 /************* Images ********************/
 
 .post-thumbnail img {
-	background: $gray-superlight;
-    border: 1px solid $gray-light;
+	background: $shade8;
+    border: 1px solid $shade7;
     padding: 10px;
 	float: left;
 	margin-right: 10px;
@@ -149,7 +161,7 @@ footer nav {
 	list-style: none;
 	li,
 	h3.nlposts-ulist-title {
-		border-bottom: $gray-medium solid 1px;
+		border-bottom: $gray7 solid 1px;
 		&:first-child a {
 			font-weight: bold;
 		}
@@ -173,7 +185,7 @@ h4.widgettitle label {
     font-family: 'Oswald',sans-serif;
     font-weight: normal;
     text-transform: uppercase;
-    color: $black;
+    color: $shade0;
 }
 
 /************* Directory Page ********************/
