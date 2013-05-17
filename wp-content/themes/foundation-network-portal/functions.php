@@ -431,5 +431,3 @@ function do_output_buffer() {
 }    
 
 ?>
-
-
