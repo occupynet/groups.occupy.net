@@ -1,14 +1,16 @@
 /* app.scss */
 
+@import "typeplate";
+
+
 /************* Global ********************/
 
 //Variables
+$base: #000;
 $brand: #fbb03b;
-$complement: #4D4D4D;
-$action: #c91c22;
-$action-dark: #900;
-$action-light: #600;
-$bg: #F2F2F2;
+$loud: #c91c22;
+$loud-dark: darken($loud, 10%);
+$loud-light: lighten($loud, 10%);
 $gray1: #000;
 $gray2: #222;
 $gray3: #444;
@@ -46,7 +48,7 @@ p, li, dt, dd {
 }
 
 h1 {
-	color: $action;
+	color: $loud;
 }
 
 .intro-text,
@@ -60,15 +62,15 @@ h1 {
 /************* Elements ********************/
 
 a {
-  color: $action;
+  color: $loud;
   &:hover { color: $shade1; }
   &:active { color: $shade1; }
-  &:visited { color: $action-dark; }
+  &:visited { color: $loud-dark; }
 }
 
 .button {
-	background: $action;
-	border-color: $action-dark;
+	background: $loud;
+	border-color: $loud-dark;
 	&:hover {
 		background: $shade7;
 		border-color: $shade1;
@@ -101,10 +103,10 @@ a {
 }
 
 .nav-bar > li.active {
-	background: $action !important;
-	border-color: $action-dark !important;
+	background: $loud !important;
+	border-color: $loud-dark !important;
 		&:hover {
-		background: $action-dark !important;
+		background: $loud-dark !important;
 		}
 	}
 
