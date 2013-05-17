@@ -398,7 +398,8 @@ function bloglist($link_self = true) {
         AND spam = '0'
         AND deleted = '0'
         AND archived = '0'
-        AND blog_id != 1
+        AND blog_id != 1,
+        AND blog_id != 5
     ");
      
     $sites = array();
