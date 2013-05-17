@@ -357,8 +357,6 @@ if(!function_exists('get_all_sites')){
     return $multisite;
   }
 }
-
-
  
  /************* SHOW ALL SITES********************/
 // Output a single menu item
@@ -387,7 +385,8 @@ function bloglist_entry($id, $title, $link_self) {
 // If $link_self is false, skip the current site - used to display the menu on the homepage
 function bloglist($link_self = true) {
     global $wpdb;
-     
+
+    echo '<h4 class="widgettitle">Active Groups</h4>';
     echo '<ul class="blog-list">';
      
     bloglist_entry(1, 'Home', $link_self);
@@ -424,23 +423,12 @@ function bloglist_shortcode($atts)
  
 add_shortcode('bloglist', 'bloglist_shortcode');
 
-// Network Post Display
 
-function network_post_meta() {
-
-    //begin blend
-    $postid = get_the_id();
-    $org_blog_id = get_post_meta( $postid, 'blogid', true);
-    if($org_blog_id) {
-        $blog_details = get_blog_details($org_blog_id);
-        echo '<div id="blogname-' . $postid . '">  from <a href="' . $blog_details->siteurl . '">' . $blog_details->blogname . '</a></div> ';
-    }
-    //end blend
-
-        $categories = get_the_category();
-        echo '<a class="teaser_category" href="' . get_category_link($categories[0]->cat_ID) . '">' . $categories[0]->cat_name . '</a>' . "\n";
-    }
-    add_action('post_meta_headline', 'network_post_meta');
+//allow redirection, even if my theme starts to send output to the browser
+add_action('init', 'do_output_buffer');
+function do_output_buffer() {
+        ob_start();
+}    
 
 ?>
 
