@@ -5,12 +5,12 @@ Syntax error: File to import not found or unreadable: typeplate.
                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/blueprint/stylesheets
                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets
                 Compass::SpriteImporter
-        on line 3 of /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss
+        on line 3 of /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app copy.scss
 
-1: /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss
+1: /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app copy.scss
 
 Backtrace:
-/Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss:3
+/Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app copy.scss:3
 /Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/import_node.rb:67:in `import'
 /Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/import_node.rb:28:in `imported_file'
 /Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/import_node.rb:37:in `css_import?'
@@ -58,4 +58,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: typeplate.\A               Load paths:\A                 /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass\A                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/blueprint/stylesheets\A                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets\A                 Compass::SpriteImporter\A         on line 3 of /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss\A \A 1: /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss"; }
+  content: "Syntax error: File to import not found or unreadable: typeplate.\A               Load paths:\A                 /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass\A                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/blueprint/stylesheets\A                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets\A                 Compass::SpriteImporter\A         on line 3 of /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app copy.scss\A \A 1: /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app copy.scss"; }
