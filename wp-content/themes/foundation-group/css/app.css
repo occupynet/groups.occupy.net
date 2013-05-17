@@ -1,61 +1,175 @@
-/*
-Syntax error: File to import not found or unreadable: typeplate.
-              Load paths:
-                /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass
-                /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/blueprint/stylesheets
-                /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets
-                Compass::SpriteImporter
-        on line 3 of /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss
+/* app.scss */
+/************* Global ********************/
+/************* Typography ********************/
+/* line 38, ../sass/app.scss */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-weight: normal;
+  color: #222222; }
 
-1: /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss
+/* line 45, ../sass/app.scss */
+p, li, dt, dd {
+  color: #666666; }
 
-Backtrace:
-/Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss:3
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/import_node.rb:67:in `import'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/import_node.rb:28:in `imported_file'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/import_node.rb:37:in `css_import?'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:217:in `visit_import'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:100:in `visit'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:53:in `map'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:53:in `visit_children'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:109:in `visit_children'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:121:in `with_environment'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:108:in `visit_children'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:128:in `visit_root'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:37:in `send'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/base.rb:37:in `visit'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:100:in `visit'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:7:in `send'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/visitors/perform.rb:7:in `visit'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/tree/root_node.rb:20:in `render'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/engine.rb:315:in `_render'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/engine.rb:262:in `render'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:140:in `compile'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:126:in `timed'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:139:in `compile'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/logger.rb:45:in `red'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:138:in `compile'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:118:in `compile_if_required'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:103:in `run'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:101:in `each'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:101:in `run'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:126:in `timed'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/compiler.rb:100:in `run'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/commands/update_project.rb:45:in `perform'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/commands/stamp_pattern.rb:76:in `perform'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/commands/base.rb:18:in `execute'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/commands/project_base.rb:19:in `execute'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/exec/sub_command_ui.rb:43:in `perform!'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../lib/compass/exec/sub_command_ui.rb:15:in `run!'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/compass:43
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/compass:57:in `call'
-/Applications/CodeKit.app/Contents/Resources/engines/compass/bin/compass:57
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: File to import not found or unreadable: typeplate.\A               Load paths:\A                 /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass\A                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/blueprint/stylesheets\A                 /Applications/CodeKit.app/Contents/Resources/engines/compass/frameworks/compass/stylesheets\A                 Compass::SpriteImporter\A         on line 3 of /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss\A \A 1: /Applications/MAMP/htdocs/groups/wp-content/themes/foundation-group/sass/app.scss"; }
+/* line 49, ../sass/app.scss */
+h1, h1 a, h1 h3.nlposts-ulist-title {
+  color: #c91c22; }
+
+/* line 54, ../sass/app.scss */
+.intro-text,
+.intro-text p {
+  font-size: 1.5em;
+  font-style: italic;
+  line-height: 1.4em;
+  margin-top: 5px; }
+
+/************* Elements ********************/
+/* line 63, ../sass/app.scss */
+a, h3.nlposts-ulist-title {
+  color: #c91c22; }
+  /* line 65, ../sass/app.scss */
+  a:hover, h3.nlposts-ulist-title:hover {
+    color: black; }
+  /* line 66, ../sass/app.scss */
+  a:active, h3.nlposts-ulist-title:active {
+    color: black; }
+  /* line 67, ../sass/app.scss */
+  a:visited, h3.nlposts-ulist-title:visited {
+    color: #9c161a; }
+
+/* line 70, ../sass/app.scss */
+.button {
+  background: #c91c22;
+  border-color: #9c161a; }
+  /* line 73, ../sass/app.scss */
+  .button:hover {
+    background: #cccccc;
+    border-color: black; }
+  /* line 77, ../sass/app.scss */
+  .button:active {
+    background: black;
+    border-color: black; }
+
+/************* Header ********************/
+/* line 86, ../sass/app.scss */
+.siteinfo a, .siteinfo h3.nlposts-ulist-title {
+  color: black;
+  font-weight: normal;
+  font-size: 55px; }
+/* line 91, ../sass/app.scss */
+.siteinfo .subhead {
+  color: #666; }
+
+/************* Navigation ********************/
+/* line 99, ../sass/app.scss */
+.top-nav {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase; }
+
+/* line 104, ../sass/app.scss */
+.nav-bar > li.active {
+  background: #c91c22 !important;
+  border-color: #9c161a !important; }
+  /* line 107, ../sass/app.scss */
+  .nav-bar > li.active:hover {
+    background: #9c161a !important; }
+
+/************* Slider ********************/
+/* line 114, ../sass/app.scss */
+.featured-slider {
+  background: #eeeeee; }
+
+/* line 119, ../sass/app.scss */
+#featured h3 {
+  margin-top: 1em; }
+/* line 122, ../sass/app.scss */
+#featured img {
+  width: 100%;
+  height: auto; }
+
+/* line 128, ../sass/app.scss */
+#featured.orbit div.featured-slider {
+  padding: 0; }
+
+/* line 132, ../sass/app.scss */
+footer nav {
+  background: black; }
+  /* line 134, ../sass/app.scss */
+  footer nav a, footer nav h3.nlposts-ulist-title {
+    color: #fff; }
+    /* line 136, ../sass/app.scss */
+    footer nav a:hover, footer nav h3.nlposts-ulist-title:hover {
+      color: #eeeeee; }
+
+/************* Images ********************/
+/* line 144, ../sass/app.scss */
+.post-thumbnail img {
+  background: #eeeeee;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  float: left;
+  margin-right: 10px;
+  width: 45%;
+  height: auto; }
+  /* line 152, ../sass/app.scss */
+  .post-thumbnail img .right {
+    float: right;
+    margin-left: 10px; }
+
+/************* Widgets ********************/
+/* line 161, ../sass/app.scss */
+.sidebar ul,
+.sidebar ul.nlposts-wrapper {
+  list-style: none; }
+  /* line 164, ../sass/app.scss */
+  .sidebar ul li,
+  .sidebar ul h3.nlposts-ulist-title,
+  .sidebar ul.nlposts-wrapper li,
+  .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title {
+    border-bottom: #cccccc solid 1px; }
+    /* line 166, ../sass/app.scss */
+    .sidebar ul li:first-child a, .sidebar ul li:first-child h3.nlposts-ulist-title,
+    .sidebar ul h3.nlposts-ulist-title:first-child a,
+    .sidebar ul h3.nlposts-ulist-title:first-child h3.nlposts-ulist-title,
+    .sidebar ul.nlposts-wrapper li:first-child a,
+    .sidebar ul.nlposts-wrapper li:first-child h3.nlposts-ulist-title,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child a,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:first-child h3.nlposts-ulist-title {
+      font-weight: bold; }
+    /* line 169, ../sass/app.scss */
+    .sidebar ul li:last-child,
+    .sidebar ul h3.nlposts-ulist-title:last-child,
+    .sidebar ul.nlposts-wrapper li:last-child,
+    .sidebar ul.nlposts-wrapper h3.nlposts-ulist-title:last-child {
+      border-bottom: none; }
+
+/* line 180, ../sass/app.scss */
+h4.widgettitle label {
+  font-size: 23px;
+  line-height: 1.1;
+  margin-bottom: 14px;
+  margin-top: 14px;
+  text-rendering: optimizelegibility;
+  font-family: 'Oswald',sans-serif;
+  font-weight: normal;
+  text-transform: uppercase;
+  color: black; }
+
+/************* Directory Page ********************/
+/* line 194, ../sass/app.scss */
+section.post_content div h1 {
+  display: none; }
+
+/* line 199, ../sass/app.scss */
+.page section.post_content div,
+table.blogs_directory_nav_table {
+  float: none !important; }
+
+/* line 203, ../sass/app.scss */
+ul.organization-listing {
+  list-style: none; }

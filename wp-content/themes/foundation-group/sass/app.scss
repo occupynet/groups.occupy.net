@@ -1,13 +1,12 @@
 /* app.scss */
 
-@import "typeplate";
-
 
 /************* Global ********************/
 
 //Variables
 $base: #000;
 $brand: #fbb03b;
+$brand-light: lighten($brand, 10%);
 $loud: #c91c22;
 $loud-dark: darken($loud, 10%);
 $loud-light: lighten($loud, 10%);
@@ -47,7 +46,7 @@ p, li, dt, dd {
 	color: $gray4;
 }
 
-h1 {
+h1, h1 a {
 	color: $loud;
 }
 
@@ -63,8 +62,8 @@ h1 {
 
 a {
   color: $loud;
-  &:hover { color: $shade1; }
-  &:active { color: $shade1; }
+  &:hover { color: $gray1; }
+  &:active { color: $gray1; }
   &:visited { color: $loud-dark; }
 }
 
@@ -72,12 +71,12 @@ a {
 	background: $loud;
 	border-color: $loud-dark;
 	&:hover {
-		background: $shade7;
-		border-color: $shade1;
+		background: $gray7;
+		border-color: $gray1;
 	}
 	&:active {
-		background: $shade1;
-		border-color: $shade1;
+		background: $gray1;
+		border-color: $gray1;
 	}
 }
 
@@ -85,7 +84,7 @@ a {
 
 .siteinfo {
 	a {
-	color: $shade0;
+	color: $gray1;
 	font-weight: normal;
 	font-size: 55px;
 	}
@@ -113,7 +112,7 @@ a {
 /************* Slider ********************/
 
 .featured-slider {
-    background: $shade8;
+    background: $gray8;
 }
 
 #featured {
@@ -131,11 +130,11 @@ a {
 }
 
 footer nav {
-	background: $shade1;
+	background: $gray1;
 	a {
 		color: #fff;
 		&:hover {
-			color: $shade8;
+			color: $gray8;
 		}
 	}
 }
@@ -143,8 +142,8 @@ footer nav {
 /************* Images ********************/
 
 .post-thumbnail img {
-	background: $shade8;
-    border: 1px solid $shade7;
+	background: $gray8;
+    border: 1px solid $gray7;
     padding: 10px;
 	float: left;
 	margin-right: 10px;
@@ -187,7 +186,7 @@ h4.widgettitle label {
     font-family: 'Oswald',sans-serif;
     font-weight: normal;
     text-transform: uppercase;
-    color: $shade0;
+    color: $gray1;
 }
 
 /************* Directory Page ********************/
