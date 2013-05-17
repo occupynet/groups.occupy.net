@@ -14,7 +14,7 @@ $experimental-support-for-khtml : false !default;
 
 /************* Global ********************/
 
-//Variables
+// colors
 $base: #000;
 $brand: #fbb03b;
 $brand-light: lighten($brand, 10%);
@@ -33,7 +33,9 @@ $gray9: #F2F2F2;
 $gray10: #FFF;
 
 
-//Mixins
+
+/************* Typography ********************/
+
 
 @mixin caps {
 	text-transform: uppercase;
@@ -49,25 +51,45 @@ $gray10: #FFF;
 	@include caps;
 }
 
-/************* Typography ********************/
 
 
 
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, h6 {
 	color: $gray2;
+	line-height: 1.2;
+	font-weight: 500;
 }
 
 h1 {
 	@include condensed;
-	font-weight: normal;	
+	font-weight: normal;
+	font-size: 36px;
 }
 h2 {
-	
+	font-size: 30px;
+	text-transform: capitalize;
+}
+h3 {
+	font-size: 24px;
+}
+h4 {
+	font-size: 18px;
+}
+h5 {
+	font-size: 15px;
+}
+h6 {
+	@include caps;
+	font-size: 12px;
 }
 
+
 p, li, dt, dd {
-	color: $gray4;
+	color: $gray3;
+	font-size: 15px;
+	line-height: 1.6;
+	margin-bottom: 22px;
 }
 
 h1, h1 a {
@@ -82,6 +104,34 @@ h1, h1 a {
 	margin-top: 5px;
 }
 
+
+@mixin pull-quotes($font-size, $opacity) {
+	position: relative;
+	padding: ems($font-size, $font-size);
+	&:before,
+	&:after {
+		height: ems($font-size, $font-size);
+		opacity: $opacity;
+		position: absolute;
+		font-size: $font-size;
+	}
+	&:before {
+		content: '“';
+		top:  0em;
+		left: 0em;
+	}
+	&:after {
+		content: '”';
+		bottom: 0em;
+		right: 0em;
+	}
+}
+
+.pull-quote {
+	@include pull-quotes(4em, .15);
+}
+
+
 /************* Elements ********************/
 
 a {
@@ -89,6 +139,13 @@ a {
   &:hover { color: $gray1; }
   &:active { color: $gray1; }
   &:visited { color: $loud-dark; }
+}
+
+.read-more {
+	@include caps;
+	font-weight: 500;
+	padding: 0 5px;
+	font-size: 80%;
 }
 
 .button {
@@ -107,33 +164,63 @@ a {
 /************* Header ********************/
 
 .siteinfo {
+	background: $gray3;
+	padding: 0 15px;
+	margin: 0;
+	h1 {
+		margin: 0;
+	}
 	a {
-	color: $gray1;
-	font-weight: normal;
-	font-size: 55px;
+		color: $gray9;
+		font-weight: normal;
+		font-size: 55px;
 	}
-	.subhead {
-	color: #666;
-	}
-
 }
 
 /************* Navigation ********************/
 
-.top-nav {
-	font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    @include border-radius(5px,5px);
-    
+.nav-bar {
+	height: 44px;
+	background: $gray4;
+	margin: 0 0 30px;
+	padding: 0;
+}
+.nav-bar > li {
+	border: 0;
+	line-height: 44px;
 }
 
 .nav-bar > li.active {
-	background: $loud !important;
-	border-color: $loud-dark !important;
-		&:hover {
-		background: $loud-dark !important;
-		}
+	background: $brand !important;
+	a {
+		border: 0;
 	}
+	&:hover {
+		background: $brand !important;
+	}
+}
+
+.nav-bar > li > a:first-child {
+	position: relative;
+	padding: 0 15px;
+	display: block;
+	@include condensed;
+	text-decoration: none;
+	font-size: 26px;
+	color: $gray9;
+}
+
+.nav-bar > li:last-child {
+	border: 0;
+}
+
+
+/************* Posts ********************/
+
+#main article {
+	margin-bottom: 30px;
+	border-bottom: 1px solid $gray8;
+}
 
 /************* Slider ********************/
 

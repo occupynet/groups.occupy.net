@@ -150,7 +150,7 @@
 					
 					<div class="siteinfo">
 						<h1><a class="brand" id="logo" href="<?php echo get_bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>
-						<h4 class="subhead"><?php echo get_bloginfo ( 'description' ); ?></h4>
+						<!--<h4 class="subhead"><?php echo get_bloginfo ( 'description' ); ?></h4>-->
 					</div>
 			
 					<?php bones_main_nav(); // Adjust using Menus in Wordpress Admin ?>
