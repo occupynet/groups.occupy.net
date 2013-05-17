@@ -49,6 +49,7 @@ $gray10: #FFF;
 @mixin condensed {
 	font-family: 'LeagueGothicRegular', 'Arial Narrow', sans-serif;
 	@include caps;
+	font-weight: normal;
 }
 
 
@@ -149,23 +150,48 @@ a {
 }
 
 .button {
-	background: $loud;
-	border-color: $loud-dark;
+	background: $gray1;
+	border: 0;
+	font-size: 18px;
+	@include border-radius(3px, 3px);
+	@include condensed;
 	&:hover {
-		background: $gray7;
-		border-color: $gray1;
+		background: $loud;
 	}
 	&:active {
 		background: $gray1;
-		border-color: $gray1;
 	}
 }
 
 /************* Header ********************/
 
+.searchform {
+	float: right;
+	margin-top: 15px;
+	margin-left: 15px;
+	input[type="text"] {
+		@include border-radius(15px, 15px);
+		height: 30px;
+		color: $gray6;
+		padding: 0 12px;
+	}
+}
+
+.global-nav {
+	height: 40px;
+	background: $gray1;
+	margin: 0;
+	padding: 0 15px;
+	a {
+		@include condensed;
+		color: $gray9;
+		font-size: 26px;
+	}
+}
+
 .siteinfo {
 	background: $gray3;
-	padding: 0 15px;
+	padding: 3px 15px;
 	margin: 0;
 	h1 {
 		margin: 0;
@@ -178,6 +204,9 @@ a {
 }
 
 /************* Navigation ********************/
+
+
+
 
 .nav-bar {
 	height: 44px;
@@ -219,7 +248,7 @@ a {
 
 #main article {
 	margin-bottom: 30px;
-	border-bottom: 1px solid $gray8;
+	border-bottom: 1px solid $gray7;
 }
 
 /************* Slider ********************/

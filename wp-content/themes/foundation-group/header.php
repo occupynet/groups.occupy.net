@@ -148,7 +148,13 @@
 			<div class="twelve columns">
 				<header role="banner" id="top-header">
 					
+					<div class="global-nav">
+						<h2><a class="" href="#">Occupy</a></h2>
+					</div>
 					<div class="siteinfo">
+						<form class="three columns searchform" method="get" id="searchform" action="<?php bloginfo('home'); ?>/">
+							<div><input type="text" size="18" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" placeholder="Search" /></div>
+						</form>
 						<h1><a class="brand" id="logo" href="<?php echo get_bloginfo('url'); ?>"><?php bloginfo('name'); ?></a></h1>
 						<!--<h4 class="subhead"><?php echo get_bloginfo ( 'description' ); ?></h4>-->
 					</div>
