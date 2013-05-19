@@ -137,6 +137,10 @@ h1, h1 a {
 	color: $base2;
 }
 
+.post_content p:first-child {
+	font-size: 18px;
+}
+
 .meta {
 	@include caps;
 	font-size: 12px;
@@ -329,6 +333,13 @@ footer .panel {
 	h4 {
 		color: $base10;
 	}
+	.textwidget,
+	.textwidget p {
+		color: $base10;
+		font-weight: 500;
+		font-size: 15px;
+		line-height: 1.6;
+	}
 }
 
 /************* Images ********************/
@@ -494,6 +505,13 @@ ul.organization-listing {
 	}
 }
 
+/************* Comments ********************/
+
+
+#comment-form-title {
+	@include condensed;
+	margin: 0;
+}
 
 
 /************* Responsive Styling ********************/
