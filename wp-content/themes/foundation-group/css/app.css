@@ -367,26 +367,59 @@ h4.widgettitle label {
   margin-right: 15px;
   font-size: 12px; }
 
+/* line 423, ../sass/app.scss */
+table.em-calendar {
+  border: 0;
+  width: 100%;
+  -webkit-border-radius: 0 0;
+  -moz-border-radius: 0 / 0;
+  border-radius: 0 / 0;
+  font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: normal; }
+  /* line 428, ../sass/app.scss */
+  table.em-calendar thead {
+    background: white;
+    font-size: 18px; }
+  /* line 432, ../sass/app.scss */
+  table.em-calendar tbody tr:nth-child(even) {
+    background: white; }
+  /* line 435, ../sass/app.scss */
+  table.em-calendar td {
+    padding: 3px;
+    font-size: 18px;
+    font-weight: normal; }
+  /* line 441, ../sass/app.scss */
+  table.em-calendar td.eventless-today,
+  table.em-calendar td.eventful-today {
+    background-color: white; }
+  /* line 445, ../sass/app.scss */
+  table.em-calendar td.eventful a, table.em-calendar td.eventful h3.nlposts-ulist-title,
+  table.em-calendar td.eventful-today a,
+  table.em-calendar td.eventful-today h3.nlposts-ulist-title {
+    color: #c91c22 !important; }
+
 /************* Directory Page ********************/
-/* line 424, ../sass/app.scss */
+/* line 454, ../sass/app.scss */
 section.post_content div h1 {
   display: none; }
 
-/* line 429, ../sass/app.scss */
+/* line 459, ../sass/app.scss */
 .page section.post_content div,
 table.blogs_directory_nav_table {
   float: none !important; }
 
-/* line 433, ../sass/app.scss */
+/* line 463, ../sass/app.scss */
 ul.organization-listing {
   list-style: none; }
 
 /************* Events Calendar ********************/
-/* line 439, ../sass/app.scss */
+/* line 469, ../sass/app.scss */
 .em-events-search-form {
   background: #333333;
   padding: 5px 10px; }
-  /* line 442, ../sass/app.scss */
+  /* line 472, ../sass/app.scss */
   .em-events-search-form input[type="text"] {
     height: 24px;
     width: 20%;
@@ -394,20 +427,20 @@ ul.organization-listing {
     -moz-border-radius: 12px / 12px;
     border-radius: 12px / 12px;
     padding-left: 12px; }
-  /* line 448, ../sass/app.scss */
+  /* line 478, ../sass/app.scss */
   .em-events-search-form input.em-events-search-text {
     width: 40%;
     margin-right: 30px; }
-  /* line 452, ../sass/app.scss */
+  /* line 482, ../sass/app.scss */
   .em-events-search-form span {
     color: white; }
-  /* line 455, ../sass/app.scss */
+  /* line 485, ../sass/app.scss */
   .em-events-search-form select {
     width: auto;
     height: 24px;
     border: 0;
     background: #666666; }
-  /* line 461, ../sass/app.scss */
+  /* line 491, ../sass/app.scss */
   .em-events-search-form input[type="submit"] {
     height: 24px;
     -webkit-border-radius: 12px 12px;
@@ -420,29 +453,29 @@ ul.organization-listing {
     letter-spacing: 1px;
     font-weight: normal; }
 
-/* line 470, ../sass/app.scss */
+/* line 500, ../sass/app.scss */
 .events-table {
   border: 0;
   border-top: 1px solid #999999; }
-  /* line 473, ../sass/app.scss */
+  /* line 503, ../sass/app.scss */
   .events-table thead {
     display: none; }
-  /* line 476, ../sass/app.scss */
+  /* line 506, ../sass/app.scss */
   .events-table tr {
     border-bottom: 1px solid #999999; }
-  /* line 479, ../sass/app.scss */
+  /* line 509, ../sass/app.scss */
   .events-table a, .events-table h3.nlposts-ulist-title {
     font-size: 18px; }
 
-/* line 486, ../sass/app.scss */
+/* line 516, ../sass/app.scss */
 .event-body {
   padding-top: 30px; }
 
-/* line 490, ../sass/app.scss */
+/* line 520, ../sass/app.scss */
 .event .sidebar {
   padding-left: 0; }
 
-/* line 496, ../sass/app.scss */
+/* line 526, ../sass/app.scss */
 .event-date-time h3,
 .event-location h3 {
   font-size: 18px;
@@ -451,7 +484,7 @@ ul.organization-listing {
   letter-spacing: 1px;
   font-weight: normal;
   margin: 2em 0 0.5em; }
-/* line 501, ../sass/app.scss */
+/* line 531, ../sass/app.scss */
 .event-date-time p,
 .event-location p {
   font-size: 14px;
@@ -459,7 +492,7 @@ ul.organization-listing {
   line-height: 1.4; }
 
 /************* Comments ********************/
-/* line 511, ../sass/app.scss */
+/* line 543, ../sass/app.scss */
 #comment-form-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
@@ -469,33 +502,33 @@ ul.organization-listing {
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 520, ../sass/app.scss */
+  /* line 552, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 524, ../sass/app.scss */
+  /* line 556, ../sass/app.scss */
   #main {
     border-bottom: none; }
 
-  /* line 528, ../sass/app.scss */
+  /* line 560, ../sass/app.scss */
   #featured h3 {
     margin-top: .5em;
     padding: 0 60px; }
 
-  /* line 533, ../sass/app.scss */
+  /* line 565, ../sass/app.scss */
   #featured p {
     padding: 0 60px; }
 
-  /* line 538, ../sass/app.scss */
+  /* line 570, ../sass/app.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 546, ../sass/app.scss */
+  /* line 578, ../sass/app.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 550, ../sass/app.scss */
+  /* line 582, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }

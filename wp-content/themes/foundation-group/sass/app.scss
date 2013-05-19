@@ -16,7 +16,7 @@ $experimental-support-for-khtml : false !default;
 
 // colors
 $brand: #fbb03b;
-$brand-light: lighten($brand, 10%);
+$brand-light: lighten($brand, 40%);
 $loud: #c91c22;
 $loud-dark: darken($loud, 10%);
 $loud-light: lighten($loud, 10%);
@@ -397,7 +397,7 @@ h4.widgettitle label {
     color: $base1;
 }
 
-// event manager widget
+// event manager list widget
 
 .widget_em_widget {
 	li  {
@@ -417,6 +417,36 @@ h4.widgettitle label {
 		font-size: 12px;
 	}
 }
+
+// event manager calendar widget
+
+table.em-calendar {
+	border: 0;
+	width: 100%;
+	@include border-radius(0,0);
+	@include condensed;
+	thead {
+		background: $base10;
+		font-size: 18px;
+	}
+	tbody tr:nth-child(even) {
+		background:  $base10;
+	}
+	td {
+		padding: 3px;
+		font-size: 18px;
+		font-weight: normal;
+	}
+	td.eventless-today, 
+	td.eventful-today {
+		background-color: $brand-light;
+	}
+	td.eventful a, 
+	td.eventful-today a {
+		color: $loud !important;
+	}
+}
+
 
 
 /************* Directory Page ********************/
@@ -504,6 +534,8 @@ ul.organization-listing {
 		line-height: 1.4;
 	}
 }
+
+
 
 /************* Comments ********************/
 
