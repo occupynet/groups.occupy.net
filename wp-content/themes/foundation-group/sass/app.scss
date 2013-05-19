@@ -423,6 +423,45 @@ ul.organization-listing {
 	}
 }
 
+.events-table {
+	border: 0;
+	border-top: 1px solid $base6;
+	thead {
+		display: none;
+	}
+	tr {
+		border-bottom: 1px solid $base6;
+	}
+	a {
+		font-size: 18px;
+	}
+}
+
+// single event page
+
+.event-body {
+	padding-top: 30px;
+}
+
+.event .sidebar {
+	padding-left: 0;
+}
+
+.event-date-time, 
+.event-location {
+	h3 {
+		font-size: 18px;
+		@include condensed;
+		margin: 2em 0 .5em;
+	}
+	p {
+		font-size: 14px;
+		margin-bottom: 1em;
+		line-height: 1.4;
+	}
+}
+
+
 
 /************* Responsive Styling ********************/
 
