@@ -10,6 +10,7 @@ Template: wp-foundation
 */
 /************* Global ********************/
 /************* Typography ********************/
+/* line 39, ../sass/style.scss */
 h1,
 h2,
 h3,
@@ -19,6 +20,7 @@ h5 {
   text-transform: uppercase;
   font-weight: normal; }
 
+/* line 46, ../sass/style.scss */
 .intro-text,
 .intro-text p {
   font-size: 1.5em;
@@ -27,61 +29,78 @@ h5 {
   margin-top: 5px; }
 
 /************* Elements ********************/
+/* line 55, ../sass/style.scss */
 a {
   color: #c91c22; }
+  /* line 57, ../sass/style.scss */
   a:hover {
     color: #f2f2f2; }
+  /* line 58, ../sass/style.scss */
   a:active {
     color: #333333; }
 
+/* line 61, ../sass/style.scss */
 .button {
   background: #c91c22;
   border-color: #990000; }
+  /* line 64, ../sass/style.scss */
   .button:hover {
     background: #f2f2f2;
     border-color: #333333; }
+  /* line 68, ../sass/style.scss */
   .button:active {
     background: #333333;
     border-color: #333333; }
 
 /************* Header ********************/
+/* line 77, ../sass/style.scss */
 .siteinfo a {
   color: black;
   font-weight: normal;
   font-size: 55px;
   font-style: italic; }
+/* line 83, ../sass/style.scss */
 .siteinfo .exclamation {
   color: #c91c22;
   font-size: 65px; }
+/* line 87, ../sass/style.scss */
 .siteinfo .subhead {
   color: #666; }
 
 /************* Navigation ********************/
+/* line 95, ../sass/style.scss */
 .top-nav {
   font-family: "Oswald", sans-serif;
   text-transform: uppercase; }
 
+/* line 101, ../sass/style.scss */
 .nav-bar > li .active {
   background: #c91c22;
   border-color: #990000; }
+  /* line 104, ../sass/style.scss */
   .nav-bar > li .active:hover {
     background: #990000; }
 
 /************* Slider ********************/
+/* line 112, ../sass/style.scss */
 .featured-slider {
   background: #f2f2f2;
   border: 1px solid #666666; }
 
+/* line 118, ../sass/style.scss */
 #featured h3 {
   margin-top: 1em; }
+/* line 121, ../sass/style.scss */
 #featured img {
   width: 100%;
   height: auto; }
 
+/* line 127, ../sass/style.scss */
 #featured.orbit div.featured-slider {
   padding: 0; }
 
 /************* Images ********************/
+/* line 133, ../sass/style.scss */
 .post-thumbnail img {
   background: #f2f2f2;
   border: 1px solid #666666;
@@ -90,18 +109,23 @@ a {
   margin-right: 10px;
   width: 45%;
   height: auto; }
+  /* line 141, ../sass/style.scss */
   .post-thumbnail img .right {
     float: right;
     margin-left: 10px; }
 
 /************* Widgets ********************/
+/* line 149, ../sass/style.scss */
 .sidebar ul {
   list-style: none; }
+  /* line 152, ../sass/style.scss */
   .sidebar ul .sidebar ul li {
     border-bottom: #666666 solid 1px; }
+    /* line 154, ../sass/style.scss */
     .sidebar ul .sidebar ul li:last-child {
       border-bottom: none; }
 
+/* line 160, ../sass/style.scss */
 h4.widgettitle label {
   font-size: 23px;
   line-height: 1.1;

@@ -444,6 +444,9 @@ table.em-calendar {
 	td.eventful a, 
 	td.eventful-today a {
 		color: $loud !important;
+		&:hover {
+			color: $loud-dark !important;
+		}
 	}
 }
 
