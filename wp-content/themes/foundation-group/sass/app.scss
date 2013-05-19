@@ -15,22 +15,22 @@ $experimental-support-for-khtml : false !default;
 /************* Global ********************/
 
 // colors
-$base: #000;
 $brand: #fbb03b;
 $brand-light: lighten($brand, 10%);
 $loud: #c91c22;
 $loud-dark: darken($loud, 10%);
 $loud-light: lighten($loud, 10%);
-$gray1: #000;
-$gray2: #222;
-$gray3: #444;
-$gray4: #666;
-$gray5: #888;
-$gray6: #AAA;
-$gray7: #CCC;
-$gray8: #EEE;
-$gray9: #F2F2F2;
-$gray10: #FFF;
+$base: #000;
+$base1: lighten($base, 10%);
+$base2: lighten($base, 20%);
+$base3: lighten($base, 30%);
+$base4: lighten($base, 40%);
+$base5: lighten($base, 50%);
+$base6: lighten($base, 60%);
+$base7: lighten($base, 70%);
+$base8: lighten($base, 80%);
+$base9: lighten($base, 90%);
+$base10: lighten($base, 100%);
 
 
 
@@ -57,7 +57,7 @@ $gray10: #FFF;
 
 
 h1, h2, h3, h4, h5, h6 {
-	color: $gray2;
+	color: $base2;
 	line-height: 1.2;
 	font-weight: 500;
 }
@@ -87,7 +87,7 @@ h6 {
 
 
 p, li, dt, dd {
-	color: $gray3;
+	color: $base3;
 	font-size: 15px;
 	line-height: 1.6;
 	margin-bottom: 22px;
@@ -132,10 +132,14 @@ h1, h1 a {
 	@include pull-quotes(4em, .15);
 }
 
+.page-title, 
+.single-title {
+	color: $base2;
+}
 
 /************* Elements ********************/
 
-.panel {
+div.panel {
 	border: 0;
 }
 
@@ -144,8 +148,8 @@ h1, h1 a {
 
 a {
   color: $loud;
-  &:hover { color: $gray1; }
-  &:active { color: $gray1; }
+  &:hover { color: $base1; }
+  &:active { color: $base1; }
   &:visited { color: $loud-dark; }
 }
 
@@ -157,7 +161,7 @@ a {
 }
 
 .button {
-	background: $gray1;
+	background: $base1;
 	border: 0;
 	font-size: 18px;
 	@include border-radius(3px, 3px);
@@ -166,7 +170,7 @@ a {
 		background: $loud;
 	}
 	&:active {
-		background: $gray1;
+		background: $base1;
 	}
 }
 
@@ -178,32 +182,32 @@ a {
 	input[type="text"] {
 		@include border-radius(15px, 15px);
 		height: 30px;
-		color: $gray6;
+		color: $base6;
 		padding: 0 12px;
 	}
 }
 
 .global-nav {
 	height: 40px;
-	background: $gray1;
+	background: $base;
 	margin: 0;
 	padding: 0 15px;
 	a {
 		@include condensed;
-		color: $gray9;
+		color: $base10;
 		font-size: 26px;
 	}
 }
 
 .siteinfo {
-	background: $gray3;
+	background: $base2;
 	padding: 3px 15px;
 	margin: 0;
 	h1 {
 		margin: 0;
 	}
 	a {
-		color: $gray9;
+		color: $base10;
 		font-weight: normal;
 		font-size: 55px;
 	}
@@ -216,7 +220,7 @@ a {
 
 .nav-bar {
 	height: 44px;
-	background: $gray4;
+	background: $base4;
 	margin: 0 0 30px;
 	padding: 0;
 }
@@ -232,6 +236,9 @@ a {
 	}
 	&:hover {
 		background: $brand !important;
+		a {
+			color: $base10 !important;
+		}
 	}
 }
 
@@ -242,7 +249,7 @@ a {
 	@include condensed;
 	text-decoration: none;
 	font-size: 26px;
-	color: $gray9;
+	color: $base10;
 }
 
 .nav-bar > li:last-child {
@@ -254,7 +261,7 @@ a {
 
 #main article {
 	margin-bottom: 30px;
-	border-bottom: 1px solid $gray7;
+	border-bottom: 1px solid $base7;
 }
 
 /************* Slider ********************/
@@ -264,11 +271,13 @@ a {
 #featured {
 	border: 0;
 	h3 {
-		margin: 1em 0 0;
+		margin: 1em 0 .5em;
 		padding: 0 60px;
+		font-size: 30px;
 	}
 	p {
 		padding: 0 60px;
+		font-size: 16px;
 	}
 	img {
 		width: 100%;
@@ -293,20 +302,27 @@ div.orbit-wrapper div.timer {
 /************* Footer ********************/
 
 footer nav {
-	background: $gray1;
+	background: $base2;
 	a {
 		color: #fff;
 		&:hover {
-			color: $gray8;
+			color: $base8;
 		}
+	}
+}
+
+footer .panel {
+	background: $base2;
+	h4 {
+		color: $base10;
 	}
 }
 
 /************* Images ********************/
 
 .post-thumbnail img {
-	background: $gray8;
-    border: 1px solid $gray7;
+	background: $base8;
+    border: 1px solid $base7;
     padding: 10px;
 	float: left;
 	margin-right: 10px;
@@ -322,6 +338,7 @@ footer nav {
 
 .widgettitle {
 	@include condensed;
+	font-size: 24px;
 }
 
 .sidebar ul,
@@ -329,7 +346,9 @@ footer nav {
 	list-style: none;
 	li,
 	h3.nlposts-ulist-title {
-		border-bottom: $gray7 solid 1px;
+		border-bottom: $base7 solid 1px;
+		padding: 5px 0 10px;
+		line-height: 1.3em;
 		&:first-child a {
 			font-weight: bold;
 		}
@@ -353,7 +372,7 @@ h4.widgettitle label {
     font-family: 'Oswald',sans-serif;
     font-weight: normal;
     text-transform: uppercase;
-    color: $gray1;
+    color: $base1;
 }
 
 /************* Directory Page ********************/
@@ -371,6 +390,38 @@ ul.organization-listing {
 	list-style: none;
 }
 
+/************* Events Calendar ********************/
+
+.em-events-search-form {
+	background: $base2;
+	padding: 5px 10px;
+	input[type="text"] {
+		height: 24px;
+		width: 20%;
+		@include border-radius(12px, 12px);
+		padding-left: 12px;
+	}
+	input.em-events-search-text {
+		width: 40%;
+		margin-right: 30px;
+	}
+	span {
+		color: $base10;
+	}
+	select {
+		width: auto;
+		height: 24px;
+		border: 0;
+		background: $base4;
+	}
+	input[type="submit"] {
+		height: 24px;
+		@include border-radius(12px, 12px);
+		background: $loud;
+		color: $base10;
+		@include condensed;
+	}
+}
 
 
 /************* Responsive Styling ********************/
@@ -385,7 +436,7 @@ ul.organization-listing {
 	}
 
 	#featured h3{
-		margin-top: 1em;
+		margin-top: .5em;
 		padding: 0 60px;
 	}
 
