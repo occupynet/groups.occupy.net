@@ -137,6 +137,13 @@ h1, h1 a {
 	color: $base2;
 }
 
+.meta {
+	@include caps;
+	font-size: 12px;
+	color: $base7;
+	font-style: normal;
+}
+
 /************* Elements ********************/
 
 div.panel {
@@ -204,7 +211,7 @@ a {
 	padding: 3px 15px;
 	margin: 0;
 	h1 {
-		margin: 0;
+		margin: 3px 0 -3px;
 	}
 	a {
 		color: $base10;
@@ -261,8 +268,14 @@ a {
 
 #main article {
 	margin-bottom: 30px;
-	border-bottom: 1px solid $base7;
+	border-bottom: 1px solid $base8;
 }
+
+.post-thumbnail img {
+	width: 100%;
+	border: 0;
+}
+
 
 /************* Slider ********************/
 
@@ -346,12 +359,10 @@ footer .panel {
 	list-style: none;
 	li,
 	h3.nlposts-ulist-title {
-		border-bottom: $base7 solid 1px;
+		border-bottom: $base8 solid 1px;
 		padding: 5px 0 10px;
 		line-height: 1.3em;
-		&:first-child a {
-			font-weight: bold;
-		}
+		font-size: 13px;
 		&:last-child {
 			border-bottom: none;
 		}
@@ -374,6 +385,28 @@ h4.widgettitle label {
     text-transform: uppercase;
     color: $base1;
 }
+
+// event manager widget
+
+.widget_em_widget {
+	li  {
+		padding: 10px 0 10px;
+		font-size: 13px;
+	}
+	a {
+		font-size: 18px;
+		font-weight: normal !important;
+		display: block;
+		padding: 5px 0;
+	}
+	ul ul li {
+		display: inline;
+		border: 0;
+		margin-right: 15px;
+		font-size: 12px;
+	}
+}
+
 
 /************* Directory Page ********************/
 
