@@ -286,14 +286,14 @@ a {
 
 
 #featured {
-	border: 0;
+	border: 10px solid $base9;
 	h3 {
-		margin: 1em 0 .5em;
-		padding: 0 60px;
+		margin: 1.5em 0 .5em;
+		padding: 0 30px;
 		font-size: 30px;
 	}
 	p {
-		padding: 0 60px;
+		padding: 0 30px;
 		font-size: 16px;
 	}
 	img {
@@ -302,11 +302,23 @@ a {
 	}
 }
 
+/* hiding Orbit images on load */
+
 .featured-slider {
+	display: none;
 }
 
 #featured.orbit div.featured-slider {
 	padding: 0;
+}
+
+.orbit-bullets {
+	margin: 10px 0;
+	opacity: .8;
+}
+
+div.orbit-wrapper div.slider-nav {
+	display: none;
 }
 
 div.orbit-wrapper div.timer {
@@ -378,6 +390,11 @@ footer .panel {
 			border-bottom: none;
 		}
 	}
+}
+
+.sidebar p, .sidebar li {
+	font-size: 13px;
+	line-height: 1.4;
 }
 
 h3.nlposts-ulist-title {
@@ -474,29 +491,38 @@ ul.organization-listing {
 	padding: 5px 10px;
 	input[type="text"] {
 		height: 24px;
-		width: 20%;
+		width: 18%;
 		@include border-radius(12px, 12px);
 		padding-left: 12px;
+		display: inline;
+		font-size: 13px;
+		margin: 0 5px 10px;
 	}
 	input.em-events-search-text {
 		width: 40%;
-		margin-right: 30px;
+		margin: 0 30px 10px 0;
 	}
 	span {
 		color: $base10;
+		font-size: 12px;
 	}
 	select {
 		width: auto;
 		height: 24px;
 		border: 0;
-		background: $base4;
+		
 	}
 	input[type="submit"] {
 		height: 24px;
-		@include border-radius(12px, 12px);
-		background: $loud;
+		line-height: 24px;
+		font-size: 18px;
 		color: $base10;
 		@include condensed;
+		@include border-radius(5px, 5px);
+		border: 0;
+		background: $loud;
+		padding: 0 10px;
+		
 	}
 }
 
@@ -561,12 +587,12 @@ ul.organization-listing {
 	}
 
 	#featured h3{
-		margin-top: .5em;
-		padding: 0 60px;
+		margin-top: 1em;
+		padding: 0 30px;
 	}
 
 	#featured p{
-		padding: 0 60px;
+		padding: 0 30px;
 	}
 
 	#featured h3,
