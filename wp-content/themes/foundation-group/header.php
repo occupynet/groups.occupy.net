@@ -149,7 +149,7 @@
 				<header role="banner" id="top-header">
 					
 					<div class="global-nav">
-						<h2><a class="" href="#">Occupy</a></h2>
+						<h2><a class="global-logo" href="../">Occupy</a></h2>
 					</div>
 					<div class="siteinfo">
 						<form class="three columns searchform" method="get" id="searchform" action="<?php bloginfo('home'); ?>/">
