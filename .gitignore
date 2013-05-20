@@ -29,5 +29,6 @@ wp-content/w3tc-config/
 sitemap.xml
 sitemap.xml.gz
 
+wp-snapshots/
 wp-content/plugins/social-media-mashup/smm-cache/
 */.sass-cache/

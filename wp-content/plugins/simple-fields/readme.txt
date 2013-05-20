@@ -4,7 +4,7 @@ Donate link: http://simple-fields.com/about/donate/
 Tags: admin, fields, custom fields, advanced custom fields, extended custom fields, more fields, repeatable fields, field manager, attachments, text areas, input fields, tinymce, radio button, drop down, files, meta box, edit, post, post_meta, post meta, custom, simple fields, cms, date picker, time picker, repeatable fields, multiple fields
 Requires at least: 3.5.1
 Tested up to: 3.5.1
-Stable tag: 1.2.4
+Stable tag: 1.3.1
 
 With Simple Fields you can add any kind of custom fields to your pages, posts and attachments.
 
@@ -143,6 +143,20 @@ See that "Add"-link above "Article images"? That means that it is repeatable, so
 
 
 == Changelog ==
+
+#### Version 1.3.1
+- Fixed: used short tags in options screen.
+
+#### Version 1.3
+- Added: tabs! in the gui that is.
+- Added: tab with export and import functions!
+- Added: notice in GUI when editing field group or post connctor that has been added with PHP code, because if you try to change that field group/post connector then the changed may not sticks since it gets overwritten by php code.
+- Fixed: could not add fields with ajax when plugin All-in-One Event Calendar was installed
+- Added: developers can now add their own tabs to the simple fields options page
+- Added: some new filters and actions: simple_fields_settings_admin_head, simple_fields_after_last_options_nav_tab, simple_fields_subpage, simple_fields_subpage_<subpage-name>. Check inc-admin-options-export-import.php for an example how to use these filters and actions.
+- Fixed: empty/not saved post connectors could be visible in GUI
+- Fixed: misc GUI changes here and there
+- Fixed: filter simple_fields_get_meta_key_template now fully works, so you for example can use it to enable storing fields by its slugs instead of ids. useful when ids have been messed up between development server and production server. also useful when working with import and export, since ids are easily increased.
 
 #### Version 1.2.4
 - Fixed: was unable to enable use html editor when using gui

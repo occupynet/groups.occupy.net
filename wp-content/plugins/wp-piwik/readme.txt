@@ -3,7 +3,7 @@
 Contributors: Braekling
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 0.9.9.1
+Stable tag: 0.9.9.4
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6046779
 Tags: statistics, stats, analytics, piwik, wpmu
 
@@ -19,7 +19,7 @@ Look at the [Piwik website](http://piwik.org/) to get further information about 
 
 *This plugin is not created or provided by the Piwik project team.*
 
-Languages: English, German, Albanian, Azerbaijani, Belorussian, Dutch, French, Greek, Lithuanian, Norwegian, Persian, Romanian, Russian, Spanish, Swedish, Ukrainian
+Languages: English, German, Albanian, Azerbaijani, Belorussian, Dutch, French, Greek, Italian, Lithuanian, Norwegian, Persian, Romanian, Russian, Spanish, Swedish, Ukrainian
 
 *Note: If you vote "It's broken", please tell me about your problem. It's hard to fix a bug I don't know about! ;-)*
 
@@ -46,7 +46,7 @@ See section "Installation".
 * Graphs powered by [jqPlot](http://www.jqplot.com/) (GPL 2.0 and MIT) and  and [jQuery Sparklines](http://omnipotent.net/jquery.sparkline/) (New BSD License).
 * Metabox support inspired by [Heiko Rabe's metabox demo plugin](http://www.code-styling.de/english/how-to-use-wordpress-metaboxes-at-own-plugins).
 * Translation credits see plugin settings
-* Donations: Marco L., Rolf W., Tobias U., Lars K., Donna F., Kevin D., Ramos S, Thomas M., John C., Andreas G., Ben M., the Piwik team itself, and all people flattering this.
+* Donations: Marco L., Rolf W., Tobias U., Lars K., Donna F., Kevin D., Ramos S, Thomas M., John C., Andreas G., Ben M., Myra R. I., Carlos U. R.-S., the Piwik team itself, and all people flattering this.
 * All users who send me mails containing criticism, commendation, feature requests and bug reports - you help me to make WP-Piwik much better!
 
 Thank you all!
@@ -113,6 +113,21 @@ Add WP-Piwik to your /wp-content/plugins folder and enable it as [Network Plugin
 Please update Piwik if not done yet (Piwik 1.11 or higher is recommended)!
 
 == Changelog ==
+
+= 0.9.9.4 =
+* Use Transients API (one week caching)
+* Option: Track visitors without JavaScript, see http://piwik.org/faq/how-to/#faq_176
+
+= 0.9.9.3 = 
+* Sparkline script update (IE 10 compatbility)
+* Syntax error fixes
+
+= 0.9.9.2 =
+* Bugfix regarding tracking code changes in proxy mode, see http://wordpress.org/support/topic/problem-with-https-in-proxy-mode
+* Feature: Change text "WP-Piwik" in menu items and dashboard widgets
+* Code cleanup ("new" first step)
+* Debugging: Logger added
+* Avoid double slash (//) in tracking code
 
 = 0.9.9.1 =
 * CDN support: http and https separated, see http://wordpress.org/support/topic/request-cdn-support-1

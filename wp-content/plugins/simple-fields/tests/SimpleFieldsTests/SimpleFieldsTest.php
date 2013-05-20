@@ -23,9 +23,32 @@ class MyPluginTest extends WP_UnitTestCase {
 	// Test output of debug function
 	function testDebug()
 	{
-		$this->expectOutputString("<pre class='sf_box_debug'>this is simple fields debug function</pre>");
+
+		$expected = <<<EOD
+
+<pre class='sf_box_debug'>
+this is simple fields debug function
+</pre>
+EOD;
+
+		$this->expectOutputString($expected);
 		sf_d("this is simple fields debug function");
 	}
+
+	// Test output of debug function
+	function testDebug2()
+	{
+		$expected = <<<EOD
+
+<pre class='sf_box_debug'>
+<b>With headline:</b>
+this is simple fields debug function
+</pre>
+EOD;
+		$this->expectOutputString($expected);
+		sf_d("this is simple fields debug function", "With headline");
+	}
+
 
 	function testInsertManuallyAddedFields() {
 		_insert_manually_added_fields();
@@ -53,6 +76,12 @@ class MyPluginTest extends WP_UnitTestCase {
 		$this->assertEquals(1, simple_fields_value("field_user", $post_id));
 
 		// test repeatable/all values
+
+		#echo "xxx";
+		#var_dump( simple_fields_values("field_text") );
+		#exit;
+		#print_r($allvals);
+
 		$val = array(
 			0 => "Text entered in the text field",
 			1 => "text in textfield 2<span>yes it is</span>"
@@ -1042,7 +1071,8 @@ class MyPluginTest extends WP_UnitTestCase {
 		        ),
 		    ),
 		    'deleted' => false,
-		    "fields_count" => 1
+		    "fields_count" => 1,
+		    "added_with_code" => true
 		    // "fields_by_slug" => array()
 		);
 		
@@ -1107,7 +1137,8 @@ class MyPluginTest extends WP_UnitTestCase {
 		        ),
 		    ),
 		    'deleted' => false,
-		    "fields_count" => 1
+		    "fields_count" => 1,
+		    "added_with_code" => true
 		);
 
 		unset($arr_return["fields_by_slug"]);
@@ -1187,7 +1218,8 @@ class MyPluginTest extends WP_UnitTestCase {
                 ),
                 'deleted' => false,
                 'hide_editor' => false,
-                'field_groups_count' => 1
+                'field_groups_count' => 1,
+                "added_with_code" => true
               );
         
         $this->assertEquals($connector_return1_expected, $connector_return1);
@@ -1223,7 +1255,8 @@ class MyPluginTest extends WP_UnitTestCase {
                 ),
                 'deleted' => false,
                 'hide_editor' => false,
-                'field_groups_count' => 2
+                'field_groups_count' => 2,
+                "added_with_code" => true
               );
 
         $this->assertEquals($connector_return2_expected, $connector_return2);
@@ -1335,6 +1368,12 @@ class MyPluginTest extends WP_UnitTestCase {
 	public function test_misc() {
 		
 		// Test meta key
+		
+		// older format
+		$key = $this->sf->get_meta_key(1, 2, 3);
+		$this->assertEquals("_simple_fields_fieldGroupID_1_fieldID_2_numInSet_3", $key);
+
+		// newer format
 		$key = $this->sf->get_meta_key(1, 2, 3);
 		$this->assertEquals("_simple_fields_fieldGroupID_1_fieldID_2_numInSet_3", $key);
 
