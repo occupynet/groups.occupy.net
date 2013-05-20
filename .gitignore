@@ -29,4 +29,5 @@ wp-content/w3tc-config/
 sitemap.xml
 sitemap.xml.gz
 
-.sass-cache
+wp-content/plugins/social-media-mashup/smm-cache/
+*/.sass-cache/
