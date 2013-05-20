@@ -13,11 +13,9 @@ Template Name: Homepage
 			<article role="article">
 
 				<?php
-
-				$orbit_slider = of_get_option('orbit_slider'); //Set in Theme Options
-				$number_featured_posts = of_get_option('posts_in_orbit_slider'); //Value set in Theme Options
-				if ($orbit_slider){
-
+					$orbit_slider = of_get_option('orbit_slider'); //Set in Theme Options
+					$number_featured_posts = of_get_option('posts_in_orbit_slider'); //Value set in Theme Options
+					if ($orbit_slider){
 				?>
 				
 				<header>

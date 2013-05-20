@@ -97,12 +97,17 @@ h1, h1 a {
 	color: $loud;
 }
 
-.intro-text,
-.intro-text p {
+.intro-text {
 	font-size: 1.5em;
-	font-style: italic;
 	line-height: 1.4em;
-	margin-top: 5px;
+	margin-bottom: 30px;
+	p {
+	
+	}
+}
+
+.wp-caption-text {
+	font-size: 13px;
 }
 
 
@@ -144,8 +149,8 @@ h1, h1 a {
 .meta {
 	@include caps;
 	font-size: 12px;
-	color: $base7;
-	font-style: normal;
+	color: $base6;
+	font-style: normal !important;
 }
 
 /************* Elements ********************/
@@ -302,10 +307,9 @@ a {
 	}
 }
 
-/* hiding Orbit images on load */
 
 .featured-slider {
-	display: none;
+	background: $base10;
 }
 
 #featured.orbit div.featured-slider {
@@ -467,6 +471,15 @@ table.em-calendar {
 	}
 }
 
+//
+
+.social-media-mashup .entry-meta {
+	font-weight: normal;
+	color: $base6;
+	a {
+		color: $base6;
+	}
+}
 
 
 /************* Directory Page ********************/
