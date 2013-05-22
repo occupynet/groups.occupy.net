@@ -647,12 +647,13 @@ ul.organization-listing {
 
 .events-table {
 	border: 0;
-	border-top: 1px solid $base6;
+	border-top: 1px solid $base7;
+	width: 100%;
 	thead {
 		display: none;
 	}
 	tr {
-		border-bottom: 1px solid $base6;
+		border-bottom: 1px solid $base7;
 	}
 	a {
 		font-size: 18px;
