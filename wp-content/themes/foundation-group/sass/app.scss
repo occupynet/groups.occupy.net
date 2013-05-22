@@ -234,18 +234,36 @@ a {
 
 
 
-.nav-bar {
+.top-nav {
 	height: 44px;
 	background: $base4;
 	margin: 0 0 30px;
 	padding: 0;
 }
-.nav-bar > li {
+
+.top-nav > li {
 	border: 0;
 	line-height: 44px;
 }
 
-.nav-bar > li.active {
+.top-nav > li > a {
+	color: $base10 !important;
+	&:hover {
+		color: $base10 !important;		
+	}
+}
+
+.top-nav > li > a:first-child {
+	position: relative;
+	padding: 0 15px;
+	display: block;
+	@include condensed;
+	text-decoration: none;
+	font-size: 26px;
+	color: $base10;
+}
+
+.top-nav > li.active {
 	background: $brand !important;
 	a {
 		border: 0;
@@ -258,17 +276,8 @@ a {
 	}
 }
 
-.nav-bar > li > a:first-child {
-	position: relative;
-	padding: 0 15px;
-	display: block;
-	@include condensed;
-	text-decoration: none;
-	font-size: 26px;
-	color: $base10;
-}
 
-.nav-bar > li:last-child {
+.top-nav > li:last-child {
 	border: 0;
 }
 
