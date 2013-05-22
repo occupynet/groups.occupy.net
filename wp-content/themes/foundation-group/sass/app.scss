@@ -640,8 +640,9 @@ ul.organization-listing {
 		@include border-radius(5px, 5px);
 		border: 0;
 		background: $loud;
-		padding: 0 10px;
-		
+		padding: 1px 15px 4px;
+		position: relative;
+		top: 2px;
 	}
 }
 
@@ -659,6 +660,8 @@ ul.organization-listing {
 		font-size: 18px;
 	}
 }
+
+
 
 // single event page
 
