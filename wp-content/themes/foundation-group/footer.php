@@ -5,7 +5,7 @@
 					<div class="row panel">
 
 						<nav class="twelve columns clearfix">
-							<?php bones_footer_links(); ?>
+							<?php// bones_footer_links(); ?>
 						</nav>
 
 						<div class="footer twelve columns">
