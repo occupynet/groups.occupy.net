@@ -178,9 +178,12 @@ a {
 
 .button {
 	background: $base1;
+	color: $base10;
+	cursor: pointer;
 	border: 0;
 	font-size: 18px;
-	@include border-radius(3px, 3px);
+	padding: 5px 15px 3px;
+	@include border-radius(5px, 5px);
 	@include condensed;
 	&:hover {
 		background: $loud;
@@ -481,7 +484,7 @@ table.em-calendar {
 	}
 }
 
-//
+// social media widget
 
 .social-media-mashup .entry-meta {
 	font-weight: normal;
@@ -491,6 +494,77 @@ table.em-calendar {
 	}
 }
 
+
+// email newsletter widget
+
+.alo_easymail_widget {
+	padding-bottom: 10px;
+	.widgettitle {
+		margin: 0 0 .25em;
+	}
+	.input-submit {
+		@extend .button;
+	}	
+}
+
+.alo_easymail_form_table {
+	background: transparent;
+	border: 0;
+	width: 260px;	
+	margin-bottom: 10px;
+	label {
+		font-size: 13px;
+		@include caps;
+		text-align: right;
+		line-height: 28px;
+		padding-right: 3px;
+	}
+	tr:nth-child(even) {
+		background: transparent;
+	}
+	td {
+		font-size: 15px;
+		padding: 5px 2px;
+	}
+}
+
+footer .alo_easymail_widget {
+	padding-bottom: 30px;
+	border-bottom: 1px solid $base3;
+	.widgettitle {
+		float: left;
+		margin-right: 25px;
+		font-size: 30px;
+		line-height: 40px;
+	}
+	.alo_easymail_form_table {
+		width: auto;
+		float: left;
+	}
+	tr {
+		float: left;
+	}
+	td {
+		color: $base10;
+		padding: 0 2px;
+	}
+	label {
+		color: $base10;
+	}
+	input[type=text] {
+		width: 220px;
+		margin-right: 15px;
+	}
+	.input-submit {
+		background: $loud;
+		padding: 7px 15px 5px;
+		position: relative;
+		top: 2px;
+		&:hover {
+			background: $loud-light;
+		}
+	}	
+}
 
 /************* Directory Page ********************/
 
