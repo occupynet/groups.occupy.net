@@ -34,6 +34,15 @@ if( !function_exists( 'custom_fonts_styles' ) ) {
     ));
 
     register_sidebar(array(
+        'id' => 'footerbar',
+        'name' => 'Footer Bar',
+        'description' => 'Displays a full-width widget in the footer.',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h4 class="widgettitle">',
+        'after_title' => '</h4>',
+    ));
+    register_sidebar(array(
         'id' => 'footerleft',
         'name' => 'Left Footer',
         'description' => 'Displays a widget in the left footer.',

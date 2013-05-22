@@ -2,11 +2,15 @@
 			
 				<div class="twelve columns">
 
-					<div class="row">
+					<div class="row panel">
 
 						<nav class="twelve columns clearfix">
 							<?php bones_footer_links(); ?>
 						</nav>
+
+						<div class="footer twelve columns">
+							<?php dynamic_sidebar( 'footerbar' ); ?>
+						</div>
 
 					</div>
 
