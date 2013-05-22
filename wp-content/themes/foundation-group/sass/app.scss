@@ -452,6 +452,25 @@ h4.widgettitle label {
 	}
 }
 
+footer .widget_em_widget {
+	.widgettitle {
+		margin-bottom: 10px;
+	}
+	.event-title {
+		margin-bottom: 0;
+	}
+	li {
+		list-style: none;
+		padding: 0;
+		color: $base10;
+		a {
+			color: $base10;
+		}
+	}
+}
+
+
+
 // event manager calendar widget
 
 table.em-calendar {
@@ -484,6 +503,7 @@ table.em-calendar {
 	}
 }
 
+
 // social media widget
 
 .social-media-mashup .entry-meta {
@@ -493,6 +513,7 @@ table.em-calendar {
 		color: $base6;
 	}
 }
+
 
 
 // email newsletter widget
