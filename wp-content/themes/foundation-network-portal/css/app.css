@@ -654,8 +654,30 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
   margin-top: -5px;
   font-size: 24px; }
 
+/* line 724, ../sass/app.scss */
+.tags {
+  line-height: 1.3; }
+  /* line 726, ../sass/app.scss */
+  .tags .label {
+    background: transparent;
+    -webkit-border-radius: 0 0;
+    -moz-border-radius: 0 / 0;
+    border-radius: 0 / 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666666;
+    font-weight: normal;
+    font-size: 11px;
+    white-space: nowrap; }
+    /* line 734, ../sass/app.scss */
+    .tags .label:after {
+      content: " ›"; }
+    /* line 737, ../sass/app.scss */
+    .tags .label:hover {
+      color: #333333; }
+
 /************* Comments ********************/
-/* line 727, ../sass/app.scss */
+/* line 747, ../sass/app.scss */
 #comment-form-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
@@ -665,33 +687,33 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 736, ../sass/app.scss */
+  /* line 756, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 740, ../sass/app.scss */
+  /* line 760, ../sass/app.scss */
   #main {
     border-bottom: none; }
 
-  /* line 744, ../sass/app.scss */
+  /* line 764, ../sass/app.scss */
   #featured h3 {
     margin-top: 1em;
     padding: 0 30px; }
 
-  /* line 749, ../sass/app.scss */
+  /* line 769, ../sass/app.scss */
   #featured p {
     padding: 0 30px; }
 
-  /* line 754, ../sass/app.scss */
+  /* line 774, ../sass/app.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 762, ../sass/app.scss */
+  /* line 782, ../sass/app.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 766, ../sass/app.scss */
+  /* line 786, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }

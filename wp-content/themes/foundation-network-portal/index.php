@@ -28,7 +28,7 @@
 						
 						<footer class="two columns">
 			
-							<p class="tags"><?php the_tags('', '&nbsp;&rsaquo;<br>', '&nbsp;&rsaquo;'); ?></p>
+							<p class="tags"><?php the_tags('', '<br>', ''); ?></p>
 
 							<div style="clear:both;">
 							</div>
