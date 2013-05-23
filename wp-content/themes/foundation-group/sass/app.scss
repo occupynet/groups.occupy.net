@@ -110,6 +110,10 @@ h1, h1 a {
 	font-size: 13px;
 }
 
+.post_content li {
+	margin: 0 30px .75em;
+}
+
 
 @mixin pull-quotes($font-size, $opacity) {
 	position: relative;
@@ -425,7 +429,7 @@ h4.widgettitle label {
     margin-bottom: 14px;
     margin-top: 14px;
     text-rendering: optimizelegibility;
-    font-family: 'Oswald',sans-serif;
+    font-family: sans-serif;
     font-weight: normal;
     text-transform: uppercase;
     color: $base1;
@@ -434,6 +438,9 @@ h4.widgettitle label {
 // event manager list widget
 
 .widget_em_widget {
+	.widgettitle {
+		margin-bottom: 0;
+	}
 	li  {
 		padding: 10px 0 10px;
 		font-size: 13px;
@@ -443,6 +450,7 @@ h4.widgettitle label {
 		font-weight: normal !important;
 		display: block;
 		padding: 5px 0;
+		line-height: 1.3em;
 	}
 	ul ul li {
 		display: inline;
@@ -603,6 +611,21 @@ ul.organization-listing {
 	list-style: none;
 }
 
+
+/************* News Page ********************/
+
+.nlposts-block-container .nlposts-block-item,
+div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
+	width: 100%;
+}
+
+.nlposts-block-container .nlposts-block-thumbnail-litem a > img,
+div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
+	float: left;
+	margin: 14px 15px auto auto !important;
+}
+
+
 /************* Events Calendar ********************/
 
 .em-events-search-form {
@@ -629,7 +652,6 @@ ul.organization-listing {
 		width: auto;
 		height: 24px;
 		border: 0;
-		
 	}
 	input[type="submit"] {
 		height: 24px;

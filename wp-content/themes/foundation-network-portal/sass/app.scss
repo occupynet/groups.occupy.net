@@ -97,12 +97,22 @@ h1, h1 a {
 	color: $loud;
 }
 
-.intro-text,
-.intro-text p {
+.intro-text {
 	font-size: 1.5em;
-	font-style: italic;
 	line-height: 1.4em;
-	margin-top: 5px;
+	margin-bottom: 30px;
+	p {
+	
+	}
+}
+
+
+.wp-caption-text {
+	font-size: 13px;
+}
+
+.post_content li {
+	margin: 0 30px .75em;
 }
 
 
@@ -144,8 +154,8 @@ h1, h1 a {
 .meta {
 	@include caps;
 	font-size: 12px;
-	color: $base7;
-	font-style: normal;
+	color: $base6;
+	font-style: normal !important;
 }
 
 /************* Elements ********************/
@@ -173,9 +183,12 @@ a {
 
 .button {
 	background: $base1;
+	color: $base10;
+	cursor: pointer;
 	border: 0;
 	font-size: 18px;
-	@include border-radius(3px, 3px);
+	padding: 5px 15px 3px;
+	@include border-radius(5px, 5px);
 	@include condensed;
 	&:hover {
 		background: $loud;
@@ -184,6 +197,7 @@ a {
 		background: $base1;
 	}
 }
+
 
 /************* Header ********************/
 
@@ -229,18 +243,36 @@ a {
 
 
 
-.nav-bar {
+.top-nav {
 	height: 44px;
 	background: $base4;
 	margin: 0 0 30px;
 	padding: 0;
 }
-.nav-bar > li {
+
+.top-nav > li {
 	border: 0;
 	line-height: 44px;
 }
 
-.nav-bar > li.active {
+.top-nav > li > a {
+	color: $base10 !important;
+	&:hover {
+		color: $base10 !important;		
+	}
+}
+
+.top-nav > li > a:first-child {
+	position: relative;
+	padding: 0 15px;
+	display: block;
+	@include condensed;
+	text-decoration: none;
+	font-size: 26px;
+	color: $base10;
+}
+
+.top-nav > li.active {
 	background: $brand !important;
 	a {
 		border: 0;
@@ -253,19 +285,11 @@ a {
 	}
 }
 
-.nav-bar > li > a:first-child {
-	position: relative;
-	padding: 0 15px;
-	display: block;
-	@include condensed;
-	text-decoration: none;
-	font-size: 26px;
-	color: $base10;
-}
 
-.nav-bar > li:last-child {
+.top-nav > li:last-child {
 	border: 0;
 }
+
 
 
 /************* Posts ********************/
@@ -286,7 +310,7 @@ a {
 
 
 #featured {
-	border: 0;
+	border: 10px solid $base9;
 	h3 {
 		margin: 1em 0 .5em;
 		padding: 0 60px;
@@ -303,10 +327,20 @@ a {
 }
 
 .featured-slider {
+	background: $base10;
 }
 
 #featured.orbit div.featured-slider {
 	padding: 0;
+}
+
+.orbit-bullets {
+	margin: 10px 0;
+	opacity: .8;
+}
+
+div.orbit-wrapper div.slider-nav {
+	display: none;
 }
 
 div.orbit-wrapper div.timer {
@@ -314,6 +348,7 @@ div.orbit-wrapper div.timer {
 	right: 0;
 	bottom: 10px;
 }
+
 
 
 /************* Footer ********************/
@@ -380,6 +415,12 @@ footer .panel {
 	}
 }
 
+.sidebar p, .sidebar li {
+	font-size: 13px;
+	line-height: 1.4;
+	word-break: break-word;
+}
+
 h3.nlposts-ulist-title {
 	@extend body;
 	@extend a;
@@ -391,7 +432,7 @@ h4.widgettitle label {
     margin-bottom: 14px;
     margin-top: 14px;
     text-rendering: optimizelegibility;
-    font-family: 'Oswald',sans-serif;
+    font-family: sans-serif;
     font-weight: normal;
     text-transform: uppercase;
     color: $base1;
@@ -400,6 +441,9 @@ h4.widgettitle label {
 // event manager list widget
 
 .widget_em_widget {
+	.widgettitle {
+		margin-bottom: 0;
+	}
 	li  {
 		padding: 10px 0 10px;
 		font-size: 13px;
@@ -409,6 +453,7 @@ h4.widgettitle label {
 		font-weight: normal !important;
 		display: block;
 		padding: 5px 0;
+		line-height: 1.3em;
 	}
 	ul ul li {
 		display: inline;
@@ -417,6 +462,25 @@ h4.widgettitle label {
 		font-size: 12px;
 	}
 }
+
+footer .widget_em_widget {
+	.widgettitle {
+		margin-bottom: 10px;
+	}
+	.event-title {
+		margin-bottom: 0;
+	}
+	li {
+		list-style: none;
+		padding: 0;
+		color: $base10;
+		a {
+			color: $base10;
+		}
+	}
+}
+
+
 
 // event manager calendar widget
 
@@ -451,6 +515,91 @@ table.em-calendar {
 }
 
 
+// social media widget
+
+.social-media-mashup .entry-meta {
+	font-weight: normal;
+	color: $base6;
+	a {
+		color: $base6;
+	}
+}
+
+
+
+// email newsletter widget
+
+.alo_easymail_widget {
+	padding-bottom: 10px;
+	.widgettitle {
+		margin: 0 0 .25em;
+	}
+	.input-submit {
+		@extend .button;
+	}	
+}
+
+.alo_easymail_form_table {
+	background: transparent;
+	border: 0;
+	width: 260px;	
+	margin-bottom: 10px;
+	label {
+		font-size: 13px;
+		@include caps;
+		text-align: right;
+		line-height: 28px;
+		padding-right: 3px;
+	}
+	tr:nth-child(even) {
+		background: transparent;
+	}
+	td {
+		font-size: 15px;
+		padding: 5px 2px;
+	}
+}
+
+footer .alo_easymail_widget {
+	padding-bottom: 30px;
+	min-height: 60px;
+	border-bottom: 1px solid $base3;
+	.widgettitle {
+		float: left;
+		margin-right: 25px;
+		font-size: 30px;
+		line-height: 40px;
+	}
+	.alo_easymail_form_table {
+		width: auto;
+		float: left;
+	}
+	tr {
+		float: left;
+	}
+	td {
+		color: $base10;
+		padding: 0 2px;
+	}
+	label {
+		color: $base10;
+	}
+	input[type=text] {
+		width: 220px;
+		margin-right: 15px;
+	}
+	.input-submit {
+		background: $loud;
+		padding: 7px 15px 5px;
+		position: relative;
+		top: 2px;
+		&:hover {
+			background: $loud-light;
+		}
+	}	
+}
+
+
 
 /************* Directory Page ********************/
 
@@ -467,6 +616,21 @@ ul.organization-listing {
 	list-style: none;
 }
 
+
+/************* News Page ********************/
+
+.nlposts-block-container .nlposts-block-item,
+div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
+	width: 100%;
+}
+
+.nlposts-block-container .nlposts-block-thumbnail-litem a > img,
+div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
+	float: left;
+	margin: 14px 15px auto auto !important;
+}
+
+
 /************* Events Calendar ********************/
 
 .em-events-search-form {
@@ -477,37 +641,47 @@ ul.organization-listing {
 		width: 20%;
 		@include border-radius(12px, 12px);
 		padding-left: 12px;
+		display: inline;
+		font-size: 13px;
+		margin: 0 5px 10px;
 	}
 	input.em-events-search-text {
 		width: 40%;
-		margin-right: 30px;
+		margin: 0 30px 10px 0;
 	}
 	span {
 		color: $base10;
+		font-size: 12px;
 	}
 	select {
 		width: auto;
 		height: 24px;
 		border: 0;
-		background: $base4;
 	}
 	input[type="submit"] {
 		height: 24px;
-		@include border-radius(12px, 12px);
-		background: $loud;
+		line-height: 24px;
+		font-size: 18px;
 		color: $base10;
 		@include condensed;
+		@include border-radius(5px, 5px);
+		border: 0;
+		background: $loud;
+		padding: 1px 15px 4px;
+		position: relative;
+		top: 2px;
 	}
 }
 
 .events-table {
 	border: 0;
-	border-top: 1px solid $base6;
+	border-top: 1px solid $base7;
+	width: 100%;
 	thead {
 		display: none;
 	}
 	tr {
-		border-bottom: 1px solid $base6;
+		border-bottom: 1px solid $base7;
 	}
 	a {
 		font-size: 18px;
@@ -561,12 +735,12 @@ ul.organization-listing {
 	}
 
 	#featured h3{
-		margin-top: .5em;
-		padding: 0 60px;
+		margin-top: 1em;
+		padding: 0 30px;
 	}
 
 	#featured p{
-		padding: 0 60px;
+		padding: 0 30px;
 	}
 
 	#featured h3,
@@ -589,31 +763,4 @@ ul.organization-listing {
 }
 
 
-/************* Directory Page ********************/
-
-section.post_content div h1 {
-	display: none;
-}
-
-.page section.post_content div,
-table.blogs_directory_nav_table {
-	float: none !important;
-}
-
-ul.organization-listing {
-	list-style: none;
-}
-
-/************* News Page ********************/
-
-.nlposts-block-container .nlposts-block-item,
-div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
-	width: 100%;
-}
-
-.nlposts-block-container .nlposts-block-thumbnail-litem a > img,
-div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
-	float: left;
-	margin: 14px 15px auto auto !important;
-}
 
