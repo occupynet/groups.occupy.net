@@ -717,6 +717,25 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 /************* Network Home Page ********************/
 
 
+// event slider
+
+.slider-title {
+	@include condensed;
+}
+.slider-all-events {
+	font-size: 50%;
+}
+.event-image {
+	height: 300px;
+	width: 300px;
+}
+.event-title {
+	@include condensed;
+}
+
+
+// post list
+
 .main-feed h2 {
 	margin-top: -5px;
 	font-size: 24px;

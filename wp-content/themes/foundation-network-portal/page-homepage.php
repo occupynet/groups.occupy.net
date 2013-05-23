@@ -29,7 +29,7 @@ Template Name: Homepage
 				});
 				</script>
 
-				<h2>Upcoming Events <span class="slider-all-events"><a href="/events/">View All</a></span></h2>
+				<h2 class="slider-title">Upcoming Events <span class="slider-all-events"><a href="/events/">View All</a></span></h2>
 				<?php if (class_exists('EM_Events')) {
 					// Get placeholder image defined in Theme Options
 					$placeholder_image = of_get_option('placeholder_image');
