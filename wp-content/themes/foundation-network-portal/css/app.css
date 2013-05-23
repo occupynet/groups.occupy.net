@@ -648,8 +648,14 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
   margin-bottom: 1em;
   line-height: 1.4; }
 
+/************* Network Home Page ********************/
+/* line 719, ../sass/app.scss */
+.main-feed h2 {
+  margin-top: -5px;
+  font-size: 24px; }
+
 /************* Comments ********************/
-/* line 720, ../sass/app.scss */
+/* line 727, ../sass/app.scss */
 #comment-form-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
@@ -659,33 +665,33 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 729, ../sass/app.scss */
+  /* line 736, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 733, ../sass/app.scss */
+  /* line 740, ../sass/app.scss */
   #main {
     border-bottom: none; }
 
-  /* line 737, ../sass/app.scss */
+  /* line 744, ../sass/app.scss */
   #featured h3 {
     margin-top: 1em;
     padding: 0 30px; }
 
-  /* line 742, ../sass/app.scss */
+  /* line 749, ../sass/app.scss */
   #featured p {
     padding: 0 30px; }
 
-  /* line 747, ../sass/app.scss */
+  /* line 754, ../sass/app.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 755, ../sass/app.scss */
+  /* line 762, ../sass/app.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 759, ../sass/app.scss */
+  /* line 766, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }

@@ -2,32 +2,33 @@
 			
 			<div id="content">
 			
-				<div id="main" class="twelve columns clearfix" role="main">
+				<div id="main" class="twelve columns clearfix main-feed" role="main">
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					
-					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
+					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix row'); ?> role="article">
 						
-						<header>
-							
-							<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-							
-							<p class="meta"><?php _e("Posted", "bonestheme"); ?> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> <span class="amp">&</span> <?php _e("filed under", "bonestheme"); ?> <?php the_category(', '); ?>.</p>
-						
+						<header class="two columns">
+
+							<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span>  <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS'); ?></time> &nbsp; <?php the_category(' | '); ?></p>
+													
 						</header> <!-- end article header -->
 					
-						<section class="post_content clearfix">
+						<section class="eight columns post_content clearfix">
+
+							<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+
 							<div class="post-thumbnail">
-							<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
+								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
 							</div>
 
 							<?php the_excerpt('Read more &raquo;'); ?>
 					
 						</section> <!-- end article section -->
 						
-						<footer>
+						<footer class="two columns">
 			
-							<p class="tags"><?php the_tags('<span class="tags-title">Tags:</span> ', ' ', ''); ?></p>
+							<p class="tags"><?php the_tags('', '&nbsp;&rsaquo;<br>', '&nbsp;&rsaquo;'); ?></p>
 
 							<div style="clear:both;">
 							</div>
