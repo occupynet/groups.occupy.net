@@ -28,7 +28,7 @@
 						
 						<footer>
 			
-							<p class="tags"><?php the_tags('', '<br>', ''); ?></p>
+							<p class="tags"><?php the_tags('', ' ', ''); ?></p>
 
 							<div style="clear:both;">
 							</div>

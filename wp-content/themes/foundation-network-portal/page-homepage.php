@@ -8,23 +8,27 @@ Template Name: Homepage
 
 	<div id="content">
 
-		<div id="main" class="twelve columns clearfix" role="main">
-
+		<div id="promo" class="twelve columns clearfix">
+		
 			<!-- Home page intro text -->
 
-			<article role="article">
+			<article role="article" class="home-intro three columns">
 
 				<div class="intro-text">
 					<?php echo get_post_meta($post->ID, 'custom_tagline', true); ?>
 				</div>
+
+			</article>
+
+			<article role="article" class="home-slider nine columns">
 
 				<script>
 				jQuery(document).ready(function(){
 				  $('.bxslider').bxSlider({
 					  minSlides: 3,
 					  maxSlides: 3,
-					  slideWidth: 360,
-					  slideMargin: 20
+					  slideWidth: 220,
+					  slideMargin: 5
 					});
 				});
 				</script>
@@ -35,7 +39,7 @@ Template Name: Homepage
 					$placeholder_image = of_get_option('placeholder_image');
 					echo EM_Events::output( array('format_header'=>'<ul class="bxslider">','format_footer'=>'</ul>','limit'=>5,'orderby'=>'date','format'=>'
 						<li class="slider-item">
-							<div class="event-image"><a href="#_EVENTURL">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{350,250}{/has_image}</a></div>
+							<div class="event-image"><a href="#_EVENTURL">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{220,150}{/has_image}</a></div>
 							<h3 class="event-title"><span class="event-date">#M #j:</span> #_EVENTLINK</h3>
 						</li>
 						'
@@ -44,8 +48,15 @@ Template Name: Homepage
 
 			</article>
 
+		
+		</div>
+		
+		<div id="main" class="twelve columns clearfix" role="main">
+
 
 			<!-- Recent posts -->
+
+			<h2 class="main-title">News </h2>
 
 			<?php
 
