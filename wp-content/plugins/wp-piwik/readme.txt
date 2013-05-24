@@ -3,7 +3,7 @@
 Contributors: Braekling
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 0.9.9.4
+Stable tag: 0.9.9.5
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6046779
 Tags: statistics, stats, analytics, piwik, wpmu
 
@@ -113,6 +113,9 @@ Add WP-Piwik to your /wp-content/plugins folder and enable it as [Network Plugin
 Please update Piwik if not done yet (Piwik 1.11 or higher is recommended)!
 
 == Changelog ==
+
+= 0.9.9.5 =
+* Fatal error on statistics settings page fixed
 
 = 0.9.9.4 =
 * Use Transients API (one week caching)
