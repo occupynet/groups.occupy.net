@@ -71,17 +71,25 @@ Template Name: Homepage
 
 			?>
 				
-			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
+			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
 				
 				<header>
 					
-					<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span>  <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> | <?php the_category(' | '); ?></p>
-
-					<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+					<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time><br><?php the_category('<br>'); ?></p>
 				
 				</header> <!-- end article header -->
 			
+				<footer>
+	
+					<p class="tags"><?php the_tags('', '<br>', ''); ?></p>
+					<div style="clear: both;"></div>
+					
+				</footer> <!-- end article footer -->
+
 				<section class="post_content clearfix">
+
+					<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+
 					<div class="post-thumbnail">
 					<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
 					</div>
@@ -89,15 +97,7 @@ Template Name: Homepage
 					<?php the_excerpt('100'); ?>
 			
 				</section> <!-- end article section -->
-				
-				<footer>
-	
-					<p class="tags"><?php the_tags('<span class="tags-title">Tags:</span> ', ' ', ''); ?></p>
-
-					<div style="clear: both;"></div>
-					
-				</footer> <!-- end article footer -->
-			
+							
 			</article> <!-- end article -->
 								
 			<?php endwhile; ?>	

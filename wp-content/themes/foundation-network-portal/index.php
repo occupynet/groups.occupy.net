@@ -2,7 +2,7 @@
 			
 			<div id="content">
 			
-				<div id="main" class="twelve columns clearfix main-feed" role="main">
+				<div id="main" class="twelve columns clearfix" role="main">
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					

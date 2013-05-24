@@ -736,10 +736,33 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 // post list
 
-.main-feed h2 {
-	margin-top: -5px;
-	font-size: 24px;
+.network-post {
+	padding-bottom: 10px;
+	header {
+		float: left;
+		width: 16%;
+	}
+	.site-name {
+		@include condensed;
+		font-size: 24px;
+		line-height: 25px;
+		display: block;
+		margin: 5px 0;
+	} 
+	footer {
+		float: right;
+		width: 16%;
+	}
+	.post_content {
+		margin: 0 17%;
+	}
+	h2 {
+		margin-top: 0;
+		margin-right: 30px;
+		font-size: 24px;
+	}
 }
+
 
 .tags {
 	line-height: 1.3;
