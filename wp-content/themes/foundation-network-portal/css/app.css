@@ -692,19 +692,32 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
   box-shadow: 0 0 0 white !important;
   border: 0; }
 
-/* line 770, ../sass/app.scss */
+/* line 769, ../sass/app.scss */
+.bx-controls {
+  position: absolute;
+  top: -30px;
+  right: 10px; }
+  /* line 773, ../sass/app.scss */
+  .bx-controls .bx-next {
+    right: 0; }
+  /* line 776, ../sass/app.scss */
+  .bx-controls .bx-prev {
+    right: 40px;
+    left: auto; }
+
+/* line 782, ../sass/app.scss */
 .event-image {
   height: 150px;
   width: auto; }
 
-/* line 774, ../sass/app.scss */
+/* line 786, ../sass/app.scss */
 .event-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal; }
 
-/* line 781, ../sass/app.scss */
+/* line 793, ../sass/app.scss */
 .main-title {
   clear: both;
   padding: 20px 0;
@@ -716,43 +729,43 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
   font-weight: normal;
   border-bottom: 1px solid #cccccc; }
 
-/* line 790, ../sass/app.scss */
+/* line 802, ../sass/app.scss */
 .network-post {
   padding-bottom: 10px; }
-  /* line 792, ../sass/app.scss */
+  /* line 804, ../sass/app.scss */
   .network-post header {
     float: left;
     width: 16%; }
-    /* line 795, ../sass/app.scss */
+    /* line 807, ../sass/app.scss */
     .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
       display: block; }
-  /* line 799, ../sass/app.scss */
+  /* line 811, ../sass/app.scss */
   .network-post .site-name {
     display: block;
     font-weight: bold; }
-  /* line 803, ../sass/app.scss */
+  /* line 815, ../sass/app.scss */
   .network-post footer {
     float: right;
     width: 16%; }
-  /* line 807, ../sass/app.scss */
+  /* line 819, ../sass/app.scss */
   .network-post .post_content {
     margin: 0 17%; }
-  /* line 810, ../sass/app.scss */
+  /* line 822, ../sass/app.scss */
   .network-post h2 {
     margin-top: 0;
     margin-right: 30px;
     font-size: 24px; }
 
-/* line 818, ../sass/app.scss */
+/* line 830, ../sass/app.scss */
 .tags {
   line-height: 1.3; }
-  /* line 820, ../sass/app.scss */
+  /* line 832, ../sass/app.scss */
   .tags .tags-title {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 11px;
     padding: 1px 4px 2px 0; }
-  /* line 825, ../sass/app.scss */
+  /* line 837, ../sass/app.scss */
   .tags .label {
     background: transparent;
     -webkit-border-radius: 0 0;
@@ -764,15 +777,15 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
     font-weight: normal;
     font-size: 11px;
     white-space: nowrap; }
-    /* line 833, ../sass/app.scss */
+    /* line 845, ../sass/app.scss */
     .tags .label:after {
       content: " ›"; }
-    /* line 836, ../sass/app.scss */
+    /* line 848, ../sass/app.scss */
     .tags .label:hover {
       color: #333333; }
 
 /************* Comments ********************/
-/* line 846, ../sass/app.scss */
+/* line 858, ../sass/app.scss */
 #comment-form-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
@@ -782,54 +795,54 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 855, ../sass/app.scss */
+  /* line 867, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 859, ../sass/app.scss */
+  /* line 871, ../sass/app.scss */
   #main {
     border-bottom: none; }
 
-  /* line 863, ../sass/app.scss */
+  /* line 875, ../sass/app.scss */
   #featured h3 {
     margin-top: 1em;
     padding: 0 30px; }
 
-  /* line 868, ../sass/app.scss */
+  /* line 880, ../sass/app.scss */
   #featured p {
     padding: 0 30px; }
 
-  /* line 873, ../sass/app.scss */
+  /* line 885, ../sass/app.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 881, ../sass/app.scss */
+  /* line 893, ../sass/app.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 885, ../sass/app.scss */
+  /* line 897, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }
 @media only screen and (max-width: 768px) {
-  /* line 894, ../sass/app.scss */
+  /* line 906, ../sass/app.scss */
   .network-post header {
     float: none;
     width: 100%; }
-    /* line 897, ../sass/app.scss */
+    /* line 909, ../sass/app.scss */
     .network-post header .site-name {
       display: inline-block; }
-    /* line 900, ../sass/app.scss */
+    /* line 912, ../sass/app.scss */
     .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
       display: inline-block;
       margin-right: 10px; }
-  /* line 905, ../sass/app.scss */
+  /* line 917, ../sass/app.scss */
   .network-post footer {
     display: none; }
-  /* line 908, ../sass/app.scss */
+  /* line 920, ../sass/app.scss */
   .network-post .post_content {
     margin: 0%; }
-  /* line 911, ../sass/app.scss */
+  /* line 923, ../sass/app.scss */
   .network-post h2 {
     margin-right: 0; } }

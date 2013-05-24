@@ -766,6 +766,18 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	box-shadow: 0 0 0 #FFF !important;
 	border: 0;
 }
+.bx-controls {
+	position: absolute;
+	top: -30px;
+	right: 10px;
+	.bx-next {
+		right: 0;
+	}
+	.bx-prev {
+		right: 40px;
+		left: auto;
+	}
+}
 
 .event-image {
 	height: 150px;

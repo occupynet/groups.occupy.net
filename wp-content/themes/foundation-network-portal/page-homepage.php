@@ -28,6 +28,8 @@ Template Name: Homepage
 					  minSlides: 3,
 					  maxSlides: 3,
 					  slideWidth: 220,
+					  controls: true,
+					  pager: false,
 					  slideMargin: 5
 					});
 				});
