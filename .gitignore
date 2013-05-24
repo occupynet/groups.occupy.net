@@ -32,3 +32,5 @@ sitemap.xml.gz
 wp-snapshots/
 wp-content/plugins/social-media-mashup/smm-cache/
 */.sass-cache/
+wp-content/themes/foundation-network-portal/.sass-cache/
+wp-content/themes/foundation-group/.sass-cache/
