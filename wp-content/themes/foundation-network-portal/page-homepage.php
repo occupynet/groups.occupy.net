@@ -75,13 +75,13 @@ Template Name: Homepage
 				
 				<header>
 					
-					<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time><br><?php the_category('<br>'); ?></p>
+					<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></time> <?php the_category(' '); ?></p>
 				
 				</header> <!-- end article header -->
 			
 				<footer>
 	
-					<p class="tags"><?php the_tags('', '<br>', ''); ?></p>
+					<p class="tags"><?php the_tags('', ' ', ''); ?></p>
 					<div style="clear: both;"></div>
 					
 				</footer> <!-- end article footer -->

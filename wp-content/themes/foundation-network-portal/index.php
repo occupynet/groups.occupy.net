@@ -8,13 +8,13 @@
 					
 					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix row'); ?> role="article">
 						
-						<header class="two columns">
+						<header>
 
-							<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span>  <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS'); ?></time> &nbsp; <?php the_category(' | '); ?></p>
+							<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span>  <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS'); ?></time> <?php the_category(' '); ?></p>
 													
 						</header> <!-- end article header -->
 					
-						<section class="eight columns post_content clearfix">
+						<section class="post_content clearfix">
 
 							<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
 
@@ -26,7 +26,7 @@
 					
 						</section> <!-- end article section -->
 						
-						<footer class="two columns">
+						<footer>
 			
 							<p class="tags"><?php the_tags('', '<br>', ''); ?></p>
 

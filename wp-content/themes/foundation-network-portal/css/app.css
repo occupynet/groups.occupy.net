@@ -679,16 +679,13 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
   .network-post header {
     float: left;
     width: 16%; }
-  /* line 745, ../sass/app.scss */
+    /* line 744, ../sass/app.scss */
+    .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
+      display: block; }
+  /* line 748, ../sass/app.scss */
   .network-post .site-name {
-    font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 25px;
     display: block;
-    margin: 5px 0; }
+    font-weight: bold; }
   /* line 752, ../sass/app.scss */
   .network-post footer {
     float: right;
@@ -770,4 +767,22 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
   /* line 834, ../sass/app.scss */
   ol.commentlist div.avatar {
+    margin-right: 0; } }
+@media only screen and (max-width: 768px) {
+  /* line 843, ../sass/app.scss */
+  .network-post header {
+    float: none;
+    width: 100%; }
+    /* line 846, ../sass/app.scss */
+    .network-post header .site-name, .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
+      display: inline-block;
+      margin-right: 10px; }
+  /* line 851, ../sass/app.scss */
+  .network-post footer {
+    display: none; }
+  /* line 854, ../sass/app.scss */
+  .network-post .post_content {
+    margin: 0%; }
+  /* line 857, ../sass/app.scss */
+  .network-post h2 {
     margin-right: 0; } }

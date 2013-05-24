@@ -741,13 +741,13 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	header {
 		float: left;
 		width: 16%;
+		time, a {
+			display: block;
+		}
 	}
 	.site-name {
-		@include condensed;
-		font-size: 24px;
-		line-height: 25px;
 		display: block;
-		margin: 5px 0;
+		font-weight: bold;
 	} 
 	footer {
 		float: right;
@@ -837,5 +837,26 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	
 }
 
+@media only screen and (max-width: 768px) {
 
+	.network-post {
+		header {
+			float: none;
+			width: 100%;
+			.site-name, time, a {
+				display: inline-block;
+				margin-right: 10px;
+			}
+		}
+		footer {
+			display: none;
+		}
+		.post_content {
+			margin: 0%;
+		}
+		h2 {
+			margin-right: 0;
+		}
+	}
 
+}
