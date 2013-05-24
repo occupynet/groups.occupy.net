@@ -133,7 +133,7 @@ a, h3.nlposts-ulist-title {
   font-size: 80%; }
 
 /* line 185, ../sass/app.scss */
-.btn, .btn-loud, .intro-button, .alo_easymail_widget .input-submit {
+.btn, .btn-loud, .intro-btn, .alo_easymail_widget .input-submit {
   background: #1a1a1a;
   color: white;
   cursor: pointer;
@@ -149,21 +149,21 @@ a, h3.nlposts-ulist-title {
   letter-spacing: 1px;
   font-weight: normal; }
   /* line 195, ../sass/app.scss */
-  .btn:hover, .btn-loud:hover, .intro-button:hover, .alo_easymail_widget .input-submit:hover {
+  .btn:hover, .btn-loud:hover, .intro-btn:hover, .alo_easymail_widget .input-submit:hover {
     background: #c91c22; }
   /* line 198, ../sass/app.scss */
-  .btn:active, .btn-loud:active, .intro-button:active, .alo_easymail_widget .input-submit:active {
+  .btn:active, .btn-loud:active, .intro-btn:active, .alo_easymail_widget .input-submit:active {
     background: #1a1a1a; }
 
 /* line 203, ../sass/app.scss */
-.btn-loud, .intro-button {
+.btn-loud, .intro-btn {
   background: #c91c22; }
   /* line 206, ../sass/app.scss */
-  .btn-loud:hover, .intro-button:hover {
+  .btn-loud:hover, .intro-btn:hover {
     background: #e3353b;
     color: white; }
   /* line 210, ../sass/app.scss */
-  .btn-loud:active, .intro-button:active {
+  .btn-loud:active, .intro-btn:active {
     background: #c91c22; }
 
 /************* Header ********************/
@@ -662,7 +662,7 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 /************* Network Home Page ********************/
 /* line 739, ../sass/app.scss */
-.intro-button {
+.intro-btn {
   display: inline-block;
   margin-top: 20px;
   padding: 5px 20px;
