@@ -318,7 +318,7 @@ function show_template() {
     global $template;
 
     if ( is_user_logged_in() ) {
-        print_r($template);
+        echo ($template);
     }
 }
 

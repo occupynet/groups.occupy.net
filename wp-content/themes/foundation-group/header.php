@@ -45,13 +45,6 @@
 		<!-- bring in theme options styles -->
 		<?php 
 
-		$site_name_display = of_get_option('site_name_display');
-		if ($site_name_display) {
-			$site_name = $site_name_display;
-		} else {
-			$site_name = bloginfo('name');
-		}
-
 		$footer_text = of_get_option('footer_text');
 
 		$heading_typography = of_get_option('heading_typography');
