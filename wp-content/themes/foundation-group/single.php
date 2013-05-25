@@ -27,6 +27,7 @@
 						<footer>
 
 							<p class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?>.</p>
+							<?php edit_post_link('edit', '<p class="meta edit-link">', '</p>'); ?>
 			
 							<?php the_tags('<p class="tags">', ' ', '</p>'); ?>
 							
