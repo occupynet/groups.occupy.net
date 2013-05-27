@@ -198,6 +198,14 @@ a {
 	}
 }
 
+.post-edit-link {
+	padding: 1px 7px;
+	border: 1px solid $loud-light;
+	font-size: 12px;
+	@include caps;
+}
+
+
 /************* Header ********************/
 
 .searchform {
