@@ -467,6 +467,14 @@ div.panel {
 	border-bottom: 1px dotted #FFF;
 }
 
+footer .panel .widget {
+	border-bottom: 0;
+}
+
+.footer.twelve.columns {
+	border-bottom: 1px solid $base3;
+	padding-bottom: 20px;
+}
 
 .widgettitle {
 	@include condensed;
@@ -627,7 +635,7 @@ table.em-calendar {
 .alo_easymail_widget {
 	padding-bottom: 10px;
 	.widgettitle {
-		margin: 0 0 .25em;
+		margin: 0;
 	}
 	.input-submit {
 		@extend .button;
@@ -658,7 +666,6 @@ table.em-calendar {
 footer .alo_easymail_widget {
 	padding-bottom: 30px;
 	min-height: 60px;
-	border-bottom: 1px solid $base3;
 	.widgettitle {
 		float: left;
 		margin-right: 25px;
