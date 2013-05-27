@@ -393,6 +393,17 @@ footer .panel {
 
 /************* Widgets ********************/
 
+div.panel {
+	padding: 0;
+}
+
+.panel .widget {
+	padding: 20px;
+	margin: 0;
+	border-bottom: 1px dotted #FFF;
+}
+
+
 .widgettitle {
 	@include condensed;
 	font-size: 24px;
@@ -435,6 +446,10 @@ h4.widgettitle label {
     text-transform: uppercase;
     color: $base1;
 }
+
+
+// login widget 
+
 
 // event manager list widget
 
