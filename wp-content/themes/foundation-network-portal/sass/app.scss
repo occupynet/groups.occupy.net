@@ -380,6 +380,8 @@ ul.flyout,
 
 #featured {
 	border: 10px solid $base9;
+	height: 308px;
+	overflow: hidden;
 	h3 {
 		margin: 1em 0 .5em;
 		padding: 0 60px;

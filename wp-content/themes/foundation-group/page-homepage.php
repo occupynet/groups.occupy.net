@@ -10,7 +10,7 @@ Template Name: Homepage
 
 		<div id="main" class="eight columns clearfix" role="main">
 
-			<article role="article">
+			<article role="article" class="main-slider">
 
 				<?php
 					$orbit_slider = of_get_option('orbit_slider'); //Set in Theme Options
