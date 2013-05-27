@@ -239,54 +239,98 @@ a {
 
 /************* Navigation ********************/
 
-
-
-
 .top-nav {
 	height: 44px;
 	background: $base4;
 	margin: 0 0 30px;
 	padding: 0;
-}
-
-.top-nav > li {
-	border: 0;
-	line-height: 44px;
-}
-
-.top-nav > li > a {
-	color: $base10 !important;
-	&:hover {
-		color: $base10 !important;		
-	}
-}
-
-.top-nav > li > a:first-child {
-	position: relative;
-	padding: 0 15px;
-	display: block;
-	@include condensed;
-	text-decoration: none;
-	font-size: 26px;
-	color: $base10;
-}
-
-.top-nav > li.active {
-	background: $brand !important;
-	a {
+	& > li {
 		border: 0;
-	}
-	&:hover {
-		background: $brand !important;
-		a {
+		line-height: 44px;
+		&:last-child {
+			border: 0;
+		}
+		&:hover {
+			background: $base3;
+		}
+		&.active {
+			background: $brand !important;
+			a {
+				border: 0;
+			}
+			&:hover {
+				background: $brand !important;
+				a {
+					color: $base10 !important;
+				}
+			}
+		}
+		&.has-flyout {
+			& > a:first-child {
+				padding-right: 26px;
+				position: relative;
+				&:after {
+					right: 10px;
+				}
+			}
+			& > a.flyout-toggle {
+				padding: 22px 10px;
+			}
+		}
+		& > a {
 			color: $base10 !important;
+			&:first-child {
+				position: relative;
+				padding: 0 15px;
+				display: block;
+				@include condensed;
+				text-decoration: none;
+				font-size: 26px;
+				color: $base10;
+			}
+			&:hover {
+				color: $base10 !important;		
+			}
 		}
 	}
 }
 
 
-.top-nav > li:last-child {
-	border: 0;
+ul.flyout, 
+.top-nav li ul {
+    background: $base5;
+    top: 44px;
+    border: 0;
+    left: 1px;
+    width: auto;
+    @include box-shadow(0 0 0 #FFF);
+    li {
+      width: 100%;
+      margin: 0;
+      border: 0;
+      @include caps;
+	    a {
+	      @extend .sans;
+	      font-size: 13px;
+	      font-weight: bold;
+	      line-height: 1em;
+	      padding: 11px 15px;
+	      width: 100%;
+	      background: $base3;
+	      color: $base10;
+	      border: 0;
+	      border-top: 1px solid $base4;
+	      white-space: nowrap;
+	      box-shadow: inherit;
+	    }
+	    a:hover {
+		    background: $base2;
+		    color: $base10;
+	    }
+    }
+    li:last-child {
+      border: 0;
+    }
 }
 
 
