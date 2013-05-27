@@ -205,6 +205,11 @@ a {
 	@include caps;
 }
 
+ul.pagination li.current a {
+	background: $brand;
+}
+
+
 
 /************* Header ********************/
 
