@@ -836,6 +836,7 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	}
 	.label {
 		background: transparent;
+		border: 0;
 		@include border-radius(0,0);
 		@include caps;
 		color: $base4;

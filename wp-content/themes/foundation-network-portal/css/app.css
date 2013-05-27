@@ -768,6 +768,7 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
   /* line 837, ../sass/app.scss */
   .tags .label {
     background: transparent;
+    border: 0;
     -webkit-border-radius: 0 0;
     -moz-border-radius: 0 / 0;
     border-radius: 0 / 0;
@@ -777,15 +778,15 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
     font-weight: normal;
     font-size: 11px;
     white-space: nowrap; }
-    /* line 845, ../sass/app.scss */
+    /* line 846, ../sass/app.scss */
     .tags .label:after {
       content: " ›"; }
-    /* line 848, ../sass/app.scss */
+    /* line 849, ../sass/app.scss */
     .tags .label:hover {
       color: #333333; }
 
 /************* Comments ********************/
-/* line 858, ../sass/app.scss */
+/* line 859, ../sass/app.scss */
 #comment-form-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
@@ -795,54 +796,54 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 867, ../sass/app.scss */
+  /* line 868, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 871, ../sass/app.scss */
+  /* line 872, ../sass/app.scss */
   #main {
     border-bottom: none; }
 
-  /* line 875, ../sass/app.scss */
+  /* line 876, ../sass/app.scss */
   #featured h3 {
     margin-top: 1em;
     padding: 0 30px; }
 
-  /* line 880, ../sass/app.scss */
+  /* line 881, ../sass/app.scss */
   #featured p {
     padding: 0 30px; }
 
-  /* line 885, ../sass/app.scss */
+  /* line 886, ../sass/app.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 893, ../sass/app.scss */
+  /* line 894, ../sass/app.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 897, ../sass/app.scss */
+  /* line 898, ../sass/app.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }
 @media only screen and (max-width: 768px) {
-  /* line 906, ../sass/app.scss */
+  /* line 907, ../sass/app.scss */
   .network-post header {
     float: none;
     width: 100%; }
-    /* line 909, ../sass/app.scss */
+    /* line 910, ../sass/app.scss */
     .network-post header .site-name {
       display: inline-block; }
-    /* line 912, ../sass/app.scss */
+    /* line 913, ../sass/app.scss */
     .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
       display: inline-block;
       margin-right: 10px; }
-  /* line 917, ../sass/app.scss */
+  /* line 918, ../sass/app.scss */
   .network-post footer {
     display: none; }
-  /* line 920, ../sass/app.scss */
+  /* line 921, ../sass/app.scss */
   .network-post .post_content {
     margin: 0%; }
-  /* line 923, ../sass/app.scss */
+  /* line 924, ../sass/app.scss */
   .network-post h2 {
     margin-right: 0; } }

@@ -54,7 +54,7 @@
 						
 						<footer>
 	
-							<p class="tags"><?php the_tags('<span class="tags-title">Tags:</span> ', ' ', ''); ?></p>
+							<p class="tags"><?php the_tags('<span class="tags-title"></span> ', ' ', ''); ?></p>
 
 							<div style="clear:both;"></div>
 							

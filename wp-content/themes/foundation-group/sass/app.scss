@@ -450,6 +450,24 @@ h4.widgettitle label {
 
 // login widget 
 
+.widget_loginwithajaxwidget .widgettitle {
+	margin-bottom: 5px;
+}
+
+.lwa {
+	table {
+		background: transparent;
+		border: 0;
+	}
+	td {
+		padding-top: 0;
+		text-transform: uppercase;
+		a {
+			padding: 3px;
+		}
+	}
+}
+
 
 // event manager list widget
 
@@ -725,6 +743,34 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	}
 }
 
+
+// post list
+
+
+.tags {
+	line-height: 1.3;
+	.tags-title {
+		@include caps;
+		font-size: 11px;
+		padding: 1px 4px 2px 0;
+	}
+	.label {
+		background: transparent;
+		border: 0;
+		@include border-radius(0,0);
+		@include caps;
+		color: $base4;
+		font-weight: normal;
+		font-size: 11px;
+		white-space: nowrap;
+		&:after {
+			content: ' ›'
+		}
+		&:hover {
+			color: $base2;
+		}
+	}
+}
 
 
 /************* Comments ********************/
