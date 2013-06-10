@@ -8,8 +8,9 @@ var simple_fields_googlemap = (function($) {
 		;
 
 	return {
-		
+
 		init: function(){
+			
 			this.load_map_script();
 
 			// Listen for added field groups
@@ -90,7 +91,7 @@ var simple_fields_googlemap_map = (function($) {
 				metaboxDiv.find(".simple-fields-fieldtype-googlemap-selected-positions").show();
 				
 				// Output rounded coords on screen beause like 10 digits is just to noisy
-				var coefficient = Math.pow(10, 4);
+				var coefficient = Math.pow(10, 5);
 				var roundedLat = Math.round(pos.lat() * coefficient) / coefficient;
 				var roundedLng = Math.round(pos.lng() * coefficient) / coefficient;
 				metaboxDiv.find(".simple-fields-field-googlemap-selected-lat").text(roundedLat);
@@ -225,6 +226,7 @@ var simple_fields_googlemap_map = (function($) {
 					var place = autocomplete.getPlace();
 					
 					if (place.geometry === undefined) {
+
 						// console.log("No full place selected in autocomplete.");
 
 						// no place found/selected in autocomplete drop down, but perhaps there is a lat lng entered
@@ -233,7 +235,7 @@ var simple_fields_googlemap_map = (function($) {
 						// 48.858278 2.294254
 						// so perhaps minus then number.dot.number pehaps comma then perhaps number then number.dot.number
 						var entered_address = address_input.get(0).value;
-						var matches = entered_address.match(/(-?\d+\.\d+)[, ](-?\d+\.\d+)/);
+						var matches = entered_address.match(/(-?\d+\.\d+), ?(-?\d+\.\d+)/);
 						if (matches && matches.length === 3) {
 							
 							// Woha! Looks like a lat/lng position
@@ -293,6 +295,12 @@ var simple_fields_googlemap_map = (function($) {
 
 				});
 
+			}); // idle
+
+			// change zoom level on map when select with preferred zoom level is changed
+			metaboxDiv.on("change", ".simple-fields-fieldtype-googlemap-preferred-zoom select", function(e) {
+				var zoom = parseInt(this.value, 10);
+				if ( ! isNaN(zoom) ) map.setZoom( zoom );
 			});
 
 		} // add_listeners

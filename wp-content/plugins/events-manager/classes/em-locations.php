@@ -187,6 +187,7 @@ class EM_Locations extends EM_Object implements Iterator {
 	 * @return array
 	 */
 	function build_sql_conditions( $args = array(), $count=false ){
+	    self::$context = EM_POST_TYPE_LOCATION;
 		global $wpdb;
 		$events_table = EM_EVENTS_TABLE;
 		$locations_table = EM_LOCATIONS_TABLE;
@@ -226,11 +227,19 @@ class EM_Locations extends EM_Object implements Iterator {
 		    }
 		}
 		//status
-		if( array_key_exists('status',$args) && is_numeric($args['status']) ){
-			$null = ($args['status'] == 0) ? ' OR `location_status` = 0':'';
-			$conditions['status'] = "(`location_status`={$args['status']}{$null} )";
-		}else{
-			$conditions['status'] = "(`location_status` IS NOT NULL)";
+		$conditions['status'] = "(`location_status` >= 0)"; //pending and published if status is not explicitly defined (Default is 1)
+		if( array_key_exists('status',$args) ){ 
+		    if( is_numeric($args['status']) ){
+				$conditions['status'] = "(`location_status`={$args['status']} )"; //trash (-1), pending, (0) or published (1)
+			}elseif( $args['status'] == 'pending' ){
+			    $conditions['status'] = "(`location_status`=0)"; //pending
+			}elseif( $args['status'] == 'publish' ){
+			    $conditions['status'] = "(`location_status`=1)"; //published
+		    }elseif( $args['status'] === null || $args['status'] == 'draft' ){
+			    $conditions['status'] = "(`location_status` IS NULL )"; //show draft items
+			}elseif( $args['status'] == 'trash' ){
+			    $conditions['status'] = "(`location_status` = -1 )"; //show trashed items
+			}
 		}
 		//private locations
 		if( empty($args['private']) ){
@@ -253,6 +262,7 @@ class EM_Locations extends EM_Object implements Iterator {
 	 * @see wp-content/plugins/events-manager/classes/EM_Object#build_sql_orderby()
 	 */
 	function build_sql_orderby( $args, $accepted_fields, $default_order = 'ASC' ){
+	    self::$context = EM_POST_TYPE_LOCATION;
 		return apply_filters( 'em_locations_build_sql_orderby', parent::build_sql_orderby($args, $accepted_fields, get_option('dbem_events_default_order')), $args, $accepted_fields, $default_order );
 	}
 	
@@ -261,6 +271,7 @@ class EM_Locations extends EM_Object implements Iterator {
 	 * @see wp-content/plugins/events-manager/classes/EM_Object::get_default_search()
 	 */
 	function get_default_search($array = array()){
+	    self::$context = EM_POST_TYPE_LOCATION;
 		$defaults = array(
 			'eventful' => false, //Locations that have an event (scope will also play a part here
 			'eventless' => false, //Locations WITHOUT events, eventful takes precedence

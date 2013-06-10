@@ -109,7 +109,9 @@ class EM_Event_Post_Admin{
 						if( $EM_Event->is_published() ){ $EM_Event->set_status(0, true); } //no publishing and editing... security threat
 					}
 					//now update the db
-					$wpdb->query("UPDATE ".EM_EVENTS_TABLE." SET event_name='{$EM_Event->event_name}', event_owner='{$EM_Event->event_owner}', event_slug='{$EM_Event->event_slug}', event_status={$event_status}, event_private={$EM_Event->event_private} WHERE event_id='{$EM_Event->event_id}'");
+					$where_array = array($EM_Event->event_name, $EM_Event->event_owner, $EM_Event->event_slug, $EM_Event->event_private, $EM_Event->event_id);
+					$sql = $wpdb->prepare("UPDATE ".EM_EVENTS_TABLE." SET event_name=%s, event_owner=%d, event_slug=%s, event_status={$event_status}, event_private=%d WHERE event_id=%d", $where_array);
+					$wpdb->query($sql);
 					if( $EM_Event->is_recurring() &&  $EM_Event->is_published()){
 						//recurrences are (re)saved only if event is published
 						$EM_Event->save_events();
@@ -153,7 +155,7 @@ class EM_Event_Post_Admin{
 		if(get_post_type($post_id) == EM_POST_TYPE_EVENT){
 			global $EM_Notices;
 			$EM_Event = em_get_event($post_id,'post_id');
-			$EM_Event->set_status(null);
+			$EM_Event->set_status(-1);
 			$EM_Notices->remove_all(); //no validation/notices needed
 		}
 	}
@@ -167,9 +169,9 @@ class EM_Event_Post_Admin{
 	
 	public static function untrashed_post($post_id){
 		if(get_post_type($post_id) == EM_POST_TYPE_EVENT){
-			global $EM_Notices;
-			$EM_Event = em_get_event($post_id,'post_id');			
-			$EM_Event->set_status(1);
+			global $EM_Notices, $EM_Event;
+			$EM_Event = new EM_Event($post_id, 'post_id'); //get a refreshed $EM_Event because otherwise statuses don't get updated by WP
+			$EM_Event->set_status( $EM_Event->get_status() );
 			$EM_Notices->remove_all(); //no validation/notices needed
 		}
 	}
@@ -243,19 +245,22 @@ class EM_Event_Post_Admin{
 	
 	public static function meta_box_ms_categories(){
 		global $EM_Event;
-		$categories = EM_Categories::get(array('orderby'=>'category_name','hide_empty'=>false));
+		EM_Object::ms_global_switch();
+		$categories = EM_Categories::get(array('hide_empty'=>false));
 		?>
 		<?php if( count($categories) > 0 ): ?>
-			<p>
-				<?php foreach( $categories as $EM_Category ):?>
-				<label><input type="checkbox" name="event_categories[]" value="<?php echo $EM_Category->id; ?>" <?php if($EM_Event->get_categories()->has($EM_Category->id)) echo 'checked="checked"'; ?> /> <?php echo $EM_Category->name ?></label><br />			
-				<?php endforeach; ?>
+			<p class="ms-global-categories">
+			 <?php $selected = $EM_Event->get_categories()->get_ids(); ?>
+			 <?php $walker = new EM_Walker_Category(); ?>
+			 <?php $args_em = array( 'hide_empty' => 0, 'name' => 'event_categories[]', 'hierarchical' => true, 'id' => EM_TAXONOMY_CATEGORY, 'taxonomy' => EM_TAXONOMY_CATEGORY, 'selected' => $selected, 'walker'=> $walker); ?>
+			 <?php echo walk_category_dropdown_tree($categories, 0, $args_em); ?>
 			</p>
 		<?php else: ?>
 			<p><?php sprintf(__('No categories available, <a href="%s">create one here first</a>','dbem'), get_bloginfo('wpurl').'/wp-admin/admin.php?page=events-manager-categories'); ?></p>
 		<?php endif; ?>
 		<!-- END Categories -->
 		<?php
+		EM_Object::ms_global_switch_back();
 	}
 }
 add_action('admin_init',array('EM_Event_Post_Admin','init'));

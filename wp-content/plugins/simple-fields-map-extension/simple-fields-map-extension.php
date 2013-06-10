@@ -3,21 +3,96 @@
 Plugin Name: Simple Fields Map extension
 Plugin URI: http://earthpeople.se/
 Description: Adds a Google Maps-field to Simple Fields
-Version: 1.2.2
+Version: 1.3.1
 Author: Earth People
 Author URI: http://earthpeople.se/
 License: GPL2
 */
 
-add_action("simple_fields_register_field_types", "simple_fields_field_googlemaps_register"); 
+/* Add example post type and simple fields to test plugin. 
+// In case I forget to comment it out, it will only be called when using on my test domain (hopefully pretty unique name :)
+if ( "playground-nightly.ep" === $_SERVER["HTTP_HOST"] ) {
 
+	// Full example to add post type with maps and stuff
+	add_action("init", function() {
+
+		register_post_type( "sf_map_test", array(
+			"label" => "SF Map Extension Test",
+			"public" => true
+		));
+
+		simple_fields_register_field_group('sf_map_test_field_fg',
+			array (
+				'name' => 'Map test',
+				'repeatable' => 1,
+				'fields' => array(
+					array(
+						"slug" => "sf_map",
+						"name" => "Test map",
+						"type" => "googlemaps",
+						"options" => array(
+							"defaultZoomLevel" => 10,
+							"defaultMapTypeId" => "HYBRID", // ROADMAP | SATELLITE | HYBRID | TERRAIN
+							"defaultLocationLat" => 40.71435,
+							"defaultLocationLng" => -74.00597,
+							"defaultZoomLevel" => 10
+						)
+					)
+				)
+			)
+		);
+
+		simple_fields_register_post_connector('sf_map_test', array(
+			"name" => "Map extension post connector",
+			"field_groups" => array(
+				array("slug" => "sf_map_test_field_fg")
+			),
+			"post_types" => "sf_map_test"
+		));
+
+		simple_fields_register_post_type_default('sf_map_test', 'sf_map_test');
+
+	});
+
+	add_filter( "the_content", function($str) {
+		$str .= "<pre>" . print_r( simple_fields_values('sf_map'), true) . "</pre>";
+		return $str;
+	} );
+
+}
+//*
+
+
+// Check if Simple Fields is installed and notify user if not
+function simple_fields_field_googlemaps_check_simple_fields_installed() {
+
+	$plugin_is_active = is_plugin_active("Simple-Fields-GIT/simple_fields.php") || is_plugin_active("Simple-Fields/simple_fields.php");
+	if ( ! $plugin_is_active ) {
+		?>
+		<div class="error">
+			<p><?php _e('To use the plugin <em>Simple Fields Map Extension</em> you must also have <a target="_blank" href="http://wordpress.org/extend/plugins/simple-fields/">Simple Fields</a> installed.', 'simple-fields-field-googlemaps'); ?></p>
+		</div>
+		<?php
+	}
+
+}
+add_action("admin_notices", "simple_fields_field_googlemaps_check_simple_fields_installed");
+
+
+/**
+ * Function that is called from simple fields
+ */ 
 function simple_fields_field_googlemaps_register() {
+
+	/**
+	 * Main class for the google maps extension
+	 */
 	class simple_fields_field_googlemaps extends simple_fields_field {
 	
 		public 
 			$key = "googlemaps", 
 			$name = "Google Maps location",
-			$version = "1.2.1";
+			$version = "1.3.1";
 		
 		function __construct() {
 			parent::__construct();
@@ -139,7 +214,20 @@ function simple_fields_field_googlemaps_register() {
 			$formatted_address 	= isset($saved_values["formatted_address"]) ? $saved_values["formatted_address"] : "";
 			$address_components	= isset($saved_values["address_components"]) ? $saved_values["address_components"] : "";
 			$name				= isset($saved_values["name"]) ? $saved_values["name"] : "";
+			$saved_preferred_zoom	= ( isset( $saved_values["preferred_zoom"] ) && is_numeric($saved_values["preferred_zoom"]) ) ? (int) $saved_values["preferred_zoom"] : "";
+
+			$str_zoom_options = sprintf( '<select name="%1$s">', $this->get_options_name("preferred_zoom") );
+			$str_zoom_options .= sprintf('<option value="%1$s">%2$s</option>', "", __("None preferred selected", "simple-fields-field-googlemaps"));
+			$ranges = range(0,21);
+			$ranges[0] = __("0 - whole earth visible", "simple-fields-field-googlemaps");
+			$ranges[21] = __("21 - very close", "simple-fields-field-googlemaps");
+			foreach ( $ranges as $one_zoom_range_key => $one_zoom_range_value ) {
+				$str_zoom_options .= sprintf( '<option value="%1$s" %3$s>%2$s</option>', $one_zoom_range_key, $one_zoom_range_value, ($one_zoom_range_key === $saved_preferred_zoom) ? " selected " : "" );
+			}
+			$str_zoom_options .= "</select>";
 			
+			$str_zoom = $str_zoom_options;
+
 			$output .= sprintf(
 				'
 					<div 
@@ -157,14 +245,25 @@ function simple_fields_field_googlemaps_register() {
 					<input type=hidden name=%10$s value="%11$s" class="simple-fields-field-googlemap-formatted_address" />
 					<input type=hidden name=%12$s value="%13$s" class="simple-fields-field-googlemap-address_components" />
 					<p class="simple-fields-fieldtype-googlemap-selected-positions">
-						Position: 
+						
+						<span class="simple-fields-fieldtype-googlemap-preferred-zoom">
+							<strong>%21$s:</strong>
+							<br>
+							%20$s
+						</span>
+						
+						<br>
+
+						<strong>Position</strong>: 
 						<a class="simple-fields-fieldtype-googlemap-marker-remove" href="#">%16$s</a>
 						<span class="simple-fields-fieldtype-googlemap-selected-positions-inner">
-							latitude <span class="simple-fields-field-googlemap-selected-lat">%5$s</span>,
+							latitude <span class="simple-fields-field-googlemap-selected-lat">%5$s</span>
+							<br>
 							longitude <span class="simple-fields-field-googlemap-selected-lng">%6$s</span>
 							<span class="simple-fields-field-googlemap-selected-name">%15$s</span>
 							<span class="simple-fields-field-googlemap-selected-formatted_address">%11$s</span>
 						</span>
+
 					</p>
 					<p><a class="simple-fields-fieldtype-googlemap-marker-add" href="#">%17$s</a></p>
 					<p class="simple-fields-fieldtype-googlemap-address-search">
@@ -178,8 +277,8 @@ function simple_fields_field_googlemaps_register() {
 				round($lat_saved, 5),
 				round($lng_saved, 5),
 				$options["defaultMapTypeId"],
-				$options["defaultZoomLevel"],
-				__("Search company/address or lat/lng coordinates", "simple-fields-field-googlemaps"), // 9
+				empty($saved_preferred_zoom) ? $options["defaultZoomLevel"] : $saved_preferred_zoom, // use preferred over default
+				__("Search company/address or lat,lng", "simple-fields-field-googlemaps"), // 9
 				$this->get_options_name("formatted_address"), // 10
 				esc_attr($formatted_address),
 				$this->get_options_name("address_components"), // 12
@@ -189,7 +288,9 @@ function simple_fields_field_googlemaps_register() {
 				__("(remove)", "simple-fields-field-googlemaps"), // 16
 				__("Add marker/location", "simple-fields-field-googlemaps"), // 17
 				$lat_init_pos, // 18
-				$lng_init_pos  // 19
+				$lng_init_pos,  // 19
+				$str_zoom, // 20
+				__("Preferred zoom", "simple-fields-field-googlemaps") // 21
 			);
 			
 			return $output;
@@ -242,6 +343,7 @@ function simple_fields_field_googlemaps_register() {
 			// https://developers.google.com/maps/documentation/staticmaps/
 			$static_map_base = "http://maps.googleapis.com/maps/api/staticmap?sensor=false";
 			foreach ($values as $key => $val) {
+				
 				$arr_static_maps = array();
 				foreach($arr_sizes as $size_key => $size_vals) {
 	
@@ -255,9 +357,13 @@ function simple_fields_field_googlemaps_register() {
 						$markers .= $val["lat"] . "," . $val["lng"];
 					}
 	
+					// zoom order works like this: 
+					// 1. $options["static_maps_zoom"], if set. got from arg to simple_fields_value or default val
+					// 2. $val['preferred_zoom'], if set. is set in gui. is empty if not set, but can be 0 (then it is set)
+
 					$static_map = add_query_arg(array(
 						"center" 	=> $val["lat"] . "," . $val["lng"],
-						"zoom" 		=> $options["static_maps_zoom"],
+						"zoom" 		=> isset( $val["preferred_zoom"] ) && is_numeric( $val["preferred_zoom"] ) ? $val["preferred_zoom"] : $options["static_maps_zoom"],
 						"size" 		=> $size_vals["width"] . "x" . $size_vals["height"],
 						"scale"		=> $options["static_maps_scale"],
 						"maptype"	=> $options["static_maps_maptype"],
@@ -287,4 +393,7 @@ function simple_fields_field_googlemaps_register() {
 
 	simple_fields::register_field_type("simple_fields_field_googlemaps");
 }
+
+// Tell Simple Fields to register this plugin
+add_action("simple_fields_register_field_types", "simple_fields_field_googlemaps_register");
 
