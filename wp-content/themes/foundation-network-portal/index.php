@@ -11,26 +11,37 @@ Template Name: News Page
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					
-					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
-						
-						<header>
+						<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
 							
-							<h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1>
-						
-						</header> <!-- end article header -->
-					
-						<section class="post_content clearfix" itemprop="articleBody">
-							<?php the_content(); ?>
-					
-						</section> <!-- end article section -->
-						
-						<footer>
-			
-							<?php the_tags('<p class="tags"><span class="tags-title"></span> ', ', ', '</p>'); ?>
+							<header>
+								
+								<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
+									<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></time> 
+									<?php the_category(' '); ?>
+								</p>
 							
-						</footer> <!-- end article footer -->
-					
-					</article> <!-- end article -->
+							</header> <!-- end article header -->
+						
+							<footer>
+				
+								<p class="tags"><?php the_tags('', ' ', ''); ?></p>
+								<div style="clear: both;"></div>
+								
+							</footer> <!-- end article footer -->
+
+							<section class="post_content clearfix">
+
+								<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+
+								<div class="post-thumbnail">
+								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
+								</div>
+
+								<?php the_excerpt('100'); ?>
+						
+							</section> <!-- end article section -->
+										
+						</article> <!-- end article -->
 					
 					<?php comments_template(); ?>
 					
