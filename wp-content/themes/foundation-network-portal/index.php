@@ -1,37 +1,32 @@
+<?php
+/*
+Template Name: News Page
+*/
+?>
 <?php get_header(); ?>
 			
 			<div id="content">
 			
-				<div id="main" class="twelve columns clearfix" role="main">
+				<div id="main" class="eight columns clearfix" role="main">
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					
-					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix row'); ?> role="article">
+					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article" itemscope itemtype="http://schema.org/BlogPosting">
 						
 						<header>
-
-							<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span>  <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS'); ?></time> <?php the_category(' '); ?></p>
-													
+							
+							<h1 class="page-title" itemprop="headline"><?php the_title(); ?></h1>
+						
 						</header> <!-- end article header -->
 					
-						<section class="post_content clearfix">
-
-							<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-
-							<div class="post-thumbnail">
-								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
-							</div>
-
-							<?php the_excerpt('Read more &raquo;'); ?>
+						<section class="post_content clearfix" itemprop="articleBody">
+							<?php the_content(); ?>
 					
 						</section> <!-- end article section -->
 						
 						<footer>
 			
-							<p class="tags"><?php the_tags('', ' ', ''); ?></p>
-
-							<div style="clear:both;">
-							</div>
+							<?php the_tags('<p class="tags"><span class="tags-title"></span> ', ', ', '</p>'); ?>
 							
 						</footer> <!-- end article footer -->
 					
@@ -39,20 +34,7 @@
 					
 					<?php comments_template(); ?>
 					
-					<?php endwhile; ?>	
-					
-					<?php if (function_exists('page_navi')) { // if expirimental feature is active ?>
-						
-						<?php page_navi(); // use the page navi function ?>
-						
-					<?php } else { // if it is disabled, display regular wp prev & next links ?>
-						<nav class="wp-prev-next">
-							<ul class="clearfix">
-								<li class="prev-link"><?php next_posts_link(_e('&laquo; Older Entries', "bonestheme")) ?></li>
-								<li class="next-link"><?php previous_posts_link(_e('Newer Entries &raquo;', "bonestheme")) ?></li>
-							</ul>
-						</nav>
-					<?php } ?>		
+					<?php endwhile; ?>		
 					
 					<?php else : ?>
 					
