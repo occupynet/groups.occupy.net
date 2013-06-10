@@ -1,8 +1,3 @@
-<?php
-/*
-Template Name: News Page
-*/
-?>
 <?php get_header(); ?>
 			
 			<div id="content">
