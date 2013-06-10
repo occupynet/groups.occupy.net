@@ -9,10 +9,11 @@ Template Name: News Page
 			
 				<div id="main" class="eight columns clearfix" role="main">
 
-					<?php $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
-					$blog_details = get_blog_details($org_blog_id); ?>
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+
+					<?php $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
+					$blog_details = get_blog_details($org_blog_id); ?>
 					
 						<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
 							
@@ -21,6 +22,12 @@ Template Name: News Page
 								<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
 							
 							</header> <!-- end article header -->
+							
+							<footer>
+				
+								<?php the_tags('<p class="tags"><span class="tags-title"></span> ', ' ', '</p>'); ?>
+								
+							</footer> <!-- end article footer -->
 
 							<section class="post_content clearfix">
 
@@ -34,12 +41,6 @@ Template Name: News Page
 						
 							</section> <!-- end article section -->
 
-							<footer>
-				
-								<?php the_tags('<p class="tags"><span class="tags-title"></span> ', ' ', '</p>'); ?>
-								
-							</footer> <!-- end article footer -->
-																
 						</article> <!-- end article -->
 					
 					<?php comments_template(); ?>
