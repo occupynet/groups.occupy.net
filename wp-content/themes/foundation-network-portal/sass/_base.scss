@@ -14,9 +14,8 @@ $experimental-support-for-khtml : false !default;
 
 
 
-/************* Global ********************/
+/************* Colors ********************/
 
-// colors
 $brand: #fbb03b;
 $brand-light: lighten($brand, 40%);
 $loud: #c91c22;
@@ -36,3 +35,58 @@ $base10: lighten($base, 100%);
 
 
 
+/************* Typography ********************/
+
+
+
+h1, h2, h3, h4, h5, h6 {
+	color: $base2;
+	line-height: 1.2;
+	font-weight: 500;
+}
+
+h1 {
+	@include condensed;
+	font-weight: normal;
+	font-size: 36px;
+}
+h2 {
+	font-size: 30px;
+	text-transform: capitalize;
+}
+h3 {
+	font-size: 24px;
+}
+h4 {
+	font-size: 18px;
+}
+h5 {
+	font-size: 15px;
+}
+h6 {
+	@include caps;
+	font-size: 12px;
+}
+
+
+p, li, dt, dd {
+	color: $base3;
+	font-size: 15px;
+	line-height: 1.6;
+	margin-bottom: 22px;
+}
+
+h1, h1 a {
+	color: $loud;
+}
+
+
+
+
+/************* Grid ********************/
+
+
+
+
+
+/************* Images ********************/

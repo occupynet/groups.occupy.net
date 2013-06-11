@@ -2,22 +2,6 @@
 
 
 
-@mixin caps {
-	text-transform: uppercase;
-	letter-spacing: 1px;
-}
-
-@mixin sans {
-	font-family: 'Open Sans', sans-serif;
-}
-
-@mixin condensed {
-	font-family: 'LeagueGothicRegular', 'Arial Narrow', sans-serif;
-	@include caps;
-	font-weight: normal;
-}
-
-
 @mixin pull-quotes($font-size, $opacity) {
 	position: relative;
 	padding: ems($font-size, $font-size);
