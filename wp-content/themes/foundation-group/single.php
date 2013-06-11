@@ -12,6 +12,8 @@
 							
 							<h1 class="single-title" itemprop="headline"><?php the_title(); ?></h1>
 													
+							<p class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?>.</p>
+
 						</header> <!-- end article header -->
 					
 						<section class="post_content clearfix" itemprop="articleBody">
@@ -26,10 +28,9 @@
 						
 						<footer>
 
-							<p class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?>.</p>
-							<?php edit_post_link('edit', '<p class="meta edit-link">', '</p>'); ?>
-			
 							<?php the_tags('<p class="tags">', ' ', '</p>'); ?>
+							
+							<?php edit_post_link('edit', '<p class="meta edit-link">', '</p>'); ?>
 							
 						</footer> <!-- end article footer -->
 					
