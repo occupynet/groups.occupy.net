@@ -101,6 +101,7 @@ h1, h1 a {
 	font-size: 1.5em;
 	line-height: 1.4em;
 	margin-bottom: 30px;
+	text-align: center;
 	p {
 	
 	}
@@ -494,6 +495,13 @@ footer .panel .widget {
 		&:last-child {
 			border-bottom: none;
 		}
+	}
+}
+
+.widget_recent_entries a {
+	color: $base1;
+	&:hover {
+		color: $loud;
 	}
 }
 

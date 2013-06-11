@@ -1,0 +1,79 @@
+/* base.scss */
+/* BASE STYLES FOR THE NETWORK AND GROUP THEMES */
+/* brand color values, typographic setup, gutter widths, default paddings/margins, root image url path */
+
+
+@import "fonts";
+
+$experimental-support-for-opera : false !default;
+$experimental-support-for-microsoft : false !default;
+$experimental-support-for-khtml : false !default;
+@import "compass/css3";
+@import "compass/typography";
+@import "compass/utilities";
+
+
+
+/************* Global ********************/
+
+// colors
+$brand: #fbb03b;
+$brand-light: lighten($brand, 40%);
+$loud: #c91c22;
+$loud-dark: darken($loud, 10%);
+$loud-light: lighten($loud, 10%);
+$base: #000;
+$base1: lighten($base, 10%);
+$base2: lighten($base, 20%);
+$base3: lighten($base, 30%);
+$base4: lighten($base, 40%);
+$base5: lighten($base, 50%);
+$base6: lighten($base, 60%);
+$base7: lighten($base, 70%);
+$base8: lighten($base, 80%);
+$base9: lighten($base, 90%);
+$base10: lighten($base, 100%);
+
+
+
+/************* Mixins ********************/
+
+
+@mixin caps {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+@mixin sans {
+	font-family: 'Open Sans', sans-serif;
+}
+
+@mixin condensed {
+	font-family: 'LeagueGothicRegular', 'Arial Narrow', sans-serif;
+	@include caps;
+	font-weight: normal;
+}
+
+
+@mixin pull-quotes($font-size, $opacity) {
+	position: relative;
+	padding: ems($font-size, $font-size);
+	&:before,
+	&:after {
+		height: ems($font-size, $font-size);
+		opacity: $opacity;
+		position: absolute;
+		font-size: $font-size;
+	}
+	&:before {
+		content: '?';
+		top:  0em;
+		left: 0em;
+	}
+	&:after {
+		content: '?';
+		bottom: 0em;
+		right: 0em;
+	}
+}
+
