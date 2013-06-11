@@ -103,6 +103,8 @@ Template Name: Homepage
 				<header>
 					
 					<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+
+					<h6 class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by ", "bonestheme"); ?><?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></h6>
 									
 				</header> <!-- end article header -->
 			
@@ -117,7 +119,6 @@ Template Name: Homepage
 				
 				<footer>
 	
-					<h6 class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by ", "bonestheme"); ?><?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></h6>
 					<h6 class="tags"><?php the_tags('<span class="tags-title"></span> ', ' ', ''); ?></h6>
 
 					<div style="clear: both;"></div>
