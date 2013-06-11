@@ -98,6 +98,9 @@ Template Name: Homepage
 				<footer>
 	
 					<p class="tags"><?php the_tags('', ' ', ''); ?></p>
+
+					<?php edit_post_link('edit', '<p>', '</p>'); ?>
+					
 					<div style="clear: both;"></div>
 					
 				</footer> <!-- end article footer -->
