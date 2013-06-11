@@ -602,16 +602,16 @@ footer .alo_easymail_widget {
 /* line 522, ../../foundation-network-portal/sass/global.scss */
 .em-events-search-form {
   background-color: #333333;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(50%, #333333), color-stop(50%, gray), color-stop(100%, gray));
-  background-image: -webkit-linear-gradient(top, #333333, #333333 50%, gray 50%, gray 100%);
-  background-image: -moz-linear-gradient(top, #333333, #333333 50%, gray 50%, gray 100%);
-  background-image: -ms-linear-gradient(top, #333333, #333333 50%, gray 50%, gray 100%);
-  background-image: -o-linear-gradient(to bottom, #333333, #333333 50%, gray 50%, gray 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(50%, #333333), color-stop(50%, #4d4d4d), color-stop(100%, #4d4d4d));
+  background-image: -webkit-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
+  background-image: -moz-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
+  background-image: -ms-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
+  background-image: -o-linear-gradient(to bottom, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
   padding: 5px 10px; }
   /* line 544, ../../foundation-network-portal/sass/global.scss */
   .em-events-search-form input[type="text"] {
     height: 24px;
-    width: 20%;
+    width: 18%;
     -webkit-border-radius: 12px 12px;
     -moz-border-radius: 12px / 12px;
     border-radius: 12px / 12px;
@@ -823,52 +823,52 @@ footer .alo_easymail_widget {
   text-align: center; }
 
 /************* Slider ********************/
-/* line 39, ../sass/theme.scss */
+/* line 36, ../sass/theme.scss */
 .main-slider {
   height: 350px;
   /* temp until js loads */ }
 
-/* line 43, ../sass/theme.scss */
+/* line 40, ../sass/theme.scss */
 #featured {
   border: 10px solid #e6e6e6;
   height: 308px;
   /* temp until js loads */
   overflow: hidden;
   padding: 0; }
-  /* line 48, ../sass/theme.scss */
+  /* line 45, ../sass/theme.scss */
   #featured h3 {
     margin: 1.5em 0 0.5em;
     padding: 0 30px;
     font-size: 30px; }
-  /* line 53, ../sass/theme.scss */
+  /* line 50, ../sass/theme.scss */
   #featured p {
     padding: 0 30px;
     font-size: 16px; }
-  /* line 57, ../sass/theme.scss */
+  /* line 54, ../sass/theme.scss */
   #featured img {
     width: 100%;
     height: auto; }
 
-/* line 64, ../sass/theme.scss */
+/* line 61, ../sass/theme.scss */
 .featured-slider {
   background: white;
   height: 288px;
   /* temp until js loads */ }
 
-/* line 69, ../sass/theme.scss */
+/* line 66, ../sass/theme.scss */
 #featured.orbit div.featured-slider {
   padding: 0; }
 
-/* line 73, ../sass/theme.scss */
+/* line 70, ../sass/theme.scss */
 .orbit-bullets {
   margin: 10px 0;
   opacity: .8; }
 
-/* line 78, ../sass/theme.scss */
+/* line 75, ../sass/theme.scss */
 div.orbit-wrapper div.slider-nav {
   display: none; }
 
-/* line 82, ../sass/theme.scss */
+/* line 79, ../sass/theme.scss */
 div.orbit-wrapper div.timer {
   top: auto;
   right: 0;

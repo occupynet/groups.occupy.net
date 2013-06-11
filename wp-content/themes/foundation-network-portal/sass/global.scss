@@ -525,25 +525,25 @@ footer .alo_easymail_widget {
 	// crazy hack to add bg colors in two fake rows
 	background-color: $base2;
 	background-image: -webkit-gradient(
-		linear, left top, left bottom, color-stop(0, $base2), color-stop(50%, $base2), color-stop(50%, $base5), color-stop(100%, $base5)
+		linear, left top, left bottom, color-stop(0, $base2), color-stop(50%, $base2), color-stop(50%, $base3), color-stop(100%, $base3)
 	);   	
 	background-image: -webkit-linear-gradient(
-		top, $base2, $base2 50%, $base5 50%, $base5 100%
+		top, $base2, $base2 50%, $base3 50%, $base3 100%
 	);
 	background-image: -moz-linear-gradient(
-		top, $base2, $base2 50%, $base5 50%, $base5 100%
+		top, $base2, $base2 50%, $base3 50%, $base3 100%
 	);
 	background-image: -ms-linear-gradient(
-		top, $base2, $base2 50%, $base5 50%, $base5 100%
+		top, $base2, $base2 50%, $base3 50%, $base3 100%
 	);
 	background-image: -o-linear-gradient(
-		to bottom, $base2, $base2 50%, $base5 50%, $base5 100%
+		to bottom, $base2, $base2 50%, $base3 50%, $base3 100%
 	);
 
 	padding: 5px 10px;
 	input[type="text"] {
 		height: 24px;
-		width: 20%;
+		width: 18%;
 		@include border-radius(12px, 12px);
 		padding-left: 12px;
 		display: inline;

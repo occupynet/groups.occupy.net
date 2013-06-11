@@ -602,16 +602,16 @@ footer .alo_easymail_widget {
 /* line 522, ../sass/global.scss */
 .em-events-search-form {
   background-color: #333333;
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(50%, #333333), color-stop(50%, gray), color-stop(100%, gray));
-  background-image: -webkit-linear-gradient(top, #333333, #333333 50%, gray 50%, gray 100%);
-  background-image: -moz-linear-gradient(top, #333333, #333333 50%, gray 50%, gray 100%);
-  background-image: -ms-linear-gradient(top, #333333, #333333 50%, gray 50%, gray 100%);
-  background-image: -o-linear-gradient(to bottom, #333333, #333333 50%, gray 50%, gray 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(50%, #333333), color-stop(50%, #4d4d4d), color-stop(100%, #4d4d4d));
+  background-image: -webkit-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
+  background-image: -moz-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
+  background-image: -ms-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
+  background-image: -o-linear-gradient(to bottom, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
   padding: 5px 10px; }
   /* line 544, ../sass/global.scss */
   .em-events-search-form input[type="text"] {
     height: 24px;
-    width: 20%;
+    width: 18%;
     -webkit-border-radius: 12px 12px;
     -moz-border-radius: 12px / 12px;
     border-radius: 12px / 12px;
