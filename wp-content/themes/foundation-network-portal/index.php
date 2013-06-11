@@ -31,6 +31,9 @@
 					<?php } ?>
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+
+					<?php $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
+					$blog_details = get_blog_details($org_blog_id); ?>
 					
 					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
 						
@@ -38,7 +41,7 @@
 							
 							<h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
 							
-							<p class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
+							<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
 						
 						</header> <!-- end article header -->
 					
