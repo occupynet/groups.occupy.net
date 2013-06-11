@@ -1,5 +1,5 @@
-/* app.scss */
-/* CUSTOM STYLES FOR THE NETWORK THEME */
+/* global.scss */
+/* GLOBAL STYLES FOR THE NETWORK AND GROUP THEMES */
 
 @import "base";
 
@@ -172,18 +172,6 @@ ul.pagination li.current a {
 	}
 }
 
-.global-nav {
-	height: 36px;
-	background: $base;
-	margin: 0;
-	padding: 0 15px;
-	a {
-		@include condensed;
-		color: $base10;
-		font-size: 21px;
-		line-height: 38px;
-	}
-}
 
 .siteinfo {
 	background: $base2;
@@ -302,53 +290,6 @@ ul.flyout,
 
 
 
-
-
-/************* Slider ********************/
-
-
-
-#featured {
-	border: 10px solid $base9;
-	height: 308px;
-	overflow: hidden;
-	h3 {
-		margin: 1em 0 .5em;
-		padding: 0 60px;
-		font-size: 30px;
-	}
-	p {
-		padding: 0 60px;
-		font-size: 16px;
-	}
-	img {
-		width: 100%;
-		height: auto;
-	}
-}
-
-.featured-slider {
-	background: $base10;
-}
-
-#featured.orbit div.featured-slider {
-	padding: 0;
-}
-
-.orbit-bullets {
-	margin: 10px 0;
-	opacity: .8;
-}
-
-div.orbit-wrapper div.slider-nav {
-	display: none;
-}
-
-div.orbit-wrapper div.timer {
-	top: auto;
-	right: 0;
-	bottom: 10px;
-}
 
 
 
@@ -607,36 +548,6 @@ footer .alo_easymail_widget {
 
 
 
-/************* Directory Page ********************/
-
-section.post_content div h1 {
-	display: none;
-}
-
-.page section.post_content div,
-table.blogs_directory_nav_table {
-	float: none !important;
-}
-
-ul.organization-listing {
-	list-style: none;
-}
-
-
-/************* News Page ********************/
-
-.nlposts-block-container .nlposts-block-item,
-div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
-	width: 100%;
-}
-
-.nlposts-block-container .nlposts-block-thumbnail-litem a > img,
-div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
-	float: left;
-	margin: 14px 15px auto auto !important;
-}
-
-
 /************* Events Calendar ********************/
 
 .em-events-search-form {
@@ -754,8 +665,6 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 /************* Posts ********************/
 
 
-// post list
-
 .main-title {
 	clear: both;
 	@include condensed;
@@ -766,33 +675,6 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	border-top: 1px solid $base8;
 	padding-top: 10px;
 	padding-bottom: 10px;
-}
-
-.network-post {
-	padding-top: 20px;
-	header {
-		float: left;
-		width: 16%;
-		time, a {
-			display: block;
-		}
-	}
-	.site-name {
-		display: block;
-		font-weight: bold;
-	} 
-	footer {
-		float: right;
-		width: 16%;
-	}
-	.post_content {
-		margin: 0 17%;
-	}
-	h2 {
-		margin-top: 0;
-		margin-right: 30px;
-		font-size: 24px;
-	}
 }
 
 
@@ -822,94 +704,6 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 }
 
 
-
-/************* Unique pages ********************/
-
-
-
-// home page 
-
-.home-intro {
-}
-.intro-btn {
-	@extend .btn-loud;
-	display: inline-block;
-	margin-top: 20px;
-	padding: 5px 20px;
-	font-size: 24px;
-	
-}
-
-
-// event slider
-
-.home-slider {
-	border: 10px solid $base9;
-}
-
-.slider-title {
-	@include condensed;
-}
-.slider-all-events {
-	font-size: 50%;
-}
-
-.bx-wrapper {
-	margin-bottom: 0;
-}
-.bx-viewport {
-	box-shadow: 0 0 0 #FFF !important;
-	border: 0;
-}
-.bx-controls {
-	position: absolute;
-	top: -30px;
-	right: 10px;
-	.bx-next {
-		right: 0;
-	}
-	.bx-prev {
-		right: 40px;
-		left: auto;
-	}
-}
-
-.event-image {
-	height: 150px;
-	width: auto;
-}
-.event-title {
-	@include condensed;
-}
-
-
-
-// groups page
-
-.groups-list {
-	list-style: none;
-	li {
-		display: inline-block;
-		border: 1px solid #DDD;
-		width: 303px;
-		height: 150px; 
-		overflow: hidden;
-		padding: 20px;
-		margin: 0 10px 10px 0;
-	}
-	h3 {
-		font-size: 26px;
-		@include condensed;
-		margin: 0;
-	}
-	.site-description {
-		margin: .5em 0;
-	}
-	.site-post {
-		font-size: 13px;
-		margin: 0;
-	}
-}
 
 
 
