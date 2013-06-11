@@ -1,60 +1,91 @@
-<?php
-/*
-Template Name: News Page
-*/
-?>
 <?php get_header(); ?>
 			
-			<div id="content">
+			<div id="content" class="clearfix">
 			
 				<div id="main" class="eight columns clearfix" role="main">
-
+				
+					<?php if (is_category()) { ?>
+						<h1 class="archive_title h2">
+							<span><?php _e("Posts Categorized:", "bonestheme"); ?></span> <?php single_cat_title(); ?>
+						</h1>
+					<?php } elseif (is_tag()) { ?> 
+						<h1 class="archive_title h2">
+							<span><?php _e("Posts Tagged:", "bonestheme"); ?></span> <?php single_tag_title(); ?>
+						</h1>
+					<?php } elseif (is_author()) { ?>
+						<h1 class="archive_title h2">
+							<span><?php _e("Posts By:", "bonestheme"); ?></span> <?php get_the_author_meta('display_name'); ?>
+						</h1>
+					<?php } elseif (is_day()) { ?>
+						<h1 class="archive_title h2">
+							<span><?php _e("Daily Archives:", "bonestheme"); ?></span> <?php the_time('l, F j, Y'); ?>
+						</h1>
+					<?php } elseif (is_month()) { ?>
+					    <h1 class="archive_title h2">
+					    	<span><?php _e("Monthly Archives:", "bonestheme"); ?>:</span> <?php the_time('F Y'); ?>
+					    </h1>
+					<?php } elseif (is_year()) { ?>
+					    <h1 class="archive_title h2">
+					    	<span><?php _e("Yearly Archives:", "bonestheme"); ?>:</span> <?php the_time('Y'); ?>
+					    </h1>
+					<?php } ?>
 
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-
-					<?php $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
-					$blog_details = get_blog_details($org_blog_id); ?>
 					
-						<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
-							
-							<header>
-
-								<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
-							
-							</header> <!-- end article header -->
-							
-							<footer>
-				
-								<?php the_tags('<p class="tags"><span class="tags-title"></span> ', ' ', '</p>'); ?>
-								
-							</footer> <!-- end article footer -->
-
-							<section class="post_content clearfix">
-
-								<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
-
-								<div class="post-thumbnail">
-								<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
-								</div>
-
-								<?php the_excerpt('100'); ?>
+					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
 						
-							</section> <!-- end article section -->
+						<header>
+							
+							<h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
+							
+							<p class="meta"><time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
+						
+						</header> <!-- end article header -->
+					
+						<section class="post_content">
+						
+							<div class="post-thumbnail">
+							<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail( 'wpf-featured' ); ?></a>
+							</div>
+						
+							<?php the_excerpt(); ?>
+					
+						</section> <!-- end article section -->
+						
+						<footer>
+	
+							<p class="tags"><?php the_tags('<span class="tags-title"></span> ', ' ', ''); ?></p>
 
-						</article> <!-- end article -->
+							<div style="clear:both;"></div>
+							
+						</footer> <!-- end article footer -->
 					
-					<?php comments_template(); ?>
+					</article> <!-- end article -->
 					
-					<?php endwhile; ?>		
+					<?php endwhile; ?>	
+					
+					<?php if (function_exists('page_navi')) { // if expirimental feature is active ?>
+						
+						<?php page_navi(); // use the page navi function ?>
+
+					<?php } else { // if it is disabled, display regular wp prev & next links ?>
+						<nav class="wp-prev-next">
+							<ul class="clearfix">
+								<li class="prev-link"><?php next_posts_link(_e('&laquo; Older Entries', "bonestheme")) ?></li>
+								<li class="next-link"><?php previous_posts_link(_e('Newer Entries &raquo;', "bonestheme")) ?></li>
+							</ul>
+						</nav>
+					<?php } ?>
+								
 					
 					<?php else : ?>
 					
 					<article id="post-not-found">
 					    <header>
-					    	<h1>Not Found</h1>
+					    	<h1><?php _e("No Posts Yet", "bonestheme"); ?></h1>
 					    </header>
 					    <section class="post_content">
-					    	<p>Sorry, but the requested resource was not found on this site.</p>
+					    	<p><?php _e("Sorry, What you were looking for is not here.", "bonestheme"); ?></p>
 					    </section>
 					    <footer>
 					    </footer>
