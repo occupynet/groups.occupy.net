@@ -910,6 +910,32 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 }
 
 
+.groups-list {
+	list-style: none;
+	li {
+		display: inline-block;
+		border: 1px solid #DDD;
+		width: 303px;
+		height: 150px; 
+		overflow: hidden;
+		padding: 20px;
+		margin: 0 10px 10px 0;
+	}
+	h3 {
+		font-size: 26px;
+		@include condensed;
+		margin: 0;
+	}
+	.site-description {
+		margin: .5em 0;
+	}
+	.site-post {
+		font-size: 13px;
+		margin: 0;
+	}
+}
+
+
 /************* Comments ********************/
 
 
