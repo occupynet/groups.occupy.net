@@ -365,12 +365,7 @@ ul.flyout,
 
 
 
-/************* Posts ********************/
 
-#main article {
-	margin-bottom: 30px;
-	border-bottom: 1px solid $base8;
-}
 
 
 
@@ -455,12 +450,13 @@ footer .panel {
     border: 0;
     padding: 10px;
 	float: left;
-	margin-right: 10px;
+	margin-right: 20px;
+	margin-bottom: 20px;
 	width: 45%;
 	height: auto;
 		.right {
-		float: right;
-		margin-left: 10px;
+			float: right;
+			margin-left: 20px;
 		}
 }
 
@@ -851,15 +847,17 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 
 .main-title {
 	clear: both;
-	padding: 20px 0;
-	margin-top: 0;
-	margin-bottom: 30px;
 	@include condensed;
-	border-bottom: 1px solid $base8;
+}
+
+#main .post {
+	clear: both;
+	border-top: 1px solid $base8;
+	padding-bottom: 10px;
 }
 
 .network-post {
-	padding-bottom: 10px;
+	padding-top: 20px;
 	header {
 		float: left;
 		width: 16%;
