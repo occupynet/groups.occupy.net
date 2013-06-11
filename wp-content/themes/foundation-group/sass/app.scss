@@ -225,14 +225,15 @@ ul.pagination li.current a {
 }
 
 .global-nav {
-	height: 40px;
+	height: 36px;
 	background: $base;
 	margin: 0;
 	padding: 0 15px;
 	a {
 		@include condensed;
 		color: $base10;
-		font-size: 26px;
+		font-size: 21px;
+		line-height: 38px;
 	}
 }
 
@@ -489,7 +490,7 @@ footer .panel .widget {
 		border-bottom: $base8 solid 1px;
 		padding: 5px 0 10px;
 		line-height: 1.3em;
-		font-size: 13px;
+		font-size: 16px;
 		&:last-child {
 			border-bottom: none;
 		}
@@ -734,6 +735,27 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 /************* Events Calendar ********************/
 
 .em-events-search-form {
+
+
+	// crazy hack to add bg colors in two fake rows
+	background-color: $base2;
+	background-image: -webkit-gradient(
+		linear, left top, left bottom, color-stop(0, $base2), color-stop(50%, $base2), color-stop(50%, $base5), color-stop(100%, $base5)
+	);   	
+	background-image: -webkit-linear-gradient(
+		top, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+	background-image: -moz-linear-gradient(
+		top, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+	background-image: -ms-linear-gradient(
+		top, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+	background-image: -o-linear-gradient(
+		to bottom, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+
+
 	background: $base2;
 	padding: 5px 10px;
 	input[type="text"] {

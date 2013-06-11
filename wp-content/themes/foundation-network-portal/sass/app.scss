@@ -112,7 +112,8 @@ h1, h1 a {
 }
 
 .post_content li {
-	margin: 0 30px .75em;
+	margin: 0 45px 1em;
+	text-indent: -16px;
 }
 
 
@@ -239,14 +240,15 @@ ul.pagination li.current a {
 }
 
 .global-nav {
-	height: 40px;
+	height: 36px;
 	background: $base;
 	margin: 0;
 	padding: 0 15px;
 	a {
 		@include condensed;
 		color: $base10;
-		font-size: 26px;
+		font-size: 21px;
+		line-height: 38px;
 	}
 }
 
@@ -479,7 +481,7 @@ footer .panel {
 		border-bottom: $base8 solid 1px;
 		padding: 5px 0 10px;
 		line-height: 1.3em;
-		font-size: 13px;
+		font-size: 16px;
 		&:last-child {
 			border-bottom: none;
 		}
@@ -705,7 +707,26 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 /************* Events Calendar ********************/
 
 .em-events-search-form {
-	background: $base2;
+
+
+	// crazy hack to add bg colors in two fake rows
+	background-color: $base2;
+	background-image: -webkit-gradient(
+		linear, left top, left bottom, color-stop(0, $base2), color-stop(50%, $base2), color-stop(50%, $base5), color-stop(100%, $base5)
+	);   	
+	background-image: -webkit-linear-gradient(
+		top, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+	background-image: -moz-linear-gradient(
+		top, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+	background-image: -ms-linear-gradient(
+		top, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+	background-image: -o-linear-gradient(
+		to bottom, $base2, $base2 50%, $base5 50%, $base5 100%
+	);
+
 	padding: 5px 10px;
 	input[type="text"] {
 		height: 24px;
@@ -784,63 +805,20 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 }
 
 
-/************* Network Home Page ********************/
 
 
-// intro 
-
-.home-intro {
-}
-.intro-btn {
-	@extend .btn-loud;
-	display: inline-block;
-	margin-top: 20px;
-	padding: 5px 20px;
-	font-size: 24px;
-	
-}
+/************* Comments ********************/
 
 
-// event slider
-
-.home-slider {
-	border: 10px solid $base9;
-}
-
-.slider-title {
+#comment-form-title {
 	@include condensed;
-}
-.slider-all-events {
-	font-size: 50%;
+	margin: 0;
 }
 
-.bx-wrapper {
-	margin-bottom: 0;
-}
-.bx-viewport {
-	box-shadow: 0 0 0 #FFF !important;
-	border: 0;
-}
-.bx-controls {
-	position: absolute;
-	top: -30px;
-	right: 10px;
-	.bx-next {
-		right: 0;
-	}
-	.bx-prev {
-		right: 40px;
-		left: auto;
-	}
-}
 
-.event-image {
-	height: 150px;
-	width: auto;
-}
-.event-title {
-	@include condensed;
-}
+
+
+/************* Posts ********************/
 
 
 // post list
@@ -853,6 +831,7 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 #main .post {
 	clear: both;
 	border-top: 1px solid $base8;
+	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
@@ -910,6 +889,70 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 }
 
 
+
+/************* Unique pages ********************/
+
+
+
+// home page 
+
+.home-intro {
+}
+.intro-btn {
+	@extend .btn-loud;
+	display: inline-block;
+	margin-top: 20px;
+	padding: 5px 20px;
+	font-size: 24px;
+	
+}
+
+
+// event slider
+
+.home-slider {
+	border: 10px solid $base9;
+}
+
+.slider-title {
+	@include condensed;
+}
+.slider-all-events {
+	font-size: 50%;
+}
+
+.bx-wrapper {
+	margin-bottom: 0;
+}
+.bx-viewport {
+	box-shadow: 0 0 0 #FFF !important;
+	border: 0;
+}
+.bx-controls {
+	position: absolute;
+	top: -30px;
+	right: 10px;
+	.bx-next {
+		right: 0;
+	}
+	.bx-prev {
+		right: 40px;
+		left: auto;
+	}
+}
+
+.event-image {
+	height: 150px;
+	width: auto;
+}
+.event-title {
+	@include condensed;
+}
+
+
+
+// groups page
+
 .groups-list {
 	list-style: none;
 	li {
@@ -935,14 +978,6 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	}
 }
 
-
-/************* Comments ********************/
-
-
-#comment-form-title {
-	@include condensed;
-	margin: 0;
-}
 
 
 /************* Responsive Styling ********************/
