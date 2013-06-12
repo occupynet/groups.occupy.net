@@ -176,12 +176,16 @@ a, h3.nlposts-ulist-title {
     border-color: #c91c22;
     color: white; }
 
-/* line 34, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 33, ../../foundation-network-portal/sass/base/_buttons.scss */
+.network-post .post-edit-link {
+  margin-left: 4px; }
+
+/* line 38, ../../foundation-network-portal/sass/base/_buttons.scss */
 ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   background: #fbb03b; }
 
 /************* Buttons ********************/
-/* line 43, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 47, ../../foundation-network-portal/sass/base/_buttons.scss */
 .btn, .btn-loud, .alo_easymail_widget .input-submit {
   background: #1a1a1a;
   color: white;
@@ -197,23 +201,55 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal; }
-  /* line 53, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 57, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn:hover, .btn-loud:hover, .alo_easymail_widget .input-submit:hover {
     background: #c91c22; }
-  /* line 56, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 60, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn:active, .btn-loud:active, .alo_easymail_widget .input-submit:active {
     background: #1a1a1a; }
 
-/* line 61, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 65, ../../foundation-network-portal/sass/base/_buttons.scss */
 .btn-loud {
   background: #c91c22; }
-  /* line 64, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 68, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn-loud:hover {
     background: #e3353b;
     color: white; }
-  /* line 68, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 72, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn-loud:active {
     background: #c91c22; }
+
+/************* Tags ********************/
+/* line 80, ../../foundation-network-portal/sass/base/_buttons.scss */
+.tags {
+  line-height: 1.3; }
+  /* line 82, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .tags .tags-title {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    padding: 1px 4px 2px 0; }
+
+/* line 89, ../../foundation-network-portal/sass/base/_buttons.scss */
+.label {
+  background: transparent !important;
+  border: 0;
+  -webkit-border-radius: 0 0;
+  -moz-border-radius: 0 / 0;
+  border-radius: 0 / 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #666666;
+  font-weight: normal;
+  font-size: 11px;
+  white-space: nowrap;
+  text-shadow: none; }
+  /* line 99, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .label:after {
+    content: " ›"; }
+  /* line 102, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .label:hover {
+    color: #333333; }
 
 /* STATES FOR THE NETWORK AND GROUP THEMES */
 /************* Visibility ********************/
@@ -473,37 +509,8 @@ h4.widgettitle label {
   padding-top: 20px;
   padding-bottom: 10px; }
 
-/* line 23, ../../foundation-network-portal/sass/modules/_feeds.scss */
-.tags {
-  line-height: 1.3; }
-  /* line 25, ../../foundation-network-portal/sass/modules/_feeds.scss */
-  .tags .tags-title {
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 11px;
-    padding: 1px 4px 2px 0; }
-  /* line 30, ../../foundation-network-portal/sass/modules/_feeds.scss */
-  .tags .label {
-    background: transparent;
-    border: 0;
-    -webkit-border-radius: 0 0;
-    -moz-border-radius: 0 / 0;
-    border-radius: 0 / 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #666666;
-    font-weight: normal;
-    font-size: 11px;
-    white-space: nowrap; }
-    /* line 39, ../../foundation-network-portal/sass/modules/_feeds.scss */
-    .tags .label:after {
-      content: " ›"; }
-    /* line 42, ../../foundation-network-portal/sass/modules/_feeds.scss */
-    .tags .label:hover {
-      color: #333333; }
-
 /************* Comments ********************/
-/* line 54, ../../foundation-network-portal/sass/modules/_feeds.scss */
+/* line 31, ../../foundation-network-portal/sass/modules/_feeds.scss */
 #comment-form-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
