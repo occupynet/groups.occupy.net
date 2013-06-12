@@ -170,13 +170,18 @@ a, h3.nlposts-ulist-title {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px; }
+  /* line 26, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .post-edit-link:hover {
+    background: #c91c22;
+    border-color: #c91c22;
+    color: white; }
 
-/* line 29, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 34, ../../foundation-network-portal/sass/base/_buttons.scss */
 ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   background: #fbb03b; }
 
 /************* Buttons ********************/
-/* line 38, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 43, ../../foundation-network-portal/sass/base/_buttons.scss */
 .btn, .btn-loud, .alo_easymail_widget .input-submit {
   background: #1a1a1a;
   color: white;
@@ -192,21 +197,21 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal; }
-  /* line 48, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 53, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn:hover, .btn-loud:hover, .alo_easymail_widget .input-submit:hover {
     background: #c91c22; }
-  /* line 51, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 56, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn:active, .btn-loud:active, .alo_easymail_widget .input-submit:active {
     background: #1a1a1a; }
 
-/* line 56, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 61, ../../foundation-network-portal/sass/base/_buttons.scss */
 .btn-loud {
   background: #c91c22; }
-  /* line 59, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 64, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn-loud:hover {
     background: #e3353b;
     color: white; }
-  /* line 63, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 68, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn-loud:active {
     background: #c91c22; }
 

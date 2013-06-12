@@ -23,6 +23,11 @@ a {
 	border: 1px solid $loud-light;
 	font-size: 12px;
 	@include caps;
+	&:hover {
+		background: $loud;
+		border-color: $loud;
+		color: $base10;
+	}
 }
 
 
