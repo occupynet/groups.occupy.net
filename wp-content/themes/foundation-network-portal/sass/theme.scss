@@ -100,7 +100,7 @@
 .groups-list {
 	list-style: none;
 	li {
-		display: inline-block;
+		float: left;
 		border: 1px solid #DDD;
 		width: 303px;
 		height: 150px; 

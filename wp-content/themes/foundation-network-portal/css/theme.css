@@ -897,7 +897,7 @@ footer .alo_easymail_widget {
   list-style: none; }
   /* line 102, ../sass/theme.scss */
   .groups-list li {
-    display: inline-block;
+    float: left;
     border: 1px solid #dddddd;
     width: 303px;
     height: 150px;
