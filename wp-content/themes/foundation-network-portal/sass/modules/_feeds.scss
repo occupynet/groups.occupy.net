@@ -1,0 +1,60 @@
+/* FEEDS FOR THE NETWORK AND GROUP THEMES */
+
+
+
+
+
+/************* Posts ********************/
+
+
+.main-title {
+	clear: both;
+	@include condensed;
+}
+
+#main .post {
+	clear: both;
+	border-top: 1px solid $base8;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+
+.tags {
+	line-height: 1.3;
+	.tags-title {
+		@include caps;
+		font-size: 11px;
+		padding: 1px 4px 2px 0;
+	}
+	.label {
+		background: transparent;
+		border: 0;
+		@include border-radius(0,0);
+		@include caps;
+		color: $base4;
+		font-weight: normal;
+		font-size: 11px;
+		white-space: nowrap;
+		&:after {
+			content: ' ›'
+		}
+		&:hover {
+			color: $base2;
+		}
+	}
+}
+
+
+
+
+/************* Comments ********************/
+
+
+#comment-form-title {
+	@include condensed;
+	margin: 0;
+}
+
+
+

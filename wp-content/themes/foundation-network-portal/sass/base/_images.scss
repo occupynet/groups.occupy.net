@@ -1,0 +1,30 @@
+/* IMAGES FOR THE NETWORK AND GROUP THEMES */
+
+
+
+
+/************* Images ********************/
+
+
+.post-thumbnail img {
+	background: $base9;
+    border: 0;
+    padding: 10px;
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	width: 45%;
+	height: auto;
+		.right {
+			float: right;
+			margin-left: 20px;
+		}
+}
+
+.single-post .post-thumbnail img {
+	width: 100%;
+}
+
+
+
+

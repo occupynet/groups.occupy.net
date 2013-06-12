@@ -1,0 +1,53 @@
+/* SIDEBARS FOR THE NETWORK AND GROUP THEMES */
+
+
+
+
+
+/************* Sidebar ********************/
+
+
+.widgettitle {
+	@include condensed;
+	font-size: 24px;
+}
+
+.sidebar ul,
+.sidebar ul.nlposts-wrapper {
+	list-style: none;
+	li,
+	h3.nlposts-ulist-title {
+		border-bottom: $base8 solid 1px;
+		padding: 5px 0 10px;
+		line-height: 1.3em;
+		font-size: 16px;
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+}
+
+.sidebar p, .sidebar li {
+	font-size: 13px;
+	line-height: 1.4;
+	word-break: break-word;
+}
+
+h3.nlposts-ulist-title {
+	@extend body;
+	@extend a;
+}
+
+h4.widgettitle label {
+	font-size: 23px;
+	line-height: 1.1;
+    margin-bottom: 14px;
+    margin-top: 14px;
+    text-rendering: optimizelegibility;
+    font-family: sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: $base1;
+}
+
+

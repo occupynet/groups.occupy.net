@@ -52,19 +52,3 @@
 }
 
 
-
-@mixin caps {
-	text-transform: uppercase;
-	letter-spacing: 1px;
-}
-
-@mixin condensed {
-	font-family: 'LeagueGothicRegular', 'Arial Narrow', sans-serif;
-	@include caps;
-	font-weight: normal;
-}
-
-@mixin sans {
-	font-family: 'Open Sans', sans-serif;
-}
-

@@ -1,0 +1,69 @@
+/* LINK AND BUTTON STYLES FOR THE NETWORK AND GROUP THEMES */
+
+
+
+/************* Links ********************/
+
+a {
+  color: $loud;
+  &:hover { color: $base1; }
+  &:active { color: $base1; }
+  &:visited { color: $loud-dark; }
+}
+
+.read-more {
+	@include caps;
+	font-weight: 500;
+	padding: 0 5px;
+	font-size: 80%;
+}
+
+.post-edit-link {
+	padding: 1px 7px;
+	border: 1px solid $loud-light;
+	font-size: 12px;
+	@include caps;
+}
+
+
+ul.pagination li.current a {
+	background: $brand;
+}
+
+
+
+/************* Buttons ********************/
+
+
+.btn {
+	background: $base1;
+	color: $base10;
+	cursor: pointer;
+	border: 0;
+	font-size: 18px;
+	padding: 5px 15px 3px;
+	white-space: nowrap;
+	@include border-radius(5px, 5px);
+	@include condensed;
+	&:hover {
+		background: $loud;
+	}
+	&:active {
+		background: $base1;
+	}
+}
+
+.btn-loud {
+	@extend .btn;
+	background: $loud;
+	&:hover {
+		background: $loud-light;
+		color: $base10;
+	}
+	&:active {
+		background: $loud;
+	}
+}
+
+
+
