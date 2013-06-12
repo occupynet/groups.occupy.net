@@ -816,58 +816,55 @@ Changing State
 /************* Home page ********************/
 /* line 25, ../sass/theme.scss */
 .intro-text {
-  font-size: 1.5em;
-  line-height: 1.4em;
-  margin-bottom: 30px;
   text-align: center; }
 
 /************* Slider ********************/
-/* line 36, ../sass/theme.scss */
+/* line 33, ../sass/theme.scss */
 .main-slider {
   height: 350px;
   /* temp until js loads */ }
 
-/* line 40, ../sass/theme.scss */
+/* line 37, ../sass/theme.scss */
 #featured {
   border: 10px solid #e6e6e6;
   height: 308px;
   /* temp until js loads */
   overflow: hidden;
   padding: 0; }
-  /* line 45, ../sass/theme.scss */
+  /* line 42, ../sass/theme.scss */
   #featured h3 {
     margin: 1.5em 0 0.5em;
     padding: 0 30px;
     font-size: 30px; }
-  /* line 50, ../sass/theme.scss */
+  /* line 47, ../sass/theme.scss */
   #featured p {
     padding: 0 30px;
     font-size: 16px; }
-  /* line 54, ../sass/theme.scss */
+  /* line 51, ../sass/theme.scss */
   #featured img {
     width: 100%;
     height: auto; }
 
-/* line 61, ../sass/theme.scss */
+/* line 58, ../sass/theme.scss */
 .featured-slider {
   background: white;
   height: 288px;
   /* temp until js loads */ }
 
-/* line 66, ../sass/theme.scss */
+/* line 63, ../sass/theme.scss */
 #featured.orbit div.featured-slider {
   padding: 0; }
 
-/* line 70, ../sass/theme.scss */
+/* line 67, ../sass/theme.scss */
 .orbit-bullets {
   margin: 10px 0;
   opacity: .8; }
 
-/* line 75, ../sass/theme.scss */
+/* line 72, ../sass/theme.scss */
 div.orbit-wrapper div.slider-nav {
   display: none; }
 
-/* line 79, ../sass/theme.scss */
+/* line 76, ../sass/theme.scss */
 div.orbit-wrapper div.timer {
   top: auto;
   right: 0;
