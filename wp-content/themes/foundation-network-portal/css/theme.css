@@ -119,25 +119,24 @@ h1, h1 a, h1 h3.nlposts-ulist-title {
 .intro-text {
   font-size: 1.5em;
   line-height: 1.4em;
-  margin-bottom: 30px;
-  text-align: center; }
+  margin-bottom: 30px; }
 
-/* line 125, ../sass/base/_typography.scss */
+/* line 121, ../sass/base/_typography.scss */
 .wp-caption-text {
   font-size: 13px; }
 
-/* line 129, ../sass/base/_typography.scss */
+/* line 125, ../sass/base/_typography.scss */
 .post_content li {
   margin: 0 45px 1em;
   text-indent: -16px; }
 
-/* line 137, ../sass/base/_typography.scss */
+/* line 133, ../sass/base/_typography.scss */
 .page-title,
 .single-title,
 .archive_title {
   color: #333333; }
 
-/* line 141, ../sass/base/_typography.scss */
+/* line 137, ../sass/base/_typography.scss */
 .post_content p:first-child {
   font-size: 18px; }
 
