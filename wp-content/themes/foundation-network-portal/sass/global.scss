@@ -16,6 +16,7 @@ $experimental-support-for-khtml : false !default;
 @import "base/buttons";
 @import "base/states";
 @import "base/layout";
+@import "base/images";
 
 // reusable modules
 @import "modules/header";
@@ -27,18 +28,6 @@ $experimental-support-for-khtml : false !default;
 @import "plugins/events";
 @import "plugins/socialmedia";
 @import "plugins/newsletter";
-
-
-
-/*
-Base Rules
-Layout Rules
-Module Rules
-State Rules
-Theme Rules
-Changing State
-*/
-
 
 
 

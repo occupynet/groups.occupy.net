@@ -224,6 +224,27 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
 div.panel {
   border: 0; }
 
+/* IMAGES FOR THE NETWORK AND GROUP THEMES */
+/************* Images ********************/
+/* line 9, ../../foundation-network-portal/sass/base/_images.scss */
+.post-thumbnail img {
+  background: #e6e6e6;
+  border: 0;
+  padding: 10px;
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 45%;
+  height: auto; }
+  /* line 18, ../../foundation-network-portal/sass/base/_images.scss */
+  .post-thumbnail img .right {
+    float: right;
+    margin-left: 20px; }
+
+/* line 24, ../../foundation-network-portal/sass/base/_images.scss */
+.single-post .post-thumbnail img {
+  width: 100%; }
+
 /* HEADER FOR THE NETWORK AND GROUP THEMES */
 /************* Header ********************/
 /* line 9, ../../foundation-network-portal/sass/modules/_header.scss */
@@ -735,65 +756,57 @@ footer .alo_easymail_widget {
     footer .alo_easymail_widget .input-submit:hover {
       background: #e3353b; }
 
-/*
-Base Rules
-Layout Rules
-Module Rules
-State Rules
-Theme Rules
-Changing State
-*/
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 55, ../../foundation-network-portal/sass/global.scss */
+  /* line 44, ../../foundation-network-portal/sass/global.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 59, ../../foundation-network-portal/sass/global.scss */
+  /* line 48, ../../foundation-network-portal/sass/global.scss */
   #main {
     border-bottom: none; }
 
-  /* line 63, ../../foundation-network-portal/sass/global.scss */
+  /* line 52, ../../foundation-network-portal/sass/global.scss */
   #featured h3 {
     margin-top: 1em;
     padding: 0 30px; }
 
-  /* line 68, ../../foundation-network-portal/sass/global.scss */
+  /* line 57, ../../foundation-network-portal/sass/global.scss */
   #featured p {
     padding: 0 30px; }
 
-  /* line 73, ../../foundation-network-portal/sass/global.scss */
+  /* line 62, ../../foundation-network-portal/sass/global.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 81, ../../foundation-network-portal/sass/global.scss */
+  /* line 70, ../../foundation-network-portal/sass/global.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 85, ../../foundation-network-portal/sass/global.scss */
+  /* line 74, ../../foundation-network-portal/sass/global.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }
 @media only screen and (max-width: 768px) {
-  /* line 94, ../../foundation-network-portal/sass/global.scss */
+  /* line 83, ../../foundation-network-portal/sass/global.scss */
   .network-post header {
     float: none;
     width: 100%; }
-    /* line 97, ../../foundation-network-portal/sass/global.scss */
+    /* line 86, ../../foundation-network-portal/sass/global.scss */
     .network-post header .site-name {
       display: inline-block; }
-    /* line 100, ../../foundation-network-portal/sass/global.scss */
+    /* line 89, ../../foundation-network-portal/sass/global.scss */
     .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
       display: inline-block;
       margin-right: 10px; }
-  /* line 105, ../../foundation-network-portal/sass/global.scss */
+  /* line 94, ../../foundation-network-portal/sass/global.scss */
   .network-post footer {
     display: none; }
-  /* line 108, ../../foundation-network-portal/sass/global.scss */
+  /* line 97, ../../foundation-network-portal/sass/global.scss */
   .network-post .post_content {
     margin: 0%; }
-  /* line 111, ../../foundation-network-portal/sass/global.scss */
+  /* line 100, ../../foundation-network-portal/sass/global.scss */
   .network-post h2 {
     margin-right: 0; } }
 /************* Navigation ********************/
