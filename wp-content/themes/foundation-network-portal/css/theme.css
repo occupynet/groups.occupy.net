@@ -848,7 +848,7 @@ footer .alo_easymail_widget {
 
 /* line 43, ../sass/theme.scss */
 .slider-item {
-  margin: 0; }
+  margin: 0 10px 0 0; }
 
 /* line 46, ../sass/theme.scss */
 .event-image {
