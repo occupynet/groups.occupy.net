@@ -27,7 +27,7 @@ Template Name: Homepage
 				  $('.bxslider').bxSlider({
 					  minSlides: 4,
 					  maxSlides: 4,
-					  slideWidth: 237,
+					  slideWidth: 230,
 					  controls: true,
 					  pager: false,
 					  slideMargin: 0
@@ -40,7 +40,7 @@ Template Name: Homepage
 					$placeholder_image = of_get_option('placeholder_image');
 					echo EM_Events::output( array('format_header'=>'<ul class="bxslider">','format_footer'=>'</ul>','limit'=>5,'orderby'=>'date','format'=>'
 						<li class="slider-item">
-							<div class="event-image"><a href="#_EVENTURL">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{220,150}{/has_image}</a></div>
+							<div class="event-image"><a href="#_EVENTURL">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{230,157}{/has_image}</a></div>
 							<h3 class="event-title"><span class="event-date">#M #j:</span> #_EVENTLINK</h3>
 						</li>
 						'

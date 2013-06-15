@@ -842,17 +842,17 @@ footer .alo_easymail_widget {
   .bx-wrapper .bx-viewport {
     box-shadow: 0 0 0 white !important;
     border: 0;
-    padding: 10px;
+    padding: 0;
     background: transparent;
     left: 0; }
 
 /* line 43, ../sass/theme.scss */
 .slider-item {
-  margin: 0 10px 0 0; }
+  margin: 0; }
 
 /* line 46, ../sass/theme.scss */
 .event-image {
-  height: 150px;
+  height: 157px;
   width: auto;
   margin-bottom: 10px; }
 
