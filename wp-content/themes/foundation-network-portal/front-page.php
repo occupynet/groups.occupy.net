@@ -12,7 +12,7 @@ Template Name: Homepage
 		
 			<!-- Home page intro text -->
 
-			<article role="article" class="home-intro three columns">
+			<article role="article" class="home-intro twelve columns clearfix">
 
 				<div class="intro-text">
 					<?php echo get_post_meta($post->ID, 'custom_tagline', true); ?>
@@ -20,22 +20,21 @@ Template Name: Homepage
 
 			</article>
 
-			<article role="article" class="home-slider nine columns">
+			<article role="article" class="home-slider twelve columns clearfix">
 
 				<script>
 				jQuery(document).ready(function(){
 				  $('.bxslider').bxSlider({
-					  minSlides: 3,
-					  maxSlides: 3,
-					  slideWidth: 220,
+					  minSlides: 4,
+					  maxSlides: 4,
+					  slideWidth: 240,
 					  controls: true,
 					  pager: false,
-					  slideMargin: 5
+					  slideMargin: 0
 					});
 				});
 				</script>
 
-				<h2 class="slider-title">Upcoming Events <span class="slider-all-events"><a href="/events/">View All</a></span></h2>
 				<?php if (class_exists('EM_Events')) {
 					// Get placeholder image defined in Theme Options
 					$placeholder_image = of_get_option('placeholder_image');
