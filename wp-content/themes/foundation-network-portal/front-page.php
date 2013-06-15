@@ -27,7 +27,7 @@ Template Name: Homepage
 				  $('.bxslider').bxSlider({
 					  minSlides: 4,
 					  maxSlides: 4,
-					  slideWidth: 240,
+					  slideWidth: 237,
 					  controls: true,
 					  pager: false,
 					  slideMargin: 0
@@ -48,16 +48,23 @@ Template Name: Homepage
 					} ?> 
 
 			</article>
-
 		
+
 		</div>
 		
 		<div id="main" class="twelve columns clearfix" role="main">
 
 
-			<!-- Recent posts -->
+			<article role="article" class="feed-intro twelve columns clearfix">
 
-			<h2 class="main-title">News</h2>
+				<div class="intro-text">
+					&nbsp;
+				</div>
+
+			</article>
+
+
+			<!-- Recent posts -->
 
 			<?php
 

@@ -9,8 +9,68 @@
 /************* Home Page ********************/
 
 
-// feed
 
+
+// intro
+
+.intro-text h1 {
+	text-align: center;
+	color: #333;
+	font-size: 70px;
+	line-height: 70px;
+	margin: 0 0 -12px;
+}
+
+
+// event slider 
+
+
+.home-slider {
+	background: $base9;
+	padding: 10px;
+}
+
+.bx-wrapper {
+	margin-bottom: 0;
+	.bx-viewport {
+		box-shadow: 0 0 0 #FFF !important;
+		border: 0;
+		padding: 10px;
+		background: transparent;
+		left: 0;
+	}
+}
+.slider-item {
+	margin: 0 10px 0 0;
+}
+.event-image {
+	height: 150px;
+	width: auto;
+	margin-bottom: 10px;
+}
+.event-title {
+	@include condensed;
+	height: 65px;
+	overflow: hidden;
+	margin: 0;
+}
+
+.bx-controls {
+	position: absolute;
+	top: 85px;
+	width: 100%;
+	.bx-prev {
+		left: -26px;
+	}
+	.bx-next {
+		left: auto;
+		right: -26px;
+	}
+}
+
+
+
+// feed
 
 .network-post {
 	header {
@@ -39,59 +99,6 @@
 }
 
 
-// intro
-
-.intro-btn {
-	@extend .btn-loud;
-	display: inline-block;
-	margin-top: 20px;
-	padding: 5px 20px;
-	font-size: 24px;
-	
-}
-
-
-
-/************* Event Slider ********************/
-
-.home-slider {
-	border: 10px solid $base9;
-}
-
-.slider-title {
-	@include condensed;
-}
-.slider-all-events {
-	font-size: 50%;
-}
-
-.bx-wrapper {
-	margin-bottom: 0;
-}
-.bx-viewport {
-	box-shadow: 0 0 0 #FFF !important;
-	border: 0;
-}
-.bx-controls {
-	position: absolute;
-	top: -30px;
-	right: 10px;
-	.bx-next {
-		right: 0;
-	}
-	.bx-prev {
-		right: 40px;
-		left: auto;
-	}
-}
-
-.event-image {
-	height: 150px;
-	width: auto;
-}
-.event-title {
-	@include condensed;
-}
 
 
 

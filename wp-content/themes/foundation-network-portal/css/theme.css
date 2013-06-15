@@ -186,7 +186,7 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
 
 /************* Buttons ********************/
 /* line 47, ../sass/base/_buttons.scss */
-.btn, .btn-loud, .intro-btn, .alo_easymail_widget .input-submit {
+.btn, .btn-loud, .alo_easymail_widget .input-submit {
   background: #1a1a1a;
   color: white;
   cursor: pointer;
@@ -202,21 +202,21 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   letter-spacing: 1px;
   font-weight: normal; }
   /* line 57, ../sass/base/_buttons.scss */
-  .btn:hover, .btn-loud:hover, .intro-btn:hover, .alo_easymail_widget .input-submit:hover {
+  .btn:hover, .btn-loud:hover, .alo_easymail_widget .input-submit:hover {
     background: #c91c22; }
   /* line 60, ../sass/base/_buttons.scss */
-  .btn:active, .btn-loud:active, .intro-btn:active, .alo_easymail_widget .input-submit:active {
+  .btn:active, .btn-loud:active, .alo_easymail_widget .input-submit:active {
     background: #1a1a1a; }
 
 /* line 65, ../sass/base/_buttons.scss */
-.btn-loud, .intro-btn {
+.btn-loud {
   background: #c91c22; }
   /* line 68, ../sass/base/_buttons.scss */
-  .btn-loud:hover, .intro-btn:hover {
+  .btn-loud:hover {
     background: #e3353b;
     color: white; }
   /* line 72, ../sass/base/_buttons.scss */
-  .btn-loud:active, .intro-btn:active {
+  .btn-loud:active {
     background: #c91c22; }
 
 /************* Tags ********************/
@@ -823,91 +823,91 @@ footer .alo_easymail_widget {
     margin-right: 0; } }
 /************* Home Page ********************/
 /* line 16, ../sass/theme.scss */
+.intro-text h1 {
+  text-align: center;
+  color: #333;
+  font-size: 70px;
+  line-height: 70px;
+  margin: 0 0 -12px; }
+
+/* line 28, ../sass/theme.scss */
+.home-slider {
+  background: #e6e6e6;
+  padding: 10px; }
+
+/* line 33, ../sass/theme.scss */
+.bx-wrapper {
+  margin-bottom: 0; }
+  /* line 35, ../sass/theme.scss */
+  .bx-wrapper .bx-viewport {
+    box-shadow: 0 0 0 white !important;
+    border: 0;
+    padding: 10px;
+    background: transparent;
+    left: 0; }
+
+/* line 43, ../sass/theme.scss */
+.slider-item {
+  margin: 0 10px 0 0; }
+
+/* line 46, ../sass/theme.scss */
+.event-image {
+  height: 150px;
+  width: auto;
+  margin-bottom: 10px; }
+
+/* line 51, ../sass/theme.scss */
+.event-title {
+  font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: normal;
+  height: 65px;
+  overflow: hidden;
+  margin: 0; }
+
+/* line 58, ../sass/theme.scss */
+.bx-controls {
+  position: absolute;
+  top: 85px;
+  width: 100%; }
+  /* line 62, ../sass/theme.scss */
+  .bx-controls .bx-prev {
+    left: -26px; }
+  /* line 65, ../sass/theme.scss */
+  .bx-controls .bx-next {
+    left: auto;
+    right: -26px; }
+
+/* line 76, ../sass/theme.scss */
 .network-post header {
   float: left;
   width: 16%; }
-  /* line 19, ../sass/theme.scss */
+  /* line 79, ../sass/theme.scss */
   .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
     display: block; }
-/* line 23, ../sass/theme.scss */
+/* line 83, ../sass/theme.scss */
 .network-post .site-name {
   display: block;
   font-weight: bold; }
-/* line 27, ../sass/theme.scss */
+/* line 87, ../sass/theme.scss */
 .network-post footer {
   float: right;
   width: 16%; }
-/* line 31, ../sass/theme.scss */
+/* line 91, ../sass/theme.scss */
 .network-post .post_content {
   margin: 0 17%; }
-/* line 34, ../sass/theme.scss */
+/* line 94, ../sass/theme.scss */
 .network-post h2 {
   margin-top: 0;
   margin-right: 30px;
   font-size: 24px; }
 
-/* line 44, ../sass/theme.scss */
-.intro-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 5px 20px;
-  font-size: 24px; }
-
-/************* Event Slider ********************/
-/* line 57, ../sass/theme.scss */
-.home-slider {
-  border: 10px solid #e6e6e6; }
-
-/* line 61, ../sass/theme.scss */
-.slider-title {
-  font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: normal; }
-
-/* line 64, ../sass/theme.scss */
-.slider-all-events {
-  font-size: 50%; }
-
-/* line 68, ../sass/theme.scss */
-.bx-wrapper {
-  margin-bottom: 0; }
-
-/* line 71, ../sass/theme.scss */
-.bx-viewport {
-  box-shadow: 0 0 0 white !important;
-  border: 0; }
-
-/* line 75, ../sass/theme.scss */
-.bx-controls {
-  position: absolute;
-  top: -30px;
-  right: 10px; }
-  /* line 79, ../sass/theme.scss */
-  .bx-controls .bx-next {
-    right: 0; }
-  /* line 82, ../sass/theme.scss */
-  .bx-controls .bx-prev {
-    right: 40px;
-    left: auto; }
-
-/* line 88, ../sass/theme.scss */
-.event-image {
-  height: 150px;
-  width: auto; }
-
-/* line 92, ../sass/theme.scss */
-.event-title {
-  font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: normal; }
-
 /************* Groups Page ********************/
-/* line 100, ../sass/theme.scss */
+/* line 107, ../sass/theme.scss */
 .groups-list {
   list-style: none; }
-  /* line 102, ../sass/theme.scss */
+  /* line 109, ../sass/theme.scss */
   .groups-list li {
     float: left;
     border: 1px solid #dddddd;
@@ -916,7 +916,7 @@ footer .alo_easymail_widget {
     overflow: hidden;
     padding: 20px;
     margin: 0 10px 10px 0; }
-  /* line 111, ../sass/theme.scss */
+  /* line 118, ../sass/theme.scss */
   .groups-list h3 {
     font-size: 26px;
     font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
@@ -924,35 +924,35 @@ footer .alo_easymail_widget {
     letter-spacing: 1px;
     font-weight: normal;
     margin: 0; }
-  /* line 116, ../sass/theme.scss */
+  /* line 123, ../sass/theme.scss */
   .groups-list .site-description {
     margin: 0.5em 0; }
-  /* line 119, ../sass/theme.scss */
+  /* line 126, ../sass/theme.scss */
   .groups-list .site-post {
     font-size: 13px;
     margin: 0; }
 
 /************* Directory Page ********************/
-/* line 130, ../sass/theme.scss */
+/* line 137, ../sass/theme.scss */
 section.post_content div h1 {
   display: none; }
 
-/* line 135, ../sass/theme.scss */
+/* line 142, ../sass/theme.scss */
 .page section.post_content div,
 table.blogs_directory_nav_table {
   float: none !important; }
 
-/* line 139, ../sass/theme.scss */
+/* line 146, ../sass/theme.scss */
 ul.organization-listing {
   list-style: none; }
 
 /************* News Page ********************/
-/* line 149, ../sass/theme.scss */
+/* line 156, ../sass/theme.scss */
 .nlposts-block-container .nlposts-block-item,
 div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
   width: 100%; }
 
-/* line 154, ../sass/theme.scss */
+/* line 161, ../sass/theme.scss */
 .nlposts-block-container .nlposts-block-thumbnail-litem a > img, .nlposts-block-container .nlposts-block-thumbnail-litem h3.nlposts-ulist-title > img,
 div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
   float: left;
