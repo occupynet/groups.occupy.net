@@ -3,6 +3,8 @@
 
 @import "global";
 
+@import "plugins/isotope";
+
 
 
 
@@ -99,63 +101,9 @@
 	}
 }
 
-.packery .network-post {
-	width: 31%;
-	border: 1px solid $base9 !important;
-	padding-bottom: 60px;
-	header {
-		float: none;
-		width: 90%;
-		margin: 0 5%;
-		border-top: 1px solid $base9;
-		position: absolute;
-		bottom: 0;
-		.meta {
-			margin: 10px 0;
-		}
-		time, a, h3.nlposts-ulist-title {
-			display: inline;
-		}
-	}
-	.post_content {
-		margin: 0 5%;
-	}
-	.post-thumbnail img {
-		width: 100%;
-		padding: 5%;
-	}
-	footer {
-		display: none;
-	}
-}
 
-.filter {
-	@include clearfix;
-	.filter-view, 
-	.filter-category,
-	.filter-format {
-		@include condensed;
-		float: left;
-		margin: 35px 40px 10px 0;
-	}
-	.filter-add {
-		@include condensed;
-		float: right;
-		margin: 35px 0 10px;
-	}
-	a {
-		color: $base2;
-		opacity: .25;
-		cursor: pointer;
-		margin-left: 5px;
-	}
-	a:hover {
-		opacity: .5;
-	}
-	a.on {
-		opacity: 1;
-	}	
-}
+
+
 
 /************* Groups Page ********************/
 
