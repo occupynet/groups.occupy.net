@@ -432,11 +432,12 @@ footer nav {
 
 /* line 20, ../sass/modules/_footer.scss */
 footer .panel {
-  background: #333333; }
-  /* line 22, ../sass/modules/_footer.scss */
+  background: #333333;
+  margin-bottom: 0; }
+  /* line 23, ../sass/modules/_footer.scss */
   footer .panel h4 {
     color: white; }
-  /* line 26, ../sass/modules/_footer.scss */
+  /* line 27, ../sass/modules/_footer.scss */
   footer .panel .textwidget,
   footer .panel .textwidget p {
     color: white;
@@ -517,6 +518,14 @@ h4.widgettitle label {
   letter-spacing: 1px;
   font-weight: normal;
   margin: 0; }
+
+/* FORMS FOR THE NETWORK AND GROUP THEMES */
+/************* General ********************/
+/************* Unique ********************/
+/* line 16, ../sass/modules/_forms.scss */
+.respond-form {
+  border-top: 1px solid #333333;
+  padding-top: 30px; }
 
 /* EVENT MANAGER PLUGIN */
 /*************  Calendar Page ********************/
@@ -770,55 +779,55 @@ footer .alo_easymail_widget {
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {
-  /* line 44, ../sass/global.scss */
+  /* line 45, ../sass/global.scss */
   ol.commentlist div.avatar {
     margin-right: 0; }
 
-  /* line 48, ../sass/global.scss */
+  /* line 49, ../sass/global.scss */
   #main {
     border-bottom: none; }
 
-  /* line 52, ../sass/global.scss */
+  /* line 53, ../sass/global.scss */
   #featured h3 {
     margin-top: 1em;
     padding: 0 30px; }
 
-  /* line 57, ../sass/global.scss */
+  /* line 58, ../sass/global.scss */
   #featured p {
     padding: 0 30px; }
 
-  /* line 62, ../sass/global.scss */
+  /* line 63, ../sass/global.scss */
   #featured h3,
   #featured p {
     width: 100%; } }
 @media only screen and (min-width: 940px) {
   /* desktop specific styles */
-  /* line 70, ../sass/global.scss */
+  /* line 71, ../sass/global.scss */
   #main {
     margin-bottom: 0; }
 
-  /* line 74, ../sass/global.scss */
+  /* line 75, ../sass/global.scss */
   ol.commentlist div.avatar {
     margin-right: 0; } }
 @media only screen and (max-width: 768px) {
-  /* line 83, ../sass/global.scss */
+  /* line 84, ../sass/global.scss */
   .network-post header {
     float: none;
     width: 100%; }
-    /* line 86, ../sass/global.scss */
+    /* line 87, ../sass/global.scss */
     .network-post header .site-name {
       display: inline-block; }
-    /* line 89, ../sass/global.scss */
+    /* line 90, ../sass/global.scss */
     .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
       display: inline-block;
       margin-right: 10px; }
-  /* line 94, ../sass/global.scss */
+  /* line 95, ../sass/global.scss */
   .network-post footer {
     display: none; }
-  /* line 97, ../sass/global.scss */
+  /* line 98, ../sass/global.scss */
   .network-post .post_content {
     margin: 0%; }
-  /* line 100, ../sass/global.scss */
+  /* line 101, ../sass/global.scss */
   .network-post h2 {
     margin-right: 0; } }
 /************* Home Page ********************/

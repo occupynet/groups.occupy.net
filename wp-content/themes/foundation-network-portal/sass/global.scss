@@ -23,6 +23,7 @@ $experimental-support-for-khtml : false !default;
 @import "modules/footer";
 @import "modules/sidebar";
 @import "modules/feeds";
+@import "modules/forms";
 
 // add-on plugins
 @import "plugins/events";
