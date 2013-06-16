@@ -848,66 +848,67 @@ footer .alo_easymail_widget {
 
 /* line 43, ../sass/theme.scss */
 .slider-item {
-  margin: 0 10px 0 0; }
+  margin: 0; }
 
 /* line 46, ../sass/theme.scss */
 .event-image {
   height: 157px;
   width: auto;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  overflow: hidden; }
 
-/* line 51, ../sass/theme.scss */
+/* line 52, ../sass/theme.scss */
 .event-title {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal;
-  height: 65px;
+  height: 53px;
   overflow: hidden;
   margin: 0; }
 
-/* line 58, ../sass/theme.scss */
+/* line 59, ../sass/theme.scss */
 .bx-controls {
   position: absolute;
-  top: 85px;
+  top: 80px;
   width: 100%; }
-  /* line 62, ../sass/theme.scss */
+  /* line 63, ../sass/theme.scss */
   .bx-controls .bx-prev {
     left: -26px; }
-  /* line 65, ../sass/theme.scss */
+  /* line 66, ../sass/theme.scss */
   .bx-controls .bx-next {
     left: auto;
     right: -26px; }
 
-/* line 76, ../sass/theme.scss */
+/* line 77, ../sass/theme.scss */
 .network-post header {
   float: left;
   width: 16%; }
-  /* line 79, ../sass/theme.scss */
+  /* line 80, ../sass/theme.scss */
   .network-post header time, .network-post header a, .network-post header h3.nlposts-ulist-title {
     display: block; }
-/* line 83, ../sass/theme.scss */
+/* line 84, ../sass/theme.scss */
 .network-post .site-name {
   display: block;
   font-weight: bold; }
-/* line 87, ../sass/theme.scss */
+/* line 88, ../sass/theme.scss */
 .network-post footer {
   float: right;
   width: 16%; }
-/* line 91, ../sass/theme.scss */
+/* line 92, ../sass/theme.scss */
 .network-post .post_content {
   margin: 0 17%; }
-/* line 94, ../sass/theme.scss */
+/* line 95, ../sass/theme.scss */
 .network-post h2 {
   margin-top: 0;
   margin-right: 30px;
   font-size: 24px; }
 
 /************* Groups Page ********************/
-/* line 107, ../sass/theme.scss */
+/* line 108, ../sass/theme.scss */
 .groups-list {
   list-style: none; }
-  /* line 109, ../sass/theme.scss */
+  /* line 110, ../sass/theme.scss */
   .groups-list li {
     float: left;
     border: 1px solid #dddddd;
@@ -916,7 +917,7 @@ footer .alo_easymail_widget {
     overflow: hidden;
     padding: 20px;
     margin: 0 10px 10px 0; }
-  /* line 118, ../sass/theme.scss */
+  /* line 119, ../sass/theme.scss */
   .groups-list h3 {
     font-size: 26px;
     font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
@@ -924,35 +925,35 @@ footer .alo_easymail_widget {
     letter-spacing: 1px;
     font-weight: normal;
     margin: 0; }
-  /* line 123, ../sass/theme.scss */
+  /* line 124, ../sass/theme.scss */
   .groups-list .site-description {
     margin: 0.5em 0; }
-  /* line 126, ../sass/theme.scss */
+  /* line 127, ../sass/theme.scss */
   .groups-list .site-post {
     font-size: 13px;
     margin: 0; }
 
 /************* Directory Page ********************/
-/* line 137, ../sass/theme.scss */
+/* line 138, ../sass/theme.scss */
 section.post_content div h1 {
   display: none; }
 
-/* line 142, ../sass/theme.scss */
+/* line 143, ../sass/theme.scss */
 .page section.post_content div,
 table.blogs_directory_nav_table {
   float: none !important; }
 
-/* line 146, ../sass/theme.scss */
+/* line 147, ../sass/theme.scss */
 ul.organization-listing {
   list-style: none; }
 
 /************* News Page ********************/
-/* line 156, ../sass/theme.scss */
+/* line 157, ../sass/theme.scss */
 .nlposts-block-container .nlposts-block-item,
 div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
   width: 100%; }
 
-/* line 161, ../sass/theme.scss */
+/* line 162, ../sass/theme.scss */
 .nlposts-block-container .nlposts-block-thumbnail-litem a > img, .nlposts-block-container .nlposts-block-thumbnail-litem h3.nlposts-ulist-title > img,
 div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
   float: left;

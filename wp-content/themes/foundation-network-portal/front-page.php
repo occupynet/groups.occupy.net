@@ -30,7 +30,7 @@ Template Name: Homepage
 					  slideWidth: 230,
 					  controls: true,
 					  pager: false,
-					  slideMargin: 0
+					  slideMargin: 10
 					});
 				});
 				</script>

@@ -41,23 +41,24 @@
 	}
 }
 .slider-item {
-	margin: 0 10px 0 0;
+	margin: 0;
 }
 .event-image {
 	height: 157px;
 	width: auto;
 	margin-bottom: 10px;
+	overflow: hidden;
 }
 .event-title {
 	@include condensed;
-	height: 65px;
+	height: 53px;
 	overflow: hidden;
 	margin: 0;
 }
 
 .bx-controls {
 	position: absolute;
-	top: 85px;
+	top: 80px;
 	width: 100%;
 	.bx-prev {
 		left: -26px;
