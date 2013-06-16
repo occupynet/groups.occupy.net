@@ -46,8 +46,8 @@
 	.filter-format {
 		@include condensed;
 		float: left;
-		padding: 35px 40px 10px 0;
-		margin: 0;
+		margin: 30px 30px 0 0;
+		padding: 5px 10px 5px 0;
 		position: relative;
 		&:hover {
 			cursor: pointer;
@@ -59,7 +59,8 @@
 	.filter-add {
 		@include condensed;
 		float: right;
-		margin: 35px 0 10px;
+		margin: 30px 0 0;
+		padding: 5px 0 5px 10px;
 		a {
 			color: $loud;
 		}
@@ -69,7 +70,7 @@
 	}
 	span {
 		color: $base7;
-		margin-left: 5px;
+		margin-left: 3px;
 	}
 }
 
@@ -79,13 +80,14 @@
 	display: none;
 	position: absolute;
 	z-index: 999999;
-	top: 60px;
-	left: -11px;
+	top: 31px;
+	left: -15px;
 	list-style: none;
-	border: 1px solid $base9;
+	border: 1px solid $base8;
+	border-top: 0;
 	background: $base10;
 	margin: 0;
-	padding: 5px 0;
+	padding: 0 0 5px;
 	li {
 		margin: 0;
 		padding: 0;
@@ -93,12 +95,12 @@
 		line-height: 16px;
 	}
 	a {
-		padding: 5px 10px;
-		color: $base5;
+		padding: 5px 15px;
+		color: $base2;
 		display: block;
 	}
 	a:hover{
-		color: $base2;
+		color: $base7;
 	}
 	&:hover {
 		display: block;
