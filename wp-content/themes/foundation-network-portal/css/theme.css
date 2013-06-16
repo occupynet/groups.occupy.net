@@ -958,3 +958,20 @@ div.nlposts-container div.nlposts-wrapper div.nlposts-block-item {
 div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-litem > img {
   float: left;
   margin: 14px 15px auto auto !important; }
+
+/************* Footer ********************/
+/* line 170, ../sass/theme.scss */
+footer nav {
+  background: white;
+  border-top: 1px solid #333333; }
+
+/* line 174, ../sass/theme.scss */
+#menu-global-navigation {
+  margin: 0; }
+  /* line 176, ../sass/theme.scss */
+  #menu-global-navigation li {
+    margin: 0;
+    text-transform: uppercase; }
+  /* line 180, ../sass/theme.scss */
+  #menu-global-navigation a, #menu-global-navigation h3.nlposts-ulist-title {
+    padding: 12px 17px 15px; }

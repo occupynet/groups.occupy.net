@@ -164,3 +164,21 @@ div.nlposts-block-item ul.nlposts-block-thumbnail li.nlposts-block-thumbnail-lit
 	margin: 14px 15px auto auto !important;
 }
 
+
+/************* Footer ********************/
+
+footer nav {
+	background: white;
+	border-top: 1px solid #333;
+}
+#menu-global-navigation {
+	margin: 0;
+	li {
+		margin: 0;
+		text-transform: uppercase;
+	}
+	a {
+		padding: 12px 17px 15px;
+	}
+}
+
