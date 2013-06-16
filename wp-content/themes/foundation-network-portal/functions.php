@@ -28,6 +28,8 @@ if( !function_exists( 'include_custom_scripts' ) ) {
         // wp_register_script('boxsliderscript', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/js/jquery.bxslider/jquery.bxslider.js', true);  
          wp_register_script('boxsliderscript', get_stylesheet_directory_uri() . '/js/jquery.bxslider/jquery.bxslider.js', true); 
         wp_enqueue_script('boxsliderscript');
+         wp_register_script('packery', get_stylesheet_directory_uri() . '/js/packery.pkgd.min.js', true); 
+        wp_enqueue_script('packery');
     }
     add_action('wp_enqueue_scripts', 'include_custom_scripts', 25);
 }

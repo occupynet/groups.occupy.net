@@ -52,16 +52,75 @@ Template Name: Homepage
 
 		</div>
 		
+		<script src="/wp-includes/js/packery.pkgd.min.js"></script>
+		<script>
+		jQuery(document).ready(function(){
+			var container = document.querySelector('#main');
+			var pckry = new Packery( container, {
+			  // options
+			  itemSelector: '.network-post',
+			  gutter: 10
+			});
+		});
+		</script>
+		
+		<script>
+		jQuery(document).ready(function(){
+			$('#as-grid').click(function(){
+				$('#main').addClass('packery');
+				$('.by-view a').toggleClass('on');
+				$('#main').packery('reloadItems');
+			});
+			$('#as-list').click(function(){
+				$('#main').removeClass('packery');
+				$('.by-view a').toggleClass('on');
+				$('#main').packery('reloadItems');
+			});
+		});
+		</script>
+
+		<div class="filter twelve columns clearfix">
+
+			<h4 class="filter-add"><a href="/join">Add a post</a></h4>
+
+			<h4 class="filter-view">View:
+				<a id="view-list" class="on">
+					<svg xml:space="preserve" enable-background="new 0 0 48 48" viewBox="0 0 48 48" height="18px" width="18px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+						<line y2="8.907" x2="48" y1="8.907" x1="0" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="24.173" x2="48" y1="24.173" x1="0" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="39.439" x2="48" y1="39.439" x1="0" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+					</svg>
+				</a>
+				<a id="view-grid">
+					<svg xml:space="preserve" enable-background="new 0 0 48 48" viewBox="0 0 48 48" height="18px" width="18px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1">
+						<line y2="8.907" x2="9" y1="8.907" x1="0" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="24.173" x2="9" y1="24.173" x1="0" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="39.439" x2="9" y1="39.439" x1="0" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="8.907" x2="27" y1="8.907" x1="18" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="24.173" x2="27" y1="24.173" x1="18" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="39.439" x2="27" y1="39.439" x1="18" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="8.907" x2="45" y1="8.907" x1="36" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="24.173" x2="45" y1="24.173" x1="36" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+						<line y2="39.439" x2="45" y1="39.439" x1="36" stroke-miterlimit="10" stroke-width="8" stroke="#000000" fill="none"></line>
+					</svg>
+				</a>
+			</h4>
+
+			<h4 class="filter-category">Category:
+				<a id="category-all" class="on">All</a>
+			</h4>
+
+
+			<h4 class="filter-format">Format:
+				<a id="format-all" class="on">All</a>
+			</h4>
+
+		</div>
+
+
 		<div id="main" class="twelve columns clearfix" role="main">
 
 
-			<article role="article" class="feed-intro twelve columns clearfix">
-
-				<div class="intro-text">
-					&nbsp;
-				</div>
-
-			</article>
 
 
 			<!-- Recent posts -->
