@@ -905,59 +905,52 @@ footer .alo_easymail_widget {
     .filter .filter-add a:hover, .filter .filter-add h3.nlposts-ulist-title:hover {
       color: #333333; }
   /* line 70, ../sass/plugins/_isotope.scss */
-  .filter a, .filter h3.nlposts-ulist-title {
+  .filter span {
     color: #b3b3b3;
     margin-left: 5px; }
-  /* line 74, ../sass/plugins/_isotope.scss */
-  .filter a:hover, .filter h3.nlposts-ulist-title:hover {
-    color: gray; }
-  /* line 77, ../sass/plugins/_isotope.scss */
-  .filter a.on, .filter h3.on.nlposts-ulist-title {
-    color: #333333; }
-  /* line 80, ../sass/plugins/_isotope.scss */
-  .filter ul {
-    list-style: none; }
 
-/* line 87, ../sass/plugins/_isotope.scss */
+/* line 78, ../sass/plugins/_isotope.scss */
 .f-dropdown {
   display: none;
   position: absolute;
   z-index: 999999;
   top: 60px;
   left: -11px;
+  list-style: none;
   border: 1px solid #e6e6e6;
   background: white;
+  margin: 0;
   padding: 5px 0; }
-  /* line 96, ../sass/plugins/_isotope.scss */
+  /* line 89, ../sass/plugins/_isotope.scss */
   .f-dropdown li {
     margin: 0;
     padding: 0;
     font-size: 16px;
     line-height: 16px; }
-  /* line 102, ../sass/plugins/_isotope.scss */
+  /* line 95, ../sass/plugins/_isotope.scss */
   .f-dropdown a, .f-dropdown h3.nlposts-ulist-title {
-    padding: 5px 10px 5px 5px;
+    padding: 5px 10px;
     color: gray;
     display: block; }
-  /* line 107, ../sass/plugins/_isotope.scss */
+  /* line 100, ../sass/plugins/_isotope.scss */
   .f-dropdown a:hover, .f-dropdown h3.nlposts-ulist-title:hover {
     color: #333333; }
-  /* line 110, ../sass/plugins/_isotope.scss */
+  /* line 103, ../sass/plugins/_isotope.scss */
   .f-dropdown:hover {
     display: block; }
 
 /**** Isotope Filtering ****/
-/* line 119, ../sass/plugins/_isotope.scss */
+/* line 112, ../sass/plugins/_isotope.scss */
 .isotope-item {
   z-index: 2; }
 
-/* line 123, ../sass/plugins/_isotope.scss */
+/* line 116, ../sass/plugins/_isotope.scss */
 .isotope-hidden.isotope-item {
   pointer-events: none;
   z-index: 1; }
 
 /**** Isotope CSS3 transitions ****/
-/* line 131, ../sass/plugins/_isotope.scss */
+/* line 124, ../sass/plugins/_isotope.scss */
 .isotope,
 .isotope .isotope-item {
   -webkit-transition-duration: 0.8s;
@@ -966,7 +959,7 @@ footer .alo_easymail_widget {
   -o-transition-duration: 0.8s;
   transition-duration: 0.8s; }
 
-/* line 139, ../sass/plugins/_isotope.scss */
+/* line 132, ../sass/plugins/_isotope.scss */
 .isotope {
   -webkit-transition-property: height, width;
   -moz-transition-property: height, width;
@@ -974,7 +967,7 @@ footer .alo_easymail_widget {
   -o-transition-property: height, width;
   transition-property: height, width; }
 
-/* line 147, ../sass/plugins/_isotope.scss */
+/* line 140, ../sass/plugins/_isotope.scss */
 .isotope .isotope-item {
   -webkit-transition-property: -webkit-transform, opacity;
   -moz-transition-property: -moz-transform, opacity;
@@ -983,7 +976,7 @@ footer .alo_easymail_widget {
   transition-property: transform, opacity; }
 
 /**** disabling Isotope CSS3 transitions ****/
-/* line 159, ../sass/plugins/_isotope.scss */
+/* line 152, ../sass/plugins/_isotope.scss */
 .isotope.no-transition,
 .isotope.no-transition .isotope-item,
 .isotope .isotope-item.no-transition {

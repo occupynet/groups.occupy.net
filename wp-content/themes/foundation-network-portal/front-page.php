@@ -58,7 +58,7 @@ Template Name: Homepage
 			      var $container = $('#main');
 			      $container.isotope({
 			        itemSelector: '.network-post',
-			        layoutMode: 'fitRows'
+			        layoutMode: 'masonry'
 			      });
 
 
@@ -131,14 +131,14 @@ Template Name: Homepage
 			<h4 class="filter-add"><a href="/join">Add a post</a></h4>
 
 			
-			<h4 class="filter-view">View: <a class="view-current">List</a>
+			<h4 class="filter-view">View: <span id="view-current">List</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">List</a></li>
 				  <li><a href="#masonry" data-option-value="masonry">Grid</a></li>
 				</ul>
 			</h4>
 
-			<h4 class="filter-category">Category: <a class="category-current">All</a>
+			<h4 class="filter-category">Category: <span id="category-current">All</span>
 				<ul class="f-dropdown">
 				  <li><a href="#" data-filter="*">All</a></li>
 				  <li><a href="#" data-filter=".category-actions">Actions</a></li>
@@ -148,8 +148,7 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-
-			<h4 class="filter-format">Format: <a class="format-current">All</a>
+			<h4 class="filter-format">Format: <span id="format-current">All</span>
 				<ul class="f-dropdown">
 				  <li><a href="#" data-filter="*">All</a></li>
 				  <li><a href="#" data-filter=".format-standard">Standard</a></li>
