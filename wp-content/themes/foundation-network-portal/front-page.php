@@ -58,14 +58,14 @@ Template Name: Homepage
 			<h4 class="filter-add"><a href="/join">Add a post</a></h4>
 
 			
-			<h4 class="filter-view">View: <span id="view-current">List</span>
+			<h4 class="filter-view">View: <span class="filter-title" id="view-current">List</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">List</a></li>
 				  <li><a href="#masonry" data-option-value="masonry">Grid</a></li>
 				</ul>
 			</h4>
 
-			<h4 class="filter-category">Category: <span id="category-current">All</span>
+			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <li><a href="#" data-option-value=".category-actions">Actions</a></li>
@@ -75,7 +75,7 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-			<h4 class="filter-format">Format: <span id="format-current">All</span>
+			<h4 class="filter-format">Format: <span class="filter-title" id="format-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <li><a href="#" data-option-value=".format-standard">Standard</a></li>
@@ -206,6 +206,11 @@ Template Name: Homepage
 		    var $optionSet = $this.parents('.f-dropdown');
 		    $optionSet.find('.selected').removeClass('selected');
 		    $this.addClass('selected');
+
+		    var $linkTitle = $this.text();
+		    var $currentTitle = $this.parents('h4');
+		    $currentTitle.find('.filter-title').text($linkTitle);
+		    
 		
 		    // make option object dynamically, i.e. { filter: '.my-filter-class' }
 		    var options = {},

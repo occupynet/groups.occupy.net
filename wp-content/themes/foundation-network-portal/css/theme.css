@@ -936,25 +936,27 @@ footer .alo_easymail_widget {
     padding: 5px 15px;
     color: #333333;
     display: block; }
-  /* line 105, ../sass/plugins/_isotope.scss */
-  .f-dropdown a:hover, .f-dropdown h3.nlposts-ulist-title:hover {
+  /* line 106, ../sass/plugins/_isotope.scss */
+  .f-dropdown a:hover, .f-dropdown h3.nlposts-ulist-title:hover,
+  .f-dropdown a.selected,
+  .f-dropdown h3.selected.nlposts-ulist-title {
     color: #b3b3b3; }
-  /* line 108, ../sass/plugins/_isotope.scss */
+  /* line 109, ../sass/plugins/_isotope.scss */
   .f-dropdown:hover {
     display: block; }
 
 /**** Isotope Filtering ****/
-/* line 117, ../sass/plugins/_isotope.scss */
+/* line 119, ../sass/plugins/_isotope.scss */
 .isotope-item {
   z-index: 2; }
 
-/* line 121, ../sass/plugins/_isotope.scss */
+/* line 123, ../sass/plugins/_isotope.scss */
 .isotope-hidden.isotope-item {
   pointer-events: none;
   z-index: 1; }
 
 /**** Isotope CSS3 transitions ****/
-/* line 129, ../sass/plugins/_isotope.scss */
+/* line 131, ../sass/plugins/_isotope.scss */
 .isotope,
 .isotope .isotope-item {
   -webkit-transition-duration: 0.8s;
@@ -963,7 +965,7 @@ footer .alo_easymail_widget {
   -o-transition-duration: 0.8s;
   transition-duration: 0.8s; }
 
-/* line 137, ../sass/plugins/_isotope.scss */
+/* line 139, ../sass/plugins/_isotope.scss */
 .isotope {
   -webkit-transition-property: height, width;
   -moz-transition-property: height, width;
@@ -971,7 +973,7 @@ footer .alo_easymail_widget {
   -o-transition-property: height, width;
   transition-property: height, width; }
 
-/* line 145, ../sass/plugins/_isotope.scss */
+/* line 147, ../sass/plugins/_isotope.scss */
 .isotope .isotope-item {
   -webkit-transition-property: -webkit-transform, opacity;
   -moz-transition-property: -moz-transform, opacity;
@@ -980,7 +982,7 @@ footer .alo_easymail_widget {
   transition-property: transform, opacity; }
 
 /**** disabling Isotope CSS3 transitions ****/
-/* line 157, ../sass/plugins/_isotope.scss */
+/* line 159, ../sass/plugins/_isotope.scss */
 .isotope.no-transition,
 .isotope.no-transition .isotope-item,
 .isotope .isotope-item.no-transition {
