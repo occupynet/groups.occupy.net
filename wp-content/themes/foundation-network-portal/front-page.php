@@ -88,7 +88,7 @@ Template Name: Homepage
 		</div>
 
 
-		<div id="main" class="twelve columns clearfix masonry" role="main">
+		<div id="main" class="twelve columns clearfix main-feeds" role="main">
 
 			<!-- Recent posts -->
 
@@ -218,11 +218,19 @@ Template Name: Homepage
 		    
 		    if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
 		      // changes in layout modes need extra logic
-		      $container.toggleClass('masonry').css( style );
 		      changeLayoutMode( $this, options )
 		    } else {
 		      // otherwise, apply new options
 		      $container.isotope( options );
+		    }
+
+		    if ( key === 'layoutMode' && value === 'straightDown' ) {
+		      $container.removeClass('masonry');
+		      $container.isotope('reLayout');
+		    }
+		    if ( key === 'layoutMode' && value === 'masonry' ) {
+		      $container.addClass('masonry');
+		      $container.isotope('reLayout');
 		    }
 		    
 		    return false;

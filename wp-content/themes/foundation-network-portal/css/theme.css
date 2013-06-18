@@ -504,7 +504,7 @@ h4.widgettitle label {
   font-weight: normal; }
 
 /* line 15, ../sass/modules/_feeds.scss */
-#main .post {
+.main-feeds .post {
   clear: both;
   border-top: 1px solid #cccccc;
   padding-top: 20px;
