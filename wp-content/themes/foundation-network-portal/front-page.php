@@ -52,79 +52,6 @@ Template Name: Homepage
 
 		</div>
 		
-		<script src="/wp-includes/js/jquery.isotope.min.js"></script>
-		<script>
-			jQuery(document).ready(function(){
-			      var $container = $('#main');
-			      $container.isotope({
-			        itemSelector: '.network-post',
-			        layoutMode: 'masonry'
-			      });
-
-
-			      // change layout
-			      var isHorizontal = false;
-			      function changeLayoutMode( $link, options ) {
-			        var wasHorizontal = isHorizontal;
-			        isHorizontal = $link.hasClass('horizontal');
-			
-			        if ( wasHorizontal !== isHorizontal ) {
-			          // orientation change
-			          // need to do some clean up for transitions and sizes
-			          var style = isHorizontal ? 
-			            { height: '80%', width: $container.width() } : 
-			            { width: 'auto' };
-			          // stop any animation on container height / width
-			          $container.filter(':animated').stop();
-			          // disable transition, apply revised style
-			          $container.addClass('no-transition').css( style );
-			          setTimeout(function(){
-			            $container.removeClass('no-transition').isotope( options );
-			          }, 100 )
-			        } else {
-			          $container.isotope( options );
-			        }
-			      }
-			
-			
-			      
-			      var $optionSets = $('#options .option-set'),
-			          $optionLinks = $optionSets.find('a');
-			
-			      $optionLinks.click(function(){
-			        var $this = $(this);
-			        // don't proceed if already selected
-			        if ( $this.hasClass('selected') ) {
-			          return false;
-			        }
-			        var $optionSet = $this.parents('.option-set');
-			        $optionSet.find('.selected').removeClass('selected');
-			        $this.addClass('selected');
-			  
-			        // make option object dynamically, i.e. { filter: '.my-filter-class' }
-			        var options = {},
-			            key = $optionSet.attr('data-option-key'),
-			            value = $this.attr('data-option-value');
-			        // parse 'false' as false boolean
-			        value = value === 'false' ? false : value;
-			        options[ key ] = value;
-			        if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
-			          // changes in layout modes need extra logic
-			          changeLayoutMode( $this, options )
-			        } else {
-			          // otherwise, apply new options
-			          $container.isotope( options );
-			        }
-			        
-			        return false;
-			      });
-			
-			      
-
-			});
-
-    	</script>
-		
 
 		<div class="filter twelve columns clearfix">
 
@@ -139,29 +66,29 @@ Template Name: Homepage
 			</h4>
 
 			<h4 class="filter-category">Category: <span id="category-current">All</span>
-				<ul class="f-dropdown">
-				  <li><a href="#" data-filter="*">All</a></li>
-				  <li><a href="#" data-filter=".category-actions">Actions</a></li>
-				  <li><a href="#" data-filter=".category-citibank">Banks</a></li>
-				  <li><a href="#" data-filter=".category-featured">Featured</a></li>
-				  <li><a href="#" data-filter=".category-news">News</a></li>
+				<ul class="f-dropdown" data-option-key="filter">
+				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
+				  <li><a href="#" data-option-value=".category-actions">Actions</a></li>
+				  <li><a href="#" data-option-value=".category-citibank">Banks</a></li>
+				  <li><a href="#" data-option-value=".category-featured">Featured</a></li>
+				  <li><a href="#" data-option-value=".category-news">News</a></li>
 				</ul>
 			</h4>
 
 			<h4 class="filter-format">Format: <span id="format-current">All</span>
-				<ul class="f-dropdown">
-				  <li><a href="#" data-filter="*">All</a></li>
-				  <li><a href="#" data-filter=".format-standard">Standard</a></li>
-				  <li><a href="#" data-filter=".format-photo">Photo</a></li>
-				  <li><a href="#" data-filter=".format-video">Video</a></li>
-				  <li><a href="#" data-filter=".format-quote">Quote</a></li>
+				<ul class="f-dropdown" data-option-key="filter">
+				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
+				  <li><a href="#" data-option-value=".format-standard">Standard</a></li>
+				  <li><a href="#" data-option-value=".format-photo">Photo</a></li>
+				  <li><a href="#" data-option-value=".format-video">Video</a></li>
+				  <li><a href="#" data-option-value=".format-quote">Quote</a></li>
 				</ul>
 			</h4>
 
 		</div>
 
 
-		<div id="main" class="twelve columns clearfix" role="main">
+		<div id="main" class="twelve columns clearfix masonry" role="main">
 
 			<!-- Recent posts -->
 
@@ -250,5 +177,61 @@ Template Name: Homepage
 		<?php// get_sidebar('sidebar2'); // sidebar 2 ?>
 
 	</div> <!-- end #content -->
+
+
+
+		
+	<script src="wp-content/themes/foundation-network-portal/js/jquery.isotope.min.js"></script>
+	<script>
+	jQuery(document).ready(function(){
+		$(function(){
+		  
+		  var $container = $('#main');
+		
+		  $container.isotope({
+		    itemSelector : '.network-post'
+		  });
+		  
+		  
+		  var $optionSets = $('.f-dropdown'),
+		      $optionLinks = $optionSets.find('a');
+		
+		  $optionLinks.click(function(){
+		    var $this = $(this);
+		    // don't proceed if already selected
+		    if ( $this.hasClass('selected') ) {
+		      return false;
+		    }
+		    
+		    var $optionSet = $this.parents('.f-dropdown');
+		    $optionSet.find('.selected').removeClass('selected');
+		    $this.addClass('selected');
+		
+		    // make option object dynamically, i.e. { filter: '.my-filter-class' }
+		    var options = {},
+		        key = $optionSet.attr('data-option-key'),
+		        value = $this.attr('data-option-value');
+		        
+		    // parse 'false' as false boolean
+		    value = value === 'false' ? false : value;
+		    options[ key ] = value;
+		    
+		    if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+		      // changes in layout modes need extra logic
+		      $container.toggleClass('masonry').css( style );
+		      changeLayoutMode( $this, options )
+		    } else {
+		      // otherwise, apply new options
+		      $container.isotope( options );
+		    }
+		    
+		    return false;
+		  });
+		
+		  
+		});
+	});
+	</script>
+
 
 <?php get_footer(); ?>
