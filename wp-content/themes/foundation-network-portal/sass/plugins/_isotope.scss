@@ -3,33 +3,36 @@
 
 /**** masonry (grid) style ****/
 
-.masonry .network-post {
-	width: 31%;
-	border: 1px solid $base9 !important;
-	padding-bottom: 60px;
-	header {
-		float: none;
-		width: 90%;
-		margin: 0 5%;
-		border-top: 1px solid $base9;
-		position: absolute;
-		bottom: 0;
-		.meta {
-			margin: 10px 0;
+.masonry {
+	.network-post {
+		width: 310px; /* 970 container width */
+		border: 1px solid $base9 !important;
+		padding-bottom: 50px;
+		margin: 0 13px 13px 0;
+		header {
+			float: none;
+			width: 90%;
+			margin: 0 5%;
+			border-top: 1px solid $base9;
+			position: absolute;
+			bottom: 0;
+			.meta {
+				margin: 10px 0;
+			}
+			time, a, h3.nlposts-ulist-title {
+				display: inline;
+			}
 		}
-		time, a, h3.nlposts-ulist-title {
-			display: inline;
+		.post_content {
+			margin: 0 5%;
 		}
-	}
-	.post_content {
-		margin: 0 5%;
-	}
-	.post-thumbnail img {
-		width: 100%;
-		padding: 5%;
-	}
-	footer {
-		display: none;
+		.post-thumbnail img {
+			width: 100%;
+			padding: 5%;
+		}
+		footer {
+			display: none;
+		}
 	}
 }
 

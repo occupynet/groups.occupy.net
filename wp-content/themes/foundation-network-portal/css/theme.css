@@ -832,12 +832,14 @@ footer .alo_easymail_widget {
     margin-right: 0; } }
 /* ISOTOPE FRAMEWORK FOR HOME PAGE FEED */
 /**** masonry (grid) style ****/
-/* line 6, ../sass/plugins/_isotope.scss */
+/* line 7, ../sass/plugins/_isotope.scss */
 .masonry .network-post {
-  width: 31%;
+  width: 310px;
+  /* 970 container width */
   border: 1px solid #e6e6e6 !important;
-  padding-bottom: 60px; }
-  /* line 10, ../sass/plugins/_isotope.scss */
+  padding-bottom: 50px;
+  margin: 0 13px 13px 0; }
+  /* line 12, ../sass/plugins/_isotope.scss */
   .masonry .network-post header {
     float: none;
     width: 90%;
@@ -845,30 +847,30 @@ footer .alo_easymail_widget {
     border-top: 1px solid #e6e6e6;
     position: absolute;
     bottom: 0; }
-    /* line 17, ../sass/plugins/_isotope.scss */
+    /* line 19, ../sass/plugins/_isotope.scss */
     .masonry .network-post header .meta {
       margin: 10px 0; }
-    /* line 20, ../sass/plugins/_isotope.scss */
+    /* line 22, ../sass/plugins/_isotope.scss */
     .masonry .network-post header time, .masonry .network-post header a, .masonry .network-post header h3.nlposts-ulist-title, .masonry .network-post header h3.nlposts-ulist-title {
       display: inline; }
-  /* line 24, ../sass/plugins/_isotope.scss */
+  /* line 26, ../sass/plugins/_isotope.scss */
   .masonry .network-post .post_content {
     margin: 0 5%; }
-  /* line 27, ../sass/plugins/_isotope.scss */
+  /* line 29, ../sass/plugins/_isotope.scss */
   .masonry .network-post .post-thumbnail img {
     width: 100%;
     padding: 5%; }
-  /* line 31, ../sass/plugins/_isotope.scss */
+  /* line 33, ../sass/plugins/_isotope.scss */
   .masonry .network-post footer {
     display: none; }
 
 /**** filter menus ****/
-/* line 41, ../sass/plugins/_isotope.scss */
+/* line 44, ../sass/plugins/_isotope.scss */
 .filter {
   overflow: hidden;
   *zoom: 1;
   overflow: visible; }
-  /* line 46, ../sass/plugins/_isotope.scss */
+  /* line 49, ../sass/plugins/_isotope.scss */
   .filter .filter-view,
   .filter .filter-category,
   .filter .filter-format {
@@ -880,17 +882,17 @@ footer .alo_easymail_widget {
     margin: 30px 30px 0 0;
     padding: 5px 10px 5px 0;
     position: relative; }
-    /* line 52, ../sass/plugins/_isotope.scss */
+    /* line 55, ../sass/plugins/_isotope.scss */
     .filter .filter-view:hover,
     .filter .filter-category:hover,
     .filter .filter-format:hover {
       cursor: pointer; }
-      /* line 54, ../sass/plugins/_isotope.scss */
+      /* line 57, ../sass/plugins/_isotope.scss */
       .filter .filter-view:hover .f-dropdown,
       .filter .filter-category:hover .f-dropdown,
       .filter .filter-format:hover .f-dropdown {
         display: block; }
-  /* line 59, ../sass/plugins/_isotope.scss */
+  /* line 62, ../sass/plugins/_isotope.scss */
   .filter .filter-add {
     font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
     text-transform: uppercase;
@@ -899,18 +901,18 @@ footer .alo_easymail_widget {
     float: right;
     margin: 30px 0 0;
     padding: 5px 0 5px 10px; }
-    /* line 64, ../sass/plugins/_isotope.scss */
+    /* line 67, ../sass/plugins/_isotope.scss */
     .filter .filter-add a, .filter .filter-add h3.nlposts-ulist-title {
       color: #c91c22; }
-    /* line 67, ../sass/plugins/_isotope.scss */
+    /* line 70, ../sass/plugins/_isotope.scss */
     .filter .filter-add a:hover, .filter .filter-add h3.nlposts-ulist-title:hover {
       color: #333333; }
-  /* line 71, ../sass/plugins/_isotope.scss */
+  /* line 74, ../sass/plugins/_isotope.scss */
   .filter span {
     color: #b3b3b3;
     margin-left: 3px; }
 
-/* line 79, ../sass/plugins/_isotope.scss */
+/* line 82, ../sass/plugins/_isotope.scss */
 .f-dropdown {
   display: none;
   position: absolute;
@@ -923,36 +925,36 @@ footer .alo_easymail_widget {
   background: white;
   margin: 0;
   padding: 0 0 5px; }
-  /* line 91, ../sass/plugins/_isotope.scss */
+  /* line 94, ../sass/plugins/_isotope.scss */
   .f-dropdown li {
     margin: 0;
     padding: 0;
     font-size: 16px;
     line-height: 16px; }
-  /* line 97, ../sass/plugins/_isotope.scss */
+  /* line 100, ../sass/plugins/_isotope.scss */
   .f-dropdown a, .f-dropdown h3.nlposts-ulist-title {
     padding: 5px 15px;
     color: #333333;
     display: block; }
-  /* line 102, ../sass/plugins/_isotope.scss */
+  /* line 105, ../sass/plugins/_isotope.scss */
   .f-dropdown a:hover, .f-dropdown h3.nlposts-ulist-title:hover {
     color: #b3b3b3; }
-  /* line 105, ../sass/plugins/_isotope.scss */
+  /* line 108, ../sass/plugins/_isotope.scss */
   .f-dropdown:hover {
     display: block; }
 
 /**** Isotope Filtering ****/
-/* line 114, ../sass/plugins/_isotope.scss */
+/* line 117, ../sass/plugins/_isotope.scss */
 .isotope-item {
   z-index: 2; }
 
-/* line 118, ../sass/plugins/_isotope.scss */
+/* line 121, ../sass/plugins/_isotope.scss */
 .isotope-hidden.isotope-item {
   pointer-events: none;
   z-index: 1; }
 
 /**** Isotope CSS3 transitions ****/
-/* line 126, ../sass/plugins/_isotope.scss */
+/* line 129, ../sass/plugins/_isotope.scss */
 .isotope,
 .isotope .isotope-item {
   -webkit-transition-duration: 0.8s;
@@ -961,7 +963,7 @@ footer .alo_easymail_widget {
   -o-transition-duration: 0.8s;
   transition-duration: 0.8s; }
 
-/* line 134, ../sass/plugins/_isotope.scss */
+/* line 137, ../sass/plugins/_isotope.scss */
 .isotope {
   -webkit-transition-property: height, width;
   -moz-transition-property: height, width;
@@ -969,7 +971,7 @@ footer .alo_easymail_widget {
   -o-transition-property: height, width;
   transition-property: height, width; }
 
-/* line 142, ../sass/plugins/_isotope.scss */
+/* line 145, ../sass/plugins/_isotope.scss */
 .isotope .isotope-item {
   -webkit-transition-property: -webkit-transform, opacity;
   -moz-transition-property: -moz-transform, opacity;
@@ -978,7 +980,7 @@ footer .alo_easymail_widget {
   transition-property: transform, opacity; }
 
 /**** disabling Isotope CSS3 transitions ****/
-/* line 154, ../sass/plugins/_isotope.scss */
+/* line 157, ../sass/plugins/_isotope.scss */
 .isotope.no-transition,
 .isotope.no-transition .isotope-item,
 .isotope .isotope-item.no-transition {
