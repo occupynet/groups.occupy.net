@@ -300,13 +300,14 @@ div.panel {
   .siteinfo a, .siteinfo h3.nlposts-ulist-title {
     color: white;
     font-weight: normal;
-    font-size: 55px; }
+    font-size: 48px; }
 
 /* line 24, ../../foundation-network-portal/sass/modules/_header.scss */
 .searchform {
   float: right;
-  margin: 15px 0 0; }
-  /* line 27, ../../foundation-network-portal/sass/modules/_header.scss */
+  margin: 12px 0 0;
+  padding-right: 0; }
+  /* line 28, ../../foundation-network-portal/sass/modules/_header.scss */
   .searchform input[type="text"] {
     -webkit-border-radius: 15px 15px;
     -moz-border-radius: 15px / 15px;
@@ -316,48 +317,48 @@ div.panel {
     padding: 0 12px; }
 
 /************* Local Navigation ********************/
-/* line 42, ../../foundation-network-portal/sass/modules/_header.scss */
+/* line 43, ../../foundation-network-portal/sass/modules/_header.scss */
 .top-nav {
   height: 44px;
   background: #666666;
   margin: 0 0 30px;
   padding: 0; }
-  /* line 47, ../../foundation-network-portal/sass/modules/_header.scss */
+  /* line 48, ../../foundation-network-portal/sass/modules/_header.scss */
   .top-nav > li {
     border: 0;
     line-height: 44px; }
-    /* line 50, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 51, ../../foundation-network-portal/sass/modules/_header.scss */
     .top-nav > li:last-child {
       border: 0; }
-    /* line 53, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 54, ../../foundation-network-portal/sass/modules/_header.scss */
     .top-nav > li:hover {
       background: #4d4d4d; }
-    /* line 56, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 57, ../../foundation-network-portal/sass/modules/_header.scss */
     .top-nav > li.active {
       background: #fbb03b !important; }
-      /* line 58, ../../foundation-network-portal/sass/modules/_header.scss */
+      /* line 59, ../../foundation-network-portal/sass/modules/_header.scss */
       .top-nav > li.active a, .top-nav > li.active h3.nlposts-ulist-title {
         border: 0; }
-      /* line 61, ../../foundation-network-portal/sass/modules/_header.scss */
+      /* line 62, ../../foundation-network-portal/sass/modules/_header.scss */
       .top-nav > li.active:hover {
         background: #fbb03b !important; }
-        /* line 63, ../../foundation-network-portal/sass/modules/_header.scss */
+        /* line 64, ../../foundation-network-portal/sass/modules/_header.scss */
         .top-nav > li.active:hover a, .top-nav > li.active:hover h3.nlposts-ulist-title {
           color: white !important; }
-    /* line 69, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 70, ../../foundation-network-portal/sass/modules/_header.scss */
     .top-nav > li.has-flyout > a:first-child, .top-nav > li.has-flyout > h3.nlposts-ulist-title:first-child {
       padding-right: 26px;
       position: relative; }
-      /* line 72, ../../foundation-network-portal/sass/modules/_header.scss */
+      /* line 73, ../../foundation-network-portal/sass/modules/_header.scss */
       .top-nav > li.has-flyout > a:first-child:after, .top-nav > li.has-flyout > h3.nlposts-ulist-title:first-child:after {
         right: 10px; }
-    /* line 76, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 77, ../../foundation-network-portal/sass/modules/_header.scss */
     .top-nav > li.has-flyout > a.flyout-toggle, .top-nav > li.has-flyout > h3.flyout-toggle.nlposts-ulist-title {
       padding: 22px 10px; }
-    /* line 80, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 81, ../../foundation-network-portal/sass/modules/_header.scss */
     .top-nav > li > a, .top-nav > li > h3.nlposts-ulist-title {
       color: white !important; }
-      /* line 82, ../../foundation-network-portal/sass/modules/_header.scss */
+      /* line 83, ../../foundation-network-portal/sass/modules/_header.scss */
       .top-nav > li > a:first-child, .top-nav > li > h3.nlposts-ulist-title:first-child {
         position: relative;
         padding: 0 15px;
@@ -369,11 +370,11 @@ div.panel {
         text-decoration: none;
         font-size: 26px;
         color: white; }
-      /* line 91, ../../foundation-network-portal/sass/modules/_header.scss */
+      /* line 92, ../../foundation-network-portal/sass/modules/_header.scss */
       .top-nav > li > a:hover, .top-nav > li > h3.nlposts-ulist-title:hover {
         color: white !important; }
 
-/* line 102, ../../foundation-network-portal/sass/modules/_header.scss */
+/* line 103, ../../foundation-network-portal/sass/modules/_header.scss */
 ul.flyout,
 .top-nav li ul {
   background: gray;
@@ -384,7 +385,7 @@ ul.flyout,
   -webkit-box-shadow: 0 0 0 white;
   -moz-box-shadow: 0 0 0 white;
   box-shadow: 0 0 0 white; }
-  /* line 109, ../../foundation-network-portal/sass/modules/_header.scss */
+  /* line 110, ../../foundation-network-portal/sass/modules/_header.scss */
   ul.flyout li,
   .top-nav li ul li {
     width: 100%;
@@ -392,7 +393,7 @@ ul.flyout,
     border: 0;
     text-transform: uppercase;
     letter-spacing: 1px; }
-    /* line 114, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 115, ../../foundation-network-portal/sass/modules/_header.scss */
     ul.flyout li a, ul.flyout li h3.nlposts-ulist-title,
     .top-nav li ul li a,
     .top-nav li ul li h3.nlposts-ulist-title {
@@ -407,13 +408,13 @@ ul.flyout,
       border-top: 1px solid #666666;
       white-space: nowrap;
       box-shadow: inherit; }
-    /* line 128, ../../foundation-network-portal/sass/modules/_header.scss */
+    /* line 129, ../../foundation-network-portal/sass/modules/_header.scss */
     ul.flyout li a:hover, ul.flyout li h3.nlposts-ulist-title:hover,
     .top-nav li ul li a:hover,
     .top-nav li ul li h3.nlposts-ulist-title:hover {
       background: #333333;
       color: white; }
-  /* line 133, ../../foundation-network-portal/sass/modules/_header.scss */
+  /* line 134, ../../foundation-network-portal/sass/modules/_header.scss */
   ul.flyout li:last-child,
   .top-nav li ul li:last-child {
     border: 0; }
