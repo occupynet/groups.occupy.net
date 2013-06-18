@@ -94,18 +94,6 @@ Template Name: Homepage
 
 			<?php
 
-			if ($orbit_slider) { //If slider is turned on, offset posts by number set in Theme Options
-				$args = array(
-					'post_type' => 'post',
-					'offset' => $number_featured_posts
-				);
-			} else {
-				$args = array( //If the slider is turned off, show all posts
-					'post_type' => 'post',
-					'offset' => 0
-				);
-			}
-
 			$home_posts = new WP_Query( $args ); 
 			 
 			if($home_posts->have_posts()) : 
