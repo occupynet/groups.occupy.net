@@ -47,8 +47,6 @@ $args = array(
 			<h4 class="event-heading">Location</h4>
 
 			<div class="event-location address"><?php echo $args['Location']; ?></div>
-			
-			<div class="event-location map"><?php echo $args['Map']; ?></div>
 			<?php } ?>
 
 			<div class="meta">
@@ -60,7 +58,12 @@ $args = array(
 		</div>
 		<div class="event-body nine columns">
 			<div class="event-image post-thumbnail"><?php echo $args['Image']; ?></div>
-			<?php echo $args['Body']; ?>
+
+			<div class="event-description clearfix"><?php echo $args['Body']; ?></div>
+
+			<?php if($args['Location']) { ?>
+			<div class="event-location map"><?php echo $args['Map']; ?></div>
+			<?php } ?>
 		</div>
 	</section>
 	<footer class="clearfix twelve columns">
