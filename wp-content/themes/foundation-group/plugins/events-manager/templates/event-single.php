@@ -64,10 +64,12 @@ $args = array(
 		</div>
 	</section>
 	<footer class="clearfix twelve columns">
-		<div class="event-edit-link"><?php echo $args['Edit']; ?></div>
 
 		<h4 class="event-heading">Related Events</h4>
 		<div class="related-events-list"><?php echo $args['Related']; ?></div>
+
+		<div class="event-edit-link meta"><?php echo $args['Edit']; ?></div>
+
 	</footer>
 
 </div>
