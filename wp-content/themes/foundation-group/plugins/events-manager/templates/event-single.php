@@ -59,12 +59,7 @@ $args = array(
 		</div>
 	</section>
 	<footer class="clearfix twelve columns">
-		{logged_in}<div class="event-edit-link"><?php echo $args['Edit']; ?></div>{/logged_in}
-
-		{has_bookings}
-		<h4 class="event-heading">RSVPs</h4>
-		<div class="rsvp-list"><?php echo $args['Attendees']; ?></div>
-		{/has_bookings}
+		<div class="event-edit-link"><?php echo $args['Edit']; ?></div>
 
 		<h4 class="event-heading">Related Events</h4>
 		<div class="related-events-list"><?php echo $args['Related']; ?></div>
