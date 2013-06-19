@@ -49,11 +49,11 @@ $args = array(
 			<div class="event-location map"><?php echo $args['Map']; ?></div>
 			<?php } ?>
 
-			<div class="event-categories categories"><?php echo $args['Categories']; ?></div>
-
-			<div class="event-tags tags"><?php echo $args['Tags']; ?></div>
-
-			<div class="event-contact meta"><?php echo $args['Contact']; ?></div>
+			<div class="meta">
+				<div class="event-categories categories"><?php echo $args['Categories']; ?></div>
+				<div class="event-tags tags"><?php echo $args['Tags']; ?></div>
+				<div class="event-contact"><?php echo $args['Contact']; ?></div>
+			</div>
 
 		</div>
 		<div class="event-body nine columns">
