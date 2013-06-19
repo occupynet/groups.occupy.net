@@ -11,7 +11,7 @@
 						<header>
 							
 							<h1 class="single-title" itemprop="headline"><?php the_title(); ?></h1>
-							<p class="meta"><time datetime="<?php the_modified_date('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y', 'Modified:', ' | ', true); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
+							<!-- <p class="meta"><time datetime="<?php the_modified_date('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y', 'Modified:', ' | ', true); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p> -->
 						
 						</header> <!-- end article header -->
 					
@@ -20,6 +20,11 @@
 							<?php the_content(); ?>
 							
 						</section> <!-- end article section -->
+
+						<footer>
+							Related Events
+
+						</footer>
 					
 					</article> <!-- end article -->
 					
