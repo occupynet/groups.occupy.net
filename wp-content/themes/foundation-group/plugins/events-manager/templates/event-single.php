@@ -54,7 +54,7 @@ $args = array(
 			<div class="meta">
 				<div class="event-categories categories"><?php echo $args['Categories']; ?></div>
 				<div class="event-tags tags"><?php echo $args['Tags']; ?></div>
-				<div class="event-contact"><?php echo $args['Contact']; ?></div>
+				<div class="event-contact"><?php echo $args['Contact']; ?> <?php the_author_posts_link(); ?></div>
 			</div>
 
 		</div>
