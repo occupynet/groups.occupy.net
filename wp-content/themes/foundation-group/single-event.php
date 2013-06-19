@@ -20,11 +20,6 @@
 							<?php the_content(); ?>
 							
 						</section> <!-- end article section -->
-
-						<footer>
-							Related Events
-
-						</footer>
 					
 					</article> <!-- end article -->
 					
