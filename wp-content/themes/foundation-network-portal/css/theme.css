@@ -186,7 +186,7 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
 
 /************* Buttons ********************/
 /* line 47, ../sass/base/_buttons.scss */
-.btn, .btn-loud, .alo_easymail_widget .input-submit {
+.btn, .btn-loud, input[type="submit"], .alo_easymail_widget .input-submit {
   background: #1a1a1a;
   color: white;
   cursor: pointer;
@@ -202,35 +202,40 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   letter-spacing: 1px;
   font-weight: normal; }
   /* line 57, ../sass/base/_buttons.scss */
-  .btn:hover, .btn-loud:hover, .alo_easymail_widget .input-submit:hover {
+  .btn:hover, .btn-loud:hover, input[type="submit"]:hover, .alo_easymail_widget .input-submit:hover {
     background: #c91c22; }
   /* line 60, ../sass/base/_buttons.scss */
-  .btn:active, .btn-loud:active, .alo_easymail_widget .input-submit:active {
+  .btn:active, .btn-loud:active, input[type="submit"]:active, .alo_easymail_widget .input-submit:active {
     background: #1a1a1a; }
 
 /* line 65, ../sass/base/_buttons.scss */
-.btn-loud {
+.btn-loud, input[type="submit"] {
   background: #c91c22; }
   /* line 68, ../sass/base/_buttons.scss */
-  .btn-loud:hover {
+  .btn-loud:hover, input[type="submit"]:hover {
     background: #e3353b;
     color: white; }
   /* line 72, ../sass/base/_buttons.scss */
-  .btn-loud:active {
+  .btn-loud:active, input[type="submit"]:active {
     background: #c91c22; }
 
+/* line 77, ../sass/base/_buttons.scss */
+.btn-large, input[type="submit"] {
+  padding: 10px 25px 8px;
+  font-size: 22px; }
+
 /************* Tags ********************/
-/* line 80, ../sass/base/_buttons.scss */
+/* line 85, ../sass/base/_buttons.scss */
 .tags {
   line-height: 1.3; }
-  /* line 82, ../sass/base/_buttons.scss */
+  /* line 87, ../sass/base/_buttons.scss */
   .tags .tags-title {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 11px;
     padding: 1px 4px 2px 0; }
 
-/* line 89, ../sass/base/_buttons.scss */
+/* line 94, ../sass/base/_buttons.scss */
 .label {
   background: transparent !important;
   border: 0;
@@ -244,10 +249,10 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   font-size: 11px;
   white-space: nowrap;
   text-shadow: none; }
-  /* line 99, ../sass/base/_buttons.scss */
+  /* line 104, ../sass/base/_buttons.scss */
   .label:after {
     content: " ›"; }
-  /* line 102, ../sass/base/_buttons.scss */
+  /* line 107, ../sass/base/_buttons.scss */
   .label:hover {
     color: #333333; }
 
@@ -522,15 +527,144 @@ h4.widgettitle label {
 
 /* FORMS FOR THE NETWORK AND GROUP THEMES */
 /************* General ********************/
+/* line 9, ../sass/modules/_forms.scss */
+.post_content form p:first-child {
+  font-size: 15px;
+  /* undo intro paragraph style */ }
+
+/* line 13, ../sass/modules/_forms.scss */
+input[type="submit"] {
+  width: auto; }
+
 /************* Unique ********************/
-/* line 16, ../sass/modules/_forms.scss */
+/* line 25, ../sass/modules/_forms.scss */
 .respond-form {
   border-top: 1px solid #333333;
   padding-top: 30px; }
 
+/* line 36, ../sass/modules/_forms.scss */
+.mu_register .mu_alert {
+  color: #333333;
+  background: #feefd7;
+  border: 0;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.4;
+  padding: 10px 20px; }
+/* line 45, ../sass/modules/_forms.scss */
+.mu_register li {
+  margin-bottom: .5em;
+  margin-left: 2em; }
+/* line 49, ../sass/modules/_forms.scss */
+.mu_register form {
+  margin: 2em 0 5em;
+  border: 10px solid #cccccc;
+  background: #e6e6e6;
+  padding: 20px 30px; }
+/* line 55, ../sass/modules/_forms.scss */
+.mu_register label {
+  text-transform: uppercase;
+  margin: 30px 0 5px;
+  clear: left; }
+/* line 60, ../sass/modules/_forms.scss */
+.mu_register label.checkbox {
+  text-transform: none; }
+/* line 63, ../sass/modules/_forms.scss */
+.mu_register .prefix_address {
+  float: left;
+  margin: 7px 0; }
+/* line 67, ../sass/modules/_forms.scss */
+.mu_register .suffix_address {
+  margin: 7px 0; }
+/* line 73, ../sass/modules/_forms.scss */
+.mu_register #blog_title,
+.mu_register #user_email,
+.mu_register #blogname,
+.mu_register #user_name {
+  width: 80%;
+  font-size: 20px;
+  padding: 3px 5px; }
+/* line 78, ../sass/modules/_forms.scss */
+.mu_register #blogname {
+  width: 40%; }
+
 /* EVENT MANAGER PLUGIN */
+/*************  Events Editor ********************/
+/* line 7, ../sass/plugins/_events.scss */
+#event-form {
+  margin: 2em 0 5em;
+  border: 10px solid #cccccc;
+  background: #e6e6e6;
+  padding: 20px 30px; }
+  /* line 12, ../sass/plugins/_events.scss */
+  #event-form h4 {
+    margin: 30px 0px 10px;
+    text-transform: uppercase;
+    clear: both; }
+  /* line 17, ../sass/plugins/_events.scss */
+  #event-form p {
+    margin: 10px 0; }
+  /* line 24, ../sass/plugins/_events.scss */
+  #event-form .em-date-range input,
+  #event-form .em-time-range input {
+    width: 15%;
+    display: inline; }
+  /* line 28, ../sass/plugins/_events.scss */
+  #event-form .em-date-range input[type="checkbox"],
+  #event-form .em-time-range input[type="checkbox"] {
+    width: auto; }
+  /* line 32, ../sass/plugins/_events.scss */
+  #event-form table.em-location-data {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-spacing: 0;
+    background: transparent; }
+    /* line 37, ../sass/plugins/_events.scss */
+    #event-form table.em-location-data tbody tr:nth-child(even),
+    #event-form table.em-location-data tbody tr:nth-child(odd) {
+      background: transparent; }
+    /* line 40, ../sass/plugins/_events.scss */
+    #event-form table.em-location-data th {
+      border-top: 1px solid #cccccc;
+      padding-top: 15px;
+      padding-right: 5px;
+      text-align: right; }
+    /* line 46, ../sass/plugins/_events.scss */
+    #event-form table.em-location-data td {
+      border-top: 1px solid #cccccc;
+      padding-top: 10px; }
+    /* line 50, ../sass/plugins/_events.scss */
+    #event-form table.em-location-data i {
+      color: #c91c22;
+      font-weight: bold;
+      float: right;
+      height: 0;
+      position: relative;
+      right: -15px;
+      top: -30px; }
+  /* line 60, ../sass/plugins/_events.scss */
+  #event-form #em-map, #event-form #em-map-404 {
+    border: 1px dashed #bbbbbb;
+    margin-left: 40px; }
+  /* line 64, ../sass/plugins/_events.scss */
+  #event-form .event-form-image {
+    padding-bottom: 15px; }
+    /* line 66, ../sass/plugins/_events.scss */
+    #event-form .event-form-image label {
+      text-transform: uppercase;
+      font-size: 12px;
+      margin: 5px 5px 20px 0;
+      display: inline; }
+    /* line 72, ../sass/plugins/_events.scss */
+    #event-form .event-form-image #event-image {
+      margin: 5px 0 10px; }
+  /* line 76, ../sass/plugins/_events.scss */
+  #event-form input[type="submit"] {
+    margin: 20px 0; }
+
 /*************  Calendar Page ********************/
-/* line 8, ../sass/plugins/_events.scss */
+/* line 85, ../sass/plugins/_events.scss */
 .em-events-search-form {
   background-color: #333333;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(50%, #333333), color-stop(50%, #4d4d4d), color-stop(100%, #4d4d4d));
@@ -539,7 +673,7 @@ h4.widgettitle label {
   background-image: -ms-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
   background-image: -o-linear-gradient(to bottom, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
   padding: 5px 10px; }
-  /* line 30, ../sass/plugins/_events.scss */
+  /* line 107, ../sass/plugins/_events.scss */
   .em-events-search-form input[type="text"] {
     height: 24px;
     width: 18%;
@@ -550,20 +684,20 @@ h4.widgettitle label {
     display: inline;
     font-size: 13px;
     margin: 0 5px 10px; }
-  /* line 39, ../sass/plugins/_events.scss */
+  /* line 116, ../sass/plugins/_events.scss */
   .em-events-search-form input.em-events-search-text {
     width: 40%;
     margin: 0 30px 10px 0; }
-  /* line 43, ../sass/plugins/_events.scss */
+  /* line 120, ../sass/plugins/_events.scss */
   .em-events-search-form span {
     color: white;
     font-size: 12px; }
-  /* line 47, ../sass/plugins/_events.scss */
+  /* line 124, ../sass/plugins/_events.scss */
   .em-events-search-form select {
     width: auto;
     height: 24px;
     border: 0; }
-  /* line 52, ../sass/plugins/_events.scss */
+  /* line 129, ../sass/plugins/_events.scss */
   .em-events-search-form input[type="submit"] {
     height: 24px;
     line-height: 24px;
@@ -582,31 +716,31 @@ h4.widgettitle label {
     position: relative;
     top: 2px; }
 
-/* line 67, ../sass/plugins/_events.scss */
+/* line 144, ../sass/plugins/_events.scss */
 .events-table {
   border: 0;
   border-top: 1px solid #b3b3b3;
   width: 100%; }
-  /* line 71, ../sass/plugins/_events.scss */
+  /* line 148, ../sass/plugins/_events.scss */
   .events-table thead {
     display: none; }
-  /* line 74, ../sass/plugins/_events.scss */
+  /* line 151, ../sass/plugins/_events.scss */
   .events-table tr {
     border-bottom: 1px solid #b3b3b3; }
-  /* line 77, ../sass/plugins/_events.scss */
+  /* line 154, ../sass/plugins/_events.scss */
   .events-table a, .events-table h3.nlposts-ulist-title {
     font-size: 18px; }
 
 /*************  Single Event Page ********************/
-/* line 86, ../sass/plugins/_events.scss */
+/* line 163, ../sass/plugins/_events.scss */
 .event-body {
   padding-top: 30px; }
 
-/* line 90, ../sass/plugins/_events.scss */
+/* line 167, ../sass/plugins/_events.scss */
 .event .sidebar {
   padding-left: 0; }
 
-/* line 96, ../sass/plugins/_events.scss */
+/* line 173, ../sass/plugins/_events.scss */
 .event-date-time h3,
 .event-location h3 {
   font-size: 18px;
@@ -615,7 +749,7 @@ h4.widgettitle label {
   letter-spacing: 1px;
   font-weight: normal;
   margin: 2em 0 0.5em; }
-/* line 101, ../sass/plugins/_events.scss */
+/* line 178, ../sass/plugins/_events.scss */
 .event-date-time p,
 .event-location p {
   font-size: 14px;
@@ -623,44 +757,44 @@ h4.widgettitle label {
   line-height: 1.4; }
 
 /*************  List Widget ********************/
-/* line 113, ../sass/plugins/_events.scss */
+/* line 190, ../sass/plugins/_events.scss */
 .widget_em_widget .widgettitle {
   margin-bottom: 0; }
-/* line 116, ../sass/plugins/_events.scss */
+/* line 193, ../sass/plugins/_events.scss */
 .widget_em_widget li {
   padding: 10px 0 10px;
   font-size: 13px; }
-/* line 120, ../sass/plugins/_events.scss */
+/* line 197, ../sass/plugins/_events.scss */
 .widget_em_widget a, .widget_em_widget h3.nlposts-ulist-title {
   font-size: 18px;
   font-weight: normal !important;
   display: block;
   padding: 5px 0;
   line-height: 1.3em; }
-/* line 127, ../sass/plugins/_events.scss */
+/* line 204, ../sass/plugins/_events.scss */
 .widget_em_widget ul ul li {
   display: inline;
   border: 0;
   margin-right: 15px;
   font-size: 12px; }
 
-/* line 139, ../sass/plugins/_events.scss */
+/* line 216, ../sass/plugins/_events.scss */
 footer .widget_em_widget .widgettitle {
   margin-bottom: 10px; }
-/* line 142, ../sass/plugins/_events.scss */
+/* line 219, ../sass/plugins/_events.scss */
 footer .widget_em_widget .event-title {
   margin-bottom: 0; }
-/* line 145, ../sass/plugins/_events.scss */
+/* line 222, ../sass/plugins/_events.scss */
 footer .widget_em_widget li {
   list-style: none;
   padding: 0;
   color: white; }
-  /* line 149, ../sass/plugins/_events.scss */
+  /* line 226, ../sass/plugins/_events.scss */
   footer .widget_em_widget li a, footer .widget_em_widget li h3.nlposts-ulist-title {
     color: white; }
 
 /*************  Calendar Widget ********************/
-/* line 159, ../sass/plugins/_events.scss */
+/* line 236, ../sass/plugins/_events.scss */
 table.em-calendar {
   border: 0;
   width: 100%;
@@ -671,28 +805,28 @@ table.em-calendar {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal; }
-  /* line 164, ../sass/plugins/_events.scss */
+  /* line 241, ../sass/plugins/_events.scss */
   table.em-calendar thead {
     background: white;
     font-size: 18px; }
-  /* line 168, ../sass/plugins/_events.scss */
+  /* line 245, ../sass/plugins/_events.scss */
   table.em-calendar tbody tr:nth-child(even) {
     background: white; }
-  /* line 171, ../sass/plugins/_events.scss */
+  /* line 248, ../sass/plugins/_events.scss */
   table.em-calendar td {
     padding: 3px;
     font-size: 18px;
     font-weight: normal; }
-  /* line 177, ../sass/plugins/_events.scss */
+  /* line 254, ../sass/plugins/_events.scss */
   table.em-calendar td.eventless-today,
   table.em-calendar td.eventful-today {
     background-color: white; }
-  /* line 181, ../sass/plugins/_events.scss */
+  /* line 258, ../sass/plugins/_events.scss */
   table.em-calendar td.eventful a, table.em-calendar td.eventful h3.nlposts-ulist-title,
   table.em-calendar td.eventful-today a,
   table.em-calendar td.eventful-today h3.nlposts-ulist-title {
     color: #c91c22 !important; }
-    /* line 183, ../sass/plugins/_events.scss */
+    /* line 260, ../sass/plugins/_events.scss */
     table.em-calendar td.eventful a:hover, table.em-calendar td.eventful h3.nlposts-ulist-title:hover,
     table.em-calendar td.eventful-today a:hover,
     table.em-calendar td.eventful-today h3.nlposts-ulist-title:hover {
