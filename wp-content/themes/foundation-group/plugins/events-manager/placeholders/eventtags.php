@@ -6,7 +6,7 @@ if( is_array($tags) && count($tags) > 0 ){
 	foreach($tags as $tag){ 
 		$link = get_term_link($tag->slug, EM_TAXONOMY_TAG);
 		if ( is_wp_error($link) ) $link = '';
-		$tags_list[] = '<a href="'. $link .'">'. $tag->name .'</a>';
+		$tags_list[] = '<a href="'. $link .'" class="label success radius" rel="tag">'. $tag->name .'</a>';
 	}
 	echo implode(', ', $tags_list);
 }
