@@ -45,6 +45,8 @@ $args = array(
 
 			<?php if($args['Location']) { ?>
 			<h4 class="event-heading">Location</h4>
+
+			<div class="event-location address"><?php echo $args['Location']; ?></div>
 			
 			<div class="event-location map"><?php echo $args['Map']; ?></div>
 			<?php } ?>
