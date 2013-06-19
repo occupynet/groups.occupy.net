@@ -34,8 +34,12 @@
 		line-height: 1.4;
 		padding: 10px 20px;
 	}
+	li {
+		margin-bottom: .5em;
+		margin-left: 2em;
+	}
 	form {
-		margin-top: 2em;
+		margin: 2em 0 5em;
 		border: 10px solid $base8;
 		background: $base9;
 		padding: 20px 30px;

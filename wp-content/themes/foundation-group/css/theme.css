@@ -543,27 +543,31 @@ h4.widgettitle label {
   line-height: 1.4;
   padding: 10px 20px; }
 /* line 37, ../../foundation-network-portal/sass/modules/_forms.scss */
+.mu_register li {
+  margin-bottom: .5em;
+  margin-left: 2em; }
+/* line 41, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register form {
-  margin-top: 2em;
+  margin: 2em 0 5em;
   border: 10px solid #cccccc;
   background: #e6e6e6;
   padding: 20px 30px; }
-/* line 43, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 47, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register label {
   text-transform: uppercase;
   margin: 30px 0 5px;
   clear: left; }
-/* line 48, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 52, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register label.checkbox {
   text-transform: none; }
-/* line 51, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 55, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register .prefix_address {
   float: left;
   margin: 7px 0; }
-/* line 55, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 59, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register .suffix_address {
   margin: 7px 0; }
-/* line 61, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 65, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register #blog_title,
 .mu_register #user_email,
 .mu_register #blogname,
@@ -571,10 +575,10 @@ h4.widgettitle label {
   width: 80%;
   font-size: 20px;
   padding: 3px 5px; }
-/* line 66, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 70, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register #blogname {
   width: 40%; }
-/* line 69, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 73, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register input[type="submit"] {
   width: auto; }
 
