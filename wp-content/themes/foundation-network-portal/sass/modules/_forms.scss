@@ -6,7 +6,15 @@
 
 /************* General ********************/
 
+.post_content form p:first-child {
+	font-size: 15px;  /* undo intro paragraph style */
+}
 
+input[type="submit"] {
+	@extend .btn-loud;
+	@extend .btn-large;
+	width: auto;
+}	
 
 
 /************* Unique ********************/
@@ -70,9 +78,4 @@
 	#blogname {
 		width: 40%;
 	}
-	input[type="submit"] {
-		@extend .btn-loud;
-		@extend .btn-large;
-		width: auto;
-	}	
 }

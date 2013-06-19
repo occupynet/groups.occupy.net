@@ -2,6 +2,83 @@
 
 
 
+/*************  Events Editor ********************/
+
+#event-form {
+	margin: 2em 0 5em;
+	border: 10px solid $base8;
+	background: $base9;
+	padding: 20px 30px;
+	h4 {
+		margin: 30px 0px 10px;
+		text-transform: uppercase;
+		clear: both;
+	}
+	p {
+		margin: 10px 0;
+	}
+	.em-date-range, 
+	.em-time-range {
+		span {
+		}
+		input {
+			width: 15%;
+			display: inline;
+		}
+		input[type="checkbox"] {
+			width: auto;
+		}
+	}
+	table.em-location-data {
+		@include border-radius(0);
+		border-spacing: 0;
+		background: transparent;
+		tbody tr:nth-child(even),
+		tbody tr:nth-child(odd) {
+			background: transparent;
+		}
+		th {
+			border-top: 1px solid $base8;
+			padding-top: 15px;
+			padding-right: 5px;
+			text-align: right;
+		}
+		td {
+			border-top: 1px solid $base8;
+			padding-top: 10px;
+		}
+		i {
+			color: $loud;
+			font-weight: bold;
+			float: right;
+			height: 0;
+			position: relative;
+			right: -15px;
+			top: -30px;
+		}
+	}
+	#em-map, #em-map-404 {
+		border: 1px dashed #BBB;
+		margin-left: 40px;
+	}
+	.event-form-image {
+		padding-bottom: 15px;
+		label {
+			text-transform: uppercase;
+			font-size: 12px;
+			margin: 5px 5px 20px 0;
+			display: inline;
+		}
+		#event-image {
+			margin: 5px 0 10px;
+		}
+	}
+	input[type="submit"] {
+		margin: 20px 0;
+	}
+}
+
+
 
 /*************  Calendar Page ********************/
 
