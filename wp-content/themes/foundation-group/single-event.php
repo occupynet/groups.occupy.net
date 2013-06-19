@@ -20,12 +20,6 @@
 							<?php the_content(); ?>
 							
 						</section> <!-- end article section -->
-						
-						<footer>
-			
-							<?php the_tags('<p class="tags"><span class="tags-title"></span> ', ' ', '</p>'); ?>
-							
-						</footer> <!-- end article footer -->
 					
 					</article> <!-- end article -->
 					
