@@ -19,41 +19,57 @@ $args = array(
 	'Title' => $EM_Event->output('#_EVENTLINK'),
 	'Date' => $EM_Event->output('#D. #M #j, #Y #@_{ \u\n\t\i\l M j Y}'),
 	'Time' => $EM_Event->output('#_12HSTARTTIME - #_12HENDTIME'),
-	'Location' => $EM_Event->output('#_LOCATIONLINK') . '<br />' . $EM_Event->output('#_LOCATIONADDRESS') . ', ' . $EM_Event->output('#_LOCATIONTOWN') . ' ' . $EM_Event->output('#_LOCATIONSTATE'),
+	'Location' => '<span class="event-location name">' . $EM_Event->output('#_LOCATIONLINK') . '</span> <span class="event-location address">' . $EM_Event->output('#_LOCATIONADDRESS') . '</span> <span class="event-location city">' . $EM_Event->output('#_LOCATIONTOWN') . '</span> <span class="event-location state">' . $EM_Event->output('#_LOCATIONSTATE') . '</span> <span class="event-location region">' . $EM_Event->output('#_LOCATIONREGION') . '</span>',
 	'Address' => $EM_Event->output('#_LOCATIONADDRESS'),
 	'Map' => $EM_Event->output('#_LOCATIONMAP'),
-	'Image' => $EM_Event->output('#_EVENTCATEGORIES'),
-	'Categories' => $EM_Event->output('#_EVENTTAGS'),
+	'Categories' => $EM_Event->output('#_EVENTCATEGORIES'),
+	'Tags' => $EM_Event->output('#_EVENTTAGS'),
 	'Body' => $EM_Event->output('#_EVENTNOTES'),
 	'Image' => $EM_Event->output('#_EVENTIMAGE'),
+	'Edit' => $EM_Event->output('#_EDITEVENTLINK'),
+	'Attendees' => $EM_Event->output('#_BOOKINGATTENDEES'),
+	'Related' => $EM_Event->output('#_CATEGORYNEXTEVENTS'),
 	);
 ?>
 
-<div class="sidebar three columns">
-	<?php if($args['Image']) { ?>
-	<div class="event-image"><?php echo $args['Image']; ?></div>
-	<?php } ?>
-	<div class="event-date-time">
-		<h3>Date & Time</h3>
-		<p><?php echo $args['Date']; ?></p>
-		<p><?php echo $args['Time']; ?></p>
-	</div>
-	<?php if($args['Location']) { ?>
-	<div class="event-location">
-		<h3>Location</h3>
-		<p><?php echo $args['Location']; ?></p>
-	</div>
-	<?php } ?>
-	<?php if($args['Location']) { ?>
-	<div class="event-location">
-		<p><?php echo $args['Map']; ?></p>
-	</div>
-	<?php } ?>
-</div>
-<div class="event-content nine columns">
-	<div class="event-body"><?php echo $args['Body']; ?></div>
-</div>
-	
+<div class="event-wrapper">
+
+	<section class="clearfix">
+		<div class="sidebar three columns event-details">
+			<h4 class="event-heading">Date/Time</h4>
+			<div class="event-dates-times">
+			<span class="event-date"><?php echo $args['Date']; ?></span>
+			<span class="event-time"><?php echo $args['Time']; ?></span>
+			</div>
+
+			<?php if($args['Location']) { ?>
+			<h4 class="event-heading">Location</h4>
+			
+			<div class="event-location map"><?php echo $args['Map']; ?></div>
+			<?php } ?>
+
+			<div class="event-categories categories"><?php echo $args['Categories']; ?></div>
+
+			<div class="event-tags tags"><?php echo $args['Tags']; ?></div>
+
+		</div>
+		<div class="event-body nine columns">
+			<div class="event-image"><?php echo $args['Image']; ?></div>
+			<?php echo $args['Body']; ?>
+		</div>
+	</section>
+	<footer class="clearfix twelve columns">
+		{logged_in}<div class="event-edit-link"><?php echo $args['Edit']; ?></div>{/logged_in}
+
+		{has_bookings}
+		<h4 class="event-heading">RSVPs</h4>
+		<div class="rsvp-list"><?php echo $args['Attendees']; ?></div>
+		{/has_bookings}
+
+		<h4 class="event-heading">Related Events</h4>
+		<div class="related-events-list"><?php echo $args['Related']; ?></div>
+	</footer>
+
 </div>
 
 <?php// } ?>
