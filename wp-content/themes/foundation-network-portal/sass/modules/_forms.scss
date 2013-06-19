@@ -12,8 +12,63 @@
 /************* Unique ********************/
 
 
+// commenting
 
 .respond-form {
 	border-top: 1px solid #333;
 	padding-top: 30px;
+}
+
+
+
+
+// site registration
+
+.mu_register {
+	.mu_alert {
+		color: $base2;
+		background: mix(#fff, $brand, 80%);
+		border: 0;
+		clear: both;
+		font-weight: normal;
+		line-height: 1.4;
+		padding: 10px 20px;
+	}
+	form {
+		margin-top: 2em;
+		border: 10px solid $base8;
+		background: $base9;
+		padding: 20px 30px;
+	}
+	label {
+		text-transform: uppercase;
+		margin: 30px 0 5px;
+		clear: left;
+	}
+	label.checkbox {
+		text-transform: none;
+	}
+	.prefix_address {
+		float: left;
+		margin: 7px 0;
+	}
+	.suffix_address {
+		margin: 7px 0;		
+	}
+	#blog_title, 
+	#user_email, 
+	#blogname, 
+	#user_name {
+		width: 80%;
+		font-size: 20px;
+		padding: 3px 5px;
+	}
+	#blogname {
+		width: 40%;
+	}
+	input[type="submit"] {
+		@extend .btn-loud;
+		@extend .btn-large;
+		width: auto;
+	}	
 }
