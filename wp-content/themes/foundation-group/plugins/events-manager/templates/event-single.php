@@ -29,6 +29,7 @@ $args = array(
 	'Edit' => $EM_Event->output('#_EDITEVENTLINK'),
 	'Attendees' => $EM_Event->output('#_BOOKINGATTENDEES'),
 	'Related' => $EM_Event->output('#_CATEGORYNEXTEVENTS'),
+	'Contact' => $EM_Event->output('#_CONTACTUSERNAME'),
 	);
 ?>
 
@@ -51,6 +52,8 @@ $args = array(
 			<div class="event-categories categories"><?php echo $args['Categories']; ?></div>
 
 			<div class="event-tags tags"><?php echo $args['Tags']; ?></div>
+
+			<div class="event-contact meta"><?php echo $args['Contact']; ?></div>
 
 		</div>
 		<div class="event-body nine columns">
