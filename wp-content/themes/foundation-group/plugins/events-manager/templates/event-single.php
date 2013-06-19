@@ -54,7 +54,7 @@ $args = array(
 
 		</div>
 		<div class="event-body nine columns">
-			<div class="event-image"><?php echo $args['Image']; ?></div>
+			<div class="event-image post-thumbnail"><?php echo $args['Image']; ?></div>
 			<?php echo $args['Body']; ?>
 		</div>
 	</section>
