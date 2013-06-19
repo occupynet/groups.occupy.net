@@ -19,7 +19,7 @@ $args = array(
 	'Title' => $EM_Event->output('#_EVENTLINK'),
 	'Date' => $EM_Event->output('#D. #M #j, #Y #@_{ \u\n\t\i\l M j Y}'),
 	'Time' => $EM_Event->output('#_12HSTARTTIME - #_12HENDTIME'),
-	'Location' => '<span class="event-location name">' . $EM_Event->output('#_LOCATIONLINK') . '</span> <span class="event-location address">' . $EM_Event->output('#_LOCATIONADDRESS') . '</span> <span class="event-location city">' . $EM_Event->output('#_LOCATIONTOWN') . '</span> <span class="event-location state">' . $EM_Event->output('#_LOCATIONSTATE') . '</span> <span class="event-location region">' . $EM_Event->output('#_LOCATIONREGION') . '</span>',
+	'Location' => '<p><span class="event-location name">' . $EM_Event->output('#_LOCATIONLINK') . '</span></p><p><span class="event-location address">' . $EM_Event->output('#_LOCATIONADDRESS') . '</span> <span class="event-location city">' . $EM_Event->output('#_LOCATIONTOWN') . '</span> <span class="event-location state">' . $EM_Event->output('#_LOCATIONSTATE') . '</span></p><p><span class="event-location region">' . $EM_Event->output('#_LOCATIONREGION') . '</span></p>',
 	'Address' => $EM_Event->output('#_LOCATIONADDRESS'),
 	'Map' => $EM_Event->output('#_LOCATIONMAP'),
 	'Categories' => $EM_Event->output('#_EVENTCATEGORIES'),
