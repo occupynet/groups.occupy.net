@@ -133,9 +133,7 @@ Template Name: Homepage
 							<?php 
 							if (!is_syndicated ()) {
 								_e("by", "bonestheme"); ?> <?php the_author_posts_link(); 
-							} else {
-								the_author();
-							}
+							} 
 							?>
 
 							<?php if ($category->cat_name != 'Uncategorized') {
