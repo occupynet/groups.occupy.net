@@ -128,7 +128,20 @@ Template Name: Homepage
 							<?php } else { ?>
 							<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
 							<?php } ?>
-							<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?>
+							<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> 
+
+							<?php 
+							if (!is_syndicated ()) {
+								_e("by", "bonestheme"); ?> <?php the_author_posts_link(); 
+							} else {
+								the_author();
+							}
+							?>
+
+							<?php if ($category->cat_name != 'uncategorized') {
+							echo the_category(' | '); 
+							}
+							?>
 					</p>
 				
 				</header> <!-- end article header -->
