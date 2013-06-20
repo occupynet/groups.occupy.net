@@ -128,7 +128,7 @@ Template Name: Homepage
 							<?php } else { ?>
 							<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
 							<?php } ?>
-							<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php echo human_time_diff( get_the_time('U'), current_time('timestamp') ) . ' ago'; ?></time> 
+							<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?>
 					</p>
 				
 				</header> <!-- end article header -->
