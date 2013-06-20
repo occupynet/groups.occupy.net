@@ -138,7 +138,7 @@ Template Name: Homepage
 							}
 							?>
 
-							<?php if ($category->cat_name != 'uncategorized') {
+							<?php if ($category->cat_name != 'Uncategorized') {
 							echo the_category(' | '); 
 							}
 							?>
