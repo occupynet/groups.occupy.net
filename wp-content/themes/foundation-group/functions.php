@@ -113,15 +113,36 @@ function show_template() {
     }
 }
 
-/************* ADD POSTS 2 POSTS CONNECTION BOX ********************/
-
-function my_connection_types() {
-    p2p_register_connection_type( array(
-        'name' => 'posts_to_pages',
-        'from' => 'post',
-        'to' => 'page'
-    ) );
+/************* SHORTCODES ********************/
+/**
+ * Get site url for links 
+ *
+ * @author WPSnacks.com
+ * @link http://www.wpsnacks.com
+ */
+function url_shortcode() {
+return get_bloginfo('url');
 }
-add_action( 'p2p_init', 'my_connection_types' );
+add_shortcode('url','url_shortcode');
+}
+
+/**
+ * Add an RSS Feed
+ *
+ * Usage: [rss feed="http://feeds.feedburner.com/catswhocode" num="5"]
+ */
+include_once(ABSPATH.WPINC.'/rss.php');
+
+function rss_feed($atts) {
+    extract(shortcode_atts(array(
+    "feed" => 'http://',
+      "num" => '1',
+    ), $atts));
+
+    return wp_rss($feed, $num);
+}
+
+add_shortcode('rss', 'rss_feed');
+
 
 ?>
