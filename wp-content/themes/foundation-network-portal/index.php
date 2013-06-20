@@ -33,16 +33,23 @@
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
 					<?php $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
-					$blog_details = get_blog_details($org_blog_id); ?>
+					$blog_details = get_blog_details($org_blog_id);
+					$syndicated_site = get_syndication_source ();
+					$syndicated_url = get_syndication_source_link ();
+
+					?>
 					
 					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
 						
 						<header>
 							
 							<h3 class="h2"><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h3>
-							
+							 
+							<?php if (is_syndicated ()) { ?>
+							<p class="meta"><span class="site-name"><a href="<?php echo $syndicated_url; ?>"><?php echo $syndicated_site; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
+							<?php } else { ?>
 							<p class="meta"><span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> <time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> <?php _e("by", "bonestheme"); ?> <?php the_author_posts_link(); ?> | <?php the_category(' | '); ?></p>
-						
+							<?php } ?>
 						</header> <!-- end article header -->
 					
 						<section class="post_content">
