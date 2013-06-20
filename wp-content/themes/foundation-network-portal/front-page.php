@@ -113,6 +113,8 @@ Template Name: Homepage
 			         $home_posts->the_post();
 				     $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
 				     $blog_details = get_blog_details($org_blog_id);
+				     $syndicated_site = get_syndication_source ();
+					 $syndicated_url = get_syndication_source_link ();
 
 			?>
 				
