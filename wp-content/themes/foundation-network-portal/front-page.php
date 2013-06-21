@@ -141,11 +141,13 @@ Template Name: Homepage
 
 							<?php 
 							if (!is_syndicated ()) {
-								_e("by", "bonestheme"); ?> <?php the_author_posts_link(); 
+								the_author_posts_link(); 
 							} 
+							
+							if ($category->cat_name != 'Uncategorized') {
+								the_category(' | '); 
+							}
 							?>
-
-							<?php the_category(' | '); ?>
 					</p>
 				
 				</header> <!-- end article header -->
