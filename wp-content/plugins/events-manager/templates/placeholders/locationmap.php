@@ -9,7 +9,7 @@
 	/* @var $EM_Location EM_Location */
 	if ( get_option('dbem_gmap_is_active') && ( is_object($EM_Location) && $EM_Location->location_latitude != 0 && $EM_Location->location_longitude != 0 ) ) {
 	    //get dimensions with px or % added in
-		$width = (!empty($args['width'])) ? $args['width']:get_option('dbem_map_default_width','697px');
+		$width = (!empty($args['width'])) ? $args['width']:get_option('dbem_map_default_width','803px');
 		$width = preg_match('/(px)|%/', $width) ? $width:$width.'px';
 		$height = (!empty($args['height'])) ? $args['height']:get_option('dbem_map_default_height','300px');
 		$height = preg_match('/(px)|%/', $height) ? $height:$height.'px';

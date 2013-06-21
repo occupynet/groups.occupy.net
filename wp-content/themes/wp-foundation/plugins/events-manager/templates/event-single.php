@@ -63,6 +63,7 @@ $args = array(
 		<div class="event-body ten columns offset-by-one">
 
 			<div class="event-description clearfix"><?php echo $args['Body']; ?></div>
+			<div class="event-edit-link meta"><?php echo $args['Edit']; ?></div>
 
 			<?php if($args['Location']) { ?>
 			<div class="event-location map"><?php echo $args['Map']; ?></div>
@@ -72,9 +73,7 @@ $args = array(
 	<footer class="clearfix twelve columns">
 
 		<h4 class="event-heading">Related Events</h4>
-		<div class="related-events-list"><?php echo $args['Related']; ?></div>
-
-		<div class="event-edit-link meta"><?php echo $args['Edit']; ?></div>
+		<div class="related-events-list clearfix"><?php echo $args['Related']; ?></div>
 
 	</footer>
 
