@@ -118,7 +118,7 @@ Template Name: Homepage
 				</ul>
 			</h4>	
 
-			<h4 class="filter-source">Source: <span class="filter-title" id="source-current">All</span>
+			<!-- <h4 class="filter-source">Source: <span class="filter-title" id="source-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <li><a href="#" data-option-value=".format-standard">Standard</a></li>
@@ -126,7 +126,7 @@ Template Name: Homepage
 				  <li><a href="#" data-option-value=".format-video">Video</a></li>
 				  <li><a href="#" data-option-value=".format-quote">Quote</a></li>
 				</ul>
-			</h4>
+			</h4> -->
 
 		</div>
 
