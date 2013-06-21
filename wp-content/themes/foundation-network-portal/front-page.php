@@ -77,7 +77,7 @@ Template Name: Homepage
 			<h4 class="filter-format">Format: <span class="filter-title" id="format-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 
-			<?php for each($categories as $category) {
+			<?php foreach($categories as $category) {
 				$category_slug = $category->slug;
 				echo '<li><a href="#" data-option-value=".category-' . $category_slug . '">' . $category . '</a></li>';
 			}
