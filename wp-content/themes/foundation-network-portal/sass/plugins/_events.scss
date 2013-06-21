@@ -2,6 +2,88 @@
 
 
 
+/*************  Single Event Page ********************/
+
+h1.single-title {
+	font-size: 44px;
+	width: 50%;
+	float: right;
+	margin: 0;
+	padding: 10px 15px;
+}
+
+.event-image.post-thumbnail {
+	max-height: 470px;
+	overflow: hidden;
+	img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+.event-date, 
+.event-time {
+	margin: .5em 0;
+}
+.event-location {
+	margin: 1.5em 0;
+	line-height: 1.5;
+	.el-name,
+	.el-address {
+		display: block;
+	}
+}
+
+.em-location-map {
+	border: 10px solid $base9;
+	margin: 40px 0;
+}
+
+.event-heading {
+	@include condensed;
+	font-size: 24px;
+}
+
+.related-events-list {
+	ul {
+		@include clearfix;
+		list-style: none;
+		margin: 0 0 40px;
+		border-top: 1px solid $base7;
+		li {
+			float: left;
+			width: 25%;
+			padding: 10px 20px 10px 0;
+			margin: 0;
+			text-indent: 0;
+			font-size: 14px;
+		}
+		li:nth-child(4n+1) {
+			clear: left;
+		}
+		a {
+			display: block;
+			font-size: 16px;
+		}
+	}
+}
+
+.event-edit-link {
+	padding: 5px 7px;
+	border: 1px solid $loud-light;
+	font-size: 12px;
+	display: inline-block;
+	@include caps;
+	&:hover {
+		background: $loud;
+		border-color: $loud;
+		color: $base10;
+	}
+}
+
+
+
+
 /*************  Events Editor ********************/
 
 #event-form {
@@ -191,14 +273,15 @@
 		margin-bottom: 0;
 	}
 	li  {
-		padding: 10px 0 10px;
+		margin-bottom: 10px;
 		font-size: 13px;
+		border-top: 1px solid $base9;
 	}
 	a {
-		font-size: 18px;
+		font-size: 16px;
 		font-weight: normal !important;
 		display: block;
-		padding: 5px 0;
+		padding-top: 10px;
 		line-height: 1.3em;
 	}
 	ul ul li {
@@ -221,10 +304,13 @@ footer .widget_em_widget {
 	}
 	li {
 		list-style: none;
-		padding: 0;
 		color: $base10;
+		border-top: 1px solid $base3;
 		a {
 			color: $base10;
+		}
+		a:hover {
+			color: $loud;
 		}
 	}
 }

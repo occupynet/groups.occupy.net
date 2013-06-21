@@ -55,7 +55,7 @@ Template Name: Homepage
 
 		<div class="filter twelve columns clearfix">
 
-			<h4 class="filter-add"><a href="/join">Add a post</a></h4>
+			<h4 class="filter-add"><a href="/join">Contribute</a></h4>
 
 			
 			<h4 class="filter-view">View: <span class="filter-title" id="view-current">List</span>
@@ -195,9 +195,6 @@ Template Name: Homepage
 
 	</div> <!-- end #content -->
 
-
-
-		
 	<script src="wp-content/themes/foundation-network-portal/js/jquery.isotope.min.js"></script>
 	<script>
 	jQuery(document).ready(function(){

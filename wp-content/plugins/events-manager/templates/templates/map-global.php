@@ -11,7 +11,7 @@ if (get_option('dbem_gmap_is_active') == '1') {
 	$args['em_ajax'] = true;
 	$args['query'] = 'GlobalMapData';
     //get dimensions with px or % added in
-	$width = (!empty($args['width'])) ? $args['width']:get_option('dbem_map_default_width','400px');
+	$width = (!empty($args['width'])) ? $args['width']:get_option('dbem_map_default_width','803px');
 	$width = preg_match('/(px)|%/', $width) ? $width:$width.'px';
 	$height = (!empty($args['height'])) ? $args['height']:get_option('dbem_map_default_height','300px');
 	$height = preg_match('/(px)|%/', $height) ? $height:$height.'px';
