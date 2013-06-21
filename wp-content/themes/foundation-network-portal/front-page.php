@@ -66,12 +66,10 @@ Template Name: Homepage
 			</h4>
 
 			<?php $args = array(
-				'style'              => 'none',
-				'echo'               => 0,
 				'taxonomy'           => 'category',
 			); 
 
-			$categories[] = wp_list_categories( $args );
+			$categories = get_categories( $args );
 			?>
 
 			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
