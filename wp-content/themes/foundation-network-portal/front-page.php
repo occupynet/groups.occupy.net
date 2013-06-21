@@ -111,7 +111,6 @@ Template Name: Homepage
 					</li>
 				
 				<?php
-				endforeach;
 				restore_current_blog(); 
 				}
 				?>
