@@ -84,16 +84,6 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
-				<ul class="f-dropdown" data-option-key="filter">
-				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
-				  <li><a href="#" data-option-value=".category-actions">Actions</a></li>
-				  <li><a href="#" data-option-value=".category-citibank">Banks</a></li>
-				  <li><a href="#" data-option-value=".category-featured">Featured</a></li>
-				  <li><a href="#" data-option-value=".category-news">News</a></li>
-				</ul>
-			</h4>
-
 			<h4 class="filter-format">Format: <span class="filter-title" id="format-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
@@ -155,10 +145,7 @@ Template Name: Homepage
 							} 
 							?>
 
-							<?php if ($category->cat_name != 'Uncategorized') {
-								the_category(' | '); 
-							}
-							?>
+							<?php the_category(' | '); ?>
 					</p>
 				
 				</header> <!-- end article header -->
