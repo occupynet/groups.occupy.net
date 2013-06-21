@@ -195,9 +195,6 @@ Template Name: Homepage
 
 	</div> <!-- end #content -->
 
-
-
-		
 	<script src="wp-content/themes/foundation-network-portal/js/jquery.isotope.min.js"></script>
 	<script>
 	jQuery(document).ready(function(){
