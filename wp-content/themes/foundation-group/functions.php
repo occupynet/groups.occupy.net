@@ -113,36 +113,5 @@ function show_template() {
     }
 }
 
-/************* SHORTCODES ********************/
-/**
- * Get site url for links 
- *
- * @author WPSnacks.com
- * @link http://www.wpsnacks.com
- */
-function url_shortcode() {
-return get_bloginfo('url');
-}
-add_shortcode('url','url_shortcode');
-}
-
-/**
- * Add an RSS Feed
- *
- * Usage: [rss feed="http://feeds.feedburner.com/catswhocode" num="5"]
- */
-include_once(ABSPATH.WPINC.'/rss.php');
-
-function rss_feed($atts) {
-    extract(shortcode_atts(array(
-    "feed" => 'http://',
-      "num" => '1',
-    ), $atts));
-
-    return wp_rss($feed, $num);
-}
-
-add_shortcode('rss', 'rss_feed');
-
 
 ?>
