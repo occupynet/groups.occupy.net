@@ -99,8 +99,8 @@ Template Name: Homepage
 					<li><a href="#" data-option-value="*" class="selected">All</a></li>
 
 				<?php
-				$blogs = get_blog_details($GLOBALS['blog_id']); 
-				$slug = str_replace('/','',$GLOBALS['path']); 
+				$blogs = get_last_updated();
+				$slug = str_replace('/','',$blogs->path);
 				
 				foreach ($blogs AS $blog) {
 					echo '<li><a href="#" data-option-value=".source-' . $slug . '">' . get_blog_option( $blog[ 'blog_id' ], 'blogname' ) . '</a></li>';
