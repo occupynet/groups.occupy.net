@@ -94,43 +94,6 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-			<h4 class="filter-source">Source: <span class="filter-title" id="source-current">All</span>
-				<ul class="f-dropdown" data-option-key="filter">
-					<li><a href="#" data-option-value="*" class="selected">All</a></li>
-
-				<?php
-				// $blogs = get_last_updated();
-				$blogs =  get_blog_details($GLOBALS['blog_id']);
-
-				foreach ($blogs AS $blog) {
-					//$blog_details =  get_blog_details($GLOBALS['blog_id']);
-					$slug = str_replace('/','',$blog->path);
-					echo '<li><a href="#" data-option-value=".source-' . $slug . '">' . get_blog_option( $blog[ 'blog_id' ], 'blogname' ) . '</a></li>';
-
-					switch_to_blog($blog["blog_id"]);
-
-					?>
-
-					</li>
-				
-				<?php
-				restore_current_blog(); 
-				}
-				?>
-
-				</ul>
-			</h4>	
-
-			<!-- <h4 class="filter-source">Source: <span class="filter-title" id="source-current">All</span>
-				<ul class="f-dropdown" data-option-key="filter">
-				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
-				  <li><a href="#" data-option-value=".format-standard">Standard</a></li>
-				  <li><a href="#" data-option-value=".format-photo">Photo</a></li>
-				  <li><a href="#" data-option-value=".format-video">Video</a></li>
-				  <li><a href="#" data-option-value=".format-quote">Quote</a></li>
-				</ul>
-			</h4> -->
-
 		</div>
 
 
