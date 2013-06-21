@@ -141,11 +141,8 @@ Template Name: Homepage
 
 							<?php 
 							if (!is_syndicated ()) {
-								the_author_posts_link(); 
-
-								if ($category->cat_name != 'Uncategorized') {
-									the_category(' | '); 
-								}
+								echo 'By ' . the_author_posts_link(); 
+								the_category(' | '); 
 							} 
 							
 							?>
