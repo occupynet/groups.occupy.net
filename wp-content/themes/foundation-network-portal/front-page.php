@@ -74,7 +74,7 @@ Template Name: Homepage
 			$categories[] = wp_list_categories( $args );
 			?>
 
-			<h4 class="filter-format">Format: <span class="filter-title" id="format-current">All</span>
+			<h4 class="filter-format">Category: <span class="filter-title" id="format-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 
 			<?php foreach($categories as $category) {
@@ -86,7 +86,7 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
+			<!-- <h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <li><a href="#" data-option-value=".category-actions">Actions</a></li>
@@ -94,7 +94,7 @@ Template Name: Homepage
 				  <li><a href="#" data-option-value=".category-featured">Featured</a></li>
 				  <li><a href="#" data-option-value=".category-news">News</a></li>
 				</ul>
-			</h4>
+			</h4> -->
 
 			<h4 class="filter-format">Format: <span class="filter-title" id="format-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
