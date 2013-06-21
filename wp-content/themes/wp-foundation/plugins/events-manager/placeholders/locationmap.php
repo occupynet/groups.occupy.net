@@ -8,7 +8,7 @@
  */
 	/* @var $EM_Location EM_Location */
 	if ( get_option('dbem_gmap_is_active') && ( is_object($EM_Location) && $EM_Location->location_latitude != 0 && $EM_Location->location_longitude != 0 ) ) {
-		$width = (isset($args['width'])) ? $args['width']:'400';
+		$width = (isset($args['width'])) ? $args['width']:'697';
 		$height = (isset($args['height'])) ? $args['height']:'300';
 		$rand = substr(md5(rand().rand()),0,5);
 		?>
