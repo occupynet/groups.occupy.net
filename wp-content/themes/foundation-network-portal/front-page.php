@@ -99,11 +99,12 @@ Template Name: Homepage
 					<li><a href="#" data-option-value="*" class="selected">All</a></li>
 
 				<?php
-				$blogs = get_last_updated();
-				$blog_details =  get_blog_details($GLOBALS['blog_id']); 
-				print_r($GLOBALS);
-				
+				// $blogs = get_last_updated();
+				$blogs =  get_blog_details($GLOBALS['blog_id']);
+
 				foreach ($blogs AS $blog) {
+					//$blog_details =  get_blog_details($GLOBALS['blog_id']);
+					$slug = str_replace('/','',$blog->path);
 					echo '<li><a href="#" data-option-value=".source-' . $slug . '">' . get_blog_option( $blog[ 'blog_id' ], 'blogname' ) . '</a></li>';
 
 					switch_to_blog($blog["blog_id"]);
