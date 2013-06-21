@@ -65,6 +65,27 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
+			<?php $args = array(
+				'style'              => 'none',
+				'echo'               => 0,
+				'taxonomy'           => 'category',
+			); 
+
+			$categories[] = wp_list_categories( $args );
+			?>
+
+			<h4 class="filter-format">Format: <span class="filter-title" id="format-current">All</span>
+				<ul class="f-dropdown" data-option-key="filter">
+
+			<?php for each($categories as $category) {
+				$category_slug = $category->slug;
+				echo '<li><a href="#" data-option-value=".category-' . $category_slug . '">' . $category . '</a></li>';
+			}
+			?>
+
+				</ul>
+			</h4>
+
 			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
