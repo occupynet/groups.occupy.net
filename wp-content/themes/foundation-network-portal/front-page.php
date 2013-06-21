@@ -145,7 +145,7 @@ Template Name: Homepage
 							} 
 							
 							if ($category->cat_name != 'Uncategorized') {
-								the_category(' | '); 
+								echo the_category(' | '); 
 							}
 							?>
 					</p>
