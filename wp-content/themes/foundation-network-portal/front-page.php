@@ -66,7 +66,7 @@ Template Name: Homepage
 			</h4>
 
 			<?php $args = array(
-				'style'              => 'list',
+				'style'              => 'none',
 				'echo'               => 0,
 				'taxonomy'           => 'category',
 			); 
@@ -74,7 +74,7 @@ Template Name: Homepage
 			$categories[] = wp_list_categories( $args );
 			?>
 
-			<h4 class="filter-format">Category: <span class="filter-title" id="format-current">All</span>
+			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 					<li><a href="#" data-option-value="*" class="selected">All</a></li>
 
