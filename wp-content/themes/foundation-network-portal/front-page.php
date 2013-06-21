@@ -65,8 +65,6 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-
-
 			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">
 					<li><a href="#" data-option-value="*" class="selected">All</a></li>
@@ -79,7 +77,7 @@ Template Name: Homepage
 			$categories=get_categories($args);
 
 			foreach($categories as $category) {
-				echo '<li><a href="#" data-option-value=".category-' . $category->cat_name . '">' . $category . '</a></li>';
+				echo '<li><a href="#" data-option-value=".category-' . $category->cat_name . '">' . $category->name . '</a></li>';
 			}
 			?>
 
