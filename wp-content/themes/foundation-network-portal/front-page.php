@@ -79,7 +79,7 @@ Template Name: Homepage
 			$categories=get_categories($args);
 
 			foreach($categories as $category) {
-				echo '<li><a href="#" data-option-value=".category-' . $category->slug . '">' . $category . '</a></li>';
+				echo '<li><a href="#" data-option-value=".category-' . $category->cat_name . '">' . $category . '</a></li>';
 			}
 			?>
 
