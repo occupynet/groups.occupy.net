@@ -138,10 +138,10 @@ Template Name: Homepage
 							<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
 							<?php } ?>
 							<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> 
-
 							<?php 
 							if (!is_syndicated ()) {
-								echo 'By ' . the_author_posts_link(); 
+								_e("By ", "bonestheme");
+								the_author_posts_link(); 
 								the_category(' | '); 
 							} 
 							
