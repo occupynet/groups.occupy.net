@@ -2,6 +2,34 @@
 
 
 
+/*************  Single Event Page ********************/
+
+h1.single-title {
+	font-size: 44px;
+	width: 50%;
+	float: right;
+	margin: 0;
+	padding: 10px 15px;
+}
+
+.event-image.post-thumbnail img {
+	width: 100%;
+}
+
+.event-date, 
+.event-time {
+	margin: .5em 0;
+}
+.event-location {
+	margin: 1.5em 0;
+	line-height: 1.5;
+	.el-name,
+	.el-address {
+		display: block;
+	}
+}
+
+
 /*************  Events Editor ********************/
 
 #event-form {
