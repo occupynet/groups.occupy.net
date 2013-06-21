@@ -77,10 +77,9 @@ Template Name: Homepage
 			  'order' => 'ASC'
 			  );
 			$categories=get_categories($args);
-			
+
 			foreach($categories as $category) {
-				$category_slug = $category->slug;
-				echo '<li><a href="#" data-option-value=".category-' . $category_slug . '">' . $category . '</a></li>';
+				echo '<li><a href="#" data-option-value=".category-' . $category->slug . '">' . $category . '</a></li>';
 			}
 			?>
 
