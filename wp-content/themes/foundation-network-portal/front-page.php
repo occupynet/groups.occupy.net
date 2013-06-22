@@ -142,8 +142,8 @@ Template Name: Homepage
 							if (!is_syndicated ()) {
 								_e("By ", "bonestheme");
 								the_author_posts_link(); 
-								the_category(' | '); 
 							} 
+								the_category(' | '); 
 							
 							?>
 					</p>
