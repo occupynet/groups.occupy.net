@@ -1,11 +1,10 @@
 <?php
-
 /*
 Plugin Name: WP User Frontend
 Plugin URI: http://tareq.wedevs.com/2011/01/new-plugin-wordpress-user-frontend/
 Description: Post, Edit, Delete posts and edit profile without coming to backend
 Author: Tareq Hasan
-Version: 1.2
+Version: 1.2.2
 Author URI: http://tareq.weDevs.com
 */
 
@@ -116,7 +115,7 @@ class WPUF_Main {
      * @since 0.2
      */
     function enqueue_scripts() {
-        $path = plugins_url( 'wp-user-frontend' );
+        $path = plugins_url('', __FILE__ );
 
         //for multisite upload limit filter
         if ( is_multisite() ) {
@@ -127,14 +126,11 @@ class WPUF_Main {
 
         wp_enqueue_style( 'wpuf', $path . '/css/wpuf.css' );
 
-        if ( has_shortcode( 'wpuf_addpost' ) || has_shortcode( 'wpuf_edit' ) ) {
-            wp_enqueue_script( 'plupload-handlers' );
-        }
-
+        wp_enqueue_script( 'plupload-handlers' );
         wp_enqueue_script( 'wpuf', $path . '/js/wpuf.js', array('jquery') );
 
-        $posting_msg = wpuf_get_option( 'updating_label' );
-        $feat_img_enabled = ( wpuf_get_option( 'enable_featured_image' ) == 'yes') ? true : false;
+        $posting_msg = wpuf_get_option( 'updating_label', 'wpuf_labels' );
+        $feat_img_enabled = ( wpuf_get_option( 'enable_featured_image', 'wpuf_frontend_posting' ) == 'yes') ? true : false;
         wp_localize_script( 'wpuf', 'wpuf', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
             'postingMsg' => $posting_msg,
@@ -165,7 +161,12 @@ class WPUF_Main {
     function block_admin_access() {
         global $pagenow;
 
-        $access_level = wpuf_get_option( 'admin_access' );
+        // bail out if we are from WP Cli
+        if ( defined( 'WP_CLI' ) ) {
+            return;
+        }
+
+        $access_level = wpuf_get_option( 'admin_access', 'wpuf_others', 'read' );
         $valid_pages = array('admin-ajax.php', 'async-upload.php', 'media-upload.php');
 
         if ( !current_user_can( $access_level ) && !in_array( $pagenow, $valid_pages ) ) {

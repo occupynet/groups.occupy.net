@@ -94,22 +94,22 @@ if (file_exists('dtoken.php')) {
   Example: array(array('search'=> '/html/oldpath/images',  'replace'=> '/html/newpath/images'));
   ================================================================================================= */
 
-$GLOBALS['FW_TABLEPREFIX'] = 'wpplug_';
-$GLOBALS['FW_URL_OLD'] = 'http://localhost/projects/wpplug_duplicator';
+$GLOBALS['FW_TABLEPREFIX'] = 'wp_';
+$GLOBALS['FW_URL_OLD'] = 'http://occupygroupsdev.mayfirst.org';
 $GLOBALS['FW_URL_NEW'] = '';
-$GLOBALS['FW_PACKAGE_NAME'] = '';
-$GLOBALS['FW_SECURE_NAME'] = '';
+$GLOBALS['FW_PACKAGE_NAME'] = '51c8f70b1011f1735_20130624_occupynetwork_package.zip';
+$GLOBALS['FW_SECURE_NAME'] = '51c8f70b1011f1735_20130624_occupynetwork';
 $GLOBALS['FW_DBHOST'] = 'localhost';
 $GLOBALS['FW_DBNAME'] = '';
 $GLOBALS['FW_DBUSER'] = '';
 $GLOBALS['FW_DBPASS'] = '';
-$GLOBALS['FW_SSL_ADMIN'] = '0';
-$GLOBALS['FW_SSL_LOGIN'] = '0';
-$GLOBALS['FW_CACHE_WP'] = '0';
-$GLOBALS['FW_CACHE_PATH'] = '0';
-$GLOBALS['FW_BLOGNAME'] = 'Duplicator Plugin&#039;s';
+$GLOBALS['FW_SSL_ADMIN'] = NULL;
+$GLOBALS['FW_SSL_LOGIN'] = NULL;
+$GLOBALS['FW_CACHE_WP'] = NULL;
+$GLOBALS['FW_CACHE_PATH'] = NULL;
+$GLOBALS['FW_BLOGNAME'] = 'Occupy Network';
 $GLOBALS['FW_RESCUE_FLAG'] = '(rescue file)';
-$GLOBALS['FW_WPROOT'] = 'E:/WEB/projects/wpplug_duplicator/';
+$GLOBALS['FW_WPROOT'] = '/home/members/interoccupynet/sites/dev.groups.occupy.net/web/';
 $GLOBALS['FW_DUPLICATOR_VERSION'] = '0.4.4';
 
 //DATABASE SETUP: all time in seconds	

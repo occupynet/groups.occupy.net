@@ -1,10 +1,10 @@
 === Simple Fields Map extension ===
 Contributors: eskapism, Earth People
 Donate link: http://earthpeople.se/
-Tags: simple fields, google maps, geolocation, latitude, longitude, lat, lng, location, extension, geocoding
-Requires at least: 3.5
-Tested up to: 3.5
-Stable tag: 1.3.1
+Tags: simple fields, google maps, geolocation, latitude, longitude, lat, lng, location, extension, geocoding, maps
+Requires at least: 3.5.1
+Tested up to: 3.5.1
+Stable tag: 1.3.2
 License: GPLv2
 
 Extension to Simple Fields that adds a field type for selecting a location on a Google Map.
@@ -83,6 +83,9 @@ This plugin is available in the following languages:
 3. Example of the values that are being stored for each saved location/field (and the function used to get them)
 
 == Changelog ==
+
+= 1.3.2 =
+- Fixed strict standards warning
 
 = 1.3.1 =
 - Static maps did not care about any preferred zoom level that was set in GUI. Now they do, funky funky!

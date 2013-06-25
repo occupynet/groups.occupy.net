@@ -1,7 +1,7 @@
 === WP User Frontend ===
 Contributors: tareq1988
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=tareq%40wedevs%2ecom&lc=US&item_name=WP%20User%20Frontend&item_number=Tareq%27s%20Planet&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted
-Tags: frontend, post, edit, dashboard, restrict, content submission, guest post, guest, dashboard, registration, profile, anonymous post
+Tags: frontend, post, edit, dashboard, restrict, content submission, guest post, guest, dashboard, registration, profile, anonymous post, gravity, gravity forms, formidable
 Requires at least: 3.3
 Tested up to: 3.5.1
 Stable tag: trunk
@@ -119,6 +119,16 @@ redirected to the edit page with that post id. Then you'll see the edit post for
 
 
 == Changelog ==
+
+= version 1.2.2 =
+
+[fix] shortcode error fix for edit users
+[fix] plugin css/js url
+[fix] removed has_shortcode() call
+
+= version 1.2.1 =
+
+[fix] Performance problem with wp_list_users()
 
 = version 1.2 =
 
