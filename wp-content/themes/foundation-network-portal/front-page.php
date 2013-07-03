@@ -97,16 +97,16 @@ Template Name: Homepage
 			<!-- To get only the filters relevant to the posts being displayed, return array of recent posts, then retrieve an array of categories and groups. Then, remove duplicates and sort alphabetically. -->
 
 			<!-- Category Filter -->
-			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
+			<!-- <h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 			
 				<ul class="f-dropdown" data-option-key="filter">
 					<li><a href="#" data-option-value="*" class="selected">All</a></li>
-					<?php $categories = get_categories(); 
-					foreach ($categories as $category) {
-						echo '<li><a href="#" data-option-value=".category-' . $category->slug . '">' . $category->name . ' (' . $category->count . ')</a></li>';
-					} ?> 
+					// <?php $categories = get_categories(); 
+					// foreach ($categories as $category) {
+					// 	echo '<li><a href="#" data-option-value=".category-' . $category->slug . '">' . $category->name . ' (' . $category->count . ')</a></li>';
+					// } ?> 
 				</ul>
-			</h4>
+			</h4> -->
 			<!-- Group Filter -->
 			<!-- <h4 class="filter-group">Group: <span class="filter-title" id="group-current">All</span>
 				<ul class="f-dropdown" data-option-key="filter">

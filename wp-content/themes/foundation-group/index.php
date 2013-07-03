@@ -3,7 +3,35 @@
 			<div id="content">
 			
 				<div id="main" class="eight columns clearfix" role="main">
-
+				<?php if (is_category()) { ?>
+					<h1 class="archive_title h2">
+						<span><?php _e("Posts Categorized:", "bonestheme"); ?></span> <?php single_cat_title(); ?>
+					</h1>
+				<?php } elseif (is_home()) { ?> 
+					<h1 class="archive_title h2">
+						<span><?php wp_title(''); ?>
+					</h1>
+				<?php } elseif (is_tag()) { ?> 
+					<h1 class="archive_title h2">
+						<span><?php _e("Posts Tagged:", "bonestheme"); ?></span> <?php single_tag_title(); ?>
+					</h1>
+				<?php } elseif (is_author()) { ?>
+					<h1 class="archive_title h2">
+						<span><?php _e("Posts By:", "bonestheme"); ?></span> <?php get_the_author_meta('display_name'); ?>
+					</h1>
+				<?php } elseif (is_day()) { ?>
+					<h1 class="archive_title h2">
+						<span><?php _e("Daily Archives:", "bonestheme"); ?></span> <?php the_time('l, F j, Y'); ?>
+					</h1>
+				<?php } elseif (is_month()) { ?>
+				    <h1 class="archive_title h2">
+				    	<span><?php _e("Monthly Archives:", "bonestheme"); ?>:</span> <?php the_time('F Y'); ?>
+				    </h1>
+				<?php } elseif (is_year()) { ?>
+				    <h1 class="archive_title h2">
+				    	<span><?php _e("Yearly Archives:", "bonestheme"); ?>:</span> <?php the_time('Y'); ?>
+				    </h1>
+				<?php } ?>
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					
 					<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?> role="article">
