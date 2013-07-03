@@ -48,8 +48,7 @@ function my_theme_register_required_plugins() {
         array(
             'name'      => 'FeedWordPress',
             'slug'      => 'feedwordpress',
-            'required'  => true,
-            'force_activation'  => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+            'required'  => false,
         ),
 
         array(
@@ -61,8 +60,7 @@ function my_theme_register_required_plugins() {
         array(
             'name'      => 'WordPress MU Sitewide Tags Pages',
             'slug'      => 'wordpress-mu-sitewide-tags',
-            'required'  => true,
-            'force_activation'   => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+            'required'  => false,
         ),
 
     );
