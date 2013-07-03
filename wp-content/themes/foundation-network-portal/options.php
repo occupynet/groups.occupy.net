@@ -40,6 +40,10 @@ function optionsframework_options() {
 	
 	$background_defaults = array('color' => '', 'image' => '', 'repeat' => 'repeat','position' => 'top center','attachment'=>'scroll');
 	
+	$slider_item_types = array('post' => 'Posts', 'event' => 'Events (Requires Events Manager)');
+
+	$slider_item_number = array('4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
+
 	
 	// Pull all the categories into an array
 	$options_categories = array();  
@@ -94,19 +98,19 @@ function optionsframework_options() {
 	$options[] = array( "name" => "Link Color",
 						"desc" => "Default used if no color is selected.",
 						"id" => "link_color",
-						"std" => "#2BA6CB",
+						"std" => "#C91C22",
 						"type" => "color");
 					
 	$options[] = array( "name" => "Link:hover Color",
 						"desc" => "Default used if no color is selected.",
 						"id" => "link_hover_color",
-						"std" => "#2795B6",
+						"std" => "#333333",
 						"type" => "color");
 						
 	$options[] = array( "name" => "Link:active Color",
 						"desc" => "Default used if no color is selected.",
 						"id" => "link_active_color",
-						"std" => "#2BA6CB",
+						"std" => "#C91C22",
 						"type" => "color");
 						
 	$options[] = array( "name" => "Top Nav",
@@ -129,6 +133,31 @@ function optionsframework_options() {
 						"id" => "top_nav_link_hover_color",
 						"std" => "#E6E6E6",
 						"type" => "color");
+
+	$options[] = array( "name" => "Homepage Slider",
+						"type" => "heading");
+
+	$options[] = array( "name" => "Recent posts in slider",
+						"desc" => "Show Orbit slider of recent posts on homepage template?",
+						"id" => "orbit_slider",
+						"std" => "1",
+						"type" => "checkbox");
+
+	$options[] = array(
+						'name' => __('Display Posts or Events in slider', 'options_check'),
+						'desc' => __('Select whether you\'d like to display posts or events in the slider. (If Events Manager is not active, this will be ignored)', 'options_check'),
+						'id' => 'slider_item_type',
+						'std' => 'post',
+						'type' => 'radio',
+						'options' => $slider_item_types);
+
+	$options[] = array( 'name' => __('Number of recent items in slider', 'options_check'),
+						'desc' => 'How many recent items should be displayed ?',
+						'id' => 'posts_in_orbit_slider',
+						'std' => '4',
+						'type' => 'select',
+						'class' => 'mini',
+						'options' => $slider_item_number);
 						
 	$options[] = array( "name" => "Other Settings",
 						"type" => "heading");
@@ -138,19 +167,6 @@ function optionsframework_options() {
 						"id" => "suppress_comments_message",
 						"std" => "1",
 						"type" => "checkbox");
-
-	$options[] = array( "name" => "Recent posts homepage slider",
-						"desc" => "Show Orbit slider of recent posts on homepage template?",
-						"id" => "orbit_slider",
-						"std" => "0",
-						"type" => "checkbox");
-
-	$options[] = array( "name" => "Number of ecent posts in slider",
-						"desc" => "How many recent posts should be displayed ?",
-						"id" => "posts_in_orbit_slider",
-						"std" => "5",
-						"width" => "20",
-						"type" => "text");
 									
 	return $options;
 }

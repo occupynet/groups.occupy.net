@@ -8,6 +8,110 @@ just edit things like thumbnail sizes, header images,
 sidebars, comments, ect.
 */
 
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+require_once dirname( __FILE__ ) . '/lib/class-tgm-plugin-activation.php';
+
+add_action( 'tgmpa_register', 'my_theme_register_required_plugins' );
+/**
+ * Register the required plugins for this theme.
+ *
+ * In this example, we register two plugins - one included with the TGMPA library
+ * and one from the .org repo.
+ *
+ * The variable passed to tgmpa_register_plugins() should be an array of plugin
+ * arrays.
+ *
+ * This function is hooked into tgmpa_init, which is fired within the
+ * TGM_Plugin_Activation class constructor.
+ */
+function my_theme_register_required_plugins() {
+
+    /**
+     * Array of plugin arrays. Required keys are name and slug.
+     * If the source is NOT from the .org repo, then source is also required.
+     */
+    $plugins = array(
+
+        // This is an example of how to include a plugin pre-packaged with a theme
+        array(
+            // 'name'                  => 'TGM Example Plugin', // The plugin name
+            // 'slug'                  => 'tgm-example-plugin', // The plugin slug (typically the folder name)
+            // 'source'                => get_stylesheet_directory() . '/lib/plugins/tgm-example-plugin.zip', // The plugin source
+            // 'required'              => true, // If false, the plugin is only 'recommended' instead of required
+            // 'version'               => '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+            // 'force_activation'      => true, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+            // 'force_deactivation'    => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+            // 'external_url'          => '', // If set, overrides default API URL and points to an external URL
+        ),
+
+        array(
+            'name'      => 'FeedWordPress',
+            'slug'      => 'feedwordpress',
+            'required'  => true,
+            'force_activation'  => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+        ),
+
+        array(
+            'name'      => 'Events Manager',
+            'slug'      => 'events-manager',
+            'required'  => false,
+        ),
+
+        array(
+            'name'      => 'WordPress MU Sitewide Tags Pages',
+            'slug'      => 'wordpress-mu-sitewide-tags',
+            'required'  => true,
+            'force_activation'   => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+        ),
+
+    );
+
+    // Change this to your theme text domain, used for internationalising strings
+    $theme_text_domain = 'foundation-network-portal';
+
+    /**
+     * Array of configuration settings. Amend each line as needed.
+     * If you want the default strings to be available under your own theme domain,
+     * leave the strings uncommented.
+     * Some of the strings are added into a sprintf, so see the comments at the
+     * end of each line for what each argument will be.
+     */
+    $config = array(
+        'domain'            => $theme_text_domain,          // Text domain - likely want to be the same as your theme.
+        'default_path'      => '',                          // Default absolute path to pre-packaged plugins
+        'parent_menu_slug'  => 'themes.php',                // Default parent menu slug
+        'parent_url_slug'   => 'themes.php',                // Default parent URL slug
+        'menu'              => 'install-required-plugins',  // Menu slug
+        'has_notices'       => true,                        // Show admin notices or not
+        'is_automatic'      => false,                       // Automatically activate plugins after installation or not
+        'message'           => '',                          // Message to output right before the plugins table
+        'strings'           => array(
+            'page_title'                                => __( 'Install Required Plugins', $theme_text_domain ),
+            'menu_title'                                => __( 'Install Plugins', $theme_text_domain ),
+            'installing'                                => __( 'Installing Plugin: %s', $theme_text_domain ), // %1$s = plugin name
+            'oops'                                      => __( 'Something went wrong with the plugin API.', $theme_text_domain ),
+            'notice_can_install_required'               => _n_noop( 'This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.' ), // %1$s = plugin name(s)
+            'notice_can_install_recommended'            => _n_noop( 'This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.' ), // %1$s = plugin name(s)
+            'notice_cannot_install'                     => _n_noop( 'Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.' ), // %1$s = plugin name(s)
+            'notice_can_activate_required'              => _n_noop( 'The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
+            'notice_can_activate_recommended'           => _n_noop( 'The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.' ), // %1$s = plugin name(s)
+            'notice_cannot_activate'                    => _n_noop( 'Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.' ), // %1$s = plugin name(s)
+            'notice_ask_to_update'                      => _n_noop( 'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.' ), // %1$s = plugin name(s)
+            'notice_cannot_update'                      => _n_noop( 'Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.' ), // %1$s = plugin name(s)
+            'install_link'                              => _n_noop( 'Begin installing plugin', 'Begin installing plugins' ),
+            'activate_link'                             => _n_noop( 'Activate installed plugin', 'Activate installed plugins' ),
+            'return'                                    => __( 'Return to Required Plugins Installer', $theme_text_domain ),
+            'plugin_activated'                          => __( 'Plugin activated successfully.', $theme_text_domain ),
+            'complete'                                  => __( 'All plugins installed and activated successfully. %s', $theme_text_domain ), // %1$s = dashboard link
+            'nag_type'                                  => 'error' // Determines admin notice type - can only be 'updated' or 'error'
+        )
+    );
+
+    tgmpa( $plugins, $config );
+
+}
+
 /************* REGISTER STYLES ********************/
 
 if( !function_exists( 'include_custom_styles' ) ) {
@@ -17,7 +121,6 @@ if( !function_exists( 'include_custom_styles' ) ) {
         wp_register_style( 'league-gothic', get_template_directory_uri() . '/fonts/league-gothic.css' , array(), '', 'all' );
         wp_enqueue_style( 'league-gothic' );
         wp_register_style( 'boxslider', get_stylesheet_directory_uri() . '/css/jquery.bxslider.css', array(), '', 'all' ); 
-        // wp_register_style( 'boxslider', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/css/jquery.bxslider.css', array(), '', 'all' );
         wp_enqueue_style( 'boxslider' );    
     }
     add_action('wp_enqueue_scripts', 'include_custom_styles', 25);
@@ -25,11 +128,12 @@ if( !function_exists( 'include_custom_styles' ) ) {
 
 if( !function_exists( 'include_custom_scripts' ) ) {
     function include_custom_scripts() { 
-        // wp_register_script('boxsliderscript', 'http://localhost/groups.occupy.net/web/wp-content/themes/foundation-network-portal/js/jquery.bxslider/jquery.bxslider.js', true);  
-         wp_register_script('boxsliderscript', get_stylesheet_directory_uri() . '/js/jquery.bxslider/jquery.bxslider.js', true); 
+        wp_register_script('boxsliderscript', get_stylesheet_directory_uri() . '/js/jquery.bxslider/jquery.bxslider.js', true); 
         wp_enqueue_script('boxsliderscript');
-         wp_register_script('packery', get_stylesheet_directory_uri() . '/js/packery.pkgd.min.js', true); 
-        wp_enqueue_script('packery');
+        wp_register_script('isotopelibrary', get_stylesheet_directory_uri() . '/js/jquery.isotope.min.js', true); 
+        wp_enqueue_script('isotopelibrary');
+        // wp_register_script('isotopefilters', get_stylesheet_directory_uri() . '/js/isotope.filters.js', true); 
+        // wp_enqueue_script('isotopefilters');
     }
     add_action('wp_enqueue_scripts', 'include_custom_scripts', 25);
 }
@@ -106,232 +210,142 @@ if( !function_exists( 'include_custom_scripts' ) ) {
     }
     add_filter( 'excerpt_more', 'new_excerpt_more' );
 
-/*
-*******************************************
-* Register Custom Post Types and Fields
-*******************************************
-*/
+/************* OPTIONS FRAMEWORK STUFF ********************/
+/* 
+ * Helper function to return the theme option value. If no value has been saved, it returns $default.
+ * Needed because options are saved as serialized strings.
+ *
+ * This code allows the theme to work without errors if the Options Framework plugin has been disabled.
+ */
 
-// Initialize custom post type and taxonomy registration
-add_action( 'init', 'register_organizations_post_type' );
-
-function register_organizations_post_type() {
-
-     // Register Resources Custom Post type
-    register_post_type('organizations', 
-        array(   
-            'label' => 'Organizations',
-            'description' => '',
-            'public' => true,
-            'show_ui' => true,
-            'show_in_menu' => true,
-            'capability_type' => 'post',
-            'hierarchical' => false,
-            'rewrite' => array(
-                'slug' => 'directory'),
-            'query_var' => true,
-            'has_archive' => true,
-            'exclude_from_search' => false,
-            'supports' => array(
-                'title',
-                'editor','excerpt',
-                'custom-fields','comments',
-                'revisions','thumbnail',
-                'author','page-attributes',),
-            'taxonomies' => array(
-                'organization_categories',
-                'post_tag',),
-            'labels' => array(
-                'name' => 'Organizations',
-                'singular_name' => 'Organization',
-                'menu_name' => 'Directory',
-                'add_new' => 'Add Organization',
-                'add_new_item' => 'Add New Organization',
-                'edit' => 'Edit',
-                'edit_item' => 'Edit Organization',
-                'new_item' => 'New Organization',
-                'view' => 'View Organization',
-                'view_item' => 'View Organization',
-                'search_items' => 'Search Organizations',
-                'not_found' => 'No Organizations Found',
-                'not_found_in_trash' => 'No Organizations Found in Trash',
-                'parent' => 'Parent Organization',
-            ),
-        ) 
-    );
-
-    register_taxonomy('organization_categories',
-        array(
-            0 => 'organizations',
-            ),
-        array( 'hierarchical' => true, 
-            'label' => 'Organization Categories',
-            'show_ui' => true,
-            'query_var' => true,
-            'rewrite' => array(
-                'slug' => 'organizations'
-                ),
-            'singular_label' => 'Organization Category'
-            ) 
-        );
-}
-
-/************* REGISTER CUSTOM METABOXES ********************/
-
-if(function_exists("register_field_group"))
-{
-    register_field_group(array (
-        'id' => 'organization-fields',
-        'title' => 'Organization Fields',
-        'fields' => array (
-            array (
-                'key' => 'organization_address',
-                'label' => 'Address',
-                'name' => 'organization_address',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_city',
-                'label' => 'City',
-                'name' => 'organization_city',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_state',
-                'label' => 'State',
-                'name' => 'organization_state',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_zip',
-                'label' => 'Zip',
-                'name' => 'organization_zip',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_email',
-                'label' => 'Email',
-                'name' => 'organization_email',
-                'type' => 'email',
-                'default_value' => '',
-            ),
-            array (
-                'key' => 'organization_phone',
-                'label' => 'Phone',
-                'name' => 'organization_phone',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_website',
-                'label' => 'Website',
-                'name' => 'organization_website',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_facebook',
-                'label' => 'Facebook',
-                'name' => 'organization_facebook',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_twitter',
-                'label' => 'Twitter',
-                'name' => 'organization_twitter',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_googleplus',
-                'label' => 'Google+',
-                'name' => 'organization_googleplus',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_linkedin',
-                'label' => 'LinkedIn',
-                'name' => 'organization_linkedin',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_contact_name',
-                'label' => 'Contact Name',
-                'name' => 'organization_contact_name',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-            array (
-                'key' => 'organization_contact_email',
-                'label' => 'Contact Email',
-                'name' => 'organization_contact_email',
-                'type' => 'email',
-                'default_value' => '',
-            ),
-            array (
-                'key' => 'organization_contact_phone',
-                'label' => 'Contact Phone',
-                'name' => 'organization_contact_phone',
-                'type' => 'text',
-                'default_value' => '',
-                'formatting' => 'html',
-            ),
-        ),
-        'location' => array (
-            'rules' => array (
-                array (
-                    'param' => 'post_type',
-                    'operator' => '==',
-                    'value' => 'organizations',
-                    'order_no' => 0,
-                ),
-            ),
-            'allorany' => 'all',
-        ),
-        'options' => array (
-            'position' => 'normal',
-            'layout' => 'default',
-            'hide_on_screen' => array (
-                0 => 'send-trackbacks',
-            ),
-        ),
-        'menu_order' => 0,
-    ));
-}
-
-/************* SHOW TEMPLATE NAME - FOR DEBUGGING ********************/
-
-add_action('wp_head', 'show_template');
-
-function show_template() {
-    global $template;
-
-    if ( is_user_logged_in() ) {
-        print_r($template);
+if ( !function_exists( 'of_get_option' ) ) {
+function of_get_option($name, $default = false) {
+    
+    $optionsframework_settings = get_option('optionsframework');
+    
+    // Gets the unique option id
+    $option_name = $optionsframework_settings['id'];
+    
+    if ( get_option($option_name) ) {
+        $options = get_option($option_name);
+    }
+        
+    if ( isset($options[$name]) ) {
+        return $options[$name];
+    } else {
+        return $default;
     }
 }
+}
 
-/************* SHOW ALL SITES********************/
+/************* SET FEATURED IMAGE ********************/
+// If there is no featured image set, use the first image attached to post
+function feature_image($size ='thumbnail') {
 
-if(!function_exists('get_all_sites')){
+if ( has_post_thumbnail() ) {
+    the_post_thumbnail( $size );
+} else {
+        $attachments = get_children( array(
+            'post_parent' => get_the_ID(),
+            'post_status' => 'inherit',
+            'post_type' => 'attachment',
+            'post_mime_type' => 'image',
+            'order' => 'ASC',
+            'orderby' => 'menu_order ID',
+            'numberposts' => 1)
+        );
+        foreach ( $attachments as $thumb_id => $attachment )
+            return wp_get_attachment_image($thumb_id, $size);
+        }
+}
+
+function feature_or_placeholder($size ='wpf-featured') {
+    $feature_image = feature_image($size);
+    $placeholder_image = of_get_option('placeholder_image');
+    if($feature_image) {
+        echo $feature_image;
+    } else {
+        echo $placeholder_image;
+    }
+
+} 
+
+/************* SHOW SLIDER POSTS ********************/
+
+function sliderposts($before_title='<h3 class="event-title">', $after_title='</h3>', $imagesize ='wpf-featured') {
+    global $post;
+    $placeholder_image = feature_or_placeholder();
+    $numberposts = of_get_option('posts_in_orbit_slider');
+    $args = array( 'posts_count' => $numberposts, 'post_type' => 'post' );
+    $posts = get_posts( $args );
+
+foreach( $posts as $post ) : setup_postdata($post); 
+    echo '<li class="slider-item"><a href="';
+    echo the_permalink();
+    echo '">';
+        if ( has_post_thumbnail() ) { 
+            echo '<div class="event-image">';
+            the_post_thumbnail('medium');
+            echo '</div>';
+        } else {
+            echo '<div class="event-image"><img src="';
+            feature_or_placeholder();
+            echo '"></div>';
+        }
+
+    the_title( $before_title, $after_title, true);
+    echo '</a>';
+    echo '</li>';
+
+endforeach;
+}
+
+function sliderevents($before_title='<h3 class="event-title">', $after_title='</h3>'){
+
+        $placeholder_image = of_get_option('placeholder_image');
+        $numberposts = of_get_option('posts_in_orbit_slider');
+
+    //If Events Manager is active, display events coming up in slider
+if (is_plugin_active( 'events-manager/events-manager.php' )) {
+    echo EM_Events::output( 
+        array('format_header' => '<ul class="bxslider">',
+            'format_footer' => '</ul>',
+            'limit'=> $numberposts,
+            'orderby' => 'date',
+            'format' =>
+            '<li class="slider-item">
+                <div class="event-image"><a href="#_EVENTURL">{no_image}<img src="' . $placeholder_image .'">{/no_image}{has_image}#_EVENTIMAGE{230,157}{/has_image}</a></div>'
+                . $before_title . '<span class="event-date">#M #j:</span> #_EVENTLINK' . $after_title .
+            '</li>'
+            ) );
+    } else {
+        echo 'Events Manager needs to be active in order to display events';
+    }
+
+}
+
+/************* RETURN ARRAY OF POST METADATA  ********************/
+
+function postcategorylist() {
+$args=array(
+  'taxonomy' => 'category',
+  'order' => 'ASC'
+  );
+$categories=get_categories($args);
+
+    foreach($posts as $post) {
+        foreach($categories as $category) {
+            $cats[] = $category->id;
+        }
+    }
+
+$categories[] = array_unique($cats);
+return($categories);
+}
+
+/************* SHOW ALL GROUPS ********************/
+
+if(!function_exists('get_all_sites')) {
   /**
    * Retrieves all multisite blogs
    *
@@ -359,78 +373,117 @@ if(!function_exists('get_all_sites')){
     return $multisite;
   }
 }
- 
- /************* SHOW ALL SITES********************/
-// Output a single menu item
-function bloglist_entry($id, $title, $link_self) {
-    global $blog_id;
-        if ($link_self || $id != $blog_id) {
-            echo '<li>';
-            if ($id == $blog_id) {
-            echo '<strong>';
-            }
-            $url = get_home_url($id);
-                if (substr($url, -1) != '/') {
-                // Note: I added a "/" to the end of the URL because WordPress
-                // wasn't doing that automatically in v3.0.4. YMMV.
-                $url .= '/';
-                }
-                echo '<a href="' . $url . '">' . $title . '</a>';
-                    if ($id == $blog_id) {
-                    echo '</strong>';
-            }
-        echo '</li>';
-    }
-}
- 
-// Output the whole menu
-// If $link_self is false, skip the current site - used to display the menu on the homepage
-function bloglist($link_self = true) {
+
+/************* GET LIST OF GROUPS ********************/
+
+function get_group_ids() {
+
     global $wpdb;
 
-    echo '<h4 class="widgettitle">Active Groups</h4>';
-    echo '<ul class="blog-list">';
-     
-    bloglist_entry(1, 'Home', $link_self);
-     
-    $blogs = $wpdb->get_results("
-    SELECT blog_id
-        FROM {$wpdb->blogs}
-        WHERE site_id = '{$wpdb->siteid}'
-        AND spam = '0'
-        AND deleted = '0'
-        AND archived = '0'
-        AND blog_id != 1,
-        AND blog_id != 5
-    ");
-     
-    $sites = array();
-    foreach ($blogs as $blog) {
-        $sites[$blog->blog_id] = get_blog_option($blog->blog_id, 'blogname');
+    // Query all blogs from multi-site install
+    $groups = $blogs = $wpdb->get_results("SELECT blog_id,domain,path FROM wp_blogs where blog_id > 1 ORDER BY path");
+
+    // Initialize groupids array
+    $groupids = array();
+
+    // For each group, search for blog id
+
+        foreach( $groups as $group ) {
+            $groupids[] = $group->blog_id;
+        }
+        return $groupids;
+
+}
+
+function get_group_names() {
+    $groupids = get_group_ids();
+
+    foreach($groupids as $groupid) {
+        $groupnames[] = get_blog_option( $groupid, 'blogname' );
     }
-     
-    natsort($sites);
-    foreach ($sites as $blog_id => $blog_title) {
-        bloglist_entry($blog_id, $blog_title, $link_self);
+    return $groupnames;
+
+}
+
+function get_group_list() {
+    $groupids = get_group_ids();
+
+    echo '<ul class="group-list">';
+    foreach($groupids as $groupid) {
+        $groupname = get_blog_option( $groupid, 'blogname' );
+        sort($groupids);
+        echo '<li class="group-item" id="group-' . $groupid . '">';
+        echo $groupname;
+        echo '</li>';
     }
     echo '</ul>';
 }
- 
-// Adds a [bloglist] shortcode, so I can embed the menu into the static homepage.
-// Note: I originally put it directly into the template, but that didn't work
-// with WPtouch.
-function bloglist_shortcode($atts)
-{
-    bloglist(false);
-}
- 
-add_shortcode('bloglist', 'bloglist_shortcode');
 
+/************* OFFSET AND PAGINATION FILTER ********************/
+
+add_action('pre_get_posts', 'myprefix_query_offset', 1 );
+function myprefix_query_offset(&$query) {
+
+    //Before anything else, make sure this is the right query...
+    if ( ! $query->is_posts_page ) {
+        return;
+    }
+
+    //First, define your desired offset...
+    $numberposts = of_get_option('posts_in_orbit_slider');
+    $offset = $numberposts;
+    
+    //Next, determine how many posts per page you want (we'll use WordPress's settings)
+    $ppp = get_option('posts_per_page');
+
+    //Next, detect and handle pagination...
+    if ( $query->is_paged ) {
+
+        //Manually determine page query offset (offset + current page (minus one) x posts per page)
+        $page_offset = $offset + ( ($query->query_vars['paged']-1) * $ppp );
+
+        //Apply adjust page offset
+        $query->set('offset', $page_offset );
+
+    }
+    else {
+
+        //This is the first page. Just use the offset...
+        $query->set('offset',$offset);
+
+    }
+}
+
+add_filter('found_posts', 'myprefix_adjust_offset_pagination', 1, 2 );
+function myprefix_adjust_offset_pagination($found_posts, $query) {
+
+    //Define our offset again...
+    $numberposts = of_get_option('posts_in_orbit_slider');
+    $offset = $numberposts;
+
+    //Ensure we're modifying the right query object...
+    if ( $query->is_posts_page ) {
+        //Reduce WordPress's found_posts count by the offset... 
+        return $found_posts - $offset;
+    }
+}
 
 //allow redirection, even if my theme starts to send output to the browser
 add_action('init', 'do_output_buffer');
 function do_output_buffer() {
         ob_start();
-}    
+} 
+
+/************* SHOW TEMPLATE NAME - FOR DEBUGGING ********************/
+
+add_action('wp_head', 'show_template');
+
+function show_template() {
+    global $template;
+
+    if ( is_user_logged_in() ) {
+        print_r($template);
+    }
+}
 
 ?>
