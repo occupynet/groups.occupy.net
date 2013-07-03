@@ -84,7 +84,7 @@ Template Name: Homepage
 
 		<div class="filter twelve columns clearfix">
 
-			<h4 class="contribute"><a href="/join">Contribute</a></h4>
+			<h4 class="contribute filter-add"><a href="/join">Contribute</a></h4>
 
 			<!-- Display Filter -->
 			<h4 class="filter-view">View: <span class="filter-title" id="view-current">List</span>
