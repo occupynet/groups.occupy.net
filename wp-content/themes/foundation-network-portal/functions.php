@@ -402,7 +402,6 @@ function get_group_names() {
         $groupnames[] = get_blog_option( $groupid, 'blogname' );
     }
     return $groupnames;
-
 }
 
 function get_group_list() {
