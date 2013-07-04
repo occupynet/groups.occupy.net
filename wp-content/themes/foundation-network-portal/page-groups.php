@@ -42,10 +42,13 @@ Template Name: Groups Directory
 					<?php
 
 					//Returns a list of recently updated blogs
-					$blogs = get_last_updated();
+					$blogs = get_last_updated(0);
 					
 					foreach ($blogs AS $blog) {
+						$post_blog_id = $blog['blog_id'];
+						if($post_blog_id != $blog_id) {
 						?>
+
 						<li class="group-item clearfix">
 
 						<h3><a href="http://<?php echo $blog[ 'domain' ] . $blog[ 'path' ] ?>"><?php echo get_blog_option( $blog[ 'blog_id' ], 'blogname' ) ?></a></h3>
@@ -65,6 +68,7 @@ Template Name: Groups Directory
 					
 					<?php
 					endforeach;
+					}
 					restore_current_blog(); 
 					}
 					?>
