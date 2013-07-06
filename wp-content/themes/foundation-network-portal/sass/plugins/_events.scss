@@ -34,9 +34,24 @@ h1.single-title {
 	}
 }
 
+.event-body {
+	padding-bottom: 40px;
+}
+
 .em-location-map {
 	border: 10px solid $base9;
 	margin: 40px 0;
+}
+
+.event-categories {
+	list-style: none;
+	display: inline;
+	li {
+		display: inline;
+		font-size: 12px;
+		margin: 0 5px!important;
+		text-indent: 0;
+	}
 }
 
 .event-heading {
