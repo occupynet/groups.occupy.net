@@ -15,9 +15,11 @@ h1.single-title {
 .event-image.post-thumbnail {
 	max-height: 470px;
 	overflow: hidden;
+	border: 10px solid $base9;
 	img {
 		width: 100%;
 		height: auto;
+		padding: 0;
 	}
 }
 

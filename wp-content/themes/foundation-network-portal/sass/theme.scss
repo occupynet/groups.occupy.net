@@ -30,6 +30,18 @@
 .home-slider {
 	background: $base9;
 	padding: 10px;
+	.event-image {
+		height: 157px;
+		width: auto;
+		margin-bottom: 10px;
+		overflow: hidden;
+	}
+	.event-title {
+		@include condensed;
+		height: 55px;
+		overflow: hidden;
+		margin: 0;
+	}
 }
 
 .bx-wrapper {
@@ -45,18 +57,7 @@
 .slider-item {
 	margin: 0;
 }
-.event-image {
-	height: 157px;
-	width: auto;
-	margin-bottom: 10px;
-	overflow: hidden;
-}
-.event-title {
-	@include condensed;
-	height: 55px;
-	overflow: hidden;
-	margin: 0;
-}
+
 
 .bx-controls {
 	position: absolute;

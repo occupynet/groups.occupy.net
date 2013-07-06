@@ -601,47 +601,49 @@ h1.single-title {
 /* line 15, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-image.post-thumbnail {
   max-height: 470px;
-  overflow: hidden; }
-  /* line 18, ../../foundation-network-portal/sass/plugins/_events.scss */
+  overflow: hidden;
+  border: 10px solid #e6e6e6; }
+  /* line 19, ../../foundation-network-portal/sass/plugins/_events.scss */
   .event-image.post-thumbnail img {
     width: 100%;
-    height: auto; }
+    height: auto;
+    padding: 0; }
 
-/* line 25, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 27, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-date,
 .event-time {
   margin: 0.5em 0; }
 
-/* line 28, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 30, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-location {
   margin: 1.5em 0;
   line-height: 1.5; }
-  /* line 32, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 34, ../../foundation-network-portal/sass/plugins/_events.scss */
   .event-location .el-name,
   .event-location .el-address {
     display: block; }
 
-/* line 37, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 39, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-body {
   padding-bottom: 40px; }
 
-/* line 41, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 43, ../../foundation-network-portal/sass/plugins/_events.scss */
 .em-location-map {
   border: 10px solid #e6e6e6;
   margin: 40px 0; }
 
-/* line 46, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 48, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-categories {
   list-style: none;
   display: inline; }
-  /* line 49, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 51, ../../foundation-network-portal/sass/plugins/_events.scss */
   .event-categories li {
     display: inline;
     font-size: 12px;
     margin: 0 5px !important;
     text-indent: 0; }
 
-/* line 57, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 59, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-heading {
   font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
   text-transform: uppercase;
@@ -649,14 +651,14 @@ h1.single-title {
   font-weight: normal;
   font-size: 24px; }
 
-/* line 63, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 65, ../../foundation-network-portal/sass/plugins/_events.scss */
 .related-events-list ul {
   overflow: hidden;
   *zoom: 1;
   list-style: none;
   margin: 0 0 40px;
   border-top: 1px solid #b3b3b3; }
-  /* line 68, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 70, ../../foundation-network-portal/sass/plugins/_events.scss */
   .related-events-list ul li {
     float: left;
     width: 25%;
@@ -664,15 +666,15 @@ h1.single-title {
     margin: 0;
     text-indent: 0;
     font-size: 14px; }
-  /* line 76, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 78, ../../foundation-network-portal/sass/plugins/_events.scss */
   .related-events-list ul li:nth-child(4n+1) {
     clear: left; }
-  /* line 79, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 81, ../../foundation-network-portal/sass/plugins/_events.scss */
   .related-events-list ul a, .related-events-list ul h3.nlposts-ulist-title {
     display: block;
     font-size: 16px; }
 
-/* line 86, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 88, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-edit-link {
   padding: 5px 7px;
   border: 1px solid #e3353b;
@@ -680,58 +682,58 @@ h1.single-title {
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 1px; }
-  /* line 92, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 94, ../../foundation-network-portal/sass/plugins/_events.scss */
   .event-edit-link:hover {
     background: #c91c22;
     border-color: #c91c22;
     color: white; }
 
 /*************  Events Editor ********************/
-/* line 104, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 106, ../../foundation-network-portal/sass/plugins/_events.scss */
 #event-form {
   margin: 2em 0 5em;
   border: 10px solid #cccccc;
   background: #e6e6e6;
   padding: 20px 30px; }
-  /* line 109, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 111, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form h4 {
     margin: 30px 0px 10px;
     text-transform: uppercase;
     clear: both; }
-  /* line 114, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 116, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form p {
     margin: 10px 0; }
-  /* line 121, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 123, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form .em-date-range input,
   #event-form .em-time-range input {
     width: 15%;
     display: inline; }
-  /* line 125, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 127, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form .em-date-range input[type="checkbox"],
   #event-form .em-time-range input[type="checkbox"] {
     width: auto; }
-  /* line 129, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 131, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form table.em-location-data {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     border-radius: 0;
     border-spacing: 0;
     background: transparent; }
-    /* line 134, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 136, ../../foundation-network-portal/sass/plugins/_events.scss */
     #event-form table.em-location-data tbody tr:nth-child(even),
     #event-form table.em-location-data tbody tr:nth-child(odd) {
       background: transparent; }
-    /* line 137, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 139, ../../foundation-network-portal/sass/plugins/_events.scss */
     #event-form table.em-location-data th {
       border-top: 1px solid #cccccc;
       padding-top: 15px;
       padding-right: 5px;
       text-align: right; }
-    /* line 143, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 145, ../../foundation-network-portal/sass/plugins/_events.scss */
     #event-form table.em-location-data td {
       border-top: 1px solid #cccccc;
       padding-top: 10px; }
-    /* line 147, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 149, ../../foundation-network-portal/sass/plugins/_events.scss */
     #event-form table.em-location-data i {
       color: #c91c22;
       font-weight: bold;
@@ -740,28 +742,28 @@ h1.single-title {
       position: relative;
       right: -15px;
       top: -30px; }
-  /* line 157, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 159, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form #em-map, #event-form #em-map-404 {
     border: 1px dashed #bbbbbb;
     margin-left: 40px; }
-  /* line 161, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 163, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form .event-form-image {
     padding-bottom: 15px; }
-    /* line 163, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 165, ../../foundation-network-portal/sass/plugins/_events.scss */
     #event-form .event-form-image label {
       text-transform: uppercase;
       font-size: 12px;
       margin: 5px 5px 20px 0;
       display: inline; }
-    /* line 169, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 171, ../../foundation-network-portal/sass/plugins/_events.scss */
     #event-form .event-form-image #event-image {
       margin: 5px 0 10px; }
-  /* line 173, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 175, ../../foundation-network-portal/sass/plugins/_events.scss */
   #event-form input[type="submit"] {
     margin: 20px 0; }
 
 /*************  Calendar Page ********************/
-/* line 182, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 184, ../../foundation-network-portal/sass/plugins/_events.scss */
 .em-events-search-form {
   background-color: #333333;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(50%, #333333), color-stop(50%, #4d4d4d), color-stop(100%, #4d4d4d));
@@ -770,7 +772,7 @@ h1.single-title {
   background-image: -ms-linear-gradient(top, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
   background-image: -o-linear-gradient(to bottom, #333333, #333333 50%, #4d4d4d 50%, #4d4d4d 100%);
   padding: 5px 10px; }
-  /* line 204, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 206, ../../foundation-network-portal/sass/plugins/_events.scss */
   .em-events-search-form input[type="text"] {
     height: 24px;
     width: 18%;
@@ -781,20 +783,20 @@ h1.single-title {
     display: inline;
     font-size: 13px;
     margin: 0 5px 10px; }
-  /* line 213, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 215, ../../foundation-network-portal/sass/plugins/_events.scss */
   .em-events-search-form input.em-events-search-text {
     width: 40%;
     margin: 0 30px 10px 0; }
-  /* line 217, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 219, ../../foundation-network-portal/sass/plugins/_events.scss */
   .em-events-search-form span {
     color: white;
     font-size: 12px; }
-  /* line 221, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 223, ../../foundation-network-portal/sass/plugins/_events.scss */
   .em-events-search-form select {
     width: auto;
     height: 24px;
     border: 0; }
-  /* line 226, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 228, ../../foundation-network-portal/sass/plugins/_events.scss */
   .em-events-search-form input[type="submit"] {
     height: 24px;
     line-height: 24px;
@@ -813,31 +815,31 @@ h1.single-title {
     position: relative;
     top: 2px; }
 
-/* line 241, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 243, ../../foundation-network-portal/sass/plugins/_events.scss */
 .events-table {
   border: 0;
   border-top: 1px solid #b3b3b3;
   width: 100%; }
-  /* line 245, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 247, ../../foundation-network-portal/sass/plugins/_events.scss */
   .events-table thead {
     display: none; }
-  /* line 248, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 250, ../../foundation-network-portal/sass/plugins/_events.scss */
   .events-table tr {
     border-bottom: 1px solid #b3b3b3; }
-  /* line 251, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 253, ../../foundation-network-portal/sass/plugins/_events.scss */
   .events-table a, .events-table h3.nlposts-ulist-title {
     font-size: 18px; }
 
 /*************  Single Event Page ********************/
-/* line 260, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 262, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-body {
   padding-top: 30px; }
 
-/* line 264, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 266, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event .sidebar {
   padding-left: 0; }
 
-/* line 270, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 272, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-date-time h3,
 .event-location h3 {
   font-size: 18px;
@@ -846,7 +848,7 @@ h1.single-title {
   letter-spacing: 1px;
   font-weight: normal;
   margin: 2em 0 0.5em; }
-/* line 275, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 277, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-date-time p,
 .event-location p {
   font-size: 14px;
@@ -854,48 +856,48 @@ h1.single-title {
   line-height: 1.4; }
 
 /*************  List Widget ********************/
-/* line 287, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 289, ../../foundation-network-portal/sass/plugins/_events.scss */
 .widget_em_widget .widgettitle {
   margin-bottom: 0; }
-/* line 290, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 292, ../../foundation-network-portal/sass/plugins/_events.scss */
 .widget_em_widget li {
   margin-bottom: 10px;
   font-size: 13px;
   border-top: 1px solid #e6e6e6; }
-/* line 295, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 297, ../../foundation-network-portal/sass/plugins/_events.scss */
 .widget_em_widget a, .widget_em_widget h3.nlposts-ulist-title {
   font-size: 16px;
   font-weight: normal !important;
   display: block;
   padding-top: 10px;
   line-height: 1.3em; }
-/* line 302, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 304, ../../foundation-network-portal/sass/plugins/_events.scss */
 .widget_em_widget ul ul li {
   display: inline;
   border: 0;
   margin-right: 15px;
   font-size: 12px; }
 
-/* line 314, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 316, ../../foundation-network-portal/sass/plugins/_events.scss */
 footer .widget_em_widget .widgettitle {
   margin-bottom: 10px; }
-/* line 317, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 319, ../../foundation-network-portal/sass/plugins/_events.scss */
 footer .widget_em_widget .event-title {
   margin-bottom: 0; }
-/* line 320, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 322, ../../foundation-network-portal/sass/plugins/_events.scss */
 footer .widget_em_widget li {
   list-style: none;
   color: white;
   border-top: 1px solid #4d4d4d; }
-  /* line 324, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 326, ../../foundation-network-portal/sass/plugins/_events.scss */
   footer .widget_em_widget li a, footer .widget_em_widget li h3.nlposts-ulist-title {
     color: white; }
-  /* line 327, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 329, ../../foundation-network-portal/sass/plugins/_events.scss */
   footer .widget_em_widget li a:hover, footer .widget_em_widget li h3.nlposts-ulist-title:hover {
     color: #c91c22; }
 
 /*************  Calendar Widget ********************/
-/* line 337, ../../foundation-network-portal/sass/plugins/_events.scss */
+/* line 339, ../../foundation-network-portal/sass/plugins/_events.scss */
 table.em-calendar {
   border: 0;
   width: 100%;
@@ -906,28 +908,28 @@ table.em-calendar {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal; }
-  /* line 342, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 344, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar thead {
     background: white;
     font-size: 18px; }
-  /* line 346, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 348, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar tbody tr:nth-child(even) {
     background: white; }
-  /* line 349, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 351, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar td {
     padding: 3px;
     font-size: 18px;
     font-weight: normal; }
-  /* line 355, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 357, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar td.eventless-today,
   table.em-calendar td.eventful-today {
     background-color: white; }
-  /* line 359, ../../foundation-network-portal/sass/plugins/_events.scss */
+  /* line 361, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar td.eventful a, table.em-calendar td.eventful h3.nlposts-ulist-title,
   table.em-calendar td.eventful-today a,
   table.em-calendar td.eventful-today h3.nlposts-ulist-title {
     color: #c91c22 !important; }
-    /* line 361, ../../foundation-network-portal/sass/plugins/_events.scss */
+    /* line 363, ../../foundation-network-portal/sass/plugins/_events.scss */
     table.em-calendar td.eventful a:hover, table.em-calendar td.eventful h3.nlposts-ulist-title:hover,
     table.em-calendar td.eventful-today a:hover,
     table.em-calendar td.eventful-today h3.nlposts-ulist-title:hover {
