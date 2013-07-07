@@ -935,10 +935,12 @@ input[type="submit"] {
 /************* Unique ********************/
 /* line 25, ../../foundation-network-portal/sass/modules/_forms.scss */
 .respond-form {
-  border-top: 1px solid #333333;
-  padding-top: 30px; }
+  padding-top: 30px;
+  background: #cccccc;
+  padding: 20px;
+  margin-bottom: 20px; }
 
-/* line 36, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 38, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register .mu_alert {
   color: #333333;
   background: #feefd7;
@@ -947,32 +949,32 @@ input[type="submit"] {
   font-weight: normal;
   line-height: 1.4;
   padding: 10px 20px; }
-/* line 45, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 47, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register li {
   margin-bottom: .5em;
   margin-left: 2em; }
-/* line 49, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 51, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register form {
   margin: 2em 0 5em;
   border: 10px solid #cccccc;
   background: #e6e6e6;
   padding: 20px 30px; }
-/* line 55, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 57, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register label {
   text-transform: uppercase;
   margin: 30px 0 5px;
   clear: left; }
-/* line 60, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 62, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register label.checkbox {
   text-transform: none; }
-/* line 63, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 65, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register .prefix_address {
   float: left;
   margin: 7px 0; }
-/* line 67, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 69, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register .suffix_address {
   margin: 7px 0; }
-/* line 73, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 75, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register #blog_title,
 .mu_register #user_email,
 .mu_register #blogname,
@@ -980,7 +982,7 @@ input[type="submit"] {
   width: 80%;
   font-size: 20px;
   padding: 3px 5px; }
-/* line 78, ../../foundation-network-portal/sass/modules/_forms.scss */
+/* line 80, ../../foundation-network-portal/sass/modules/_forms.scss */
 .mu_register #blogname {
   width: 40%; }
 
