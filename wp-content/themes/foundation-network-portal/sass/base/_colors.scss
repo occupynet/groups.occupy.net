@@ -3,10 +3,11 @@
 
 
 $brand: #fbb03b;
-$brand-light: lighten($brand, 40%);
+$brand-light: #FFE4B3;
+$brand-dark: #F2B549;
 $loud: #c91c22;
-$loud-dark: darken($loud, 10%);
-$loud-light: lighten($loud, 10%);
+$loud-dark: darken($loud, 15%);
+$loud-light: lighten($loud, 15%);
 $base: #000;
 $base1: lighten($base, 10%);
 $base2: lighten($base, 20%);

@@ -153,9 +153,9 @@ a, h3.nlposts-ulist-title {
     color: #1a1a1a; }
   /* line 11, ../../foundation-network-portal/sass/base/_buttons.scss */
   a:visited, h3.nlposts-ulist-title:visited {
-    color: #9c161a; }
+    color: #861317; }
 
-/* line 14, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 15, ../../foundation-network-portal/sass/base/_buttons.scss */
 .read-more {
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -163,29 +163,33 @@ a, h3.nlposts-ulist-title {
   padding: 0 5px;
   font-size: 80%; }
 
-/* line 21, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 22, ../../foundation-network-portal/sass/base/_buttons.scss */
 .post-edit-link {
   padding: 1px 7px;
-  border: 1px solid #e3353b;
+  border: 1px solid #e64c51;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px; }
-  /* line 26, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 27, ../../foundation-network-portal/sass/base/_buttons.scss */
   .post-edit-link:hover {
     background: #c91c22;
     border-color: #c91c22;
-    color: white; }
+    color: white !important; }
 
-/* line 33, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 34, ../../foundation-network-portal/sass/base/_buttons.scss */
 .network-post .post-edit-link {
   margin-left: 4px; }
 
-/* line 38, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 39, ../../foundation-network-portal/sass/base/_buttons.scss */
 ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   background: #fbb03b; }
 
 /************* Buttons ********************/
 /* line 47, ../../foundation-network-portal/sass/base/_buttons.scss */
+input[type="submit"] {
+  font-size: 24px; }
+
+/* line 51, ../../foundation-network-portal/sass/base/_buttons.scss */
 .btn, .btn-loud, input[type="submit"], .alo_easymail_widget .input-submit {
   background: #1a1a1a;
   color: white;
@@ -201,41 +205,433 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: normal; }
-  /* line 57, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 61, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn:hover, .btn-loud:hover, input[type="submit"]:hover, .alo_easymail_widget .input-submit:hover {
     background: #c91c22; }
-  /* line 60, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 64, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn:active, .btn-loud:active, input[type="submit"]:active, .alo_easymail_widget .input-submit:active {
     background: #1a1a1a; }
 
-/* line 65, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 69, ../../foundation-network-portal/sass/base/_buttons.scss */
 .btn-loud, input[type="submit"] {
   background: #c91c22; }
-  /* line 68, ../../foundation-network-portal/sass/base/_buttons.scss */
-  .btn-loud:hover, input[type="submit"]:hover {
-    background: #e3353b;
-    color: white; }
   /* line 72, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .btn-loud:hover, input[type="submit"]:hover {
+    background: #861317;
+    color: white; }
+  /* line 76, ../../foundation-network-portal/sass/base/_buttons.scss */
   .btn-loud:active, input[type="submit"]:active {
     background: #c91c22; }
 
-/* line 77, ../../foundation-network-portal/sass/base/_buttons.scss */
-.btn-large, input[type="submit"] {
-  padding: 10px 25px 8px;
-  font-size: 22px; }
+/* overwrites for Foundation defaults */
+/* Normal Buttons ---------------------- */
+/* line 87, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button {
+  background: #1a1a1a;
+  border: 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: normal;
+  font-size: 24px;
+  padding: 5px 24px;
+  line-height: 34px !important;
+  margin-bottom: 1px; }
+
+/* line 99, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button:hover,
+.button:focus {
+  background: #c91c22; }
+
+/* line 102, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+/* line 105, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button:visited {
+  color: white; }
+
+/* line 109, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.large {
+  font-size: 30px;
+  padding: 6px 30px;
+  line-height: 42px !important;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+/* line 115, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.medium {
+  font-size: 24px;
+  padding: 5px 24px;
+  line-height: 34px !important;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px; }
+
+/* line 121, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.small {
+  font-size: 15px;
+  padding: 4px 15px;
+  line-height: 23px !important;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+/* line 127, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.tiny {
+  font-size: 13px;
+  padding: 3px 12px;
+  line-height: 19px !important;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+/* line 134, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.radius {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+/* line 138, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.primary {
+  background: #1a1a1a;
+  border: 0; }
+  /* line 142, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.primary:hover, .button.primary:focus {
+    background: #861317; }
+
+/* line 146, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.success {
+  background-color: #fbb03b;
+  border: 0; }
+  /* line 150, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.success:hover, .button.success:focus {
+    background: #c91c22; }
+
+/* line 155, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.alert {
+  background-color: #c91c22;
+  border: 0; }
+  /* line 159, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.alert:hover, .button.alert:focus {
+    background: #861317; }
+
+/* line 164, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.secondary {
+  background-color: #666666;
+  color: white;
+  border: 0; }
+  /* line 169, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.secondary:hover, .button.secondary:focus {
+    background: #c91c22; }
+
+/* line 196, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.disabled,
+.button[disabled],
+.button.disabled:hover,
+.button[disabled]:hover,
+.button.disabled.success,
+.button[disabled].success,
+.button.disabled.success:hover,
+.button.disabled.success:focus,
+.button[disabled].success:hover,
+.button[disabled].success:focus,
+.button.disabled.alert,
+.button[disabled].alert,
+.button.disabled.alert:hover,
+.button.disabled.alert:focus,
+.button[disabled].alert:hover,
+.button[disabled].alert:focus,
+.button.disabled.secondary,
+.button[disabled].secondary,
+.button.disabled.secondary:hover,
+.button.disabled.secondary:focus,
+.button[disabled].secondary:hover,
+.button[disabled].secondary:focus {
+  background-color: #e6e6e6;
+  color: #b3b3b3;
+  outline: none; }
+
+/* Correct FF button padding */
+@-moz-document url-prefix() {
+  /* line 208, ../../foundation-network-portal/sass/base/_buttons.scss */
+  button::-moz-focus-inner,
+  input[type="reset"]::-moz-focus-inner,
+  input[type="button"]::-moz-focus-inner,
+  input[type="submit"]::-moz-focus-inner,
+  input[type="file"] > input[type="button"]::-moz-focus-inner {
+    border: none;
+    padding: 0; }
+
+  /* line 212, ../../foundation-network-portal/sass/base/_buttons.scss */
+  input[type="submit"].tiny.button {
+    padding: 3px 12px 4px; }
+
+  /* line 215, ../../foundation-network-portal/sass/base/_buttons.scss */
+  input[type="submit"].small.button {
+    padding: 4px 15px 5px; }
+
+  /* line 219, ../../foundation-network-portal/sass/base/_buttons.scss */
+  input[type="submit"].button,
+  input[type=submit].medium.button {
+    padding: 5px 24px 6px; }
+
+  /* line 222, ../../foundation-network-portal/sass/base/_buttons.scss */
+  input[type="submit"].large.button {
+    padding: 6px 30px 7px; } }
+
+/* Button Groups ---------------------- */
+/* line 232, ../../foundation-network-portal/sass/base/_buttons.scss */
+ul.button-group li {
+  text-indent: 0;
+  margin-left: 0; }
+  /* line 237, ../../foundation-network-portal/sass/base/_buttons.scss */
+  ul.button-group li a.button, ul.button-group li h3.button.nlposts-ulist-title,
+  ul.button-group li a.button.radius,
+  ul.button-group li h3.button.radius.nlposts-ulist-title,
+  ul.button-group li a.button.rounded,
+  ul.button-group li h3.button.rounded.nlposts-ulist-title {
+    border-radius: 0;
+    border-left: 1px solid #4d4d4d; }
+  /* line 244, ../../foundation-network-portal/sass/base/_buttons.scss */
+  ul.button-group li:first-child a.button, ul.button-group li:first-child h3.button.nlposts-ulist-title,
+  ul.button-group li:first-child a.button.radius,
+  ul.button-group li:first-child h3.button.radius.nlposts-ulist-title,
+  ul.button-group li:first-child a.button.rounded,
+  ul.button-group li:first-child h3.button.rounded.nlposts-ulist-title {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 0; }
+  /* line 253, ../../foundation-network-portal/sass/base/_buttons.scss */
+  ul.button-group li:last-child a.button, ul.button-group li:last-child h3.button.nlposts-ulist-title,
+  ul.button-group li:last-child a.button.radius,
+  ul.button-group li:last-child h3.button.radius.nlposts-ulist-title,
+  ul.button-group li:last-child a.button.rounded,
+  ul.button-group li:last-child h3.button.rounded.nlposts-ulist-title {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; }
+
+/* Buttons with Dropdowns ---------------------- */
+/* line 264, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown {
+  position: relative;
+  padding-right: 35px; }
+  /* line 267, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.split > span {
+    width: 35px; }
+  /* line 270, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown:after {
+    margin-top: -4px;
+    right: 15px; }
+
+/* line 275, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.large {
+  padding-right: 44px; }
+  /* line 277, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.large.split {
+    padding-right: 44px; }
+  /* line 280, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.large.split > span {
+    width: 44px; }
+  /* line 283, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.large:after {
+    margin-top: -5px;
+    right: 20px; }
+
+/* line 288, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.small {
+  padding-right: 25px; }
+  /* line 290, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.small.split > span {
+    width: 25px; }
+  /* line 293, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.small:after {
+    margin-top: -4px;
+    right: 10px; }
+
+/* line 298, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.tiny {
+  padding-right: 20px; }
+  /* line 300, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.tiny.split > span {
+    width: 20px; }
+  /* line 303, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown.tiny:after {
+    margin-top: -3px;
+    right: 8px; }
+
+/* line 310, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown > ul {
+  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #cccccc; }
+  /* line 314, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown > ul li {
+    padding: 0;
+    min-height: 18px;
+    line-height: 18px;
+    font-size: 18px; }
+    /* line 319, ../../foundation-network-portal/sass/base/_buttons.scss */
+    .button.dropdown > ul li a, .button.dropdown > ul li h3.nlposts-ulist-title, .button.dropdown > ul li button {
+      color: #333333;
+      font-size: 18px;
+      padding: 7px 12px;
+      display: block;
+      border: 0;
+      text-indent: 0; }
+  /* line 329, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown > ul li:hover,
+  .button.dropdown > ul li:focus {
+    background-color: #FFF;
+    color: #c91c22; }
+  /* line 333, ../../foundation-network-portal/sass/base/_buttons.scss */
+  .button.dropdown > ul li.divider {
+    margin: 0;
+    background: #e6e6e6; }
+
+/* line 339, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.up > ul {
+  border-top: 1px solid #cccccc; }
+
+/* split dropdown buttons */
+/* undo hover for whole button */
+/* line 348, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split:hover,
+.button.dropdown.split:focus {
+  background-color: #1a1a1a; }
+
+/* line 352, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.alert:hover,
+.button.dropdown.split.alert:focus {
+  background-color: #c91c22; }
+
+/* line 356, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.success:hover,
+.button.dropdown.split.success:focus {
+  background-color: #fbb03b; }
+
+/* line 360, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.secondary:hover,
+.button.dropdown.split.secondary:focus {
+  background-color: #666666; }
+
+/* add hover on separate sections */
+/* line 366, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split {
+  padding: 0 30px 0 0; }
+
+/* line 369, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split > a, .button.dropdown.split > h3.nlposts-ulist-title {
+  color: white;
+  display: block;
+  padding: 5px 24px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px; }
+
+/* line 377, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split > a:hover, .button.dropdown.split > h3.nlposts-ulist-title:hover,
+.button.dropdown.split > a:focus,
+.button.dropdown.split > h3.nlposts-ulist-title:focus {
+  background-color: #4d4d4d;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+/* line 381, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.large > a, .button.dropdown.split.large > h3.nlposts-ulist-title {
+  padding: 6px 30px; }
+
+/* line 384, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.small > a, .button.dropdown.split.small > h3.nlposts-ulist-title {
+  padding: 4px 15px; }
+
+/* line 387, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.tiny > a, .button.dropdown.split.tiny > h3.nlposts-ulist-title {
+  padding: 3px 12px; }
+
+/* line 391, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split > span {
+  background-color: #1a1a1a;
+  border-left: 1px solid #4d4d4d;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none; }
+
+/* line 399, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split > span:hover,
+.button.dropdown.split > span:focus {
+  background-color: #4d4d4d; }
+
+/* line 403, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.secondary > span:after {
+  border-color: white transparent transparent transparent; }
+
+/* line 406, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.alert > span {
+  background-color: #c91c22;
+  border-left-color: #861317; }
+
+/* line 410, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.success > span {
+  background-color: #fbb03b;
+  border-left-color: #cc7e04; }
+
+/* line 414, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.secondary > span {
+  background-color: #666666;
+  border-left-color: #333333; }
+
+/* line 418, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.secondary > a, .button.dropdown.split.secondary > h3.nlposts-ulist-title {
+  color: #FFF; }
+
+/* line 425, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.alert > a:hover, .button.dropdown.split.alert > h3.nlposts-ulist-title:hover,
+.button.dropdown.split.alert > span:hover,
+.button.dropdown.split.alert > a:focus,
+.button.dropdown.split.alert > h3.nlposts-ulist-title:focus,
+.button.dropdown.split.alert > span:focus {
+  background-color: #6f1013; }
+
+/* line 431, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.success > a:hover, .button.dropdown.split.success > h3.nlposts-ulist-title:hover,
+.button.dropdown.split.success > span:hover,
+.button.dropdown.split.success > a:focus,
+.button.dropdown.split.success > h3.nlposts-ulist-title:focus,
+.button.dropdown.split.success > span:focus {
+  background-color: #cc7e04; }
+
+/* line 437, ../../foundation-network-portal/sass/base/_buttons.scss */
+.button.dropdown.split.secondary > a:hover, .button.dropdown.split.secondary > h3.nlposts-ulist-title:hover,
+.button.dropdown.split.secondary > span:hover,
+.button.dropdown.split.secondary > a:focus,
+.button.dropdown.split.secondary > h3.nlposts-ulist-title:focus,
+.button.dropdown.split.secondary > span:focus {
+  background-color: #333333; }
 
 /************* Tags ********************/
-/* line 85, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 444, ../../foundation-network-portal/sass/base/_buttons.scss */
 .tags {
   line-height: 1.3; }
-  /* line 87, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 446, ../../foundation-network-portal/sass/base/_buttons.scss */
   .tags .tags-title {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 11px;
     padding: 1px 4px 2px 0; }
 
-/* line 94, ../../foundation-network-portal/sass/base/_buttons.scss */
+/* line 453, ../../foundation-network-portal/sass/base/_buttons.scss */
 .label {
   background: transparent !important;
   border: 0;
@@ -249,10 +645,10 @@ ul.pagination li.current a, ul.pagination li.current h3.nlposts-ulist-title {
   font-size: 11px;
   white-space: nowrap;
   text-shadow: none; }
-  /* line 104, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 463, ../../foundation-network-portal/sass/base/_buttons.scss */
   .label:after {
     content: " ›"; }
-  /* line 107, ../../foundation-network-portal/sass/base/_buttons.scss */
+  /* line 466, ../../foundation-network-portal/sass/base/_buttons.scss */
   .label:hover {
     color: #333333; }
 
@@ -677,7 +1073,7 @@ h1.single-title {
 /* line 88, ../../foundation-network-portal/sass/plugins/_events.scss */
 .event-edit-link {
   padding: 5px 7px;
-  border: 1px solid #e3353b;
+  border: 1px solid #e64c51;
   font-size: 12px;
   display: inline-block;
   text-transform: uppercase;
@@ -923,7 +1319,7 @@ table.em-calendar {
   /* line 357, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar td.eventless-today,
   table.em-calendar td.eventful-today {
-    background-color: white; }
+    background-color: #ffe4b3; }
   /* line 361, ../../foundation-network-portal/sass/plugins/_events.scss */
   table.em-calendar td.eventful a, table.em-calendar td.eventful h3.nlposts-ulist-title,
   table.em-calendar td.eventful-today a,
@@ -933,7 +1329,7 @@ table.em-calendar {
     table.em-calendar td.eventful a:hover, table.em-calendar td.eventful h3.nlposts-ulist-title:hover,
     table.em-calendar td.eventful-today a:hover,
     table.em-calendar td.eventful-today h3.nlposts-ulist-title:hover {
-      color: #9c161a !important; }
+      color: #861317 !important; }
 
 /* SOCIAL MEDIA MASHUP PLUGIN */
 /*************  Social Media Widget ********************/
@@ -1013,7 +1409,7 @@ footer .alo_easymail_widget {
     top: 2px; }
     /* line 79, ../../foundation-network-portal/sass/plugins/_newsletter.scss */
     footer .alo_easymail_widget .input-submit:hover {
-      background: #e3353b; }
+      background: #e64c51; }
 
 /************* Responsive Styling ********************/
 @media only screen and (min-width: 768px) {

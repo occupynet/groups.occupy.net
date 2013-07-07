@@ -11,6 +11,7 @@ a {
   &:visited { color: $loud-dark; }
 }
 
+
 .read-more {
 	@include caps;
 	font-weight: 500;
@@ -26,7 +27,7 @@ a {
 	&:hover {
 		background: $loud;
 		border-color: $loud;
-		color: $base10;
+		color: $base10 !important;
 	}
 }
 
@@ -43,6 +44,9 @@ ul.pagination li.current a {
 
 /************* Buttons ********************/
 
+input[type="submit"] {
+	font-size: 24px;
+}
 
 .btn {
 	background: $base1;
@@ -66,7 +70,7 @@ ul.pagination li.current a {
 	@extend .btn;
 	background: $loud;
 	&:hover {
-		background: $loud-light;
+		background: $loud-dark;
 		color: $base10;
 	}
 	&:active {
@@ -74,10 +78,365 @@ ul.pagination li.current a {
 	}
 }
 
-.btn-large {
-	padding: 10px 25px 8px;
-	font-size: 22px;
+
+
+
+/* overwrites for Foundation defaults */
+
+/* Normal Buttons ---------------------- */
+.button { 
+	background: $base1; 
+	border: 0; 
+	@include box-shadow(none);
+	@include border-radius(5px);
+	@include condensed;
+	font-size: 24px; 
+	padding: 5px 24px;
+	line-height: 34px !important; 
+	margin-bottom: 1px; 
+	}
+.button:hover, 
+.button:focus { 
+	background: $loud; 
+	}
+.button:active { 
+	@include box-shadow(none);
+	}
+.button:visited {
+	color: $base10;
+} 
+	
+.button.large { 
+	font-size: 30px; 
+	padding: 6px 30px; 
+	line-height: 42px !important; 
+	@include border-radius(5px);
+	}
+.button.medium { 
+	font-size: 24px; 
+	padding: 5px 24px; 
+	line-height: 34px !important; 
+	@include border-radius(4px);
+	}
+.button.small { 
+	font-size: 15px; 
+	padding: 4px 15px; 
+	line-height: 23px !important; 
+	@include border-radius(3px);
+	}
+.button.tiny { 
+	font-size: 13px; 
+	padding: 3px 12px; 
+	line-height: 19px !important; 
+	@include border-radius(3px);
+	}
+
+.button.radius {
+	@include border-radius(5px);	
 }
+
+.button.primary { 
+	background: $base1; 
+	border: 0; 
+	&:hover, 
+	&:focus {
+		background: $loud-dark; 	
+	}
+}
+.button.success { 
+	background-color: $brand; 
+	border: 0; 
+	&:hover, 
+	&:focus {
+		background: $loud; 	
+	}
+}
+
+.button.alert { 
+	background-color: $loud; 
+	border: 0; 
+	&:hover, 
+	&:focus {
+		background: $loud-dark; 	
+	}
+}
+
+.button.secondary { 
+	background-color: $base4; 
+	color: $base10;
+	border: 0; 
+	&:hover, 
+	&:focus {
+		background: $loud; 	
+	}
+}
+
+
+.button.disabled, 
+.button[disabled],
+.button.disabled:hover, 
+.button[disabled]:hover,
+.button.disabled.success, 
+.button[disabled].success,
+.button.disabled.success:hover, 
+.button.disabled.success:focus, 
+.button[disabled].success:hover, 
+.button[disabled].success:focus,
+.button.disabled.alert, 
+.button[disabled].alert,
+.button.disabled.alert:hover, 
+.button.disabled.alert:focus, 
+.button[disabled].alert:hover, 
+.button[disabled].alert:focus,
+.button.disabled.secondary, 
+.button[disabled].secondary,
+.button.disabled.secondary:hover, 
+.button.disabled.secondary:focus, 
+.button[disabled].secondary:hover, 
+.button[disabled].secondary:focus { 
+	background-color: $base9; 
+	color: $base7; 
+	outline: none; 
+	}
+
+/* Correct FF button padding */
+@-moz-document url-prefix() { 
+	button::-moz-focus-inner, 
+	input[type="reset"]::-moz-focus-inner, 
+	input[type="button"]::-moz-focus-inner, 
+	input[type="submit"]::-moz-focus-inner, 
+	input[type="file"] > input[type="button"]::-moz-focus-inner { 
+	border: none; 
+	padding: 0; 
+	}
+	input[type="submit"].tiny.button { 
+		padding: 3px 12px 4px; 
+		}
+	input[type="submit"].small.button { 
+		padding: 4px 15px 5px; 
+		}
+	input[type="submit"].button, 
+	input[type=submit].medium.button { 
+		padding: 5px 24px 6px; 
+		}
+	input[type="submit"].large.button { 
+		padding: 6px 30px 7px; 
+		} 
+}
+
+
+
+
+/* Button Groups ---------------------- */
+
+ul.button-group li { 
+	text-indent: 0;
+	margin-left: 0;
+	a.button,
+	a.button.radius,
+	a.button.rounded {
+		border-radius: 0;
+		border-left: 1px solid $base3;
+	}
+	&:first-child {
+		a.button, 
+		a.button.radius, 
+		a.button.rounded {
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
+			border-left: 0;
+		}
+	}
+	&:last-child {
+		a.button, 
+		a.button.radius, 
+		a.button.rounded {
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+		}
+	}
+}
+
+
+
+
+/* Buttons with Dropdowns ---------------------- */
+.button.dropdown { 
+	position: relative; 
+	padding-right: 35px; 
+	&.split > span {
+		width: 35px;
+	}
+	&:after {
+		margin-top: -4px; 	
+		right: 15px;	
+	}
+}
+.button.dropdown.large { 
+	padding-right: 44px; 
+	&.split {
+		padding-right: 44px; 	
+	}
+	&.split > span {
+		width: 44px;
+	}
+	&:after {
+		margin-top: -5px; 
+		right: 20px;	
+	}
+}
+.button.dropdown.small { 
+	padding-right: 25px; 
+	&.split > span {
+		width: 25px;
+	}
+	&:after {
+		margin-top: -4px; 	
+		right: 10px;	
+	}
+}
+.button.dropdown.tiny { 
+	padding-right: 20px; 
+	&.split > span {
+		width: 20px;
+	}
+	&:after {
+		margin-top: -3px; 	
+		right: 8px;	
+	}
+}
+
+
+.button.dropdown > ul { 
+	background: #fff; 
+	background: rgba(255, 255, 255, 0.95); 
+	border: 1px solid $base8; 
+	li { 
+		padding: 0; 
+		min-height: 18px; 
+		line-height: 18px; 
+		font-size: 18px;
+		a, button {
+			color: $base2; 
+			font-size: 18px; 
+			padding: 7px 12px; 
+			display: block;
+			border: 0;
+			text-indent: 0;
+		}
+	}
+	li:hover,
+	li:focus {
+		background-color: #FFF; 
+		color: $loud; 
+	}
+	li.divider {
+		margin: 0; 
+		background: $base9; 
+	}
+}
+
+.button.dropdown.up > ul { 
+	border-top: 1px solid $base8; 
+}
+
+
+/* split dropdown buttons */
+
+/* undo hover for whole button */
+.button.dropdown.split:hover, 
+.button.dropdown.split:focus { 
+	background-color: $base1; 
+	}
+.button.dropdown.split.alert:hover, 
+.button.dropdown.split.alert:focus { 
+	background-color: $loud; 
+	}
+.button.dropdown.split.success:hover, 
+.button.dropdown.split.success:focus { 
+	background-color: $brand; 
+	}
+.button.dropdown.split.secondary:hover, 
+.button.dropdown.split.secondary:focus { 
+	background-color: $base4; 
+	}
+
+/* add hover on separate sections */
+
+.button.dropdown.split {
+	padding:0 30px 0 0;
+}
+.button.dropdown.split > a { 
+	color: white; 
+	display: block; 
+	padding: 5px 24px; 
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	}
+.button.dropdown.split > a:hover, 
+.button.dropdown.split > a:focus { 
+	background-color: lighten($base1, 20%); 
+	@include box-shadow(none);
+	}
+.button.dropdown.split.large > a { 
+	padding: 6px 30px; 
+	}
+.button.dropdown.split.small > a { 
+	padding: 4px 15px; 
+	}
+.button.dropdown.split.tiny > a { 
+	padding: 3px 12px; 
+	}
+
+.button.dropdown.split > span { 
+	background-color: $base1; 
+	border-left: 1px solid $base3; 
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	@include box-shadow(none);
+	}
+.button.dropdown.split > span:hover, 
+.button.dropdown.split > span:focus { 
+	background-color: lighten($base1, 20%); 
+	}
+
+.button.dropdown.split.secondary > span:after { 
+	border-color: #FFF transparent transparent transparent; 
+	}
+.button.dropdown.split.alert > span { 
+	background-color: $loud; 
+	border-left-color: $loud-dark; 
+	}
+.button.dropdown.split.success > span { 
+	background-color: $brand; 
+	border-left-color: darken($brand, 20%); 
+	}
+.button.dropdown.split.secondary > span { 
+	background-color: $base4; 
+	border-left-color: $base2; 
+	}
+.button.dropdown.split.secondary > a { 
+	color: #FFF; 
+	}
+	
+.button.dropdown.split.alert > a:hover, 
+.button.dropdown.split.alert > span:hover, 
+.button.dropdown.split.alert > a:focus, 
+.button.dropdown.split.alert > span:focus { 
+	background-color: darken($loud, 20%); 
+	}
+.button.dropdown.split.success > a:hover, 
+.button.dropdown.split.success > span:hover, 
+.button.dropdown.split.success > a:focus, 
+.button.dropdown.split.success > span:focus { 
+	background-color: darken($brand, 20%);  
+	}
+.button.dropdown.split.secondary > a:hover, 
+.button.dropdown.split.secondary > span:hover, 
+.button.dropdown.split.secondary > a:focus, 
+.button.dropdown.split.secondary > span:focus { 
+	background-color: darken($base4, 20%);  
+	}
 
 
 /************* Tags ********************/
