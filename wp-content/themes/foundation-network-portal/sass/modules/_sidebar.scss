@@ -7,6 +7,20 @@
 /************* Sidebar ********************/
 
 
+.sidebar .panel {
+	border: 0;
+	padding: 0;
+}
+
+.sidebar .widget {
+	padding: 20px;
+	border: 0;
+	border-bottom: 1px solid #FFF;
+	margin: 0;
+}
+
+
+
 .widgettitle {
 	@include condensed;
 	font-size: 24px;
@@ -19,8 +33,8 @@
 	h3.nlposts-ulist-title {
 		border-bottom: $base8 solid 1px;
 		padding: 5px 0 10px;
-		line-height: 1.3em;
-		font-size: 16px;
+		line-height: 1.4em;
+		font-size: 14px;
 		&:last-child {
 			border-bottom: none;
 		}

@@ -6,6 +6,37 @@
 
 /*************  Login Widget ********************/
 
+.lwa table {
+	background: transparent;
+	border: 0;
+}
+
+td.avatar {
+	width: 62px;
+	padding-left: 6px;
+	background: $base10;
+}
+td.lwa-info {
+	padding-left: 15px;
+	padding-top: 0;
+	a {
+		color: $base10;
+		@include caps;
+	}
+	a:hover {
+		color: $base8;
+	}
+}
+
+
+.lwa-info a,
+.lwa-info a:visited {
+	color: $loud;
+}
+.lwa-info a:hover {
+	color: $loud-light;
+}
+
 
 .lwa-username,
 .lwa-password {
@@ -24,4 +55,6 @@
 .lwa-links label {
 	font-size: 12px;
 }
+
+
 

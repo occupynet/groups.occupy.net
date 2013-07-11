@@ -24,12 +24,14 @@ input[type="submit"] {
 
 .respond-form {
 	padding-top: 30px;
-	background: $base8;
+	background: $base9;
 	padding: 20px;
 	margin-bottom: 20px;
 }
 
-
+#cancel-comment-reply {
+	float: right;
+}
 
 
 // site registration
