@@ -118,96 +118,139 @@ Template Name: Homepage
 
 		<div id="main" class="twelve columns clearfix main-feeds" role="main">
 
-			<?php
-			if (($display_slider) && ($slider_post_type == 'post')) { 
-				$post_offset = of_get_option('posts_in_orbit_slider');
-			} else {
-				$post_offset ='0';
-			}
+		<?php
 
-			$args = array(
-				'post_type' => 'post',
-				'offset' => $post_offset,
-			);
+		if(function_exists('recent_network_posts')) {
 
-			$recent_posts = new WP_Query( $args ); 
-			 
-			if($recent_posts->have_posts()) : 
-			      while($recent_posts->have_posts()) : 
-			         $recent_posts->the_post();
-				     $org_blog_id = get_post_meta ($post->ID, 'blogid', true);
-				     $blog_details = get_blog_details($org_blog_id);
-				     if ($feedwordpress_plugin) {
-				     	$source_name = get_syndication_source ();
-				     	$source_link = get_syndication_source_link ();
-				     } 
-			     	$group_name = $blog_details->blogname;
-			     	$group_link = $blog_details->siteurl;
+			// Accepts 2 arguments $numberposts and $postsperblog 
+			$recent_posts = recent_network_posts(15);
+			// echo '<pre>';print_r($recent_posts);echo '</pre>';
+
+			foreach ($recent_posts as $recent_post) { 
+
+				if(function_exists('recent_posts_excerpt')) {
+					// ($count = 55, $content, $permalink, $excerpt_trail = 'Read More')
+					$excerpt = recent_posts_excerpt(55, $recent_post->post_content, $recent_post->post_url);
+				} else {
+					$excerpt = $recent_post->post_content;
+				}
+
+				$category_list = implode(' | ', $recent_post->post_categories);
+				$tag_list = implode(' ', $recent_post->post_tags);
+				$author_details = get_userdata($recent_post->post_author);
+				$blog_details = get_blog_details($recent_post->blog_id);
+				$post_date = date_i18n(get_option('date_format') ,strtotime($recent_post->post_date));
 
 			?>
 
-			<!-- recent articles -->
+			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> clearfix post type-post network-post" role="article">
+
+			<!-- recent network posts -->
+
+
+				<header>
+					<p class="meta">
+						<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
+						<time datetime="<?php echo $recent_post->post_date; ?>" pubdate><?php echo $post_date; ?></time>
+						<?php
+						// if($recent_post->post_author != 1) {
+							echo 'By ' . $author_details->display_name;
+						// }
+						?>
+						<?php echo $category_list; ?>
+					</p>
+				</header>
+
+				<footer>
+					<p class="tags"><?php echo $tag_list; ?></p>
+					
+					<div style="clear: both;"></div>
+				</footer> <!-- end article footer -->
+
+				<section class="post_content clearfix">
+					<h2><a href="<?php echo $recent_post->post_url; ?>" rel="bookmark" title="<?php echo $recent_post->post_title; ?>"><?php echo $recent_post->post_title; ?></a></h2>
+
+					<div class="post-thumbnail">
+					<a href="<?php echo $recent_post->post_url; ?>" title="<?php echo $recent_post->post_title; ?>"><?php echo $recent_post->post_thumbnail; ?></a>
+					</div>
+
+					<p><?php echo $excerpt; ?></p>
+				</section> <!-- end article section -->
+
+			<!-- end recent network posts -->
+
+			</article>
+
+			<?php
+			} // End foreach
+
+
+		} else { 
+			global $post;
+
+			// The Query
+			query_posts('numberposts=25');
+			
+			if(have_posts()) {
+				while(have_posts()) {
+					the_post();
+			?>
+
+			<!-- recent single site posts -->
 
 			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
 				
 				<header>
 					<p class="meta">
-					<!-- If using FeedWordPress, display the name of the syndicated site instead of the Wordpress blogname -->
-					<?php if ($feedwordpress_plugin) { ?>
-
-						<?php if (is_syndicated ()) { ?>
-						<span class="site-name"><a href="<?php echo $source_link; ?>"><?php echo $source_name; ?></a></span> 
-						<?php } else { ?>
-						<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
-						<?php } ?>
-						<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> 
-						<?php 
-						if (!is_syndicated ()) {
-							the_author_posts_link(); 
-						}
-							the_category(' | '); 
-						?>
-
-					<?php } else { ?>
-					
-					<!-- If not using FeedWordPress, display the Wordpress blogname -->
-						<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span>
-						<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time> 
-						<?php the_author_posts_link(); ?> <?php the_category(' | '); ?>
-					<?php } ?>
+						<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time>
+						<?php the_author(); ?> 
+						<?php the_category(' | '); ?>
 					</p>
-				
-				</header> <!-- end article header -->
+				</header>
 
 				<footer>
-	
 					<p class="tags"><?php the_tags('', ' ', ''); ?></p>
 
 					<?php edit_post_link('edit', '<p>', '</p>'); ?>
 					
 					<div style="clear: both;"></div>
-					
 				</footer> <!-- end article footer -->
 
 				<section class="post_content clearfix">
-
-					<h2><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></h2>
+					<h2><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
 
 					<div class="post-thumbnail">
-					<a href="<?php the_permalink() ?>" title="<?php the_title_attribute(); ?>"><?php echo feature_image('wpf-featured') ?></a>
+					<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo feature_image('wpf-featured') ?></a>
 					</div>
 
-					<?php the_excerpt('100'); ?>
-			
+					<p><?php the_excerpt(); ?></p>
 				</section> <!-- end article section -->
-							
-			</article> <!-- end article -->
 
-			<!-- end recent articles -->
+			</article>
 
-			<?php endwhile; else: ?>
-				<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
-			<?php endif; ?>
+			<!-- end recent single site posts -->
+
+		<?php 
+				} //End while(have_posts())
+			} // End if(have_posts())
+
+			// Reset Query
+			wp_reset_query();
+
+		} // End if ?>
+
+		<?php if (function_exists('page_navi')) { // if expirimental feature is active ?>
+				
+			<?php page_navi(); // use the page navi function ?>
+
+		<?php } else { // if it is disabled, display regular wp prev & next links ?>
+			<nav class="wp-prev-next">
+				<ul class="clearfix">
+					<li class="prev-link"><?php next_posts_link(_e('&laquo; Older Entries', "bonestheme")) ?></li>
+					<li class="next-link"><?php previous_posts_link(_e('Newer Entries &raquo;', "bonestheme")) ?></li>
+				</ul>
+			</nav>
+		<?php } ?>
 
 		</div> <!-- end #main -->
 
@@ -229,66 +272,66 @@ Template Name: Homepage
 	</div> <!-- end #content -->
 
 	<script>
-    jQuery(document).ready(function(){
-        $(function(){
+    // jQuery(document).ready(function(){
+    //     $(function(){
           
-          var $container = $('#main');
+    //       var $container = $('#main');
         
-          $container.isotope({
-            itemSelector : '.network-post'
-          });
+    //       $container.isotope({
+    //         itemSelector : '.network-post'
+    //       });
           
           
-          var $optionSets = $('.f-dropdown'),
-              $optionLinks = $optionSets.find('a');
+    //       var $optionSets = $('.f-dropdown'),
+    //           $optionLinks = $optionSets.find('a');
         
-          $optionLinks.click(function(){
-            var $this = $(this);
-            // don't proceed if already selected
-            if ( $this.hasClass('selected') ) {
-              return false;
-            }
+    //       $optionLinks.click(function(){
+    //         var $this = $(this);
+    //         // don't proceed if already selected
+    //         if ( $this.hasClass('selected') ) {
+    //           return false;
+    //         }
             
-            var $optionSet = $this.parents('.f-dropdown');
-            $optionSet.find('.selected').removeClass('selected');
-            $this.addClass('selected');
+    //         var $optionSet = $this.parents('.f-dropdown');
+    //         $optionSet.find('.selected').removeClass('selected');
+    //         $this.addClass('selected');
 
-            var $linkTitle = $this.text();
-            var $currentTitle = $this.parents('h4');
-            $currentTitle.find('.filter-title').text($linkTitle);
+    //         var $linkTitle = $this.text();
+    //         var $currentTitle = $this.parents('h4');
+    //         $currentTitle.find('.filter-title').text($linkTitle);
             
         
-            // make option object dynamically, i.e. { filter: '.my-filter-class' }
-            var options = {},
-                key = $optionSet.attr('data-option-key'),
-                value = $this.attr('data-option-value');
+    //         // make option object dynamically, i.e. { filter: '.my-filter-class' }
+    //         var options = {},
+    //             key = $optionSet.attr('data-option-key'),
+    //             value = $this.attr('data-option-value');
                 
-            // parse 'false' as false boolean
-            value = value === 'false' ? false : value;
-            options[ key ] = value;
+    //         // parse 'false' as false boolean
+    //         value = value === 'false' ? false : value;
+    //         options[ key ] = value;
             
-            if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
-              // changes in layout modes need extra logic
-              changeLayoutMode( $this, options )
-            } else {
-              // otherwise, apply new options
-              $container.isotope( options );
-            }
+    //         if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+    //           // changes in layout modes need extra logic
+    //           changeLayoutMode( $this, options )
+    //         } else {
+    //           // otherwise, apply new options
+    //           $container.isotope( options );
+    //         }
 
-            if ( key === 'layoutMode' && value === 'straightDown' ) {
-              $container.removeClass('masonry');
-              $container.isotope('reLayout');
-            }
-            if ( key === 'layoutMode' && value === 'masonry' ) {
-              $container.addClass('masonry');
-              $container.isotope('reLayout');
-            }
+    //         if ( key === 'layoutMode' && value === 'straightDown' ) {
+    //           $container.removeClass('masonry');
+    //           $container.isotope('reLayout');
+    //         }
+    //         if ( key === 'layoutMode' && value === 'masonry' ) {
+    //           $container.addClass('masonry');
+    //           $container.isotope('reLayout');
+    //         }
             
-            return false;
-          });
+    //         return false;
+    //       });
           
-        });
-    });
+    //     });
+    // });
     </script>
 
 

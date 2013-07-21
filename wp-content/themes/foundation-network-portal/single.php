@@ -33,9 +33,7 @@
 						</footer> <!-- end article footer -->
 					
 					</article> <!-- end article -->
-					
-					<?php// comments_template(); ?>
-					
+										
 					<?php endwhile; ?>			
 					
 					<?php else : ?>

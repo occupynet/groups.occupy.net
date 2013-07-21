@@ -322,56 +322,6 @@ if (is_plugin_active( 'events-manager/events-manager.php' )) {
 
 }
 
-/************* RETURN ARRAY OF POST METADATA  ********************/
-
-function postcategorylist() {
-$args=array(
-  'taxonomy' => 'category',
-  'order' => 'ASC'
-  );
-$categories=get_categories($args);
-
-    foreach($posts as $post) {
-        foreach($categories as $category) {
-            $cats[] = $category->id;
-        }
-    }
-
-$categories[] = array_unique($cats);
-return($categories);
-}
-
-/************* SHOW ALL GROUPS ********************/
-
-if(!function_exists('get_all_sites')) {
-  /**
-   * Retrieves all multisite blogs
-   *
-   * @return array Blog IDs as keys and blog names as values.
-   */
-  function get_all_sites() {
-
-    global $wpdb;
-    $multisite = array();
-    // Query all blogs from multi-site install
-    $blogs = $wpdb->get_results("SELECT blog_id,domain,path FROM wp_blogs ORDER BY path");
-
-    // Get primary blog
-    $blogname = $wpdb->get_row("SELECT option_value FROM wp_options WHERE option_name='blogname' ");
-    $multisite[1] = $blogname->option_value;
-
-    // For each blog search for blog name in respective options table
-    foreach( $blogs as $blog ) {
-      // Get rest of the sites
-      $blogname = $wpdb->get_results("SELECT option_value FROM wp_".$blog->blog_id ."_options WHERE option_name='blogname' ");
-      foreach( $blogname as $name ) {
-        $multisite[$blog->blog_id] = $name->option_value;
-      }
-    }
-    return $multisite;
-  }
-}
-
 /************* GET LIST OF GROUPS ********************/
 
 function get_group_ids() {
@@ -416,60 +366,49 @@ function get_group_list() {
     echo '</ul>';
 }
 
-/************* OFFSET AND PAGINATION FILTER ********************/
+/************* GET HOME EXCERPT ********************/
 
-add_action('pre_get_posts', 'myprefix_query_offset', 1 );
-function myprefix_query_offset(&$query) {
-
-    //Before anything else, make sure this is the right query...
-    if ( ! $query->is_posts_page ) {
-        return;
+function home_excerpt($chars = 55, $content, $permalink, $excerpt_trail) {
+    $count = $chars;
+    $content = preg_replace("/\[(.*?)\]/i", '', $content);
+    $content = strip_tags($content);
+    // Get the words
+    $words = explode(' ', $content, $count + 1);
+    // Pop everything
+    array_pop($words);
+    // Add trailing dots
+    array_push($words, '...');
+    // Add white spaces
+    $content = implode(' ', $words);
+    // Add the trail
+    switch( $excerpt_trail ) {
+        // Text
+        case 'text':
+            $content = $content.'<a href="'.$permalink.'">'.__('more','trans-nlp').'</a>';
+            break;
+        // Image
+        case 'image':
+            $content = $content.'<a href="'.$permalink.'"><img src="'.plugins_url('/img/excerpt_trail.png', __FILE__) .'" alt="'.__('more','trans-nlp').'" title="'.__('more','trans-nlp').'" /></a>';
+            break;
+        // Text by default
+        default:
+            $content = $content.'<a href="'.$permalink.'">'.__('more','trans-nlp').'</a>';
+            break;
     }
-
-    //First, define your desired offset...
-    $numberposts = of_get_option('posts_in_orbit_slider');
-    $offset = $numberposts;
-    
-    //Next, determine how many posts per page you want (we'll use WordPress's settings)
-    $ppp = get_option('posts_per_page');
-
-    //Next, detect and handle pagination...
-    if ( $query->is_paged ) {
-
-        //Manually determine page query offset (offset + current page (minus one) x posts per page)
-        $page_offset = $offset + ( ($query->query_vars['paged']-1) * $ppp );
-
-        //Apply adjust page offset
-        $query->set('offset', $page_offset );
-
-    }
-    else {
-
-        //This is the first page. Just use the offset...
-        $query->set('offset',$offset);
-
-    }
+    // Return the excerpt
+    return $content;
 }
 
-add_filter('found_posts', 'myprefix_adjust_offset_pagination', 1, 2 );
-function myprefix_adjust_offset_pagination($found_posts, $query) {
-
-    //Define our offset again...
-    $numberposts = of_get_option('posts_in_orbit_slider');
-    $offset = $numberposts;
-
-    //Ensure we're modifying the right query object...
-    if ( $query->is_posts_page ) {
-        //Reduce WordPress's found_posts count by the offset... 
-        return $found_posts - $offset;
-    }
-}
 
 //allow redirection, even if my theme starts to send output to the browser
 add_action('init', 'do_output_buffer');
 function do_output_buffer() {
         ob_start();
 } 
+
+/************* GET RECENT POSTS FOR HOME ********************/
+
+//Moved to mu-plugin
 
 /************* SHOW TEMPLATE NAME - FOR DEBUGGING ********************/
 
