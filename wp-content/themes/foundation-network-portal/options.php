@@ -144,10 +144,10 @@ function optionsframework_options() {
 	$options[] = array( 'name' => __('Number of recent items to show in the main page', 'options_check'),
 						'desc' => 'How many recent items should be displayed on the homepage?',
 						'id' => 'posts_on_home',
-						'std' => '4',
+						'std' => '15',
 						'type' => 'select',
 						'class' => 'mini',
-						'options' => $slider_item_number
+						'options' => $home_item_number
 						);
 
 	$options[] = array( "name" => "Show slider on homepage",
