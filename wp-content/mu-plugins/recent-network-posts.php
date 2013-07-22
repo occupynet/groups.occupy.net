@@ -9,18 +9,71 @@ Author URI: http://occupywallstreet.et
 */
 
 /*
-Parameter explanations
-$how_many: how many recent posts are being displayed
-$how_long: time frame to choose recent posts from (in days)
-$titleOnly: true (only title of post is displayed) OR false (title of post and name of blog are displayed)
-$begin_wrap: customise the start html code to adapt to different themes
-$end_wrap: customise the end html code to adapt to different themes
+This plug includes almost no markup. It simply returns an array of posts, organized by post_date (DESC), that you can use in your template file. Here is a sample of what is returned:
+
+[http://web.net/?p=553] => WP_Post Object
+(
+    [ID] => 553
+    [post_author] => 50
+    [post_date] => 2013-06-28 18:36:27
+    [post_date_gmt] => 2013-06-28 18:36:27
+    [post_content] => 
+    [post_title] => The Good, The Bad, & The Ugly
+    [post_excerpt] => 
+    [post_status] => publish
+    [comment_status] => open
+    [ping_status] => open
+    [post_password] => 
+    [post_name] => the-good-the-bad-the-ugly-week-of-6242013
+    [to_ping] => 
+    [pinged] => 
+    [post_modified] => 2013-06-28 18:36:27
+    [post_modified_gmt] => 2013-06-28 18:36:27
+    [post_content_filtered] => 
+    [post_parent] => 0
+    [guid] => http://web.net/?p=553
+    [menu_order] => 0
+    [post_type] => post
+    [post_mime_type] => 
+    [comment_count] => 0
+    [filter] => raw
+    [post_url] => http://web.net/2013/06/28/the-good-the-bad-the-ugly-week-of-6242013/
+    [blog_id] => 4
+    [post_thumbnail] =>  
+    [post_categories] => Array
+        (
+            [0] => Advocacy & Engagement
+            [1] => Statements
+        )
+
+    [post_category_slugs] => Array
+        (
+            [0] => advocacy-engagement
+            [1] => statements
+        )
+
+    [post_tags] => Array
+        (
+            [0] => financial literacy
+        )
+
+    [post_tag_slugs] => Array
+        (
+            [0] => financial-literacy
+        )
+)
 
 Sample call: $recent_posts = recent_network_posts(20, 3)  get a total of 20 posts, get 3 posts per blog
+
+LIST OF PARAMETERS
+* @numberposts             : Specifies total number of posts to display
+* @postsperblog            : Specifies number of posts per blog to display
+* @postoffset              : Specifies number of posts to skip (useful if displaying results in different places)
+
 */
 
 
-function recent_network_posts($numberposts = '', $postsperblog = '') { //Start Function
+function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset = 0) { //Start Function
 
     global $wpdb;
 
@@ -78,17 +131,21 @@ function recent_network_posts($numberposts = '', $postsperblog = '') { //Start F
                 // Get tags for each post and put into $all_tags array
                 // $post_tags = get_tags();
                 $post_tags = wp_get_post_tags($post->ID);
-                $all_tags[$post->guid] = array();
+                $all_tags_links[$post->guid] = array();
                 foreach ($post_tags as $post_tag) {
-                    $all_tags[$post->guid][] = '<a href="' . $blog_url . 'tag/' . $post_tag->slug . '" title="' . $post_tag->name . '" class="' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
+                    $all_tags_links[$post->guid][] = '<a href="' . $blog_url . 'tag/' . $post_tag->slug . '" title="' . $post_tag->name . '" class="' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
+                }
+                $all_tags_slugs[$post->guid] = array();
+                foreach ($post_tags as $post_tag) {
+                    $all_tags_slugs[$post->guid][] = $post_tag->slug;
                 }
 
                 // Get categories for each post and put into $all_categories array
                 $post_categories = wp_get_post_categories($post->ID);
-                $all_categories[$post->guid] = array();
+                $all_categories_links[$post->guid] = array();
                 foreach ($post_categories as $post_category) {
                     $cat = get_category($post_category);
-                    $all_categories[$post->guid][] = '<a href="' . $blog_url . 'category/' . $cat->slug . '" title="' . $cat->name . 'Category" class="' . $cat->slug . ' ' . $cat->name . '" rel="tag">' . $cat->name . '</a>';
+                    $all_categories_links[$post->guid][] = '<a href="' . $blog_url . 'category/' . $cat->slug . '" title="' . $cat->name . 'Category" class="' . $cat->slug . ' ' . $cat->name . '" rel="tag">' . $cat->name . '</a>';
                 }
                 $all_categories_slugs[$post->guid] = array();
                 foreach ($post_categories as $post_category) {
@@ -109,43 +166,30 @@ function recent_network_posts($numberposts = '', $postsperblog = '') { //Start F
     }
         
 
-    $i=0;
-    foreach ($all_posts as $wp_post){
-        // Number to retrieve set $numberposts
-        if($i==$numberposts) break;
+    // $i = 0;
+    $o = $postoffset; // Number to skip; set in $postoffset
+    $limit=$numberposts; // Number to retrieve; set $numberposts
+    $all_posts =  new ArrayIterator($all_posts);
+
+    foreach (new LimitIterator($all_posts, $postoffset, $limit) as $wp_post){
 
           $wp_post->post_url = $all_permalinks[$wp_post->guid];
           $wp_post->blog_id = $all_blogkeys[$wp_post->guid];
           $wp_post->post_thumbnail = $all_thumbnails[$wp_post->guid];
-          $wp_post->post_categories = $all_categories[$wp_post->guid];
+          $wp_post->post_categories = $all_categories_links[$wp_post->guid];
           $wp_post->post_category_slugs = $all_categories_slugs[$wp_post->guid];
-          $wp_post->post_tags = $all_tags[$wp_post->guid];
+          $wp_post->post_tags = $all_tags_links[$wp_post->guid];
+          $wp_post->post_tag_slugs = $all_tags_slugs[$wp_post->guid];
           $blog_posts[$wp_post->guid] = $wp_post;
 
-        $i++; 
     }
-
-
-
-// return array($all_posts, $all_permalinks, $all_blogkeys);
 
 return $blog_posts;
 
 } // End Function
 
+// Accepted arguments: $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
 function recent_posts_excerpt($count = 55, $content, $permalink, $excerpt_trail = 'Read More'){
-    /* Strip shortcodes
-     * Due to an incompatibility issue between Visual Composer
-     * and WordPress strip_shortcodes hook, I'm stripping
-     * shortcodes using regex. (27-09-2012)
-     *
-     * $content = strip_tags(strip_shortcodes($content));
-     *
-     * replaced by
-     *
-     * $content = preg_replace("/\[(.*?)\]/i", '', $content);
-     * $content = strip_tags($content);
-     */
     $content = preg_replace("/\[(.*?)\]/i", '', $content);
     $content = strip_tags($content);
     // Get the words

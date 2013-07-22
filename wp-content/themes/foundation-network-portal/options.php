@@ -40,10 +40,11 @@ function optionsframework_options() {
 	
 	$background_defaults = array('color' => '', 'image' => '', 'repeat' => 'repeat','position' => 'top center','attachment'=>'scroll');
 	
+	$home_item_number = array('5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50');
+
 	$slider_item_types = array('post' => 'Posts', 'event' => 'Events (Requires Events Manager)');
 
 	$slider_item_number = array('4' => '4', '5' => '5', '6' => '6', '7' => '7', '8' => '8', '9' => '9', '10' => '10');
-
 	
 	// Pull all the categories into an array
 	$options_categories = array();  
@@ -126,22 +127,35 @@ function optionsframework_options() {
 						"desc" => "Link color.",
 						"id" => "top_nav_link_color",
 						"std" => "#E6E6E6",
-						"type" => "color");
+						"type" => "color"
+						);
 						
 	$options[] = array( "name" => "Top nav item hover color",
 						"desc" => "Link hover color.",
 						"id" => "top_nav_link_hover_color",
 						"std" => "#E6E6E6",
-						"type" => "color");
+						"type" => "color"
+						);
 
-	$options[] = array( "name" => "Homepage Slider",
-						"type" => "heading");
+	$options[] = array( "name" => "Homepage Options",
+						"type" => "heading"
+						);
 
-	$options[] = array( "name" => "Recent posts in slider",
+	$options[] = array( 'name' => __('Number of recent items to show in the main page', 'options_check'),
+						'desc' => 'How many recent items should be displayed on the homepage?',
+						'id' => 'posts_on_home',
+						'std' => '4',
+						'type' => 'select',
+						'class' => 'mini',
+						'options' => $slider_item_number
+						);
+
+	$options[] = array( "name" => "Show slider on homepage",
 						"desc" => "Show Orbit slider of recent posts on homepage template?",
 						"id" => "orbit_slider",
 						"std" => "1",
-						"type" => "checkbox");
+						"type" => "checkbox"
+						);
 
 	$options[] = array(
 						'name' => __('Display Posts or Events in slider', 'options_check'),
@@ -149,24 +163,28 @@ function optionsframework_options() {
 						'id' => 'slider_item_type',
 						'std' => 'post',
 						'type' => 'radio',
-						'options' => $slider_item_types);
+						'options' => $slider_item_types
+						);
 
 	$options[] = array( 'name' => __('Number of recent items in slider', 'options_check'),
-						'desc' => 'How many recent items should be displayed ?',
+						'desc' => 'How many recent items should be displayed in the slider?',
 						'id' => 'posts_in_orbit_slider',
 						'std' => '4',
 						'type' => 'select',
 						'class' => 'mini',
-						'options' => $slider_item_number);
+						'options' => $slider_item_number
+						);
 						
 	$options[] = array( "name" => "Other Settings",
-						"type" => "heading");
+						"type" => "heading"
+						);
 						
 	$options[] = array( "name" => "'Comments are closed' message on pages",
 						"desc" => "Suppress 'Comments are closed' message",
 						"id" => "suppress_comments_message",
 						"std" => "1",
-						"type" => "checkbox");
+						"type" => "checkbox"
+						);
 									
 	return $options;
 }

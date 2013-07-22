@@ -57,12 +57,6 @@ function my_theme_register_required_plugins() {
             'required'  => false,
         ),
 
-        array(
-            'name'      => 'WordPress MU Sitewide Tags Pages',
-            'slug'      => 'wordpress-mu-sitewide-tags',
-            'required'  => false,
-        ),
-
     );
 
     // Change this to your theme text domain, used for internationalising strings
@@ -340,7 +334,6 @@ function get_group_ids() {
             $groupids[] = $group->blog_id;
         }
         return $groupids;
-
 }
 
 function get_group_names() {
@@ -364,39 +357,6 @@ function get_group_list() {
         echo '</li>';
     }
     echo '</ul>';
-}
-
-/************* GET HOME EXCERPT ********************/
-
-function home_excerpt($chars = 55, $content, $permalink, $excerpt_trail) {
-    $count = $chars;
-    $content = preg_replace("/\[(.*?)\]/i", '', $content);
-    $content = strip_tags($content);
-    // Get the words
-    $words = explode(' ', $content, $count + 1);
-    // Pop everything
-    array_pop($words);
-    // Add trailing dots
-    array_push($words, '...');
-    // Add white spaces
-    $content = implode(' ', $words);
-    // Add the trail
-    switch( $excerpt_trail ) {
-        // Text
-        case 'text':
-            $content = $content.'<a href="'.$permalink.'">'.__('more','trans-nlp').'</a>';
-            break;
-        // Image
-        case 'image':
-            $content = $content.'<a href="'.$permalink.'"><img src="'.plugins_url('/img/excerpt_trail.png', __FILE__) .'" alt="'.__('more','trans-nlp').'" title="'.__('more','trans-nlp').'" /></a>';
-            break;
-        // Text by default
-        default:
-            $content = $content.'<a href="'.$permalink.'">'.__('more','trans-nlp').'</a>';
-            break;
-    }
-    // Return the excerpt
-    return $content;
 }
 
 

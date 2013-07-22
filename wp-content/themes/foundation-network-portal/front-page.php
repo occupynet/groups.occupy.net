@@ -122,14 +122,14 @@ Template Name: Homepage
 
 		if(function_exists('recent_network_posts')) {
 
-			// Accepts 2 arguments $numberposts and $postsperblog 
-			$recent_posts = recent_network_posts(15);
-			// echo '<pre>';print_r($recent_posts);echo '</pre>';
+			// Accepts 3 arguments $numberposts,  $postsperblog , $postoffset
+			$recent_posts = recent_network_posts(25);
+			echo '<pre>';print_r($recent_posts);echo '</pre>';
 
 			foreach ($recent_posts as $recent_post) { 
 
 				if(function_exists('recent_posts_excerpt')) {
-					// ($count = 55, $content, $permalink, $excerpt_trail = 'Read More')
+					// arguments $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
 					$excerpt = recent_posts_excerpt(55, $recent_post->post_content, $recent_post->post_url);
 				} else {
 					$excerpt = $recent_post->post_content;
@@ -186,6 +186,8 @@ Template Name: Homepage
 
 
 		} else { 
+
+			// If recent network posts plugin isn't active, just show the site's recent posts
 			global $post;
 
 			// The Query

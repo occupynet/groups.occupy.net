@@ -29,7 +29,7 @@ include_once( BE_DIR . '/lib/functions/taxonomies.php' );
 include_once( BE_DIR . '/lib/functions/metaboxes.php' );
  
 // Widgets
-//include_once( BE_DIR . '/lib/widgets/widget-social.php' );
+include_once( BE_DIR . '/lib/widgets/widget-social.php' );
 
 // Editor Style Refresh
 include_once( BE_DIR . '/lib/functions/editor-style-refresh.php' );
