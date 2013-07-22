@@ -124,7 +124,7 @@ Template Name: Homepage
 
 			// Accepts 3 arguments $numberposts,  $postsperblog , $postoffset
 			$recent_posts = recent_network_posts(25);
-			echo '<pre>';print_r($recent_posts);echo '</pre>';
+			// echo '<pre>';print_r($recent_posts);echo '</pre>';
 
 			foreach ($recent_posts as $recent_post) { 
 
