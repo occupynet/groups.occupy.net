@@ -8,8 +8,15 @@ Template Name: Homepage
 
 <?php
 // Options Variables and Plugin Checks
-	$post_offset = of_get_option('posts_in_orbit_slider');
+	$number_recent_posts = of_get_option('posts_on_home');
 	$display_slider = of_get_option('orbit_slider');
+	$slider_type = of_get_option('slider_item_type'); // 
+	$slider_item_number = of_get_option('posts_in_orbit_slider'); //
+	if(($display_slider)&&($slider_type == 'post')) {
+		$post_offset = $slider_item_number + 1; // If the slider is displayed with post content offset the rest of the posts
+	} else {
+		$post_offset = 0;
+	}
 	$feedwordpress_plugin = is_plugin_active( 'feedwordpress/feedwordpress.php' );
 	$events_manager_plugin = is_plugin_active( 'events-manager/events-manager.php' );
 ?>
@@ -78,6 +85,7 @@ Template Name: Homepage
 				<?php } ?>
 
 			<?php } ?>
+			<?php wp_reset_query(); ?> 
 
 		</div>
 		
@@ -119,17 +127,28 @@ Template Name: Homepage
 		<div id="main" class="twelve columns clearfix main-feeds" role="main">
 
 		<?php
+	
+		if(function_exists('recent_network_posts')) { // If the plugin is active, display network-wide posts
 
-		if(function_exists('recent_network_posts')) {
+			// Debugging...
+			// echo "<pre>post offset: $post_offset<br/>";
+			// echo "number recent posts $number_recent_posts <br/>";
+			// echo "display slider? $display_slider<br/>";
+			// echo "what kind in slider? $slider_type<br/>"; // 
+			// echo "number of slider items $slider_item_number<br/>"; //
+			// echo "is feedwordpress active? $feedwordpress_plugin<br/>";
+			// echo "is events manager active? $events_manager_plugin</pre>";
+
 
 			// Accepts 3 arguments $numberposts,  $postsperblog , $postoffset
-			$recent_posts = recent_network_posts(25);
+			$recent_posts = recent_network_posts($number_recent_posts,0,$post_offset);
+			// Debugging...
 			// echo '<pre>';print_r($recent_posts);echo '</pre>';
 
 			foreach ($recent_posts as $recent_post) { 
 
 				if(function_exists('recent_posts_excerpt')) {
-					// arguments $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
+					// Accepts arguments $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
 					$excerpt = recent_posts_excerpt(55, $recent_post->post_content, $recent_post->post_url);
 				} else {
 					$excerpt = $recent_post->post_content;
@@ -146,7 +165,6 @@ Template Name: Homepage
 			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> clearfix post type-post network-post" role="article">
 
 			<!-- recent network posts -->
-
 
 				<header>
 					<p class="meta">
@@ -187,50 +205,56 @@ Template Name: Homepage
 
 		} else { 
 
-			// If recent network posts plugin isn't active, just show the site's recent posts
-			global $post;
+			// If recent network posts plugin isn't active, show the site's recent posts
 
 			// The Query
-			query_posts('numberposts=25');
-			
-			if(have_posts()) {
-				while(have_posts()) {
-					the_post();
+			$args = array(
+				'numberposts' => $number_recent_posts, // Number of posts managed in theme options
+				'offset' => $post_offset // If there is a slider and it displays posts (not events), offset posts displayed
+			);
+
+			$recent_posts = new WP_Query ($args);
+
+			if($recent_posts->have_posts()) {
+				while($recent_posts->have_posts()) {
+					$recent_posts->the_post();
+
 			?>
 
-			<!-- recent single site posts -->
+				<!-- recent single site posts -->
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
-				
-				<header>
-					<p class="meta">
-						<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F jS, Y'); ?></time>
-						<?php the_author(); ?> 
-						<?php the_category(' | '); ?>
-					</p>
-				</header>
-
-				<footer>
-					<p class="tags"><?php the_tags('', ' ', ''); ?></p>
-
-					<?php edit_post_link('edit', '<p>', '</p>'); ?>
+				<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix network-post'); ?> role="article">
 					
-					<div style="clear: both;"></div>
-				</footer> <!-- end article footer -->
+					<header>
+						<p class="meta">
+							<time datetime="<?php echo the_time('Y-m-j'); ?>" pubdate><?php the_time('F j, Y'); ?></time>
+							By <?php the_author(); ?> 
+							<?php the_category(' | '); ?>
+						</p>
+					</header>
 
-				<section class="post_content clearfix">
-					<h2><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+					<footer>
+						<p class="tags"><?php the_tags('', ' ', ''); ?></p>
 
-					<div class="post-thumbnail">
-					<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo feature_image('wpf-featured') ?></a>
-					</div>
+						<?php edit_post_link('edit', '<p>', '</p>'); ?>
+						
+						<div style="clear: both;"></div>
+					</footer> <!-- end article footer -->
 
-					<p><?php the_excerpt(); ?></p>
-				</section> <!-- end article section -->
+					<section class="post_content clearfix">
+						<h2><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
 
-			</article>
+						<div class="post-thumbnail">
+						<a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php echo feature_image('wpf-featured') ?></a>
+						</div>
 
-			<!-- end recent single site posts -->
+						<!-- <p><?php echo $excerpt; ?></p> -->
+						<p><?php the_excerpt(); ?></p>
+					</section> <!-- end article section -->
+
+				</article>
+
+				<!-- end recent single site posts -->
 
 		<?php 
 				} //End while(have_posts())
@@ -274,66 +298,66 @@ Template Name: Homepage
 	</div> <!-- end #content -->
 
 	<script>
-    // jQuery(document).ready(function(){
-    //     $(function(){
+    jQuery(document).ready(function(){
+        $(function(){
           
-    //       var $container = $('#main');
+          var $container = $('#main');
         
-    //       $container.isotope({
-    //         itemSelector : '.network-post'
-    //       });
+          $container.isotope({
+            itemSelector : '.network-post'
+          });
           
           
-    //       var $optionSets = $('.f-dropdown'),
-    //           $optionLinks = $optionSets.find('a');
+          var $optionSets = $('.f-dropdown'),
+              $optionLinks = $optionSets.find('a');
         
-    //       $optionLinks.click(function(){
-    //         var $this = $(this);
-    //         // don't proceed if already selected
-    //         if ( $this.hasClass('selected') ) {
-    //           return false;
-    //         }
+          $optionLinks.click(function(){
+            var $this = $(this);
+            // don't proceed if already selected
+            if ( $this.hasClass('selected') ) {
+              return false;
+            }
             
-    //         var $optionSet = $this.parents('.f-dropdown');
-    //         $optionSet.find('.selected').removeClass('selected');
-    //         $this.addClass('selected');
+            var $optionSet = $this.parents('.f-dropdown');
+            $optionSet.find('.selected').removeClass('selected');
+            $this.addClass('selected');
 
-    //         var $linkTitle = $this.text();
-    //         var $currentTitle = $this.parents('h4');
-    //         $currentTitle.find('.filter-title').text($linkTitle);
+            var $linkTitle = $this.text();
+            var $currentTitle = $this.parents('h4');
+            $currentTitle.find('.filter-title').text($linkTitle);
             
         
-    //         // make option object dynamically, i.e. { filter: '.my-filter-class' }
-    //         var options = {},
-    //             key = $optionSet.attr('data-option-key'),
-    //             value = $this.attr('data-option-value');
+            // make option object dynamically, i.e. { filter: '.my-filter-class' }
+            var options = {},
+                key = $optionSet.attr('data-option-key'),
+                value = $this.attr('data-option-value');
                 
-    //         // parse 'false' as false boolean
-    //         value = value === 'false' ? false : value;
-    //         options[ key ] = value;
+            // parse 'false' as false boolean
+            value = value === 'false' ? false : value;
+            options[ key ] = value;
             
-    //         if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
-    //           // changes in layout modes need extra logic
-    //           changeLayoutMode( $this, options )
-    //         } else {
-    //           // otherwise, apply new options
-    //           $container.isotope( options );
-    //         }
+            if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+              // changes in layout modes need extra logic
+              changeLayoutMode( $this, options )
+            } else {
+              // otherwise, apply new options
+              $container.isotope( options );
+            }
 
-    //         if ( key === 'layoutMode' && value === 'straightDown' ) {
-    //           $container.removeClass('masonry');
-    //           $container.isotope('reLayout');
-    //         }
-    //         if ( key === 'layoutMode' && value === 'masonry' ) {
-    //           $container.addClass('masonry');
-    //           $container.isotope('reLayout');
-    //         }
+            if ( key === 'layoutMode' && value === 'straightDown' ) {
+              $container.removeClass('masonry');
+              $container.isotope('reLayout');
+            }
+            if ( key === 'layoutMode' && value === 'masonry' ) {
+              $container.addClass('masonry');
+              $container.isotope('reLayout');
+            }
             
-    //         return false;
-    //       });
+            return false;
+          });
           
-    //     });
-    // });
+        });
+    });
     </script>
 
 

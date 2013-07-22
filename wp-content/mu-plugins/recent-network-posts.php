@@ -165,10 +165,21 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
 
     }
         
+    $post_count = count($all_posts);
 
-    // $i = 0;
-    $o = $postoffset; // Number to skip; set in $postoffset
-    $limit=$numberposts; // Number to retrieve; set $numberposts
+    if($post_count < $postoffset) {
+        $o = 0;
+    } else {
+        $o = $postoffset; // Number to skip; set in $postoffset 
+    }
+
+    if($post_count < $numberposts + $o) {
+        $limit = $post_count - $o;
+    } else {
+        $limit = $numberposts;
+    }
+    
+     // Number to retrieve; set $numberposts
     $all_posts =  new ArrayIterator($all_posts);
 
     foreach (new LimitIterator($all_posts, $postoffset, $limit) as $wp_post){
