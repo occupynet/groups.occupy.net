@@ -140,17 +140,24 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
                     $all_tags_slugs[$post->guid][] = $post_tag->slug;
                 }
 
+                $post_tags = wp_get_post_tags($post->ID);
+                $all_tags[$post->guid] = array();
+                foreach ($post_tags as $post_tag) {
+                    $all_tags[$post->guid][$post_tag->slug]['slug'] = $post_tag->slug;
+                    $all_tags[$post->guid][$post_tag->slug]['name'] = $post_tag->name;
+                    $all_tags[$post->guid][$post_tag->slug]['url'] = 'http:/' . $blog_url . 'tag/' . $post_tag->slug;
+                    $all_tags[$post->guid][$post_tag->slug]['nice_link'] = '<a href="' . $blog_url . 'tag/' . $post_tag->slug . '" title="' . $post_tag->name . '" class="' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
+                }
+
                 // Get categories for each post and put into $all_categories array
                 $post_categories = wp_get_post_categories($post->ID);
-                $all_categories_links[$post->guid] = array();
+                $all_categories[$post->guid] = array();
                 foreach ($post_categories as $post_category) {
                     $cat = get_category($post_category);
-                    $all_categories_links[$post->guid][] = '<a href="' . $blog_url . 'category/' . $cat->slug . '" title="' . $cat->name . 'Category" class="' . $cat->slug . ' ' . $cat->name . '" rel="tag">' . $cat->name . '</a>';
-                }
-                $all_categories_slugs[$post->guid] = array();
-                foreach ($post_categories as $post_category) {
-                    $cat = get_category($post_category);
-                    $all_categories_slugs[$post->guid][] = $cat->slug;
+                    $all_categories[$post->guid][$cat->slug]['slug'] = $cat->slug;
+                    $all_categories[$post->guid][$cat->slug]['name'] = $cat->name;
+                    $all_categories[$post->guid][$cat->slug]['url'] = 'http:/' . $blog_url . 'category/' . $cat->slug;
+                    $all_categories[$post->guid][$cat->slug]['nice_link'] = '<a href="' . $blog_url . 'category/' . $cat->slug . '" title="' . $cat->name . 'Category" class="' . $cat->slug . ' ' . $cat->name . '" rel="tag">' . $cat->name . '</a>';
                 }
 
             }
@@ -179,7 +186,7 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
         $limit = $numberposts;
     }
     
-     // Number to retrieve; set $numberposts
+    // Number to retrieve; set $numberposts
     $all_posts =  new ArrayIterator($all_posts);
 
     foreach (new LimitIterator($all_posts, $postoffset, $limit) as $wp_post){
@@ -187,14 +194,15 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
           $wp_post->post_url = $all_permalinks[$wp_post->guid];
           $wp_post->blog_id = $all_blogkeys[$wp_post->guid];
           $wp_post->post_thumbnail = $all_thumbnails[$wp_post->guid];
-          $wp_post->post_categories = $all_categories_links[$wp_post->guid];
-          $wp_post->post_category_slugs = $all_categories_slugs[$wp_post->guid];
-          $wp_post->post_tags = $all_tags_links[$wp_post->guid];
-          $wp_post->post_tag_slugs = $all_tags_slugs[$wp_post->guid];
+          $wp_post->post_categories = $all_categories[$wp_post->guid];
+          $wp_post->post_tags = $all_tags[$wp_post->guid];
+          // $wp_post->post_tag_links = $all_tags_links[$wp_post->guid];
+          // $wp_post->post_tag_slugs = $all_tags_slugs[$wp_post->guid];
           $blog_posts[$wp_post->guid] = $wp_post;
 
     }
-
+// Debuggin...
+// echo '<pre>';print_r($blog_posts);echo '</pre>';
 return $blog_posts;
 
 } // End Function

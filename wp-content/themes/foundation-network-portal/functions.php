@@ -366,9 +366,17 @@ function do_output_buffer() {
         ob_start();
 } 
 
-/************* GET RECENT POSTS FOR HOME ********************/
+/************* FUNCTION TO FIND ARRAY KEY ********************/
+//Useage: $results = searcharray('searchvalue', searchkey, $array);
 
-//Moved to mu-plugin
+function searcharray($value, $key, $array) {
+   foreach ($array as $k => $val) {
+       if ($val[$key] == $value) {
+           return $k;
+       }
+   }
+   return null;
+}
 
 /************* SHOW TEMPLATE NAME - FOR DEBUGGING ********************/
 

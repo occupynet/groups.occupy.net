@@ -102,25 +102,9 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
-			<!-- To get only the filters relevant to the posts being displayed, return array of recent posts, then retrieve an array of categories and groups. Then, remove duplicates and sort alphabetically. -->
-
-			<!-- Category Filter -->
-			<!-- <h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
-			
-				<ul class="f-dropdown" data-option-key="filter">
-					<li><a href="#" data-option-value="*" class="selected">All</a></li>
-					// <?php $categories = get_categories(); 
-					// foreach ($categories as $category) {
-					// 	echo '<li><a href="#" data-option-value=".category-' . $category->slug . '">' . $category->name . ' (' . $category->count . ')</a></li>';
-					// } ?> 
-				</ul>
-			</h4> -->
-			<!-- Group Filter -->
-			<!-- <h4 class="filter-group">Group: <span class="filter-title" id="group-current">All</span>
-				<ul class="f-dropdown" data-option-key="filter">
-					<li><a href="#" data-option-value="*" class="selected">All</a></li>
-				</ul>
-			</h4> -->
+			<?php
+			// Will eventually put in category and other filters. These will need to be based on the posts returned on the home page not all taxonomy terms.
+			?>
 
 		</div>
 
@@ -128,17 +112,9 @@ Template Name: Homepage
 
 		<?php
 	
-		if(function_exists('recent_network_posts')) { // If the plugin is active, display network-wide posts
+		if(function_exists('recent_network_posts')) { 
 
-			// Debugging...
-			// echo "<pre>post offset: $post_offset<br/>";
-			// echo "number recent posts $number_recent_posts <br/>";
-			// echo "display slider? $display_slider<br/>";
-			// echo "what kind in slider? $slider_type<br/>"; // 
-			// echo "number of slider items $slider_item_number<br/>"; //
-			// echo "is feedwordpress active? $feedwordpress_plugin<br/>";
-			// echo "is events manager active? $events_manager_plugin</pre>";
-
+			// If the plugin is active, display network-wide posts
 
 			// Accepts 3 arguments $numberposts,  $postsperblog , $postoffset
 			$recent_posts = recent_network_posts($number_recent_posts,0,$post_offset);
@@ -146,7 +122,10 @@ Template Name: Homepage
 			// echo '<pre>';print_r($recent_posts);echo '</pre>';
 
 			foreach ($recent_posts as $recent_post) { 
-
+				$cat_nice_list = array();
+				$tag_nice_list = array();
+				$cat_slugs = array();
+				$tag_slugs = array();
 				if(function_exists('recent_posts_excerpt')) {
 					// Accepts arguments $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
 					$excerpt = recent_posts_excerpt(55, $recent_post->post_content, $recent_post->post_url);
@@ -154,15 +133,33 @@ Template Name: Homepage
 					$excerpt = $recent_post->post_content;
 				}
 
-				$category_list = implode(' | ', $recent_post->post_categories);
-				$tag_list = implode(' ', $recent_post->post_tags);
+				// Get post_categories nice_links
+				$categories = $recent_post->post_categories;
+				foreach ($categories as $category => $key) {
+					$cat_nice_list[] = $key['nice_link'];
+					$cat_slugs[] = $key['slug'];
+				}
+				$category_list = implode(' | ', $cat_nice_list);
+
+				// Get tag_categories nice_links
+				$tags = $recent_post->post_tags;
+				foreach ($tags as $tag => $key) {
+					$tag_nice_list[] = $key['nice_link'];
+					$tag_slugs[] = $key['slug'];
+				}
+				$tags_list = implode(' ', $tag_nice_list);
+
+				// $category_slugs = $cat_slugs;
+				$category_slugs = 'category-' . implode(' category-', $cat_slugs);
+				// $tags_slugs = $tag_slugs;
+				$tag_slugs = 'tag-' . implode(' tag-', $tag_slugs);
 				$author_details = get_userdata($recent_post->post_author);
 				$blog_details = get_blog_details($recent_post->blog_id);
 				$post_date = date_i18n(get_option('date_format') ,strtotime($recent_post->post_date));
 
 			?>
 
-			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> clearfix post type-post network-post" role="article">
+			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> <?php echo $category_slugs; ?> <?php echo $tag_slugs; ?> clearfix post type-post network-post" role="article">
 
 			<!-- recent network posts -->
 
@@ -180,7 +177,7 @@ Template Name: Homepage
 				</header>
 
 				<footer>
-					<p class="tags"><?php echo $tag_list; ?></p>
+					<p class="tags"><?php echo $tags_list; ?></p>
 					
 					<div style="clear: both;"></div>
 				</footer> <!-- end article footer -->
