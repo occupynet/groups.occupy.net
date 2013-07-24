@@ -128,18 +128,6 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
                     $all_thumbnails[$post->guid] = ' ';   
                 }
 
-                // Get tags for each post and put into $all_tags array
-                // $post_tags = get_tags();
-                // $post_tags = wp_get_post_tags($post->ID);
-                // $all_tags_links[$post->guid] = array();
-                // foreach ($post_tags as $post_tag) {
-                //     $all_tags_links[$post->guid][] = '<a href="' . $blog_url . 'tag/' . $post_tag->slug . '" title="' . $post_tag->name . '" class="' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
-                // }
-                // $all_tags_slugs[$post->guid] = array();
-                // foreach ($post_tags as $post_tag) {
-                //     $all_tags_slugs[$post->guid][] = $post_tag->slug;
-                // }
-
                 $post_tags = wp_get_post_tags($post->ID);
                 $all_tags[$post->guid] = array();
                 foreach ($post_tags as $post_tag) {
