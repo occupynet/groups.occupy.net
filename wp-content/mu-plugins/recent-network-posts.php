@@ -129,9 +129,11 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
                 }
 
                 $post_tags = wp_get_post_tags($post->ID);
+                // $post_tags = get_the_tags($post->ID);
                 $all_tags[$post->guid] = array();
                 foreach ($post_tags as $post_tag) {
-                    $tag_link = get_term_link($post_tag->name, 'post_tag');
+                    $tag_id = $post_tag->term_id;
+                    $tag_link = get_tag_link($tag_id);
                     $all_tags[$post->guid][$post_tag->slug]['slug'] = $post_tag->slug;
                     $all_tags[$post->guid][$post_tag->slug]['name'] = $post_tag->name;
                     $all_tags[$post->guid][$post_tag->slug]['url'] = $tag_link;
