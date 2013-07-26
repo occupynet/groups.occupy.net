@@ -150,6 +150,34 @@ function optionsframework_options() {
 						'options' => $home_item_number
 						);
 
+	$options[] = array( "name" => "Show category filter",
+						"desc" => "Show category filter on the homepage template?",
+						"id" => "cat_filter",
+						"std" => "0",
+						"type" => "checkbox"
+						);
+
+	$options[] = array( "name" => "Show tag filter",
+						"desc" => "Show tag filter on the homepage template?",
+						"id" => "tag_filter",
+						"std" => "0",
+						"type" => "checkbox"
+						);
+
+	$options[] = array( "name" => "Show group filter",
+						"desc" => "Show group filter on the homepage template?",
+						"id" => "group_filter",
+						"std" => "0",
+						"type" => "checkbox"
+						);
+
+	$options[] = array( "name" => "Show post format filter",
+						"desc" => "Show post format filter on the homepage template?",
+						"id" => "format_filter",
+						"std" => "0",
+						"type" => "checkbox"
+						);
+
 	$options[] = array( "name" => "Show slider on homepage",
 						"desc" => "Show Orbit slider of recent posts on homepage template?",
 						"id" => "orbit_slider",

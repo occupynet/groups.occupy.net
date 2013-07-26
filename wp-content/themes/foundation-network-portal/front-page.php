@@ -102,35 +102,41 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
+			<?php if(of_get_option('cat_filter')) { ?>
 			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
 				  <?php recent_posts_filters('category'); ?>
 				</ul>
 			</h4>
+			<?php } ?>
 
+			<?php if(of_get_option('tag_filter')) { ?>
 			<h4 class="filter-tag filter-category">Tag: <span class="filter-title" id="tag-current">All</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
 				  <?php recent_posts_filters('tag'); ?>
 				</ul>
 			</h4>
+			<?php } ?>
 
+			<?php if(of_get_option('group_filter')) { ?>
 			<h4 class="filter-group filter-category">Group: <span class="filter-title" id="group-current">All</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
 				  <?php recent_posts_filters('blog'); ?>
 				</ul>
 			</h4>
+			<?php } ?>
 
+			<?php if(of_get_option('group_filter')) { ?>
 			<h4 class="filter-group filter-format">Format: <span class="filter-title" id="format-current">All</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
 				  <?php recent_posts_filters('format'); ?>
 				</ul>
 			</h4>
-
-			
+			<?php } ?>
 
 			<?php
 			// Will eventually put in category and other filters. These will need to be based on the posts returned on the home page not all taxonomy terms.
