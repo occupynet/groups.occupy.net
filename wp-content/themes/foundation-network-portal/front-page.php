@@ -102,6 +102,8 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
+			<?php if(function_exists('recent_posts_filters')) { ?>
+
 			<?php if(of_get_option('cat_filter')) { ?>
 			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
@@ -137,6 +139,8 @@ Template Name: Homepage
 				</ul>
 			</h4>
 			<?php } ?>
+
+			<?php } // End if function exists ?>
 
 			<?php
 			// Will eventually put in category and other filters. These will need to be based on the posts returned on the home page not all taxonomy terms.
