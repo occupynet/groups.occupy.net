@@ -264,7 +264,7 @@ function feature_or_placeholder($size ='wpf-featured') {
 
 /************* SHOW SLIDER POSTS ********************/
 
-function sliderposts($before_title='<h3 class="event-title">', $after_title='</h3>', $imagesize ='wpf-featured') {
+function sliderposts($before_title='<h3 class="event-title">', $after_title='</h3>', $imagesize ='thumbnail') {
     if(function_exists('recent_network_posts')) { 
        $slider_item_number = of_get_option('posts_in_orbit_slider');
        $recent_posts = recent_network_posts($slider_item_number,0,0);
