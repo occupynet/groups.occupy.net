@@ -84,7 +84,7 @@ LIST OF PARAMETERS
 */
 
 
-function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset = 0, $imagesize ='wpf-featured') { //Start Function
+function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset = 0, $imagesize ='thumbnail') { //Start Function
 
     global $wpdb;
 
