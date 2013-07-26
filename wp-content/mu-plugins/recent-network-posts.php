@@ -42,26 +42,37 @@ This plug includes almost no markup. It simply returns an array of posts, organi
     [post_thumbnail] =>  
     [post_categories] => Array
         (
-            [0] => Advocacy & Engagement
-            [1] => Statements
+            [advocacy-engagement] => Array
+                (
+                    [slug] => advocacy-engagement
+                    [name] => Advocacy &amp; Engagement
+                    [id] => 5
+                    [url] => http://web.net/web/occuevolve/blog/category/advocacy-engagement/
+                    [nice_link] => <a href="http://web.net/web/occuevolve/blog/category/advocacy-engagement/" title="Advocacy &amp; Engagement" class="category-advocacy-engagement" rel="tag">Advocacy &amp; Engagement</a>
+                )
+            [statements] => Array
+                (
+                    [slug] => statements
+                    [name] => Statements
+                    [id] => 59
+                    [url] => http://web.net/web/occuevolve/blog/category/statements/
+                    [nice_link] => <a href="http://web.net/web/occuevolve/blog/category/statements/" title="Statements" class="category-statements" rel="tag">Statements</a>
+                )
         )
-
-    [post_category_slugs] => Array
-        (
-            [0] => advocacy-engagement
-            [1] => statements
-        )
-
     [post_tags] => Array
         (
-            [0] => financial literacy
+            [financial-literacy] => Array
+                (
+                    [slug] => financial-literacy
+                    [name] => financial literacy
+                    [url] => http://web.net/web/occuevolve/blog/tag/financial-literacy/
+                    [nice_link] => <a href="http://web.occupy.net/web/occuevolve/blog/tag/financial-literacy/" title="financial literacy" class="tag-financial-literacy label success radius" rel="tag">financial literacy</a>
+                )
         )
-
-    [post_tag_slugs] => Array
-        (
-            [0] => financial-literacy
-        )
+    [post_format] => aside 
 )
+
+Note: If the post format is set to standard, no value will be returned.
 
 Sample call: $recent_posts = recent_network_posts(20, 3)  get a total of 20 posts, get 3 posts per blog
 
@@ -73,7 +84,7 @@ LIST OF PARAMETERS
 */
 
 
-function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset = 0) { //Start Function
+function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset = 0) { //Start Function
 
     global $wpdb;
 
@@ -128,18 +139,6 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
                     $all_thumbnails[$post->guid] = ' ';   
                 }
 
-                $post_tags = wp_get_post_tags($post->ID);
-                // $post_tags = get_the_tags($post->ID);
-                $all_tags[$post->guid] = array();
-                foreach ($post_tags as $post_tag) {
-                    $tag_id = $post_tag->term_id;
-                    $tag_link = get_tag_link($tag_id);
-                    $all_tags[$post->guid][$post_tag->slug]['slug'] = $post_tag->slug;
-                    $all_tags[$post->guid][$post_tag->slug]['name'] = $post_tag->name;
-                    $all_tags[$post->guid][$post_tag->slug]['url'] = $tag_link;
-                    $all_tags[$post->guid][$post_tag->slug]['nice_link'] = '<a href="' . $tag_link . '" title="' . $post_tag->name . '" class="' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
-                }
-
                 // Get categories for each post and put into $all_categories array
                 $post_categories = wp_get_post_categories($post->ID);
                 $all_categories[$post->guid] = array();
@@ -151,8 +150,24 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
                     $all_categories[$post->guid][$cat->slug]['name'] = $cat->name;
                     $all_categories[$post->guid][$cat->slug]['id'] = $cat_id;
                     $all_categories[$post->guid][$cat->slug]['url'] = $cat_link;
-                    $all_categories[$post->guid][$cat->slug]['nice_link'] = '<a href="' . $cat_link . '" title="' . $cat->name . 'Category" class="' . $cat->slug . ' ' . $cat->name . '" rel="tag">' . $cat->name . '</a>';
+                    $all_categories[$post->guid][$cat->slug]['nice_link'] = '<a href="' . $cat_link . '" title="' . $cat->name . '" class="category-' . $cat->slug . '" rel="tag">' . $cat->name . '</a>';
                 }
+
+                // Get tags for each post and put into $all_tags array
+                $post_tags = wp_get_post_tags($post->ID);
+                // $post_tags = get_the_tags($post->ID);
+                $all_tags[$post->guid] = array();
+                foreach ($post_tags as $post_tag) {
+                    $tag_id = $post_tag->term_id;
+                    $tag_link = get_tag_link($tag_id);
+                    $all_tags[$post->guid][$post_tag->slug]['slug'] = $post_tag->slug;
+                    $all_tags[$post->guid][$post_tag->slug]['name'] = $post_tag->name;
+                    $all_tags[$post->guid][$post_tag->slug]['url'] = $tag_link;
+                    $all_tags[$post->guid][$post_tag->slug]['nice_link'] = '<a href="' . $tag_link . '" title="' . $post_tag->name . '" class="tag-' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
+                }
+
+                // $post_format = get_post_format($post->ID);
+                $all_post_formats[$post->guid] = get_post_format($post->ID);
 
             }
 
@@ -166,14 +181,17 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
 
     }
         
+    // Count the number of posts
     $post_count = count($all_posts);
 
+    // If the number of posts is less then the post offset, make offset = 0
     if($post_count < $postoffset) {
         $o = 0;
     } else {
         $o = $postoffset; // Number to skip; set in $postoffset 
     }
 
+    // If the number of posts is less then the number of posts selected to display, change the limit to total number minus offset
     if($post_count < $numberposts + $o) {
         $limit = $post_count - $o;
     } else {
@@ -190,8 +208,7 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
           $wp_post->post_thumbnail = $all_thumbnails[$wp_post->guid];
           $wp_post->post_categories = $all_categories[$wp_post->guid];
           $wp_post->post_tags = $all_tags[$wp_post->guid];
-          // $wp_post->post_tag_links = $all_tags_links[$wp_post->guid];
-          // $wp_post->post_tag_slugs = $all_tags_slugs[$wp_post->guid];
+          $wp_post->post_format = $all_post_formats[$wp_post->guid];
           $blog_posts[$wp_post->guid] = $wp_post;
 
     }
@@ -200,6 +217,116 @@ function recent_network_posts($numberposts = '', $postsperblog = '', $postoffset
 return $blog_posts;
 
 } // End Function
+
+// Function to return filters, based on the posts displayed
+// $numberposts should be set to the number of posts set to display on the page
+function recent_posts_filters($filter_type = 'category', $numberposts = 25) {
+
+    if(function_exists('recent_network_posts')) { // If the plugin is active, display network-wide posts
+
+        // Filter options:
+        // category = 'category-'
+        // tag = 'tag-'
+        // format = 'format-'
+        // author = 'author-'
+        // blog = 'blog-'
+
+        $recent_posts = recent_network_posts();
+
+        // Get an array of categories
+        $cats = array();
+        $cat_slugs = array();
+        $cat_names = array();
+
+        // Get an array of categories
+        $tags = array();
+        $tags_slugs = array();
+        $tags_names = array();
+        $blogs = array();
+        foreach($recent_posts as $recent_post => $WP_Post) {
+            $blog_details = get_blog_details($WP_Post->blog_id);
+            
+            // Get array of categories
+            foreach ($WP_Post->post_categories as $key => $value) {
+                foreach ($value as $k => $v) {
+                    $cats[$value['slug']] = $value['name'];
+                }
+            }
+
+            // Get array of tags
+            foreach ($WP_Post->post_tags as $key => $value) {
+                foreach ($value as $k => $v) {
+                    $tags[$value['slug']] = $value['name'];
+                }
+            }
+
+            // Get array of post formats
+            if($WP_Post->post_format) {
+                $formats[$WP_Post->post_format] = $WP_Post->post_format;
+            } else {
+                $formats['standard'] = 'standard'; // Posts set to standard return no value
+            }
+
+            // Get array of blogs
+            $blogs[$blog_details->blogname] = $WP_Post->blog_id;
+
+            // Get array of authors
+            $author = get_userdata($WP_Post->post_author);
+            // Hide if author is admin
+            if($author->display_name != 'admin') {
+                $authors[$author->display_name] = $WP_Post->post_author;
+            }
+        }
+
+        if($filter_type == 'category') {
+            // usort($cats, "sort_by_keyvalue");
+            ksort($cats);
+            foreach ($cats as $key => $value) {
+                if($key != 'uncategorized') {
+                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $key . '">' . $value . '</a></li>';
+                }
+            }
+            // echo '<pre>';print_r($cats);echo '</pre>';
+
+        } elseif ($filter_type == 'tag') {
+            // usort($tags, "sort_by_keyvalue");
+            ksort($tags);
+            foreach ($tags as $key => $value) {
+                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $key. '">' . $value . '</a></li>';
+            }
+            // echo '<pre>';print_r($tags);echo '</pre>';
+            
+        } elseif ($filter_type == 'format') {
+            ksort($formats);
+            foreach ($formats as $key => $value) {
+                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $value . '">' . ucfirst($value) . '</a></li>';
+            }
+            // echo '<pre>';print_r($formats);echo '</pre>';
+            
+        } elseif ($filter_type == 'blog') {
+            ksort($blogs);
+            foreach ($blogs as $key => $value) {
+                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $value . '">' . $key . '</a></li>';
+            }
+            // echo '<pre>';print_r($blogs);echo '</pre>';
+            
+        } elseif ($filter_type == 'author') {
+            ksort($authors);
+            foreach ($authors as $key => $value) {
+                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $value . '">' . $key . '</a></li>';
+            }
+            // echo '<pre>';print_r($authors);echo '</pre>';
+
+        } else {
+            echo 'A filter type must be selected. Select categories, tags, formats, blogs or authors.';
+        }
+
+
+    } else {
+        echo 'the function recent_network_posts() must be active to use this function (Located in recent-network-posts.php).';
+    }
+
+} // End function
 
 // Accepted arguments: $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
 function recent_posts_excerpt($count = 55, $content, $permalink, $excerpt_trail = 'Read More'){

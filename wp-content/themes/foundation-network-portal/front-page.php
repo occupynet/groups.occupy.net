@@ -102,6 +102,36 @@ Template Name: Homepage
 				</ul>
 			</h4>
 
+			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="layoutMode">
+				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+				  <?php recent_posts_filters('category'); ?>
+				</ul>
+			</h4>
+
+			<h4 class="filter-tag filter-category">Tag: <span class="filter-title" id="tag-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="layoutMode">
+				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+				  <?php recent_posts_filters('tag'); ?>
+				</ul>
+			</h4>
+
+			<h4 class="filter-group filter-category">Group: <span class="filter-title" id="group-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="layoutMode">
+				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+				  <?php recent_posts_filters('blog'); ?>
+				</ul>
+			</h4>
+
+			<h4 class="filter-group filter-format">Format: <span class="filter-title" id="format-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="layoutMode">
+				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+				  <?php recent_posts_filters('format'); ?>
+				</ul>
+			</h4>
+
+			
+
 			<?php
 			// Will eventually put in category and other filters. These will need to be based on the posts returned on the home page not all taxonomy terms.
 			?>
@@ -127,7 +157,7 @@ Template Name: Homepage
 				$cat_slugs = array();
 				$tag_slugs = array();
 				if(function_exists('recent_posts_excerpt')) {
-					// Accepts arguments $count (default 5), $content, $permalink, $excerpt_trail (default 'Read More')
+					// Accepts arguments $count (default 55), $content, $permalink, $excerpt_trail (default 'Read More')
 					$excerpt = recent_posts_excerpt(55, $recent_post->post_content, $recent_post->post_url);
 				} else {
 					$excerpt = $recent_post->post_content;
@@ -152,14 +182,23 @@ Template Name: Homepage
 				// $category_slugs = $cat_slugs;
 				$category_slugs = 'category-' . implode(' category-', $cat_slugs);
 				// $tags_slugs = $tag_slugs;
-				$tag_slugs = 'tag-' . implode(' tag-', $tag_slugs);
+				if($tag_slugs) {
+					$tag_slugs = 'tag-' . implode(' tag-', $tag_slugs);
+				} else {
+					$tag_slugs = implode(' ', $tag_slugs);
+				}
 				$author_details = get_userdata($recent_post->post_author);
 				$blog_details = get_blog_details($recent_post->blog_id);
 				$post_date = date_i18n(get_option('date_format') ,strtotime($recent_post->post_date));
+				if($recent_post->post_format) {
+					$post_format = $recent_post->post_format;
+				} else {
+					$post_format = 'standard';
+				}
 
 			?>
 
-			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> <?php echo $category_slugs; ?> <?php echo $tag_slugs; ?> clearfix post type-post network-post" role="article">
+			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> author-<?php echo $recent_post->post_author; ?> format-<?php echo $post_format; ?> <?php echo $category_slugs; ?> <?php echo $tag_slugs; ?> clearfix post type-post network-post" role="article">
 
 			<!-- recent network posts -->
 
