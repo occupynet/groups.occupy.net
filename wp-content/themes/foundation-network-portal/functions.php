@@ -270,7 +270,7 @@ function sliderposts($before_title='<h3 class="event-title">', $after_title='</h
        $recent_posts = recent_network_posts($slider_item_number,0,0);
 
         foreach ($recent_posts as $recent_post) {
-            if($recent_post->post_thumbnail != ' ') {
+            if($recent_post->post_thumbnail) {
                 $thumbnail = $recent_post->post_thumbnail;
             } else {
                 $thumbnail = of_get_option('placeholder_image');
@@ -283,35 +283,6 @@ function sliderposts($before_title='<h3 class="event-title">', $after_title='</h
             echo '</a>';
             echo '</li>';
         }
-
-
-       
-
-//     global $post;
-//     $placeholder_image = feature_or_placeholder();
-//     $numberposts = of_get_option('posts_in_orbit_slider');
-//     $args = array( 'posts_count' => $numberposts, 'post_type' => 'post' );
-//     $posts = get_posts( $args );
-
-// foreach( $posts as $post ) : setup_postdata($post); 
-//     echo '<li class="slider-item"><a href="';
-//     echo the_permalink();
-//     echo '">';
-//         if ( has_post_thumbnail() ) { 
-//             echo '<div class="event-image">';
-//             the_post_thumbnail('medium');
-//             echo '</div>';
-//         } else {
-//             echo '<div class="event-image"><img src="';
-//             feature_or_placeholder();
-//             echo '"></div>';
-//         }
-
-//     the_title( $before_title, $after_title, true);
-//     echo '</a>';
-//     echo '</li>';
-
-// endforeach;
 
     } else {
 

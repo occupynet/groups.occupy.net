@@ -84,7 +84,7 @@ LIST OF PARAMETERS
 */
 
 
-function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset = 0) { //Start Function
+function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset = 0, $imagesize ='wpf-featured') { //Start Function
 
     global $wpdb;
 
@@ -134,9 +134,10 @@ function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset 
                 $blog_url = get_blog_details($blog_key)->path;
 
                 if(has_post_thumbnail($post->ID)) {
-                    $all_thumbnails[$post->guid] = get_the_post_thumbnail($post->ID);
-                } else {
-                    $all_thumbnails[$post->guid] = ' ';   
+                    $all_thumbnails[$post->guid] = get_the_post_thumbnail($post->ID, $imagesize);
+                } 
+                else {
+                    $all_thumbnails[$post->guid] = '';   
                 }
 
                 // Get categories for each post and put into $all_categories array
