@@ -1,0 +1,124 @@
+#bug-library-list { font-family: "Arial"; font-size: 12px; width: 600px}
+
+#bug-library-item-table { width: 600px; clear: both; }
+
+#bug-library-list table { width: 600px; border: none; border-spacing: 0; border-collapse: collapse; margin-top: 8px; }
+
+#bug-library-list a, a:visited { text-decoration: none; color: #0066CC }
+
+#bug-library-list a:hover { text-decoration: none; color: #CC0000 }
+
+#bug-library-list tr td {padding: 6px; margin: 0; border: none;}
+
+#bug-library-type { width: 100px; text-align: center; border-left: solid #AAAAAA 1px !important; border-bottom: none; border-right: none; border-top: solid #AAAAAA 1px !important; }
+
+/* Add more entries to Bug Library Types using the product slug to color the types in the Bug Library list */
+
+#bug-library-type-bug-report { background-color: #A60000; color: #FFFFFF; font-weight: bold; height: 20px;}
+
+#bug-library-type-feature-request { background-color: #269926; color: #FFFFFF; font-weight: bold; height: 20px }
+
+/* End of Bug Library Type List */
+
+#bug-library-title { border-top: solid #AAAAAA 1px !important; border-top: solid #AAAAAA 1px !important; border-right: solid #AAAAAA 1px !important; }
+
+#bug-library-data { border-left: solid #AAAAAA 1px !important; border-right: solid #AAAAAA 1px !important; border-bottom: solid #AAAAAA 1px !important; margin-bottom: 10px;}
+
+#bug-library-desc { border: solid #AAAAAA 1px !important; background-color: #FFF6DE;}
+
+#bug-library-desc-title { font-weight: bold; }
+
+#bug-library-breadcrumb { padding-bottom: 10px; float: left}
+
+#bug-library-products-picklist { width: 150px; }
+
+#bug-library-filters { clear: both; width: 580px; padding: 10px; margin-bottom: 10px; line-height: 14px; display: none; border: 1px solid #AAAAAA;  }
+
+#bug-library-filter-product { float: left; margin-right: 70px;  height: 130px }
+
+#bug-library-filter-producttitle { font-weight: bold; margin-bottom: 10px;}
+
+#bug-library-filter-productitems { margin-left: 10px; }
+
+#bug-library-filter-currentproduct { font-weight: bold; }
+
+#bug-library-filter-types { margin-right: 70px; float: left;  height: 130px }
+
+#bug-library-filter-typestitle { font-weight: bold; margin-bottom: 10px;}
+
+#bug-library-filter-typesitems { margin-left: 10px; }
+
+#bug-library-filter-status { padding-left: 15px;  height: 130px }
+
+#bug-library-filter-statustitle { font-weight: bold; margin-bottom: 10px;}
+
+#bug-library-filter-statusitems { margin-left: 10px; }
+
+#bug-library-currentfilters { margin-bottom: 10px; }
+
+#bug-library-filterchange { cursor: pointer; color: #0066CC }
+
+#odd { background-color: #FFF6DE; }
+
+#even { background-color: #FFFDF8; }
+
+.bug-library-pageselector {
+	text-align: center;
+}
+
+.bug-library-selectedpage {
+	margin: 0px 4px 0px 4px;
+	border: 1px solid #000;
+	padding: 7px;
+	background-color: #FFF6DE;
+}
+
+.bug-library-unselectedpage {
+	margin: 0px 4px 0px 4px;
+	border: 1px solid #000;
+	padding: 7px;
+	background-color: #FFFDF8;
+}
+
+.bug-library-previousnextactive {
+	margin: 0px 4px 0px 4px;
+	border: 1px solid #000;
+	padding: 7px;
+	background-color: #FFF6DE;
+}
+
+.bug-library-previousnextinactive {
+	margin: 0px 4px 0px 4px;
+	border: 1px solid #000;
+	padding: 7px;
+	background-color: #FFFDF8;
+	color: #cccccc;
+}
+
+#bug-library-newissuebutton { padding: 0px; margin-bottom: 10px}
+
+#bug-library-newissue-form { background-color: #FFFFFF; width: 500px; height: 640px; padding: 16px; font-family: "Arial"; font-size: 12px;}
+
+#new-bug-form-title { padding-bottom: 12px; }
+
+#new-bug-title-section { padding-bottom: 12px; }
+
+#new-bug-product-section { padding-bottom: 12px; float: left}
+
+#new-bug-type-section { padding-bottom: 12px; margin-left: 10px; float: left}
+
+#new-bug-version-section { float: left; padding-bottom: 12px; margin-left: 10px; }
+
+#new-bug-version {font-family: "Arial"; font-size: 12px;}
+
+#new-bug-product { width: 200px; }
+
+#new-bug-desc-section { clear: both }
+
+#new-bug-submit { margin-top: 6px;  }
+
+#required { color: #FF0000; }
+
+#bug-library-invalid { font-weight: bold; color: #FF0000; }
+
+#bug-library-submissionaccepted { background-color: #FFFFFF; width: 500px; height: 500px; padding: 16px; font-family: "Arial"; font-size: 12px; }
