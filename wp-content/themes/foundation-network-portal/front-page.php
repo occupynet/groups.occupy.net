@@ -206,6 +206,14 @@ Template Name: Homepage
 					$post_format = 'standard';
 				}
 
+				$syndication_link = $recent_post->syndication_link;
+				if(!$syndication_link) {
+					$post_url = $recent_post->post_url;
+
+				} else {
+					$post_url = $syndication_link;
+				}
+
 			?>
 
 			<article id="post-<?php echo $recent_post->ID; ?>" class="post-<?php echo $recent_post->ID; ?> blog-<?php echo $recent_post->blog_id; ?> author-<?php echo $recent_post->post_author; ?> format-<?php echo $post_format; ?> <?php echo $category_slugs; ?> <?php echo $tag_slugs; ?> clearfix post type-post network-post" role="article">
@@ -216,12 +224,12 @@ Template Name: Homepage
 					<p class="meta">
 						<span class="site-name"><a href="<?php echo $blog_details->siteurl; ?>"><?php echo $blog_details->blogname; ?></a></span> 
 						<time datetime="<?php echo $recent_post->post_date; ?>" pubdate><?php echo $post_date; ?></time>
-						<?php
-						// if($recent_post->post_author != 1) {
-							echo 'By ' . $author_details->display_name;
-						// }
-						?>
+						<?php if(!$syndication_link) { //If it's from a syndication site, don't show meta?>
+
+						<?php echo 'By ' . $author_details->display_name; ?>
 						<?php echo $category_list; ?>
+
+						<?php } ?>
 					</p>
 				</header>
 
@@ -232,10 +240,10 @@ Template Name: Homepage
 				</footer> <!-- end article footer -->
 
 				<section class="post_content clearfix">
-					<h2><a href="<?php echo $recent_post->post_url; ?>" rel="bookmark" title="<?php echo $recent_post->post_title; ?>"><?php echo $recent_post->post_title; ?></a></h2>
+					<h2><a href="<?php echo $post_url; ?>" rel="bookmark" title="<?php echo $recent_post->post_title; ?>" target="_blank"><?php echo $recent_post->post_title; ?></a></h2>
 
 					<div class="post-thumbnail">
-					<a href="<?php echo $recent_post->post_url; ?>" title="<?php echo $recent_post->post_title; ?>"><?php echo $recent_post->post_thumbnail; ?></a>
+					<a href="<?php echo $post_url; ?>" title="<?php echo $recent_post->post_title; ?>" target="_blank"><?php echo $recent_post->post_thumbnail; ?></a>
 					</div>
 
 					<p><?php echo $excerpt; ?></p>

@@ -167,6 +167,13 @@ function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset 
                     $all_tags[$post->guid][$post_tag->slug]['nice_link'] = '<a href="' . $tag_link . '" title="' . $post_tag->name . '" class="tag-' . $post_tag->slug . ' label success radius" rel="tag">' . $post_tag->name . '</a>';
                 }
 
+                $meta = get_post_meta($post->ID, 'syndication_permalink', true);
+                if($meta) {
+                    $all_syndication_details[$post->guid] = $meta;
+                } else {
+                    $all_syndication_details[$post->guid] = '';
+                }
+
                 // $post_format = get_post_format($post->ID);
                 $all_post_formats[$post->guid] = get_post_format($post->ID);
 
@@ -210,6 +217,7 @@ function recent_network_posts($numberposts = 25, $postsperblog = 3, $postoffset 
           $wp_post->post_categories = $all_categories[$wp_post->guid];
           $wp_post->post_tags = $all_tags[$wp_post->guid];
           $wp_post->post_format = $all_post_formats[$wp_post->guid];
+          $wp_post->syndication_link = $all_syndication_details[$wp_post->guid];
           $blog_posts[$wp_post->guid] = $wp_post;
 
     }
