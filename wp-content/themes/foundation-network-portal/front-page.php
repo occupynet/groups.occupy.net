@@ -179,7 +179,7 @@ Template Name: Homepage
 					$cat_nice_list[] = $key['nice_link'];
 					$cat_slugs[] = $key['slug'];
 				}
-				$category_list = implode(' | ', $cat_nice_list);
+				$category_list = implode(' ', $cat_nice_list);
 
 				// Get tag_categories nice_links
 				$tags = $recent_post->post_tags;
