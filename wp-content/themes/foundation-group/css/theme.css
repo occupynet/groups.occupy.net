@@ -164,14 +164,14 @@ a, h3.nlposts-ulist-title {
   font-size: 80%; }
 
 /* line 22, ../../foundation-network-portal/sass/base/_buttons.scss */
-.post-edit-link {
+.post-edit-link a, .post-edit-link h3.nlposts-ulist-title {
   padding: 1px 7px;
   border: 1px solid #e64c51;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px; }
   /* line 27, ../../foundation-network-portal/sass/base/_buttons.scss */
-  .post-edit-link:hover {
+  .post-edit-link a:hover, .post-edit-link h3.nlposts-ulist-title:hover {
     background: #c91c22;
     border-color: #c91c22;
     color: white !important; }
