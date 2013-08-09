@@ -164,14 +164,14 @@ a, h3.nlposts-ulist-title {
   font-size: 80%; }
 
 /* line 22, ../sass/base/_buttons.scss */
-.post-edit-link a, .post-edit-link h3.nlposts-ulist-title {
+.post-edit-link {
   padding: 1px 7px;
   border: 1px solid #e64c51;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px; }
   /* line 27, ../sass/base/_buttons.scss */
-  .post-edit-link a:hover, .post-edit-link h3.nlposts-ulist-title:hover {
+  .post-edit-link:hover {
     background: #c91c22;
     border-color: #c91c22;
     color: white !important; }
@@ -1101,7 +1101,7 @@ h1.single-title {
     font-size: 16px; }
 
 /* line 88, ../sass/plugins/_events.scss */
-.event-edit-link {
+.event-edit-link a, .event-edit-link h3.nlposts-ulist-title {
   padding: 5px 7px;
   border: 1px solid #e64c51;
   font-size: 12px;
@@ -1109,7 +1109,7 @@ h1.single-title {
   text-transform: uppercase;
   letter-spacing: 1px; }
   /* line 94, ../sass/plugins/_events.scss */
-  .event-edit-link:hover {
+  .event-edit-link a:hover, .event-edit-link h3.nlposts-ulist-title:hover {
     background: #c91c22;
     border-color: #c91c22;
     color: white; }
