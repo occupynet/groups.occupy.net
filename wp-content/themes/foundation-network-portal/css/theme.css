@@ -1017,7 +1017,7 @@ input[type="submit"] {
 /* EVENT MANAGER PLUGIN */
 /*************  Single Event Page ********************/
 /* line 7, ../sass/plugins/_events.scss */
-h1.single-title {
+.single-event .single-title {
   font-size: 44px;
   width: 50%;
   float: right;
