@@ -90,12 +90,12 @@ Template Name: Homepage
 		</div>
 		
 
-		<div class="filter twelve columns clearfix">
+		<div class="filters twelve columns clearfix" id="filters">
 
-			<h4 class="contribute filter-add"><a href="/join">Contribute</a></h4>
+			<h4 class="contribute"><a href="/join">Contribute</a></h4>
 
 			<!-- Display Filter -->
-			<h4 class="filter-view">View: <span class="filter-title" id="view-current">List</span>
+			<h4 class="filter" id="filter-view">View: <span class="filter-title" id="view-current">List</span>
 				<ul class="f-dropdown option-set" data-option-key="layoutMode">
 				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">List</a></li>
 				  <li><a href="#masonry" data-option-value="masonry">Grid</a></li>
@@ -105,36 +105,36 @@ Template Name: Homepage
 			<?php if(function_exists('recent_posts_filters')) { ?>
 
 			<?php if(of_get_option('cat_filter')) { ?>
-			<h4 class="filter-category">Category: <span class="filter-title" id="category-current">All</span>
-				<ul class="f-dropdown option-set" data-option-key="layoutMode">
-				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+			<h4 class="filter" id="filter-category">Category: <span class="filter-title" id="category-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="filter">
+				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <?php recent_posts_filters('category'); ?>
 				</ul>
 			</h4>
 			<?php } ?>
 
 			<?php if(of_get_option('tag_filter')) { ?>
-			<h4 class="filter-tag filter-category">Tag: <span class="filter-title" id="tag-current">All</span>
-				<ul class="f-dropdown option-set" data-option-key="layoutMode">
-				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+			<h4 class="filter" id="filter-tag">Tag: <span class="filter-title" id="tag-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="filter">
+				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <?php recent_posts_filters('tag'); ?>
 				</ul>
 			</h4>
 			<?php } ?>
 
 			<?php if(of_get_option('group_filter')) { ?>
-			<h4 class="filter-group filter-category">Group: <span class="filter-title" id="group-current">All</span>
-				<ul class="f-dropdown option-set" data-option-key="layoutMode">
-				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+			<h4 class="filter" id="filter-group">Group: <span class="filter-title" id="group-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="filter">
+				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <?php recent_posts_filters('blog'); ?>
 				</ul>
 			</h4>
 			<?php } ?>
 
 			<?php if(of_get_option('group_filter')) { ?>
-			<h4 class="filter-group filter-format">Format: <span class="filter-title" id="format-current">All</span>
-				<ul class="f-dropdown option-set" data-option-key="layoutMode">
-				  <li><a href="#straightDown" data-option-value="straightDown" class="selected">All</a></li>
+			<h4 class="filter" id="filter-format">Format: <span class="filter-title" id="format-current">All</span>
+				<ul class="f-dropdown option-set" data-option-key="filter">
+				  <li><a href="#" data-option-value="*" class="selected">All</a></li>
 				  <?php recent_posts_filters('format'); ?>
 				</ul>
 			</h4>

@@ -41,12 +41,10 @@
 /**** filter menus ****/
 
 
-.filter {
+.filters {
 	@include clearfix;
 	overflow: visible;
-	.filter-view, 
-	.filter-category,
-	.filter-format {
+	.filter {
 		@include condensed;
 		float: left;
 		margin: 30px 30px 0 0;
@@ -59,7 +57,7 @@
 			}
 		}
 	}
-	.filter-add {
+	.contribute {
 		@include condensed;
 		float: right;
 		margin: 30px 0 0;
@@ -101,6 +99,7 @@
 		padding: 5px 15px;
 		color: $base2;
 		display: block;
+		white-space: nowrap;
 	}
 	a:hover,
 	a.selected {

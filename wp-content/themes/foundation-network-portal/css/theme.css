@@ -1586,14 +1586,12 @@ td.lwa-info {
 
 /**** filter menus ****/
 /* line 44, ../sass/plugins/_isotope.scss */
-.filter {
+.filters {
   overflow: hidden;
   *zoom: 1;
   overflow: visible; }
-  /* line 49, ../sass/plugins/_isotope.scss */
-  .filter .filter-view,
-  .filter .filter-category,
-  .filter .filter-format {
+  /* line 47, ../sass/plugins/_isotope.scss */
+  .filters .filter {
     font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1602,18 +1600,14 @@ td.lwa-info {
     margin: 30px 30px 0 0;
     padding: 5px 10px 5px 0;
     position: relative; }
-    /* line 55, ../sass/plugins/_isotope.scss */
-    .filter .filter-view:hover,
-    .filter .filter-category:hover,
-    .filter .filter-format:hover {
+    /* line 53, ../sass/plugins/_isotope.scss */
+    .filters .filter:hover {
       cursor: pointer; }
-      /* line 57, ../sass/plugins/_isotope.scss */
-      .filter .filter-view:hover .f-dropdown,
-      .filter .filter-category:hover .f-dropdown,
-      .filter .filter-format:hover .f-dropdown {
+      /* line 55, ../sass/plugins/_isotope.scss */
+      .filters .filter:hover .f-dropdown {
         display: block; }
-  /* line 62, ../sass/plugins/_isotope.scss */
-  .filter .filter-add {
+  /* line 60, ../sass/plugins/_isotope.scss */
+  .filters .contribute {
     font-family: "LeagueGothicRegular", "Arial Narrow", sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -1621,18 +1615,18 @@ td.lwa-info {
     float: right;
     margin: 30px 0 0;
     padding: 5px 0 5px 10px; }
-    /* line 67, ../sass/plugins/_isotope.scss */
-    .filter .filter-add a, .filter .filter-add h3.nlposts-ulist-title {
+    /* line 65, ../sass/plugins/_isotope.scss */
+    .filters .contribute a, .filters .contribute h3.nlposts-ulist-title {
       color: #c91c22; }
-    /* line 70, ../sass/plugins/_isotope.scss */
-    .filter .filter-add a:hover, .filter .filter-add h3.nlposts-ulist-title:hover {
+    /* line 68, ../sass/plugins/_isotope.scss */
+    .filters .contribute a:hover, .filters .contribute h3.nlposts-ulist-title:hover {
       color: #333333; }
-  /* line 74, ../sass/plugins/_isotope.scss */
-  .filter span {
+  /* line 72, ../sass/plugins/_isotope.scss */
+  .filters span {
     color: #b3b3b3;
     margin-left: 3px; }
 
-/* line 82, ../sass/plugins/_isotope.scss */
+/* line 80, ../sass/plugins/_isotope.scss */
 .f-dropdown {
   display: none;
   position: absolute;
@@ -1645,38 +1639,39 @@ td.lwa-info {
   background: white;
   margin: 0;
   padding: 0 0 5px; }
-  /* line 94, ../sass/plugins/_isotope.scss */
+  /* line 92, ../sass/plugins/_isotope.scss */
   .f-dropdown li {
     margin: 0;
     padding: 0;
     font-size: 16px;
     line-height: 16px; }
-  /* line 100, ../sass/plugins/_isotope.scss */
+  /* line 98, ../sass/plugins/_isotope.scss */
   .f-dropdown a, .f-dropdown h3.nlposts-ulist-title {
     padding: 5px 15px;
     color: #333333;
-    display: block; }
-  /* line 106, ../sass/plugins/_isotope.scss */
+    display: block;
+    white-space: nowrap; }
+  /* line 105, ../sass/plugins/_isotope.scss */
   .f-dropdown a:hover, .f-dropdown h3.nlposts-ulist-title:hover,
   .f-dropdown a.selected,
   .f-dropdown h3.selected.nlposts-ulist-title {
     color: #b3b3b3; }
-  /* line 109, ../sass/plugins/_isotope.scss */
+  /* line 108, ../sass/plugins/_isotope.scss */
   .f-dropdown:hover {
     display: block; }
 
 /**** Isotope Filtering ****/
-/* line 119, ../sass/plugins/_isotope.scss */
+/* line 118, ../sass/plugins/_isotope.scss */
 .isotope-item {
   z-index: 2; }
 
-/* line 123, ../sass/plugins/_isotope.scss */
+/* line 122, ../sass/plugins/_isotope.scss */
 .isotope-hidden.isotope-item {
   pointer-events: none;
   z-index: 1; }
 
 /**** Isotope CSS3 transitions ****/
-/* line 131, ../sass/plugins/_isotope.scss */
+/* line 130, ../sass/plugins/_isotope.scss */
 .isotope,
 .isotope .isotope-item {
   -webkit-transition-duration: 0.8s;
@@ -1685,7 +1680,7 @@ td.lwa-info {
   -o-transition-duration: 0.8s;
   transition-duration: 0.8s; }
 
-/* line 139, ../sass/plugins/_isotope.scss */
+/* line 138, ../sass/plugins/_isotope.scss */
 .isotope {
   -webkit-transition-property: height, width;
   -moz-transition-property: height, width;
@@ -1693,7 +1688,7 @@ td.lwa-info {
   -o-transition-property: height, width;
   transition-property: height, width; }
 
-/* line 147, ../sass/plugins/_isotope.scss */
+/* line 146, ../sass/plugins/_isotope.scss */
 .isotope .isotope-item {
   -webkit-transition-property: -webkit-transform, opacity;
   -moz-transition-property: -moz-transform, opacity;
@@ -1702,7 +1697,7 @@ td.lwa-info {
   transition-property: transform, opacity; }
 
 /**** disabling Isotope CSS3 transitions ****/
-/* line 159, ../sass/plugins/_isotope.scss */
+/* line 158, ../sass/plugins/_isotope.scss */
 .isotope.no-transition,
 .isotope.no-transition .isotope-item,
 .isotope .isotope-item.no-transition {

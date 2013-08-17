@@ -292,7 +292,7 @@ function recent_posts_filters($filter_type = 'category', $numberposts = 25) {
             ksort($cats);
             foreach ($cats as $key => $value) {
                 if($key != 'uncategorized') {
-                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $key . '">' . $value . '</a></li>';
+                echo '<li><a href="#" data-option-value=".' . $filter_type . '-' . $key . '">' . $value . '</a></li>';
                 }
             }
             // echo '<pre>';print_r($cats);echo '</pre>';
@@ -301,28 +301,28 @@ function recent_posts_filters($filter_type = 'category', $numberposts = 25) {
             // usort($tags, "sort_by_keyvalue");
             ksort($tags);
             foreach ($tags as $key => $value) {
-                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $key. '">' . $value . '</a></li>';
+                echo '<li><a href="#" data-option-value=".' . $filter_type . '-' . $key. '">' . $value . '</a></li>';
             }
             // echo '<pre>';print_r($tags);echo '</pre>';
             
         } elseif ($filter_type == 'format') {
             ksort($formats);
             foreach ($formats as $key => $value) {
-                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $value . '">' . ucfirst($value) . '</a></li>';
+                echo '<li><a href="#" data-option-value=".' . $filter_type . '-' . $value . '">' . ucfirst($value) . '</a></li>';
             }
             // echo '<pre>';print_r($formats);echo '</pre>';
             
         } elseif ($filter_type == 'blog') {
             ksort($blogs);
             foreach ($blogs as $key => $value) {
-                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $value . '">' . $key . '</a></li>';
+                echo '<li><a href="#" data-option-value=".' . $filter_type . '-' . $value . '">' . $key . '</a></li>';
             }
             // echo '<pre>';print_r($blogs);echo '</pre>';
             
         } elseif ($filter_type == 'author') {
             ksort($authors);
             foreach ($authors as $key => $value) {
-                echo '<li><a href="#" data-option-value="' . $filter_type . '-' . $value . '">' . $key . '</a></li>';
+                echo '<li><a href="#" data-option-value=".' . $filter_type . '-' . $value . '">' . $key . '</a></li>';
             }
             // echo '<pre>';print_r($authors);echo '</pre>';
 
