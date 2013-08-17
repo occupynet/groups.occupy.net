@@ -6,9 +6,9 @@
 
 a {
   color: $loud;
-  &:hover { color: $base1; }
   &:active { color: $base1; }
   &:visited { color: $loud-dark; }
+  &:hover { color: $base1; }
 }
 
 
@@ -446,24 +446,35 @@ ul.button-group li {
 	.tags-title {
 		@include caps;
 		font-size: 11px;
-		padding: 1px 4px 2px 0;
+		margin-right: 4px;
 	}
 }
 
-.label {
+.tags a {
+  color: $base3;
+}
+.categories a {
+  color: $loud;
+}
+
+.tags a,
+.categories a {
 	background: transparent !important;
 	border: 0;
 	@include border-radius(0,0);
 	@include caps;
-	color: $base4;
 	font-weight: normal;
 	font-size: 11px;
+	line-height: 11px;
+	margin-top: 2px;
 	white-space: nowrap;
 	text-shadow: none;
 	&:after {
 		content: ' ›'
 	}
 	&:hover {
-		color: $base2;
+		color: $base1;
 	}
 }
+
+

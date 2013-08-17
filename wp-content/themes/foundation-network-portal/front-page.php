@@ -226,8 +226,8 @@ Template Name: Homepage
 						<time datetime="<?php echo $recent_post->post_date; ?>" pubdate><?php echo $post_date; ?></time>
 						<?php if(!$syndication_link) { //If it's from a syndication site, don't show meta?>
 
-						<?php echo 'By ' . $author_details->display_name; ?>
-						<?php echo $category_list; ?>
+						<span class="author"><?php echo 'By ' . $author_details->display_name; ?></span>
+						<span class="categories"><?php echo $category_list; ?></span>
 
 						<?php } ?>
 					</p>

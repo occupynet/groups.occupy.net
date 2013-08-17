@@ -12,7 +12,7 @@
 	@include condensed;
 }
 
-.main-feeds .post {
+.network-post {
 	clear: both;
 	border-top: 1px solid $base8;
 	padding-top: 20px;
@@ -20,7 +20,10 @@
 	width: 100%;
 }
 
-
+.network-post .categories {
+  display: block;
+  margin-top: .9em;
+}
 
 
 
